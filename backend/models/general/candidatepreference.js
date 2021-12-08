@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Schema
 
 
-const preferenceSchema = new mongoose.Schema({
+const candidatepreferenceSchema = new mongoose.Schema({
     mahzor:{type:ObjectId , ref:'Mahzor'},
     candidate:{type:ObjectId,ref:'Candidate'},
     certpreference1:{type:ObjectId,ref:'Job'},
@@ -13,7 +13,7 @@ const preferenceSchema = new mongoose.Schema({
     noncertpreference1:{type:ObjectId,ref:'Job'},
 });
 
-const Preference = mongoose.model('Preference', preferenceSchema);
+const Candidatepreference = mongoose.model('Candidatepreference', candidatepreferenceSchema);
 
-module.exports = Preference;
+module.exports = Candidatepreference;
 

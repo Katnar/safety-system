@@ -18,9 +18,8 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cookieParser());
 
-
 // Configure Mongo
-const db = "mongodb://localhost/worksplan";
+const db = "mongodb://localhost/Tafkidipedia";
 
 // Connect to Mongo with Mongoose
 mongoose.connect(
@@ -37,9 +36,23 @@ const userRoutes = require('./routes/authentication/user');
 app.use('/api', authRoutes)
 app.use('/api', userRoutes)
 //general routes
-const gdodRoutes = require("./routes/general/gdod");
+const affiliationRoutes = require("./routes/general/affiliation");
+const candidateRoutes = require("./routes/general/candidate");
+const candidatepreferenceRoutes = require("./routes/general/candidatepreference");
+const eshkolRoutes = require("./routes/general/eshkol");
+const finaleshkolRoutes = require("./routes/general/finaleshkol");
+const jobRoutes = require("./routes/general/job");
+const mahzorRoutes = require("./routes/general/mahzor");
+const unitpreferenceRoutes = require("./routes/general/unitpreference");
 
-app.use('/api',gdodRoutes)
+app.use('/api',affiliationRoutes)
+app.use('/api',candidateRoutes)
+app.use('/api',candidatepreferenceRoutes)
+app.use('/api',eshkolRoutes)
+app.use('/api',finaleshkolRoutes)
+app.use('/api',jobRoutes)
+app.use('/api',mahzorRoutes)
+app.use('/api',unitpreferenceRoutes)
 
 if(process.env.NODE_ENV === 'production'){
     //set static folder
