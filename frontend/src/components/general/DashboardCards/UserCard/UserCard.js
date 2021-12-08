@@ -22,12 +22,7 @@ import { ThemeContext, themes } from "contexts/ThemeContext";
 
 import history from "../../../../history";
 
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-
 import soldier from "assets/img/soldier.png";
-
-import UserCardSidebar from "./UserCardSidebars/UserCardSidebar";
 
 import UserCarousel from "./UserCarousel"
 
@@ -78,7 +73,7 @@ const UserCard = (props) => {
                                 </Col>
 
                                 <Col lg="2" style={{ padding: "0px"}}>
-                                    <UserCardSidebar />
+
                                 </Col>
                             </Row>
                         </CardBody>
@@ -115,7 +110,7 @@ const UserCard = (props) => {
                                 </Col>
 
                                 <Col lg="2" style={{ padding: "0px"}}>
-                                    <UserCardSidebar />
+
                                 </Col>
                             </Row>
                         </CardBody>

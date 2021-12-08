@@ -16,11 +16,13 @@ import routes from 'routes'
 ReactDOM.render(
   <>
     <ThemeContextWrapper>
-    <ToastContainer autoClose={2000} />
+      <ToastContainer autoClose={2000} />
       <BackgroundColorWrapper>
         <Router history={history}>
-          {routes}
-          {/*<Redirect from="/" to="/signin"/>*/}
+          <Switch>
+            {routes}
+            {/*<Redirect from="/" to="/signin"/>*/}
+          </Switch>
         </Router>
       </BackgroundColorWrapper>
     </ThemeContextWrapper>

@@ -6,10 +6,6 @@ import { Line, Bar } from "react-chartjs-2";
 
 import { Link, withRouter, Redirect } from "react-router-dom";
 
-import "assets/css/nucleo-svg.css";
-import "assets/css/nucleo-icons.css";
-import "assets/css/nucleo.css";
-
 // reactstrap components
 import {
   Button,

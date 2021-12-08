@@ -14,7 +14,6 @@ import {
   Button,
 } from "reactstrap";
 
-import { chartExample2 } from "variables/charts.js";
 import history from '../../../history';
 
 const AdminCardAdam = (props) => {

@@ -23,7 +23,7 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 import axios from 'axios';
-import ManageNotValidatedUsersSortingTable from 'components/kshirot/ManageNotValidatedUsersSortingTable/SortingTable'
+import ManageNotValidatedUsersSortingTable from 'components/general/authcomponents/ManageNotValidatedUsersSortingTable/SortingTable'
 
 
 const ManageUsersTable = ({ match }) => {

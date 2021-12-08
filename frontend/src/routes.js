@@ -5,14 +5,8 @@ import { ToastContainer } from "react-toastify";
 
 import RoutesGeneral from "./routes/routesgeneral";
 
-import RoutesWorkplan from "./routes/routesworkplan";
-
-import Routeskshirot from "./routes/routeskshirot";
-
 const routes = (
     <>
-        {Routeskshirot}
-        {RoutesWorkplan}
         {RoutesGeneral}
     </>
 )
