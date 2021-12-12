@@ -31,28 +31,34 @@ import UserCard from "components/general/DashboardCards/UserCard/UserCard";
 
 import plus from "assets/img/add.png";
 
-function Rtl({ match }) {
+function UnitDashboard({ match }) {
 
-  const [ogda, setOgda] = useState([])
+  const [gdod, setGdod] = useState([])
 
   function init() {
-    getOgda();
+    getGdod();
   }
 
-  const getOgda = async () => {
+  const getGdod = async () => {
+    var tempgdodid = match.params.gdodid;
     try {
-      const response = await axios.post(`http://localhost:8000/api/ogda/ogdabyid`, [match.params.ogdaid])
-      setOgda(response.data[0]);
+      await axios.post(`http://localhost:8000/api/gdod/gdodbyid`, [tempgdodid])
+        .then(response => {
+          setGdod(response.data[0])
+        })
+        .catch((error) => {
+          console.log(error);
+        })
     }
-    catch (err) {
-      // Handle Error Here
-      console.error(err);
+    catch {
+
     }
-  };
+  }
 
   useEffect(() => {
     init();
   }, [])
+
 
   return (
     <>
@@ -64,12 +70,12 @@ function Rtl({ match }) {
         <Row>
           <Col lg="3">
             <Link>
-              <CardKshirot unittype="ogda" ogdaid={match.params.ogdaid}/>
+              <CardKshirot unittype="gdod" gdodid={match.params.gdodid}/>
             </Link>
           </Col>
           <Col lg="3">
             <Link>
-              <CardWork unittype="ogda" ogdaid={match.params.ogdaid}/>
+              <CardWork unittype="gdod" gdodid={match.params.gdodid}/>
             </Link>
           </Col>
           <Col lg="3">
@@ -123,4 +129,4 @@ function Rtl({ match }) {
   );
 }
 
-export default withRouter(Rtl);
+export default withRouter(UnitDashboard);

@@ -27,68 +27,20 @@ export default function SignUpForm() {
     personalnumber: "",
     password: "",
     role: "",
-    gdodid: "",
-    hativaid: "",
-    ogdaid: "",
-    pikodid: "",
-    display: "",
-    zminot:"",
-    kshirot:"",
-    adam:"",
-    workplan:"",
-    formData: "",
-    errortype: "",
+    unitid: "",
     error: false,
     successmsg: false,
     loading: false,
     redirectToReferrer: false,
   });
 
-  
+  const [units, setUnits] = useState([]);
 
-  const [gdods, setGdods] = useState([]);
-  const [hativas, setHativas] = useState([]);
-  const [ogdas, setOgdas] = useState([]);
-  const [pikods, setPikods] = useState([]);
-
-  const loadGdods = () => {
+  const loadUnits = () => {
     axios
       .get("http://localhost:8000/api/gdod")
       .then((response) => {
-        setGdods(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const loadHativas = () => {
-    axios
-      .get("http://localhost:8000/api/hativa")
-      .then((response) => {
-        setHativas(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const loadOgdas = () => {
-    axios
-      .get("http://localhost:8000/api/ogda")
-      .then((response) => {
-        setOgdas(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const loadPikods = () => {
-    axios
-      .get("http://localhost:8000/api/pikod")
-      .then((response) => {
-        setPikods(response.data);
+        setUnits(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -129,29 +81,12 @@ export default function SignUpForm() {
       ErrorReason += "הרשאה ריקה \n";
     } else {
       if (data.role === "0") {
+
       }
       if (data.role === "1") {
         if (data.gdodid === "") {
           flag = false;
-          ErrorReason += "גדוד ריק \n";
-        }
-      }
-      if (data.role === "2") {
-        if (data.hativaid === "") {
-          flag = false;
-          ErrorReason += "חטיבה ריקה \n";
-        }
-      }
-      if (data.role === "3") {
-        if (data.ogdaid === "") {
-          flag = false;
-          ErrorReason += "אוגדה ריקה \n";
-        }
-      }
-      if (data.role === "4") {
-        if (data.pikodid === "") {
-          flag = false;
-          ErrorReason += "פיקוד ריק \n";
+          ErrorReason += "יחידה ריקה \n";
         }
       }
     }
@@ -164,33 +99,9 @@ export default function SignUpForm() {
   };
 
   const FixUser = (event) => {
-    //deletepikodid or hativaid idk..
     event.preventDefault();
     if (data.role === "0") {
-      delete data.gdodid;
-      delete data.hativaid;
-      delete data.ogdaid;
-      delete data.pikodid;
-    }
-    if (data.role === "1") {
-      delete data.hativaid;
-      delete data.ogdaid;
-      delete data.pikodid;
-    }
-    if (data.role === "2") {
-      delete data.gdodid;
-      delete data.ogdaid;
-      delete data.pikodid;
-    }
-    if (data.role === "3") {
-      delete data.gdodid;
-      delete data.hativaid;
-      delete data.pikodid;
-    }
-    if (data.role === "4") {
-      delete data.gdodid;
-      delete data.hativaid;
-      delete data.ogdaid;
+      delete data.unitid;
     }
     SignUp(event);
   };
@@ -203,18 +114,7 @@ export default function SignUpForm() {
       lastname: data.lastname,
       password: data.password,
       personalnumber: data.personalnumber,
-      pikod: data.pikod,
-      ogda: data.ogda,
-      hativa: data.hativa,
-      gdodid: data.gdodid,
-      hativaid: data.hativaid,
-      ogdaid: data.ogdaid,
-      pikodid: data.pikodid,
-      role: data.role,
-      zminot: data.zminot,
-      kshirot: data.kshirot,
-      adam: data.adam,
-      workplan: data.workplan,
+      unitid: data.unitid,
     };
     axios
       .post(`http://localhost:8000/api/signup`, user)
@@ -255,7 +155,6 @@ export default function SignUpForm() {
       style={{ textAlign: "right", display: data.error ? "" : "none" }}
     >
       <h2>שגיאה בשליחת הטופס</h2>
-      <h2>{data.errortype}</h2>
     </div>
   );
   const showLoading = () => (
@@ -267,12 +166,8 @@ export default function SignUpForm() {
     </div>
   );
 
-
   useEffect(() => {
-    loadGdods();
-    loadHativas();
-    loadOgdas();
-    loadPikods();
+    loadUnits();
   }, []);
 
   useEffect(() => {
@@ -290,7 +185,7 @@ export default function SignUpForm() {
                   <small>הרשמה</small>
                 </div>
                 <Form role="form">
-                  <FormGroup>
+                  <FormGroup dir="rtl">
                     <Input
                       placeholder="שם פרטי"
                       name="name"
@@ -300,7 +195,7 @@ export default function SignUpForm() {
                     />
                   </FormGroup>
 
-                  <FormGroup>
+                  <FormGroup dir="rtl">
                     <Input
                       placeholder="שם משפחה"
                       name="lastname"
@@ -310,7 +205,7 @@ export default function SignUpForm() {
                     />
                   </FormGroup>
 
-                  <FormGroup className="mb-3">
+                  <FormGroup className="mb-3" dir="rtl">
                     <Input
                       placeholder="מספר אישי"
                       name="personalnumber"
@@ -320,11 +215,6 @@ export default function SignUpForm() {
                     />
                   </FormGroup>
 
-                  {/*<FormGroup>
-                    <Input placeholder="סיסמא" name="password" type="password" value={data.password} onChange={handleChange} />
-                  </FormGroup>*/}
-
-                 
                   <FormGroup dir="rtl">
                     <Input
                       type="select"
@@ -333,113 +223,17 @@ export default function SignUpForm() {
                       onChange={handleChange}
                     >
                       <option value="">הרשאה</option>
-                      
                       <option value="0">מנהל מערכת</option>
-                      <option value="1">הרשאת גדוד</option>
-                      <option value="2">הרשאת חטיבה</option>
-                      <option value="3">הרשאת אוגדה</option>
-                      <option value="4">הרשאת פיקוד</option>
+                      <option value="1">הרשאת יחידה</option>
                     </Input>
                   </FormGroup>
-                 {data.role === "" ? 
- <div style={{ textAlign: "right", paddingTop: "10px" }}>
- סוג מערכת
-</div>
-                : 
-                  <>
-                 <div style={{ textAlign: "right", paddingTop: "10px" }}>
- סוג מערכת
-</div>
-                  <Row>
-                     
-                  <Col>
-                   
-                      <div style={{ textAlign: "right", paddingTop: "10px" }}>
-                        זמינות
-                      </div>
-                      <FormGroup dir="rtl">
-                      <Input
-                      type="select"
-                      name="zminot"
-                      value={data.zminot}
-                      onChange={handleChange}
-                    >
-                      <option value="">סוג הרשאה</option>
-                      <option value="0">רשאי</option>
-                      <option value="1">צפייה</option>
-                      <option value="2">לא רשאי</option>
-                      
-                    </Input>
-                      </FormGroup>
-
-                      <div style={{ textAlign: "right", paddingTop: "10px" }}>
-                        כשירות
-                      </div>
-                      <FormGroup dir="rtl">
-                      <Input
-                      type="select"
-                      name="kshirot"
-                      value={data.kshirot}
-                      onChange={handleChange}
-                    >
-                      <option value="">סוג הרשאה</option>
-                      <option value="0">רשאי</option>
-                      <option value="1">צפייה</option>
-                      <option value="2">לא רשאי</option>
-                      
-                    </Input>
-                      </FormGroup>
-                      </Col>
-                      <Col>
-                      <div style={{ textAlign: "right", paddingTop: "10px" }}>
-                        תוכנית עבודה
-                      </div>
-                      <FormGroup dir="rtl">
-                      <Input
-                      type="select"
-                      name="workplan"
-                      value={data.workplan}
-                      onChange={handleChange}
-                    >
-                      <option value="">סוג הרשאה</option>
-                      <option value="0">רשאי</option>
-                      <option value="1">צפייה</option>
-                      <option value="2">לא רשאי</option>
-                      
-                    </Input>
-                      </FormGroup>
-
-                      <div style={{ textAlign: "right", paddingTop: "10px" }}>
-                        כוח אדם
-                      </div>
-                      <FormGroup dir="rtl">
-                      <Input
-                      type="select"
-                      name="adam"
-                      value={data.adam}
-                      onChange={handleChange}
-                    >
-                      <option value="">סוג הרשאה</option>
-                      <option value="0">רשאי</option>
-                      <option value="1">צפייה</option>
-                      <option value="2">לא רשאי</option>
-                      
-                    </Input>
-                      </FormGroup>
-                      </Col>
-                    </Row>
-                    </>
-               
-                  }
-                     
-                
 
                   {data.role === "0" ? (
                     <div>מנהל מערכת</div>
                   ) : data.role === "1" ? (
                     <>
                       <div style={{ textAlign: "right", paddingTop: "10px" }}>
-                        גדוד
+                        יחידה
                       </div>
                       <FormGroup dir="rtl">
                         <Input
@@ -448,74 +242,14 @@ export default function SignUpForm() {
                           value={data.gdodid}
                           onChange={handleChange}
                         >
-                          <option value={""}>גדוד</option>
-                          {gdods.map((gdod, index) => (
+                          <option value={""}>יחידה</option>
+                          {units.map((gdod, index) => (
                             <option value={gdod._id}>{gdod.name}</option>
                           ))}
                         </Input>
                       </FormGroup>
                     </>
-                  ) : data.role === "2" ? (
-                    <>
-                      <div style={{ textAlign: "right", paddingTop: "10px" }}>
-                        חטיבה
-                      </div>
-                      <FormGroup dir="rtl">
-                        <Input
-                          type="select"
-                          name="hativaid"
-                          value={data.hativaid}
-                          onChange={handleChange}
-                        >
-                          <option value={""}>חטיבה</option>
-                          {hativas.map((hativa, index) => (
-                            <option value={hativa._id}>{hativa.name}</option>
-                          ))}
-                        </Input>
-                      </FormGroup>
-                    </>
-                  ) : data.role === "3" ? (
-                    <>
-                      <div style={{ textAlign: "right", paddingTop: "10px" }}>
-                        אוגדה
-                      </div>
-                      <FormGroup dir="rtl">
-                        <Input
-                          type="select"
-                          name="ogdaid"
-                          value={data.ogdaid}
-                          onChange={handleChange}
-                        >
-                          <option value={""}>אוגדה</option>
-                          {ogdas.map((ogda, index) => (
-                            <option value={ogda._id}>{ogda.name}</option>
-                          ))}
-                        </Input>
-                      </FormGroup>
-                    </>
-                  ) : data.role === "4" ? (
-                    <>
-                      <div style={{ textAlign: "right", paddingTop: "10px" }}>
-                        פיקוד
-                      </div>
-                      <FormGroup dir="rtl">
-                        <Input
-                          type="select"
-                          name="pikodid"
-                          value={data.pikodid}
-                          onChange={handleChange}
-                        >
-                          <option value={""}>פיקוד</option>
-                          {pikods.map((pikod, index) => (
-                            <option value={pikod._id}>{pikod.name}</option>
-                          ))}
-                        </Input>
-                      </FormGroup>
-                    </>
-                  ) : data.role === "" ? (
-                    <div>נא להכניס הרשאה</div>
                   ) : null}
-
                   <div className="text-center">
                     <button onClick={clickSubmit} className="btn btn-primary">
                       הרשם

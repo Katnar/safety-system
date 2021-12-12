@@ -58,7 +58,7 @@ function Sidebar() {
         )}
       </ThemeContext.Consumer>
 
-      <div className="sidebar" style={{ background: color, marginRight: '16px', marginTop: '60px', boxShadow: 'none', borderRadius: '0px' }}>
+      <div className="sidebar" style={{ background: color, marginTop: '60px', boxShadow: 'none', borderRadius: '0px' }}>
         <div className="sidebar-wrapper" style={{overflow:'hidden'}}>
           {user.role === "0" ? <SidebarAdmin /> :
 

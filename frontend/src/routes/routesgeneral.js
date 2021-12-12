@@ -2,73 +2,44 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Router, Route, Switch, Redirect, withRouter } from "react-router-dom";
 
+import UnloggedinRoute from "auth/UnloggedinRoute";
 import AdminRoute from "auth/AdminRoute.js";
-import GdodRoute from "auth/GdodRoute";
-import HativaRoute from "auth/HativaRoute";
-import OgdaRoute from "auth/OgdaRoute";
-import PikodRoute from "auth/PikodRoute";
+import CandidateRoute from "auth/CandidateRoute";
+import UnitRoute from "auth/UnitRoute";
 
-import SignInLayout from "layouts/general/authentication/SignInScreen";
-import SignUpLayout from "layouts/general/authentication/SignUpScreen";
-import ManageUsersLayout from "layouts/general/authentication/ManageUsersScreen";
-import EditUserLayout from "layouts/general/authentication/EditUserScreen";
+import SignIn from "views/general/authentication/SignInForm";
+import SignUp from "views/general/authentication/SignUpForm";
+import ManageUsers from "views/general/authentication/ManageUsersTable";
+import EditUser from "views/general/authentication/EditUserForm";
 
-import AdminDashboardLayout from "layouts/general/adminscreens/AdminDashboardLayout";
-
-import EditPikodScreen from "layouts/general/unitforms/editformslayouts/EditPikodScreen";
-import EditOgdaScreen from "layouts/general/unitforms/editformslayouts/EditOgdaScreen";
-import EditHativaScreen from "layouts/general/unitforms/editformslayouts/EditHativaScreen";
-
-import AddPikodScreen from "layouts/general/unitforms/addformslayout/AddPikodScreen";
-import AddOgdaScreen from "layouts/general/unitforms/addformslayout/AddOgdaScreen";
-import AddHativaScreen from "layouts/general/unitforms/addformslayout/AddHativaScreen";
-import AddGdodScreen from "layouts/general/unitforms/addformslayout/AddGdodScreen";
-
-
-import GdodDashboardLayout from "layouts/general/usergdod/GdodDashboardLayout";
-import HativaDashboardLayout from "layouts/general/userhativa/HativaDashboardLayout";
-import OgdaDashboardLayout from "layouts/general/userogda/OgdaDashboardLayout";
-import PikodDashboardLayout from "layouts/general/userpikod/PikodDashboardLayout";
-import SuperAdminRoute from "auth/SuperAdminRoute";
+import AdminDashboard from "views/general/adminpages/AdminDashboard";
+import UnitDashboard from "views/general/unitpages/UnitDashboard";
+// import CandidateDashboard from "views/general/candidatepages/CandidateDashboard";
+import PreferenceForm from "views/general/candidatepages/PreferenceForm";
 
 const routesgeneral =
     (
         <>
-            <Route path="/signin" exact component={SignInLayout} />
-            <Route path="/signup" exact component={SignUpLayout} />
-            {/*///////////////////////////////////////////Admin User/////////////////////////////////////////////////*/}
-           
+            {/*///////////////////////////////////////////UnLoggedIn Routes/////////////////////////////////////////////////*/}
+            <UnloggedinRoute path="/signin" exact component={SignIn} />
+            <UnloggedinRoute path="/signup" exact component={SignUp} />
+            <UnloggedinRoute path="/preferenceform" exact component={PreferenceForm} />
+            {/*///////////////////////////////////////////UnLoggedIn Routes/////////////////////////////////////////////////*/}
 
-            <SuperAdminRoute path="/admindashboard" exact component={AdminDashboardLayout} />
-            {/*///////////////////////////////////////////Admin User/////////////////////////////////////////////////*/}
-            <AdminRoute path="/manageusers" exact component={ManageUsersLayout} />
-            <AdminRoute path="/edituser/:userid" exact component={EditUserLayout} />
+            {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
+            <AdminRoute path="/manageusers" exact component={ManageUsers} />
+            <AdminRoute path="/edituser/:userid" exact component={EditUser} />
 
-            <AdminRoute exact path="/editpikod/:pikodid" exact component={EditPikodScreen} />
-            <AdminRoute exact path="/editogda/:ogdaid" exact component={EditOgdaScreen} />
-            <AdminRoute exact path="/edithativa/:hativaid" exact component={EditHativaScreen} />
+            <AdminRoute path="/dashboard" exact component={AdminDashboard} />
+            {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
 
-            <AdminRoute exact path="/addpikod" exact component={AddPikodScreen} />
-            <AdminRoute exact path="/addogda" exact component={AddOgdaScreen} />
-            <AdminRoute exact path="/addhativa" exact component={AddHativaScreen} />
-            <AdminRoute exact path="/addgdod" exact component={AddGdodScreen} />
+            {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
+            <UnitRoute path="/unitdashboard/:unitid" exact component={UnitDashboard} />
+            {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
 
-            <AdminRoute path="/dashboard" exact component={AdminDashboardLayout} />
-            {/*////////////////////////////////////////Gdod User//////////////////////////////////////////////////*/}
-            <GdodRoute path="/gdoddashboard/:gdodid" exact component={GdodDashboardLayout} />
-            {/*////////////////////////////////////////Gdod User//////////////////////////////////////////////////*/}
-
-            {/*////////////////////////////////////////Hativa User//////////////////////////////////////////////////*/}
-            <HativaRoute path="/hativadashboard/:hativaid" exact component={HativaDashboardLayout} />
-            {/*////////////////////////////////////////Hativa User//////////////////////////////////////////////////*/}
-
-            {/*////////////////////////////////////////Ogda User//////////////////////////////////////////////////*/}
-            <OgdaRoute path="/ogdadashboard/:ogdaid" exact component={OgdaDashboardLayout} />
-            {/*////////////////////////////////////////Ogda User//////////////////////////////////////////////////*/}
-
-            {/*////////////////////////////////////////Ogda User//////////////////////////////////////////////////*/}
-            <PikodRoute path="/pikoddashboard/:pikodid" exact component={PikodDashboardLayout} />
-            {/*////////////////////////////////////////Ogda User//////////////////////////////////////////////////*/}
+            {/*////////////////////////////////////////Candidate User//////////////////////////////////////////////////*/}
+            {/* <CandidateRoute path="/candidatedashboard/:candidateid" exact component={CandidateDashboard} /> */}
+            {/*////////////////////////////////////////Candidate User//////////////////////////////////////////////////*/}
         </>
     )
 

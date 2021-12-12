@@ -4,7 +4,7 @@ import { BrowserRouter, Router, Route, Switch, Redirect, withRouter } from "reac
 
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import 'components/Table.css' 
 import "assets/css/black-dashboard-react.css";
 import ThemeContextWrapper from "./components/general/ThemeWrapper/ThemeWrapper";
 import BackgroundColorWrapper from "./components/general/BackgroundColorWrapper/BackgroundColorWrapper";

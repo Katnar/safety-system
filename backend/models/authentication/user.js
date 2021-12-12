@@ -8,17 +8,10 @@ const userSchema = new mongoose.Schema({
     lastname: {type: String,trim: true,required: true},
     hashed_password: {type: String,required: true},
     personalnumber: {type: String,trim: true,unique:true,require:true},
-    gdodid: {type:String},
-    hativaid: {type:String},
-    ogdaid: {type:String},
-    pikodid: {type:String},
+    unitid: {type:ObjectId,ref:'Unit'},
     salt: String,
     role:{type: String,default:"0"},
     validated:{type: Boolean,default:false},
-    zminot:{type:String},
-    workplan:{type:String},
-    kshirot:{type:String},
-    adam:{type:String}
 }, {timestamps: true})
 
 // virtual field

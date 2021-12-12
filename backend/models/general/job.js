@@ -13,6 +13,7 @@ const jobSchema = new mongoose.Schema({
     jobname:{type:String},
     jobcode:{type:Number},
     sivug:{type:String},
+    certain:{type:Boolean},
     //affiliation:{type:ObjectId,ref:'Affiliation'},
 });
 

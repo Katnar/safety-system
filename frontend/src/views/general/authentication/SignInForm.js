@@ -51,35 +51,34 @@ function Signin() {
   }
 
   const redirectUser = () => {
-    if(redirectToReferrer)
-    {
+    if (redirectToReferrer) {
       console.log(user);
-    if (user&& user.validated==true) {
-      if (user.role === "0") {
-        history.push(`/dashboard`);
+      if (user && user.validated == true) {
+        if (user.role === "0") {
+          history.push(`/dashboard`);
+        }
+        if (user.role === "1") {
+          history.push(`/gdoddashboard/${user.gdodid}`);
+        }
+        if (user.role === "2") {
+          history.push(`/hativadashboard/${user.hativaid}`);
+        }
+        if (user.role === "3") {
+          history.push(`/ogdadashboard/${user.ogdaid}`);
+        }
+        if (user.role === "4") {
+          history.push(`/pikoddashboard/${user.pikodid}`);
+        }
+        if (user.role === "5") {
+          history.push(`/admindashboard`);
+        }
       }
-      if (user.role === "1") {
-        history.push(`/gdoddashboard/${user.gdodid}`);
+      else {
+        toast.success("משתמש לא מאושר מערכת");
+        setValues({ ...values, redirectToReferrer: false })
       }
-      if (user.role === "2") {
-        history.push(`/hativadashboard/${user.hativaid}`);
-      }
-      if (user.role === "3") {
-        history.push(`/ogdadashboard/${user.ogdaid}`);
-      }
-      if (user.role === "4") {
-        history.push(`/pikoddashboard/${user.pikodid}`);
-      }
-      if (user.role === "5") {
-        history.push(`/admindashboard`);
-      }
-    }
-    else{
-    toast.success("משתמש לא מאושר מערכת");
-    setValues({ ...values, redirectToReferrer: false })
     }
   }
-}
 
   const showSuccess = () => (
     <div className="alert alert-info " style={{ textAlign: 'right', display: values.successmsg ? '' : 'none' }}>
@@ -93,14 +92,14 @@ function Signin() {
     </div>
 
   )
-  
+
   useEffect(() => {
     clickSubmit();
   }, [])
 
   useEffect(() => {
     setValues({ ...values, password: values.personalnumber });
-}, [values.personalnumber])
+  }, [values.personalnumber])
 
   const signInForm = () => (
     <>
@@ -122,24 +121,21 @@ function Signin() {
                   </FormGroup>*/}
                   {loading ? (
                     <>
-</>
-                  ): (
-                   
+                    </>
+                  ) : (
                     <Row>
                       <Col>
-                  <div className="text-center">
-                    <button onClick={clickSubmit} className="btn btn-primary">התחבר</button>
-                  </div>
-                  </Col>
-                  <Col>
-                   <div className="text-center">
-                   <button onClick={() => {history.push(`/signup`)}} className="btn btn-primary">הרשם</button>
-                 </div>
-                 </Col>
-                 </Row>
-                
+                        <div className="text-center">
+                          <button onClick={clickSubmit} className="btn btn-primary">התחבר</button>
+                        </div>
+                      </Col>
+                      <Col>
+                        <div className="text-center">
+                          <button onClick={() => { history.push(`/signup`) }} className="btn btn-primary">הרשם</button>
+                        </div>
+                      </Col>
+                    </Row>
                   )}
-                  
                 </Form>
               </CardBody>
             </Card>
@@ -156,7 +152,7 @@ function Signin() {
       <Container className="mt--8 pb-5">
         <Row className="justify-content-center">
           <Col>
-        
+
             {showSuccess()}
             {showError()}
             {signInForm()}

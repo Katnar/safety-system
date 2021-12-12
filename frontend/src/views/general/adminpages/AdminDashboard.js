@@ -30,7 +30,7 @@ import UserCard from "components/general/DashboardCards/UserCard/UserCard";
 
 import plus from "assets/img/add.png";
 
-function Rtl() {
+function AdminDashboard() {
 
   return (
     <>
@@ -101,4 +101,4 @@ function Rtl() {
   );
 }
 
-export default withRouter(Rtl);
+export default withRouter(AdminDashboard);
