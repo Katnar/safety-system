@@ -9,7 +9,7 @@ import UnitRoute from "auth/UnitRoute";
 
 import SignIn from "views/general/authentication/SignInForm";
 import SignUp from "views/general/authentication/SignUpForm";
-import ManageUsers from "views/general/authentication/ManageUsersTable";
+import ManageUsers from "views/general/authentication/manageusers/ManageUsers";
 import EditUser from "views/general/authentication/EditUserForm";
 
 import AdminDashboard from "views/general/adminpages/AdminDashboard";

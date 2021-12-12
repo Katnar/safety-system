@@ -26,7 +26,7 @@ import axios from 'axios';
 import ManageUsersSortingTable from 'components/general/authcomponents/ManageUsersSortingTable/SortingTable'
 
 
-const ManageUsersTable = ({ match }) => {
+const ManageUsersTable = (props) => {
 
   useEffect(() => {
     
@@ -42,7 +42,7 @@ const ManageUsersTable = ({ match }) => {
                 <CardTitle tag="h4" style={{ direction: 'rtl', textAlign: 'right' }}>משתמשי מערכת</CardTitle>{/*headline*/}
               </CardHeader>
               <CardBody style={{ direction: 'rtl' }}>
-              <ManageUsersSortingTable/>
+              <ManageUsersSortingTable theme={props.theme}/>
               </CardBody>
             </Card>
           </Col>

@@ -26,7 +26,7 @@ import axios from 'axios';
 import ManageNotValidatedUsersSortingTable from 'components/general/authcomponents/ManageNotValidatedUsersSortingTable/SortingTable'
 
 
-const ManageUsersTable = ({ match }) => {
+const ManageUsersTable = (props) => {
 
   useEffect(() => {
     
@@ -42,7 +42,7 @@ const ManageUsersTable = ({ match }) => {
                 <CardTitle tag="h4" style={{ direction: 'rtl', textAlign: 'right' }}>בקשות להרשמה</CardTitle>{/*headline*/}
               </CardHeader>
               <CardBody style={{ direction: 'rtl' }}>
-              <ManageNotValidatedUsersSortingTable/>
+              <ManageNotValidatedUsersSortingTable theme={props.theme}/>
               </CardBody>
             </Card>
           </Col>

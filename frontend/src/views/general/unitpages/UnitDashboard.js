@@ -21,12 +21,6 @@ import {
 } from "reactstrap";
 import axios from 'axios';
 
-
-import Cardadam from "components/general/DashboardCards/CardAdam";
-import CardKshirot from "components/general/DashboardCards/CardKshirotFolder/CardKshirot";
-import CardZminot from "components/general/DashboardCards/CardZminot";
-import CardWork from "components/general/DashboardCards/CardWorkFolder/CardWork";
-
 import UserCard from "components/general/DashboardCards/UserCard/UserCard";
 
 import plus from "assets/img/add.png";
@@ -64,31 +58,6 @@ function UnitDashboard({ match }) {
     <>
       <Container>
         <UserCard />
-      </Container>
-
-      <Container>
-        <Row>
-          <Col lg="3">
-            <Link>
-              <CardKshirot unittype="gdod" gdodid={match.params.gdodid}/>
-            </Link>
-          </Col>
-          <Col lg="3">
-            <Link>
-              <CardWork unittype="gdod" gdodid={match.params.gdodid}/>
-            </Link>
-          </Col>
-          <Col lg="3">
-            <Link>
-              <Cardadam title="כוח אדם" />
-            </Link>
-          </Col>
-          <Col lg="3">
-            <Link>
-              <CardZminot title="זמינות" />
-            </Link>
-          </Col>
-        </Row>
       </Container>
 
       <Container style={{ paddingTop: '2rem' }}>

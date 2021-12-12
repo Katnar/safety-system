@@ -50,10 +50,7 @@ html {
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block; }
 .sidebar_active_link{
-  border-radius: 30px;
-    border-bottom: 3px solid #777171;
-    transition: border-bottom .5s ease-in-out;
-    background-color: rgb(238, 238, 238);
+    background-color: rgba(238, 238, 238, 0.63);
   }
 body {
   margin: 0;
@@ -11775,7 +11772,6 @@ hr {
     .sidebar .nav li > a,
     .off-canvas-sidebar .nav li > a {
       margin: 10px 15px 0;
-      border-radius: 30px;
       color: #ffffff;
       display: block;
       text-decoration: none;
@@ -11783,7 +11779,7 @@ hr {
       text-transform: uppercase;
       cursor: pointer;
       font-size: 0.62475rem;
-      padding: 10px 8px;
+      padding: 1px 8px;
       line-height: 1.625rem; }
     .sidebar .nav li:first-child > a,
     .off-canvas-sidebar .nav li:first-child > a {

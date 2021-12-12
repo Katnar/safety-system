@@ -21,11 +21,6 @@ import {
   Collapse,
 } from "reactstrap";
 
-import Cardadam from "components/general/DashboardCards/CardAdam";
-import CardKshirot from "components/general/DashboardCards/CardKshirotFolder/CardKshirot";
-import CardZminot from "components/general/DashboardCards/CardZminot";
-import CardWork from "components/general/DashboardCards/CardWorkFolder/CardWork";
-
 import UserCard from "components/general/DashboardCards/UserCard/UserCard";
 
 import plus from "assets/img/add.png";
@@ -38,62 +33,15 @@ function AdminDashboard() {
         <UserCard />
       </Container>
 
-      <Container>
-        <Row>
-          <Col lg="3">
-            <Link to={'/kshirottree'}>
-              <CardKshirot unittype="admin"/>
-            </Link>
-          </Col>
-          <Col lg="3">
-            <Link to={'/workplantable'}>
-              <CardWork unittype="admin"/>
-            </Link>
-          </Col>
-          <Col lg="3">
-            <Link>
-              <Cardadam title="כוח אדם" />
-            </Link>
-          </Col>
-          <Col lg="3">
-            <Link>
-              <CardZminot title="זמינות" />
-            </Link>
-          </Col>
-        </Row>
-      </Container>
-
       <Container style={{ paddingTop: '2rem' }}>
         <Card style={{ borderRadius: '40px' }}>
           <CardHeader>
             <CardTitle tag="h2" style={{ float: "right", fontWeight: 'bold' }}>
-              קישורים חיצוניים
+              מחזורים
             </CardTitle>
           </CardHeader>
           <CardBody>
-            <Row>
-              <Col>
-                <Card style={{ textAlign: 'center', background: 'linear-gradient(0deg, rgb(84 162 245) 0%, rgb(78 95 225) 100%)', borderRadius: '80px', height: '250px' }}>
-                  <CardBody style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}>
-                    <img src={plus} style={{ height: "80px" }}></img>
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col>
-                <Card style={{ textAlign: 'center', background: 'linear-gradient(0deg, rgb(84 162 245) 0%, rgb(78 95 225) 100%)', borderRadius: '80px', height: '250px' }}>
-                  <CardBody style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}>
-                    <img src={plus} style={{ height: "80px" }}></img>
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col>
-                <Card style={{ textAlign: 'center', background: 'linear-gradient(0deg, rgb(84 162 245) 0%, rgb(78 95 225) 100%)', borderRadius: '80px', height: '250px' }}>
-                  <CardBody style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}>
-                    <img src={plus} style={{ height: "80px" }}></img>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
+
           </CardBody>
         </Card>
       </Container>

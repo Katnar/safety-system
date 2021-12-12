@@ -27,30 +27,6 @@ export const COLUMNS = [
         Filter:ColumnFilter
     },
     {
-        Header: 'תוכניות עבודה',
-        Footer:'תוכניות עבודה',
-        accessor:'workplan',
-        Filter:ColumnFilter
-    },
-    {
-        Header: 'כשירות',
-        Footer:'כשירות',
-        accessor:'kshirot',
-        Filter:ColumnFilter
-    },
-    {
-        Header: 'זמינות',
-        Footer:'זמינות',
-        accessor:'zminot',
-        Filter:ColumnFilter
-    },
-    {
-        Header: 'כוח אדם',
-        Footer:'כוח אדם',
-        accessor:'adam',
-        Filter:ColumnFilter
-    },
-    {
         Header: 'נוצר בתאריך',
         Footer:'נוצר בתאריך',
         accessor:'createdAt',
