@@ -14,7 +14,7 @@ import EditUser from "views/general/authentication/EditUserForm";
 
 import AdminDashboard from "views/general/adminpages/AdminDashboard";
 import UnitDashboard from "views/general/unitpages/UnitDashboard";
-// import CandidateDashboard from "views/general/candidatepages/CandidateDashboard";
+import CandidateDashboard from "views/general/candidatepages/CandidateDashboard";
 import PreferenceForm from "views/general/candidatepages/PreferenceForm";
 
 const routesgeneral =
@@ -23,7 +23,6 @@ const routesgeneral =
             {/*///////////////////////////////////////////UnLoggedIn Routes/////////////////////////////////////////////////*/}
             <UnloggedinRoute path="/signin" exact component={SignIn} />
             <UnloggedinRoute path="/signup" exact component={SignUp} />
-            <UnloggedinRoute path="/preferenceform" exact component={PreferenceForm} />
             {/*///////////////////////////////////////////UnLoggedIn Routes/////////////////////////////////////////////////*/}
 
             {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
@@ -38,7 +37,8 @@ const routesgeneral =
             {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
 
             {/*////////////////////////////////////////Candidate User//////////////////////////////////////////////////*/}
-            {/* <CandidateRoute path="/candidatedashboard/:candidateid" exact component={CandidateDashboard} /> */}
+            <CandidateRoute path="/candidatedashboard/:candidateid" exact component={CandidateDashboard} />
+            <CandidateRoute path="/preferenceform/:mahzorid" exact component={PreferenceForm} />
             {/*////////////////////////////////////////Candidate User//////////////////////////////////////////////////*/}
         </>
     )

@@ -22,6 +22,8 @@ import axios from 'axios';
 import history from 'history.js'
 import { toast } from "react-toastify";
 
+import tafkidipedialogo from "assets/img/tafkidipedialogo.png";
+
 function Signin() {
   const [values, setValues] = useState({
     personalnumber: '',
@@ -58,19 +60,10 @@ function Signin() {
           history.push(`/dashboard`);
         }
         if (user.role === "1") {
-          history.push(`/gdoddashboard/${user.gdodid}`);
+          history.push(`/unitdashboard/${user.unitid}`);
         }
         if (user.role === "2") {
-          history.push(`/hativadashboard/${user.hativaid}`);
-        }
-        if (user.role === "3") {
-          history.push(`/ogdadashboard/${user.ogdaid}`);
-        }
-        if (user.role === "4") {
-          history.push(`/pikoddashboard/${user.pikodid}`);
-        }
-        if (user.role === "5") {
-          history.push(`/admindashboard`);
+          history.push(`/candidatedashboard/${user._id}`);
         }
       }
       else {
@@ -109,6 +102,9 @@ function Signin() {
             <Card className="shadow border-0">
 
               <CardBody className="px-lg-5 py-lg-5">
+                <div className="text-center text-muted mb-4">
+                  <img src={tafkidipedialogo}></img>
+                </div>
                 <div className="text-center text-muted mb-4">
                   <small>התחברות</small>
                 </div>
@@ -152,7 +148,6 @@ function Signin() {
       <Container className="mt--8 pb-5">
         <Row className="justify-content-center">
           <Col>
-
             {showSuccess()}
             {showError()}
             {signInForm()}

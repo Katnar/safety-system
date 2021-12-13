@@ -3,6 +3,7 @@ const {ObjectId} = mongoose.Schema
 
 
 const jobSchema = new mongoose.Schema({
+    mahzor:{type:ObjectId,ref:'Mahzor'},
     unit:{type:ObjectId,ref:'Unit'},
     mahlaka:{type:String},
     thom:{type:String},

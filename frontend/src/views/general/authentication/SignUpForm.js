@@ -84,7 +84,7 @@ export default function SignUpForm() {
 
       }
       if (data.role === "1") {
-        if (data.gdodid === "") {
+        if (data.unitid === "") {
           flag = false;
           ErrorReason += "יחידה ריקה \n";
         }
@@ -103,6 +103,12 @@ export default function SignUpForm() {
     if (data.role === "0") {
       delete data.unitid;
     }
+    if (data.role === "1") {
+
+    }
+    if (data.role === "2") {
+      delete data.unitid;
+    }
     SignUp(event);
   };
 
@@ -115,6 +121,7 @@ export default function SignUpForm() {
       password: data.password,
       personalnumber: data.personalnumber,
       unitid: data.unitid,
+      role: data.role,
     };
     axios
       .post(`http://localhost:8000/api/signup`, user)
@@ -225,6 +232,7 @@ export default function SignUpForm() {
                       <option value="">הרשאה</option>
                       <option value="0">מנהל מערכת</option>
                       <option value="1">הרשאת יחידה</option>
+                      <option value="2">הרשאת מתמודד</option>
                     </Input>
                   </FormGroup>
 

@@ -3,9 +3,11 @@ const {ObjectId} = mongoose.Schema
 
 
 const candidateSchema = new mongoose.Schema({
-    personalnumber:{type:Number},
-    firstname:{type:String},
-    lastname:{type:String},
+    user: {type:ObjectId,ref:'User'},
+    mahzor: {type:ObjectId,ref:'Mahzor'},
+    // personalnumber:{type:Number},
+    // firstname:{type:String},
+    // lastname:{type:String},
     migzar:{type:String},
     gender:{type:String},
     cellphone:{type:Number},

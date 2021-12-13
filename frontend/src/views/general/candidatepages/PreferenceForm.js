@@ -86,32 +86,7 @@ const PreferenceForm = ({ match }) => {
           <CardBody style={{ direction: 'rtl' }}>
             <Container>
 
-              <div style={{ textAlign: 'right', paddingTop: '10px', fontWeight: "bold" }}>פרטי מועמד</div>
-              <Row>
-                <Col xs={12} md={4}>
-                  <div style={{ textAlign: 'center', paddingTop: '10px' }}>מס' אישי</div>
-                  <FormGroup dir="rtl" >
-                    <Input type="text" name="personalnumber" value={tipuldata.personalnumber} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('personalnumber')} />
-                    {simpleValidator.current.message('personalnumber', tipuldata.personalnumber, 'required')}
-                  </FormGroup>
-                </Col>
-                <Col xs={12} md={4}>
-                  <div style={{ textAlign: 'center', paddingTop: '10px' }}>שם</div>
-                  <FormGroup dir="rtl" >
-                    <Input type="text" name="firstname" value={tipuldata.firstname} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('firstname')} />
-                    {simpleValidator.current.message('firstname', tipuldata.firstname, 'required')}
-                  </FormGroup>
-                </Col>
-                <Col xs={12} md={4}>
-                  <div style={{ textAlign: 'center', paddingTop: '10px' }}>שם משפחה</div>
-                  <FormGroup dir="rtl" >
-                    <Input type="text" name="lastname" value={tipuldata.lastname} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('lastname')} />
-                    {simpleValidator.current.message('lastname', tipuldata.lastname, 'required')}
-                  </FormGroup>
-                </Col>
-              </Row>
-
-              <div style={{ textAlign: 'right', paddingTop: '10px', fontWeight: "bold" }}>העדפות תפקידים - ודאי (1- גבוה ביותר)</div>
+              <h5 style={{ textAlign: 'right', paddingTop: '10px', fontWeight: "bold" }}>העדפות תפקידים - ודאי (1- גבוה ביותר)</h5>
               <Row>
                 <Col xs={12} md={4}>
                   <div style={{ textAlign: 'center', paddingTop: '10px' }}>תפקיד 1</div>
@@ -122,34 +97,77 @@ const PreferenceForm = ({ match }) => {
                         <option value={job._id}>{job.name}</option>
                       ))}
                     </Input>
+                    {simpleValidator.current.message('certjob1', tipuldata.certjob1, 'required')}
                   </FormGroup>
                 </Col>
                 <Col xs={12} md={4}>
                   <div style={{ textAlign: 'center', paddingTop: '10px' }}>תפקיד 2</div>
                   <FormGroup dir="rtl" >
-                    <Input type="select" name="certjob2" value={tipuldata.certjob2} onChange={handleChange}>
+                    <Input type="select" name="certjob2" value={tipuldata.certjob2} onChange={handleChange}  onBlur={() => simpleValidator.current.showMessageFor('certjob2')}>
                     <option value={undefined}>{"בחר תפקיד"}</option>
                     {jobs.map((job, index) => (
                         <option value={job._id}>{job.name}</option>
                       ))}
                     </Input>
+                    {simpleValidator.current.message('certjob2', tipuldata.certjob2, 'required')}
                   </FormGroup>
                 </Col>
                 <Col xs={12} md={4}>
                   <div style={{ textAlign: 'center', paddingTop: '10px' }}>תפקיד 3</div>
                   <FormGroup dir="rtl" >
-                    <Input type="select" name="certjob3" value={tipuldata.certjob3} onChange={handleChange}>
+                    <Input type="select" name="certjob3" value={tipuldata.certjob3} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('certjob3')}>
                     <option value={undefined}>{"בחר תפקיד"}</option>
                     {jobs.map((job, index) => (
                         <option value={job._id}>{job.name}</option>
                       ))}
                     </Input>
+                    {simpleValidator.current.message('certjob3', tipuldata.certjob3, 'required')}
                   </FormGroup>
                 </Col>
               </Row>
 
-              <div style={{ textAlign: 'center' }}>
-                <button className="btn btn-primary" onClick={clickSubmit}>עדכן כשירות</button>
+              <h5 style={{ textAlign: 'right', paddingTop: '10px', fontWeight: "bold" }}>העדפות תפקידים - לא ודאי (1- גבוה ביותר)</h5>
+              <Row>
+                <Col xs={12} md={4}>
+                  <div style={{ textAlign: 'center', paddingTop: '10px' }}>תפקיד 1</div>
+                  <FormGroup dir="rtl" >
+                    <Input type="select" name="noncertjob1" value={tipuldata.noncertjob1} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('noncertjob1')}>
+                    <option value={undefined}>{"בחר תפקיד"}</option>
+                    {jobs.map((job, index) => (
+                        <option value={job._id}>{job.name}</option>
+                      ))}
+                    </Input>
+                    {simpleValidator.current.message('noncertjob1', tipuldata.noncertjob1, 'required')}
+                  </FormGroup>
+                </Col>
+                <Col xs={12} md={4}>
+                  <div style={{ textAlign: 'center', paddingTop: '10px' }}>תפקיד 2</div>
+                  <FormGroup dir="rtl" >
+                    <Input type="select" name="noncertjob2" value={tipuldata.noncertjob2} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('noncertjob2')}>
+                    <option value={undefined}>{"בחר תפקיד"}</option>
+                    {jobs.map((job, index) => (
+                        <option value={job._id}>{job.name}</option>
+                      ))}
+                    </Input>
+                    {simpleValidator.current.message('noncertjob2', tipuldata.noncertjob2, 'required')}
+                  </FormGroup>
+                </Col>
+                <Col xs={12} md={4}>
+                  <div style={{ textAlign: 'center', paddingTop: '10px' }}>תפקיד 3</div>
+                  <FormGroup dir="rtl" >
+                    <Input type="select" name="noncertjob3" value={tipuldata.noncertjob3} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('noncertjob3')}>
+                    <option value={undefined}>{"בחר תפקיד"}</option>
+                    {jobs.map((job, index) => (
+                        <option value={job._id}>{job.name}</option>
+                      ))}
+                    </Input>
+                    {simpleValidator.current.message('noncertjob3', tipuldata.noncertjob3, 'required')}
+                  </FormGroup>
+                </Col>
+              </Row>
+
+              <div style={{ textAlign: 'center',paddingTop: '20px'}}>
+                <button className="btn btn-primary" onClick={clickSubmit}>עדכן העדפות</button>
               </div>
             </Container>
           </CardBody>

@@ -39,7 +39,7 @@ import { signin, authenticate, isAuthenticated } from 'auth/index';
 
 import SidebarAdmin from 'components/general/Sidebar/SidebarAdmin';
 import SidebarGdod from 'components/general/Sidebar/Sidebargdod';
-import SidebarHativa from 'components/general/Sidebar/Sidebarhativa';
+import Sidebarcandidate from 'components/general/Sidebar/Sidebarcandidate';
 import SidebarOgda from 'components/general/Sidebar/Sidebarogda';
 import SidebarPikod from 'components/general/Sidebar/Sidebarpikod';
 import SidebarSuperAdmin from './SidebarSuperAdmin';
@@ -64,7 +64,7 @@ function Sidebar() {
 
             user.role === "1" ? <SidebarGdod /> :
 
-              user.role === "2" ? <SidebarHativa /> :
+              user.role === "2" ? <Sidebarcandidate /> :
 
                 user.role === "3" ? <SidebarOgda /> :
 

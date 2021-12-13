@@ -7,8 +7,8 @@ const mahzorSchema = new mongoose.Schema({
     startdate:{type:Date},
     enddate:{type:Date},
     //affiliation:{type:ObjectId , ref:'Affiliation'},
-    candidates:[{type:ObjectId,ref:'Candidate'}],
-    jobs:[{type:ObjectId,ref:'Job'}],
+    //candidates:[{type:ObjectId,ref:'Candidate'}],
+    //jobs:[{type:ObjectId,ref:'Job'}],
 });
 
 const Mahzor = mongoose.model('Mahzor', mahzorSchema);
