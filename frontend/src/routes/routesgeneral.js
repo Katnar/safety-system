@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Router, Route, Switch, Redirect, withRouter } from "react-router-dom";
 
+import LoggedinRoute from "auth/LoggedinRoute";
 import UnloggedinRoute from "auth/UnloggedinRoute";
 import AdminRoute from "auth/AdminRoute.js";
 import CandidateRoute from "auth/CandidateRoute";
@@ -16,6 +17,7 @@ import AdminDashboard from "views/general/adminpages/AdminDashboard";
 import UnitDashboard from "views/general/unitpages/UnitDashboard";
 import CandidateDashboard from "views/general/candidatepages/CandidateDashboard";
 import PreferenceForm from "views/general/candidatepages/PreferenceForm";
+import MahzorForm from "views/general/adminpages/MahzorForm";
 
 const routesgeneral =
     (
@@ -24,6 +26,10 @@ const routesgeneral =
             <UnloggedinRoute path="/signin" exact component={SignIn} />
             <UnloggedinRoute path="/signup" exact component={SignUp} />
             {/*///////////////////////////////////////////UnLoggedIn Routes/////////////////////////////////////////////////*/}
+
+            {/*///////////////////////////////////////////Form Routes/////////////////////////////////////////////////*/}
+            <LoggedinRoute path="/mahzorform/:mahzorid" exact component={MahzorForm} />
+            {/*///////////////////////////////////////////Form Routes/////////////////////////////////////////////////*/}
 
             {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
             <AdminRoute path="/manageusers" exact component={ManageUsers} />
