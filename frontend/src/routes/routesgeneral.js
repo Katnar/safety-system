@@ -17,7 +17,7 @@ import AdminDashboard from "views/general/adminpages/AdminDashboard";
 import UnitDashboard from "views/general/unitpages/UnitDashboard";
 import CandidateDashboard from "views/general/candidatepages/CandidateDashboard";
 import PreferenceForm from "views/general/candidatepages/PreferenceForm";
-import MahzorForm from "views/general/adminpages/MahzorForm";
+import MahzorForm from "views/general/adminpages/mahzorform/MahzorForm";
 
 const routesgeneral =
     (
