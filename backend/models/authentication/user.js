@@ -4,8 +4,12 @@ const { v4: uuidv4 } = require('uuid');
 const {ObjectId} = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
-    name: {type: String,trim: true,required: true,maxlength: 32},
+    firstname: {type: String,trim: true,required: true,maxlength: 32},
     lastname: {type: String,trim: true,required: true},
+    migzar:{type:String},
+    gender:{type:String},
+    cellphone:{type:Number},
+    rank:{type:String},
     hashed_password: {type: String,required: true},
     personalnumber: {type: String,trim: true,unique:true,require:true},
     unitid: {type:ObjectId,ref:'Unit'},
