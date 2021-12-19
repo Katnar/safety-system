@@ -11,10 +11,10 @@ const jobSchema = new mongoose.Schema({
     location:{type:String},
     peilut:{type:String},
     damah:{type:Boolean},
-    jobname:{type:String},
-    jobcode:{type:Number},
     sivug:{type:String},
     certain:{type:Boolean},
+    migzar:{type:String}
+  
     //affiliation:{type:ObjectId,ref:'Affiliation'},
 });
 
