@@ -1,4 +1,41 @@
 const Job = require("../../models/general/job");
+const mongoose = require('mongoose');
+
+let readtipul = [
+  {
+    $lookup: {
+      from: "jobtypes",
+      localField: "jobtype",
+      foreignField: "_id",
+      as: "jobtype"
+    }
+  },
+  {
+    $unwind: "$jobtype"
+  },
+  {
+    $lookup: {
+      from: "mahzors",
+      localField: "mahzor",
+      foreignField: "_id",
+      as: "mahzor"
+    }
+  },
+  {
+    $unwind: "$mahzor"
+  },
+  {
+    $lookup: {
+      from: "units",
+      localField: "unit",
+      foreignField: "_id",
+      as: "unit"
+    }
+  },
+  {
+    $unwind: "$unit"
+  },
+];
 
 exports.findById = async(req, res) => {
   const job = await Job.findOne().where({_id:req.params.id})
@@ -30,7 +67,7 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
   const job = new Job(req.body);
-  Pikod.updateOne(job)
+  Job.updateOne(job)
     .then((job) => res.json(job))
     .catch((err) => res.status(400).json("Error: " + err));
 };
@@ -40,3 +77,35 @@ exports.remove = (req, res) => {
     .then((job) => res.json(job))
     .catch((err) => res.status(400).json("Error: " + err));
 };
+
+exports.jobsbymahzorid = async(req, res) => {
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
+
+  let andquery = [];
+
+  //mahzorid
+  if (req.params.mahzorid != 'undefined') {
+    andquery.push({ "mahzor._id": mongoose.Types.ObjectId(req.params.mahzorid) });
+  }
+
+  if (andquery.length != 0) {
+    let matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
+  }
+
+  // console.log(matchquerry)
+  //console.log(andquery)
+
+  Job.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
+ }

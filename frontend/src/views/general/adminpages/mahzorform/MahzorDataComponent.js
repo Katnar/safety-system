@@ -29,7 +29,7 @@ import { toast } from "react-toastify";
 
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
-import SettingModal from "../SettingModal";
+import SettingModal from "../../../../components/general/modal/SettingModal";
 
 const MahzorDataComponent = (props) => {
 

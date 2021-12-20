@@ -29,29 +29,11 @@ import { toast } from "react-toastify";
 
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
-import SettingModal from "../SettingModal";
+import SettingModal from "../../../../components/general/modal/SettingModal";
 import MahzorDataComponent from './MahzorDataComponent';
 import MahzorCandidates from './MahzorCandidates';
 
 const MahzorJobs = (props) => {
-    const [units, setUnits] = useState([]);
-    const [jobtypes, setJobtypes] = useState([]);
-    const [jobstoadd, setJobsToAdd] = useState([]);
-  
-    //handle add state
-    const [isjobmodalopen, setIsJobModalOpen] = useState(false);
-    //handle edit state
-    const [iseditjobmodalopen, setIsEditJobModalOpen] = useState(false);
-    //
-    const [modalData, setModalData] = useState("");
-    const [editData, setEditData] = useState("");
-    function init() {
-
-    }
-
-    useEffect(() => {
-        init();
-    }, [])
 
     return (
         <Card>
@@ -70,22 +52,22 @@ const MahzorJobs = (props) => {
                             <div style={{ textAlign: 'center', paddingTop: '10px' }}>בחר סוג תפקיד</div>
                             <Input
                                 type="select"
-                                name="jobtype" value={props.tempjobtoadd.jobtype} onChange={props.TempJobToAddhandleChange}
+                                name="jobtype" onChange={props.TempJobToAddhandleChange}
                             >
                                 <option value={"בחר סוג תפקיד"}>בחר סוג תפקיד</option>
-                                {props.jobtypes?props.jobtypes.map((jobtype, index) => (
-                                    <option key={index} value={index}>{jobtype.name}</option>
-                                )):null}
+                                {props.jobtypes.map((jobtype, index) => (
+                                    <option key={index} value={index}>{jobtype.jobname}</option>
+                                ))}
                             </Input>
                             <div style={{ textAlign: 'center', paddingTop: '10px' }}>בחר יחידה</div>
                             <Input
                                 type="select"
-                                name="unit" value={props.tempjobtoadd.unit} onChange={props.TempJobToAddhandleChange}
+                                name="unit" onChange={props.TempJobToAddhandleChange}
                             >
                                 <option value={"בחר יחידה"}>בחר יחידה</option>
-                                {props.units?props.units.map((unit, index) => (
+                                {props.units.map((unit, index) => (
                                     <option key={index} value={index}>{unit.name}</option>
-                                )):null}
+                                ))}
                             </Input>
                             <div style={{ textAlign: 'center', paddingTop: '10px' }}>מחלקה</div>
                             <Input type="text" name="mahlaka" value={props.tempjobtoadd.mahlaka} onChange={props.TempJobToAddhandleChange}></Input>
@@ -98,7 +80,11 @@ const MahzorJobs = (props) => {
                             <div style={{ textAlign: 'center', paddingTop: '10px' }}>פעילות</div>
                             <Input type="text" name="peilut" value={props.tempjobtoadd.peilut} onChange={props.TempJobToAddhandleChange}></Input>
                             <div style={{ textAlign: 'center', paddingTop: '10px' }}>דמ"ח</div>
-                            <Input type="text" name="damah" value={props.tempjobtoadd.damah} onChange={props.TempJobToAddhandleChange}></Input>
+                            <Input type="select" name="damah" value={props.tempjobtoadd.damah} onChange={props.TempJobToAddhandleChange}>
+                                <option value={'בחר דמ"ח'}>בחר דמ"ח</option>
+                                <option value={true}>יש</option>
+                                <option value={false}>אין</option>
+                            </Input>
                             <div style={{ textAlign: 'center', paddingTop: '10px' }}>סיווג</div>
                             <Input type="select" name="sivug" value={props.tempjobtoadd.sivug} onChange={props.TempJobToAddhandleChange}>
                                 <option value={"בחר סיווג"}>בחר סיווג</option>
@@ -118,6 +104,7 @@ const MahzorJobs = (props) => {
                         </div>
                     </SettingModal>
                     <table>
+                    <thead>
                         <tr>
                             <th>סוג תפקיד</th>
                             <th>יחידה</th>
@@ -129,22 +116,24 @@ const MahzorJobs = (props) => {
                             <th>דמ"ח</th>
                             <th>סיווג</th>
                             <th>ודאי/לא ודאי</th>
-                            <th>ערוך</th>
+                            {/* <th>ערוך</th> */}
                             <th>מחק</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         {props.jobstoadd?props.jobstoadd.map((job, index) => (
                             <tr>
-                                <td style={{ textAlign: "center" }}>{job.name}</td>
-                                <td style={{ textAlign: "center" }}>{job.unit}</td>
+                                <td style={{ textAlign: "center" }}>{job.jobtype.jobname}</td>
+                                <td style={{ textAlign: "center" }}>{job.unit.name}</td>
                                 <td style={{ textAlign: "center" }}>{job.mahlaka}</td>
                                 <td style={{ textAlign: "center" }}>{job.thom}</td>
                                 <td style={{ textAlign: "center" }}>{job.description}</td>
                                 <td style={{ textAlign: "center" }}>{job.location}</td>
                                 <td style={{ textAlign: "center" }}>{job.peilut}</td>
-                                <td style={{ textAlign: "center" }}>{job.damah}</td>
+                                <td style={{ textAlign: "center" }}>{job.damah.toString()}</td>
                                 <td style={{ textAlign: "center" }}>{job.sivug}</td>
-                                <td style={{ textAlign: "center" }}>{job.certain}</td>
-                                <td style={{ textAlign: "center" }}>
+                                <td style={{ textAlign: "center" }}>{job.certain.toString()}</td>
+                                {/* <td style={{ textAlign: "center" }}>
                                     <button
                                         className="btn btn-success"
                                         style={{ padding: "0.5rem" }}
@@ -156,7 +145,7 @@ const MahzorJobs = (props) => {
                                             style={{ height: "2rem" }}
                                         />
                                     </button>
-                                </td>
+                                </td> */}
                                 <td style={{ textAlign: "center" }}>
                                     <button
                                         className="btn btn-danger"
@@ -172,11 +161,11 @@ const MahzorJobs = (props) => {
                                 </td>
                             </tr>
                         )):null}
+                        </tbody>
                         <SettingModal
                             title="ערוך תפקיד"
                             isOpen={props.iseditjobmodalopen}
                         >
-                            {/* <Button onClick={() => editGdodBizoa()}>עדכן</Button> */}
                         </SettingModal>
                     </table>
                 </Container>

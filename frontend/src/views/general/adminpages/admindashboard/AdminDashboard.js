@@ -24,6 +24,7 @@ import {
 import UserCard from "components/general/DashboardCards/UserCard/UserCard";
 
 import plus from "assets/img/add.png";
+import MahzorsDisplay from "./MahzorsDisplay";
 
 function AdminDashboard() {
 
@@ -34,16 +35,7 @@ function AdminDashboard() {
       </Container>
 
       <Container style={{ paddingTop: '2rem' }}>
-        <Card style={{ borderRadius: '40px' }}>
-          <CardHeader>
-            <CardTitle tag="h2" style={{ float: "right", fontWeight: 'bold' }}>
-              מחזורים
-            </CardTitle>
-          </CardHeader>
-          <CardBody>
-
-          </CardBody>
-        </Card>
+        <MahzorsDisplay />
       </Container>
     </>
   );

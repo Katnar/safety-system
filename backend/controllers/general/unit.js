@@ -30,7 +30,7 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
   const unit = new Unit(req.body);
-  Pikod.updateOne(unit)
+  Unit.updateOne(unit)
     .then((unit) => res.json(unit))
     .catch((err) => res.status(400).json("Error: " + err));
 };

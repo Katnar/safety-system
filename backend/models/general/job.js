@@ -4,6 +4,7 @@ const {ObjectId} = mongoose.Schema
 
 const jobSchema = new mongoose.Schema({
     mahzor:{type:ObjectId,ref:'Mahzor'},
+    jobtype:{type:ObjectId,ref:'JobType'},
     unit:{type:ObjectId,ref:'Unit'},
     mahlaka:{type:String},
     thom:{type:String},
@@ -14,7 +15,6 @@ const jobSchema = new mongoose.Schema({
     sivug:{type:String},
     certain:{type:Boolean},
     migzar:{type:String}
-  
     //affiliation:{type:ObjectId,ref:'Affiliation'},
 });
 

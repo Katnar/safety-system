@@ -30,7 +30,7 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
   const affiliation = new Affiliation(req.body);
-  Pikod.updateOne(affiliation)
+  Affiliation.updateOne(affiliation)
     .then((affiliation) => res.json(affiliation))
     .catch((err) => res.status(400).json("Error: " + err));
 };

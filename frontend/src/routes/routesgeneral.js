@@ -13,7 +13,8 @@ import SignUp from "views/general/authentication/SignUpForm";
 import ManageUsers from "views/general/authentication/manageusers/ManageUsers";
 import EditUser from "views/general/authentication/EditUserForm";
 
-import AdminDashboard from "views/general/adminpages/AdminDashboard";
+import AdminDashboard from "views/general/adminpages/admindashboard/AdminDashboard";
+import MahzorimPage from "views/general/adminpages/mahzorimpage/MahzorimPage";
 import UnitDashboard from "views/general/unitpages/UnitDashboard";
 import CandidateDashboard from "views/general/candidatepages/CandidateDashboard";
 import PreferenceForm from "views/general/candidatepages/PreferenceForm";
@@ -36,6 +37,7 @@ const routesgeneral =
             <AdminRoute path="/edituser/:userid" exact component={EditUser} />
 
             <AdminRoute path="/dashboard" exact component={AdminDashboard} />
+            <AdminRoute path="/mahzorimpage" exact component={MahzorimPage} />
             {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
 
             {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}

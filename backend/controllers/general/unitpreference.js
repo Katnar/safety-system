@@ -30,7 +30,7 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
   const unitpreference = new Unitpreference(req.body);
-  Pikod.updateOne(unitpreference)
+  Unitpreference.updateOne(unitpreference)
     .then((unitpreference) => res.json(unitpreference))
     .catch((err) => res.status(400).json("Error: " + err));
 };

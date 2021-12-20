@@ -30,7 +30,7 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
   const finaleshkol = new Finaleshkol(req.body);
-  Pikod.updateOne(finaleshkol)
+  Finaleshkol.updateOne(finaleshkol)
     .then((finaleshkol) => res.json(finaleshkol))
     .catch((err) => res.status(400).json("Error: " + err));
 };

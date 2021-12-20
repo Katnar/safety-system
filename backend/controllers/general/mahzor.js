@@ -30,7 +30,7 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
   const mahzor = new Mahzor(req.body);
-  Pikod.updateOne(mahzor)
+  Mahzor.updateOne(mahzor)
     .then((mahzor) => res.json(mahzor))
     .catch((err) => res.status(400).json("Error: " + err));
 };

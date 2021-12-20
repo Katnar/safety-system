@@ -1,24 +1,24 @@
-const Eshkol = require("../../models/general/eshkol");
+const Jobtype = require("../../models/general/jobtype");
 
 exports.findById = async(req, res) => {
-  const eshkol = await Eshkol.findOne().where({_id:req.params.id})
+  const jobtype = await Jobtype.findOne().where({_id:req.params.id})
   
-  if(!eshkol){
+  if(!jobtype){
       res.status(500).json({success: false})
   }
-  res.send(eshkol)
+  res.send(jobtype)
   
  }
 
 exports.find = (req, res) => {
-    Eshkol.find()
-    .then((eshkol) => res.json(eshkol))
+    Jobtype.find()
+    .then((jobtype) => res.json(jobtype))
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
 exports.create = (req, res) => {
-  const eshkol = new Eshkol(req.body);
-  eshkol.save((err, data) => {
+  const jobtype = new Jobtype(req.body);
+  jobtype.save((err, data) => {
     if (err) {
       return res.status(400).json({
         error: err,
@@ -29,14 +29,14 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const eshkol = new Eshkol(req.body);
-  Eshkol.updateOne(eshkol)
-    .then((eshkol) => res.json(eshkol))
+  const jobtype = new Jobtype(req.body);
+  Jobtype.updateOne(jobtype)
+    .then((jobtype) => res.json(jobtype))
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
 exports.remove = (req, res) => {
-    Eshkol.deleteOne({ _id: req.params.id })
-    .then((eshkol) => res.json(eshkol))
+    Jobtype.deleteOne({ _id: req.params.id })
+    .then((jobtype) => res.json(jobtype))
     .catch((err) => res.status(400).json("Error: " + err));
 };
