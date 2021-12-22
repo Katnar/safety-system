@@ -99,6 +99,20 @@ function Sidebarcandidate() {
             </Row>
           </NavLink>
         </li>
+        <li>
+          <NavLink to={`/usermahzorimpage/${user._id}`} style={{margin:'0px'}} activeClassName="sidebar_active_link">
+            <Row style={{ direction: "rtl" }}>
+              <Col xs={12} md={3} style={{ paddingLeft: "0px" }}>
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4 style={{ color: color }}>
+                  מועמדויות שלי
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
       </Nav>
       <div style={{ justifyContent: 'center', textAlign: 'center', bottom: 0, width: '100%' }}>
         <Button

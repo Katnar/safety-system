@@ -17,8 +17,10 @@ import AdminDashboard from "views/general/adminpages/admindashboard/AdminDashboa
 import MahzorimPage from "views/general/adminpages/mahzorimpage/MahzorimPage";
 import UnitDashboard from "views/general/unitpages/UnitDashboard";
 import CandidateDashboard from "views/general/candidatepages/CandidateDashboard";
-import PreferenceForm from "views/general/candidatepages/PreferenceForm";
+import CandidatePreferenceForm from "views/general/candidatepages/CandidatePreferenceForm";
 import MahzorForm from "views/general/adminpages/mahzorform/MahzorForm";
+import Usermahzorimpage from "views/general/candidatepages/usermahzorimpage/Usermahzorimpage";
+import JobsByMahzor from "views/general/JobsByMahzor";
 
 const routesgeneral =
     (
@@ -30,6 +32,7 @@ const routesgeneral =
 
             {/*///////////////////////////////////////////Form Routes/////////////////////////////////////////////////*/}
             <LoggedinRoute path="/mahzorform/:mahzorid" exact component={MahzorForm} />
+            <LoggedinRoute path="/jobsbymahzor/:mahzorid" exact component={JobsByMahzor} />
             {/*///////////////////////////////////////////Form Routes/////////////////////////////////////////////////*/}
 
             {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
@@ -46,7 +49,8 @@ const routesgeneral =
 
             {/*////////////////////////////////////////Candidate User//////////////////////////////////////////////////*/}
             <CandidateRoute path="/candidatedashboard/:candidateid" exact component={CandidateDashboard} />
-            <CandidateRoute path="/preferenceform/:mahzorid" exact component={PreferenceForm} />
+            <CandidateRoute path="/usermahzorimpage/:userid" exact component={Usermahzorimpage} />
+            <CandidateRoute path="/candidatepreferenceform/:mahzorid/:candidateid" exact component={CandidatePreferenceForm} />
             {/*////////////////////////////////////////Candidate User//////////////////////////////////////////////////*/}
         </>
     )

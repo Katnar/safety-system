@@ -8,13 +8,13 @@ const jobSchema = new mongoose.Schema({
     unit:{type:ObjectId,ref:'Unit'},
     mahlaka:{type:String},
     thom:{type:String},
-    description:{type:String},
     location:{type:String},
     peilut:{type:String},
     damah:{type:Boolean},
     sivug:{type:String},
     certain:{type:Boolean},
-    migzar:{type:String}
+    migzar:{type:String},
+    description:{type:String}
     //affiliation:{type:ObjectId,ref:'Affiliation'},
 });
 

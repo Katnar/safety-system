@@ -22,22 +22,16 @@ import {
 } from "reactstrap";
 
 import { isAuthenticated } from 'auth/index';
+import CandidatesByUserSortingTable from "components/tafkidipedia/CandidatesByUserSortingTable/SortingTable";
 
-import UserCard from "components/general/DashboardCards/UserCard/UserCard";
-
-function CandidateDashboard() {
-  const { user } = isAuthenticated();
+function Usermahzorimpage() {
 
   return (
-    <>
-      <Container>
-        <UserCard />
-      </Container>
+    <Container>
 
-      <Container style={{ paddingTop: '2rem' }}>
-      </Container>
-    </>
+      <CandidatesByUserSortingTable/>
+    </Container>
   );
 }
 
-export default withRouter(CandidateDashboard);
+export default withRouter(Usermahzorimpage);

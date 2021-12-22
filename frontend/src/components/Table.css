@@ -33,10 +33,18 @@ table {
     padding-top: 0px;
     padding-bottom: 0px;
     font-size: large;
-    background-color: #00d3d2;
+    background-color: #4fff64;
     color: white;
-    
   }
+
+  table tr:last-child td:first-child {
+    border-radius: 0 0 12px 0;
+  }
+
+  table tr:last-child td:last-child {
+    border-radius: 0 0 0 12px;
+  }
+
   span{
       color: black;
   }

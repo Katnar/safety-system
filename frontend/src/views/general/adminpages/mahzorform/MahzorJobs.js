@@ -73,8 +73,6 @@ const MahzorJobs = (props) => {
                             <Input type="text" name="mahlaka" value={props.tempjobtoadd.mahlaka} onChange={props.TempJobToAddhandleChange}></Input>
                             <div style={{ textAlign: 'center', paddingTop: '10px' }}>תחום</div>
                             <Input type="text" name="thom" value={props.tempjobtoadd.thom} onChange={props.TempJobToAddhandleChange}></Input>
-                            <div style={{ textAlign: 'center', paddingTop: '10px' }}>תיאור</div>
-                            <Input type="text" name="description" value={props.tempjobtoadd.description} onChange={props.TempJobToAddhandleChange}></Input>
                             <div style={{ textAlign: 'center', paddingTop: '10px' }}>מיקום</div>
                             <Input type="text" name="location" value={props.tempjobtoadd.location} onChange={props.TempJobToAddhandleChange}></Input>
                             <div style={{ textAlign: 'center', paddingTop: '10px' }}>פעילות</div>
@@ -99,6 +97,8 @@ const MahzorJobs = (props) => {
                                 <option value={true}>ודאי</option>
                                 <option value={false}>לא ודאי</option>
                             </Input>
+                            <div style={{ textAlign: 'center', paddingTop: '10px' }}>תיאור</div>
+                            <Input type="text" name="description" value={props.tempjobtoadd.description} onChange={props.TempJobToAddhandleChange}></Input>
                             <Button onClick={() => props.AddJobToJobsToAdd()}>הוסף</Button>
                             <Button onClick={() => props.setIsJobModalOpen(false)}>סגור</Button>
                         </div>
@@ -110,7 +110,7 @@ const MahzorJobs = (props) => {
                             <th>יחידה</th>
                             <th>מחלקה</th>
                             <th>תחום</th>
-                            <th>תיאור</th>
+                            {/* <th>תיאור</th> */}
                             <th>מיקום</th>
                             <th>פעילות</th>
                             <th>דמ"ח</th>
@@ -127,7 +127,7 @@ const MahzorJobs = (props) => {
                                 <td style={{ textAlign: "center" }}>{job.unit.name}</td>
                                 <td style={{ textAlign: "center" }}>{job.mahlaka}</td>
                                 <td style={{ textAlign: "center" }}>{job.thom}</td>
-                                <td style={{ textAlign: "center" }}>{job.description}</td>
+                                {/* <td style={{ textAlign: "center" }}>{job.description}</td> */}
                                 <td style={{ textAlign: "center" }}>{job.location}</td>
                                 <td style={{ textAlign: "center" }}>{job.peilut}</td>
                                 <td style={{ textAlign: "center" }}>{job.damah.toString()}</td>
