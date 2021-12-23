@@ -38,7 +38,7 @@ export default function SignUpForm() {
 
   const loadUnits = () => {
     axios
-      .get("http://localhost:8000/api/gdod")
+      .get("http://localhost:8000/api/unit")
       .then((response) => {
         setUnits(response.data);
       })
@@ -246,13 +246,13 @@ export default function SignUpForm() {
                       <FormGroup dir="rtl">
                         <Input
                           type="select"
-                          name="gdodid"
-                          value={data.gdodid}
+                          name="unitid"
+                          value={data.unitid}
                           onChange={handleChange}
                         >
                           <option value={""}>יחידה</option>
-                          {units.map((gdod, index) => (
-                            <option value={gdod._id}>{gdod.name}</option>
+                          {units.map((unit, index) => (
+                            <option value={unit._id}>{unit.name}</option>
                           ))}
                         </Input>
                       </FormGroup>

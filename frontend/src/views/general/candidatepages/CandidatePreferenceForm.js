@@ -49,6 +49,8 @@ const CandidatePreferenceForm = ({ match }) => {
     let tempcandidatepreferencedata; //look for existing preference
     let result = await axios.get(`http://localhost:8000/api/candidatepreference/candidatepreferencebycandidateid/${match.params.candidateid}`);
     tempcandidatepreferencedata = result.data[0];
+    if(tempcandidatepreferencedata) //has existing pref
+    {
     tempcandidatepreferencedata.certjobpreference1 = tempcandidatepreferencedata.certjobpreference1._id
     tempcandidatepreferencedata.certjobpreference2 = tempcandidatepreferencedata.certjobpreference2._id
     tempcandidatepreferencedata.certjobpreference3 = tempcandidatepreferencedata.certjobpreference3._id
@@ -57,9 +59,12 @@ const CandidatePreferenceForm = ({ match }) => {
     tempcandidatepreferencedata.noncertjobpreference3 = tempcandidatepreferencedata.noncertjobpreference3._id
     delete tempcandidatepreferencedata.mahzor;
     delete tempcandidatepreferencedata.candidate;
-
-    // console.log(tempcandidatepreferencedata)
     setCandidatePreference(tempcandidatepreferencedata)
+    }
+    else{ //dont have existing pref
+
+    }
+    // console.log(tempcandidatepreferencedata)
   }
 
   const loadmahzorjobs = async () => {
