@@ -14,12 +14,12 @@ const SortingTable = ({ match }) => {
   const [data, setData] = useState([])
 
   function init() {
-    getMahzors();
+    getJobsByMahzorAndUnit();
   }
 
-  const getMahzors = async () => {
+  const getJobsByMahzorAndUnit = async () => {
     try {
-      await axios.get(`http://localhost:8000/api/mahzor`)
+      await axios.get(`http://localhost:8000/api/jobsbymahzoridandunitid/${match.params.mahzorid}/${match.params.unitid}`)
         .then(response => {
           setData(response.data)
         })
@@ -77,7 +77,6 @@ const SortingTable = ({ match }) => {
                   </th>
                 ))}
                 <th></th>
-                <th></th>
               </tr>
             ))}
 
@@ -90,42 +89,27 @@ const SortingTable = ({ match }) => {
                   <tr {...row.getRowProps()}>
                     {
                       row.cells.map(cell => {
-                        if ((cell.column.id != "createdAt") && (cell.column.id != "updatedAt")) {
+                        if (cell.column.id != "certain"){
                           return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                         }
                         else {
-                          if (cell.column.id == "createdAt") {
-                            return <td>{cell.value.slice(0, 10)}</td>
-                          }
-                          if (cell.column.id == "updatedAt") {
-                            return <td>{cell.value.slice(0, 10)}</td>
+                          if (cell.column.id == "certain") {
+                            if(cell.value==true)
+                            return <td>ודאי</td>
+                            else
+                            return <td>לא ודאי</td>
                           }
                         }
                       })
                     }
                     {/* {console.log(row)} */}
                     <td style={{ textAlign: "center" }}>
-                      <Link to={`/jobsbymahzor/${row.original._id}`}>
+                      <Link /*to={`/candidatepreferenceform/${row.original.mahzor._id}/${row.original._id}`}*/ to={"/"}>
                         <button
                           className="btn btn-success"
                           style={{ padding: "0.5rem" }}
                         >
-                         לצפייה בתפקידים
-                        </button>
-                      </Link>
-                    </td>
-                    <td style={{ textAlign: "center" }}>
-                      <Link to={`/displaymahzor/${row.original._id}`}>
-                        <button
-                          className="btn btn-success"
-                          style={{ padding: "0.5rem" }}
-                        // onClick={() => props.DeleteJobFromJobsToAdd(job)}
-                        >
-                          <img
-                            src={editpic}
-                            alt="bookmark"
-                            style={{ height: "2rem" }}
-                          />
+                          ערוך העדפות מתמודדים
                         </button>
                       </Link>
                     </td>

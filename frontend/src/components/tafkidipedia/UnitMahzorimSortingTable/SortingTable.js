@@ -77,7 +77,6 @@ const SortingTable = ({ match }) => {
                   </th>
                 ))}
                 <th></th>
-                <th></th>
               </tr>
             ))}
 
@@ -105,27 +104,12 @@ const SortingTable = ({ match }) => {
                     }
                     {/* {console.log(row)} */}
                     <td style={{ textAlign: "center" }}>
-                      <Link to={`/jobsbymahzor/${row.original._id}`}>
+                      <Link to={`/jobsbymahzorandunit/${row.original._id}/${match.params.unitid}`}>
                         <button
                           className="btn btn-success"
                           style={{ padding: "0.5rem" }}
                         >
-                         לצפייה בתפקידים
-                        </button>
-                      </Link>
-                    </td>
-                    <td style={{ textAlign: "center" }}>
-                      <Link to={`/displaymahzor/${row.original._id}`}>
-                        <button
-                          className="btn btn-success"
-                          style={{ padding: "0.5rem" }}
-                        // onClick={() => props.DeleteJobFromJobsToAdd(job)}
-                        >
-                          <img
-                            src={editpic}
-                            alt="bookmark"
-                            style={{ height: "2rem" }}
-                          />
+                         תפקידים ביחידה
                         </button>
                       </Link>
                     </td>

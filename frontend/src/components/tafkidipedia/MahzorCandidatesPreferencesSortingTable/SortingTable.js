@@ -14,14 +14,20 @@ const SortingTable = ({ match }) => {
   const [data, setData] = useState([])
 
   function init() {
-    getMahzors();
+    getMahzorCabdidatePreferences();
   }
 
-  const getMahzors = async () => {
+  const getMahzorCabdidatePreferences = async () => {//get + sort by mahzorid
     try {
-      await axios.get(`http://localhost:8000/api/mahzor`)
+      await axios.get(`http://localhost:8000/api/smartcandidatepreference`)
         .then(response => {
-          setData(response.data)
+          let tempdata = response.data;
+          let tempcandidatepreferences = [];
+          for (let i = 0; i < tempdata.length; i++) {
+            if (tempdata[i].mahzor._id == match.params.mahzorid)
+              tempcandidatepreferences.push(tempdata[i])
+          }
+          setData(tempcandidatepreferences)
         })
         .catch((error) => {
           console.log(error);
@@ -76,8 +82,6 @@ const SortingTable = ({ match }) => {
                     </div>
                   </th>
                 ))}
-                <th></th>
-                <th></th>
               </tr>
             ))}
 
@@ -90,45 +94,35 @@ const SortingTable = ({ match }) => {
                   <tr {...row.getRowProps()}>
                     {
                       row.cells.map(cell => {
-                        if ((cell.column.id != "createdAt") && (cell.column.id != "updatedAt")) {
-                          return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                        // if (cell.column.id != "candidate.user.name") {
+                        //   return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                        // }
+                        // else {
+                        if (cell.column.id == "candidate.user.name") {
+                          return <td>{cell.value}{" "}{row.original.candidate.user.lastname}</td>
                         }
-                        else {
-                          if (cell.column.id == "createdAt") {
-                            return <td>{cell.value.slice(0, 10)}</td>
-                          }
-                          if (cell.column.id == "updatedAt") {
-                            return <td>{cell.value.slice(0, 10)}</td>
-                          }
+                        if (cell.column.id == "certjobpreference1") {
+                          return <td>{cell.value.jobtype.jobname}{"/"}{cell.value.unit.name}</td>
                         }
+                        if (cell.column.id == "certjobpreference2") {
+                          return <td>{cell.value.jobtype.jobname}{"/"}{cell.value.unit.name}</td>
+                        }
+                        if (cell.column.id == "certjobpreference3") {
+                          return <td>{cell.value.jobtype.jobname}{"/"}{cell.value.unit.name}</td>
+                        }
+                        if (cell.column.id == "noncertjobpreference1") {
+                          return <td>{cell.value.jobtype.jobname}{"/"}{cell.value.unit.name}</td>
+                        }
+                        if (cell.column.id == "noncertjobpreference2") {
+                          return <td>{cell.value.jobtype.jobname}{"/"}{cell.value.unit.name}</td>
+                        }
+                        if (cell.column.id == "noncertjobpreference3") {
+                          return <td>{cell.value.jobtype.jobname}{"/"}{cell.value.unit.name}</td>
+                        }
+                        // }
                       })
                     }
                     {/* {console.log(row)} */}
-                    <td style={{ textAlign: "center" }}>
-                      <Link to={`/jobsbymahzor/${row.original._id}`}>
-                        <button
-                          className="btn btn-success"
-                          style={{ padding: "0.5rem" }}
-                        >
-                         לצפייה בתפקידים
-                        </button>
-                      </Link>
-                    </td>
-                    <td style={{ textAlign: "center" }}>
-                      <Link to={`/displaymahzor/${row.original._id}`}>
-                        <button
-                          className="btn btn-success"
-                          style={{ padding: "0.5rem" }}
-                        // onClick={() => props.DeleteJobFromJobsToAdd(job)}
-                        >
-                          <img
-                            src={editpic}
-                            alt="bookmark"
-                            style={{ height: "2rem" }}
-                          />
-                        </button>
-                      </Link>
-                    </td>
                   </tr>
                 )
               })

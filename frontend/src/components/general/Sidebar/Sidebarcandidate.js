@@ -49,19 +49,8 @@ import {
 
 import { signin, authenticate, isAuthenticated } from "auth/index";
 
-function Sidebarcandidate() {
-  const [color, setcolor] = useState("transparent");
+function SidebarCandidate() {
   const { user } = isAuthenticated();
-
-  const [collapsed1, setCollapsed1] = useState(true);
-  const [collapsed2, setCollapsed2] = useState(true);
-  const [collapsed3, setCollapsed3] = useState(true);
-  const [collapsed4, setCollapsed4] = useState(true);
-
-  const toggleNavbar1 = () => setCollapsed1(!collapsed1);
-  const toggleNavbar2 = () => setCollapsed2(!collapsed2);
-  const toggleNavbar3 = () => setCollapsed3(!collapsed3);
-  const toggleNavbar4 = () => setCollapsed4(!collapsed4);
 
   const clickSubmit = (event) => {
     event.preventDefault();
@@ -74,13 +63,6 @@ function Sidebarcandidate() {
 
   return (
     <>
-      <ThemeContext.Consumer>
-        {({ changeTheme, theme }) => (
-          theme == "white-content" ?
-            setcolor("black")
-            : setcolor("white")
-        )}
-      </ThemeContext.Consumer>
       <div className="logo">
         <img src={tafkidipedialogo}></img>
       </div>
@@ -92,7 +74,7 @@ function Sidebarcandidate() {
                 <img src={home} style={{ height: "20px" }}></img>
               </Col>
               <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4 style={{ color: color }}>
+                <h4>
                   דף הבית
                 </h4>
               </Col>
@@ -106,7 +88,7 @@ function Sidebarcandidate() {
                 <img src={table} style={{ height: "20px" }}></img>
               </Col>
               <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4 style={{ color: color }}>
+                <h4>
                   מועמדויות שלי
                 </h4>
               </Col>
@@ -127,4 +109,4 @@ function Sidebarcandidate() {
   );
 }
 
-export default Sidebarcandidate;
+export default SidebarCandidate;

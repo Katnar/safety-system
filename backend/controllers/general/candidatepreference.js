@@ -15,6 +15,17 @@ let readtipul = [
   },
   {
     $lookup: {
+      from: "users",
+      localField: "candidate.user",
+      foreignField: "_id",
+      as: "candidate.user"
+    }
+  },
+  {
+    $unwind: "$candidate.user"
+  },
+  {
+    $lookup: {
       from: "mahzors",
       localField: "mahzor",
       foreignField: "_id",
@@ -37,6 +48,28 @@ let readtipul = [
   },
   {
     $lookup: {
+      from: "jobtypes",
+      localField: "certjobpreference1.jobtype",
+      foreignField: "_id",
+      as: "certjobpreference1.jobtype"
+    }
+  },
+  {
+    $unwind: "$certjobpreference1.jobtype"
+  },
+  {
+    $lookup: {
+      from: "units",
+      localField: "certjobpreference1.unit",
+      foreignField: "_id",
+      as: "certjobpreference1.unit"
+    }
+  },
+  {
+    $unwind: "$certjobpreference1.unit"
+  },
+  {
+    $lookup: {
       from: "jobs",
       localField: "certjobpreference2",
       foreignField: "_id",
@@ -45,6 +78,28 @@ let readtipul = [
   },
   {
     $unwind: "$certjobpreference2"
+  },
+  {
+    $lookup: {
+      from: "jobtypes",
+      localField: "certjobpreference2.jobtype",
+      foreignField: "_id",
+      as: "certjobpreference2.jobtype"
+    }
+  },
+  {
+    $unwind: "$certjobpreference2.jobtype"
+  },
+  {
+    $lookup: {
+      from: "units",
+      localField: "certjobpreference2.unit",
+      foreignField: "_id",
+      as: "certjobpreference2.unit"
+    }
+  },
+  {
+    $unwind: "$certjobpreference2.unit"
   },
   {
     $lookup: {
@@ -59,6 +114,28 @@ let readtipul = [
   },
   {
     $lookup: {
+      from: "jobtypes",
+      localField: "certjobpreference3.jobtype",
+      foreignField: "_id",
+      as: "certjobpreference3.jobtype"
+    }
+  },
+  {
+    $unwind: "$certjobpreference3.jobtype"
+  },
+  {
+    $lookup: {
+      from: "units",
+      localField: "certjobpreference3.unit",
+      foreignField: "_id",
+      as: "certjobpreference3.unit"
+    }
+  },
+  {
+    $unwind: "$certjobpreference3.unit"
+  },
+  {
+    $lookup: {
       from: "jobs",
       localField: "noncertjobpreference1",
       foreignField: "_id",
@@ -67,6 +144,28 @@ let readtipul = [
   },
   {
     $unwind: "$noncertjobpreference1"
+  },
+  {
+    $lookup: {
+      from: "jobtypes",
+      localField: "noncertjobpreference1.jobtype",
+      foreignField: "_id",
+      as: "noncertjobpreference1.jobtype"
+    }
+  },
+  {
+    $unwind: "$noncertjobpreference1.jobtype"
+  },
+  {
+    $lookup: {
+      from: "units",
+      localField: "noncertjobpreference1.unit",
+      foreignField: "_id",
+      as: "noncertjobpreference1.unit"
+    }
+  },
+  {
+    $unwind: "$noncertjobpreference1.unit"
   },
   {
     $lookup: {
@@ -81,6 +180,28 @@ let readtipul = [
   },
   {
     $lookup: {
+      from: "jobtypes",
+      localField: "noncertjobpreference2.jobtype",
+      foreignField: "_id",
+      as: "noncertjobpreference2.jobtype"
+    }
+  },
+  {
+    $unwind: "$noncertjobpreference2.jobtype"
+  },
+  {
+    $lookup: {
+      from: "units",
+      localField: "noncertjobpreference2.unit",
+      foreignField: "_id",
+      as: "noncertjobpreference2.unit"
+    }
+  },
+  {
+    $unwind: "$noncertjobpreference2.unit"
+  },
+  {
+    $lookup: {
       from: "jobs",
       localField: "noncertjobpreference3",
       foreignField: "_id",
@@ -89,6 +210,28 @@ let readtipul = [
   },
   {
     $unwind: "$noncertjobpreference3"
+  },
+  {
+    $lookup: {
+      from: "jobtypes",
+      localField: "noncertjobpreference3.jobtype",
+      foreignField: "_id",
+      as: "noncertjobpreference3.jobtype"
+    }
+  },
+  {
+    $unwind: "$noncertjobpreference3.jobtype"
+  },
+  {
+    $lookup: {
+      from: "units",
+      localField: "noncertjobpreference3.unit",
+      foreignField: "_id",
+      as: "noncertjobpreference3.unit"
+    }
+  },
+  {
+    $unwind: "$noncertjobpreference3.unit"
   },
 ];
 
@@ -152,6 +295,38 @@ exports.candidatepreferencebycandidateid = async (req, res) => {
     };
     finalquerry.push(matchquerry)
   }
+
+  // console.log(matchquerry)
+  //console.log(andquery)
+
+  Candidatepreference.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
+}
+
+exports.smartcandidatepreference = async (req, res) => {
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
+
+  // let andquery = [];
+
+  // //candidateid
+  // if (req.params.candidateid != 'undefined') {
+  //   andquery.push({ "candidate._id": mongoose.Types.ObjectId(req.params.candidateid) });
+  // }
+
+  // if (andquery.length != 0) {
+  //   let matchquerry = {
+  //     "$match": {
+  //       "$and": andquery
+  //     }
+  //   };
+  //   finalquerry.push(matchquerry)
+  // }
 
   // console.log(matchquerry)
   //console.log(andquery)

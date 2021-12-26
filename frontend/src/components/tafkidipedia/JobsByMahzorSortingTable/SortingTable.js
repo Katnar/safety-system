@@ -104,7 +104,7 @@ const SortingTable = ({ match }) => {
                     }
                     {/* {console.log(row)} */}
                     <td style={{ textAlign: "center" }}>
-                      <Link to={`/candidatepreferenceform/${row.original.mahzor._id}/${row.original._id}`}>
+                      <Link to={`/displayjob/${row.original._id}`}>
                         <button
                           className="btn btn-success"
                           style={{ padding: "0.5rem" }}

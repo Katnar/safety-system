@@ -38,11 +38,8 @@ import {
 import { signin, authenticate, isAuthenticated } from 'auth/index';
 
 import SidebarAdmin from 'components/general/Sidebar/SidebarAdmin';
-import SidebarGdod from 'components/general/Sidebar/Sidebargdod';
-import Sidebarcandidate from 'components/general/Sidebar/Sidebarcandidate';
-import SidebarOgda from 'components/general/Sidebar/Sidebarogda';
-import SidebarPikod from 'components/general/Sidebar/Sidebarpikod';
-import SidebarSuperAdmin from './SidebarSuperAdmin';
+import SidebarUnit from 'components/general/Sidebar/SidebarUnit';
+import SidebarCandidate from 'components/general/Sidebar/SidebarCandidate';
 
 function Sidebar() {
   const [color, setcolor] = useState("transparent");
@@ -58,19 +55,13 @@ function Sidebar() {
         )}
       </ThemeContext.Consumer>
 
-      <div className="sidebar" style={{ background: color, marginTop: '60px', boxShadow: 'none', borderRadius: '0px' }}>
+      <div className="sidebar" style={{ background: color, marginTop: '60px', boxShadow: 'none', borderRadius: '0px',borderLeft:'1px solid lightgray'}}>
         <div className="sidebar-wrapper" style={{overflow:'hidden'}}>
           {user.role === "0" ? <SidebarAdmin /> :
 
-            user.role === "1" ? <SidebarGdod /> :
+            user.role === "1" ? <SidebarUnit /> :
 
-              user.role === "2" ? <Sidebarcandidate /> :
-
-                user.role === "3" ? <SidebarOgda /> :
-
-                    user.role === "4" ? <SidebarPikod /> :
-
-                      user.role === "5" ? <SidebarSuperAdmin /> : null
+              user.role === "2" ? <SidebarCandidate /> : null
             }
           </div>
      

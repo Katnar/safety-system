@@ -21,20 +21,17 @@ import {
   Collapse,
 } from "reactstrap";
 
-import UserCard from "components/general/DashboardCards/UserCard/UserCard";
+import UnitMahzorimSortingTable from 'components/tafkidipedia/UnitMahzorimSortingTable/SortingTable'
 
-function AdminDashboard() {
+function Unitmahzorimpage() {
 
   return (
     <>
       <Container>
-        <UserCard />
-      </Container>
-
-      <Container style={{ paddingTop: '2rem' }}>
+          <UnitMahzorimSortingTable/>
       </Container>
     </>
   );
 }
 
-export default withRouter(AdminDashboard);
+export default withRouter(Unitmahzorimpage);

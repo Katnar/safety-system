@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
 
 import { Link, withRouter, Redirect } from "react-router-dom";
-import { Link as RouterLink } from 'react-router-dom'
 
 // reactstrap components
 import {
@@ -20,21 +19,25 @@ import {
   Col,
   Collapse,
 } from "reactstrap";
+import axios from 'axios';
 
 import UserCard from "components/general/DashboardCards/UserCard/UserCard";
 
-function AdminDashboard() {
+import plus from "assets/img/add.png";
+
+function UnitDashboard({ match }) {
+
+  useEffect(() => {
+    // init();
+  }, [])
 
   return (
     <>
       <Container>
         <UserCard />
       </Container>
-
-      <Container style={{ paddingTop: '2rem' }}>
-      </Container>
     </>
   );
 }
 
-export default withRouter(AdminDashboard);
+export default withRouter(UnitDashboard);

@@ -18,7 +18,7 @@ import {
 
 import { ThemeContext, themes } from "contexts/ThemeContext";
 
-import Logoeged from "assets/img/tafkidipedialogo.png";
+import tafkidipedialogo from "assets/img/tafkidipedialogo.png";
 import home from "assets/img/home3.png";
 import table from "assets/img/table.png";
 import followers from "assets/img/followers.png";
@@ -64,7 +64,7 @@ function SidebarAdmin() {
   return (
     <>
       <div className="logo">
-        <img src={Logoeged}></img>
+        <img src={tafkidipedialogo}></img>
       </div>
       <Nav style={{ textAlign: "right"}}>
         <li>
