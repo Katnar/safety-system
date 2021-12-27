@@ -27,7 +27,7 @@ import { produce } from 'immer'
 import { generate } from 'shortid'
 import { toast } from "react-toastify";
 
-import editpic from "assets/img/edit.png";
+import soldier from "assets/img/soldier.png";
 import deletepic from "assets/img/delete.png";
 import SettingModal from "../../../../components/general/modal/SettingModal";
 import MahzorDataComponent from './MahzorDataComponent';
@@ -62,19 +62,22 @@ const MahzorCandidates = (props) => {
                             </FormGroup>
                         </Col>
                     </Row>
-                    <Row style={{ direction: "rtl" }} >
-                        {props.userstocandidate? props.userstocandidate.map((user, index) => (
+                    <Row style={{ direction: "rtl",paddingTop:'10px'}} >
+                        {props.userstocandidate ? props.userstocandidate.map((user, index) => (
                             <Col xs={12} md={6} key={index}>
-                                <Row style={{ direction: "rtl" }} >
-                                    <Col xs={12} md={6} >
+                                <Row style={{ direction: "rtl",boxShadow:'0px 0px 5px 0px rgb(0 0 0 / 40%)',borderRadius:'10px'}}>
+                                    <Col xs={12} md={2} style={{textAlign:'center',alignSelf:'center'}}>
+                                        <img src={soldier} alt="bookmark" style={{ height: "2rem" }}/>
+                                    </Col>
+                                    <Col xs={12} md={4} style={{alignSelf:'center'}}>
                                         <h3 style={{ textAlign: "right", margin: '0px' }}>{user.name}</h3>
                                     </Col>
-                                    <Col xs={12} md={6} >
-                                        <Button onClick={(e) => props.DeleteUserFromUsersToCandidate(user, e)}>מחק</Button>
+                                    <Col xs={12} md={6} style={{alignSelf:'center'}}>
+                                        <Button className="btn btn-danger" onClick={(e) => props.DeleteUserFromUsersToCandidate(user, e)} style={{padding:'11px 20px 11px 20px'}}>X</Button>
                                     </Col>
                                 </Row>
                             </Col>
-                        )):null}
+                        )) : null}
                     </Row>
                 </Container>
             </CardBody>

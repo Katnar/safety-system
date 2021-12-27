@@ -103,37 +103,38 @@ const MahzorJobs = (props) => {
                             <Button onClick={() => props.setIsJobModalOpen(false)}>סגור</Button>
                         </div>
                     </SettingModal>
-                    <table>
-                    <thead>
-                        <tr>
-                            <th>סוג תפקיד</th>
-                            <th>יחידה</th>
-                            <th>מחלקה</th>
-                            <th>תחום</th>
-                            <th>תיאור</th>
-                            <th>מיקום</th>
-                            <th>פעילות</th>
-                            <th>דמ"ח</th>
-                            <th>סיווג</th>
-                            <th>ודאי/לא ודאי</th>
-                            {/* <th>ערוך</th> */}
-                            <th>מחק</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {props.jobstoadd?props.jobstoadd.map((job, index) => (
-                            <tr>
-                                <td style={{ textAlign: "center" }}>{job.jobtype.jobname}</td>
-                                <td style={{ textAlign: "center" }}>{job.unit.name}</td>
-                                <td style={{ textAlign: "center" }}>{job.mahlaka}</td>
-                                <td style={{ textAlign: "center" }}>{job.thom}</td>
-                                <td style={{ textAlign: "center" }}>{job.description}</td>
-                                <td style={{ textAlign: "center" }}>{job.location}</td>
-                                <td style={{ textAlign: "center" }}>{job.peilut}</td>
-                                <td style={{ textAlign: "center" }}>{job.damah.toString()}</td>
-                                <td style={{ textAlign: "center" }}>{job.sivug}</td>
-                                <td style={{ textAlign: "center" }}>{job.certain.toString()}</td>
-                                {/* <td style={{ textAlign: "center" }}>
+                    <div className="table-responsive" style={{ overflow: 'auto' }}>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>סוג תפקיד</th>
+                                    <th>יחידה</th>
+                                    <th>מחלקה</th>
+                                    <th>תחום</th>
+                                    <th>תיאור</th>
+                                    <th>מיקום</th>
+                                    <th>פעילות</th>
+                                    <th>דמ"ח</th>
+                                    <th>סיווג</th>
+                                    <th>ודאי/לא ודאי</th>
+                                    {/* <th>ערוך</th> */}
+                                    <th>מחק</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {props.jobstoadd ? props.jobstoadd.map((job, index) => (
+                                    <tr>
+                                        <td style={{ textAlign: "center" }}>{job.jobtype.jobname}</td>
+                                        <td style={{ textAlign: "center" }}>{job.unit.name}</td>
+                                        <td style={{ textAlign: "center" }}>{job.mahlaka}</td>
+                                        <td style={{ textAlign: "center" }}>{job.thom}</td>
+                                        <td style={{ textAlign: "center" }}>{job.description}</td>
+                                        <td style={{ textAlign: "center" }}>{job.location}</td>
+                                        <td style={{ textAlign: "center" }}>{job.peilut}</td>
+                                        <td style={{ textAlign: "center" }}>{job.damah.toString()}</td>
+                                        <td style={{ textAlign: "center" }}>{job.sivug}</td>
+                                        <td style={{ textAlign: "center" }}>{job.certain.toString()}</td>
+                                        {/* <td style={{ textAlign: "center" }}>
                                     <button
                                         className="btn btn-success"
                                         style={{ padding: "0.5rem" }}
@@ -146,28 +147,29 @@ const MahzorJobs = (props) => {
                                         />
                                     </button>
                                 </td> */}
-                                <td style={{ textAlign: "center" }}>
-                                    <button
-                                        className="btn btn-danger"
-                                        style={{ padding: "0.5rem" }}
-                                        onClick={() => props.DeleteJobFromJobsToAdd(job)}
-                                    >
-                                        <img
-                                            src={deletepic}
-                                            alt="bookmark"
-                                            style={{ height: "2rem" }}
-                                        />
-                                    </button>
-                                </td>
-                            </tr>
-                        )):null}
-                        </tbody>
-                        <SettingModal
-                            title="ערוך תפקיד"
-                            isOpen={props.iseditjobmodalopen}
-                        >
-                        </SettingModal>
-                    </table>
+                                        <td style={{ textAlign: "center" }}>
+                                            <button
+                                                className="btn btn-danger"
+                                                style={{ padding: "0.5rem" }}
+                                                onClick={() => props.DeleteJobFromJobsToAdd(job)}
+                                            >
+                                                <img
+                                                    src={deletepic}
+                                                    alt="bookmark"
+                                                    style={{ height: "2rem" }}
+                                                />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )) : null}
+                            </tbody>
+                            <SettingModal
+                                title="ערוך תפקיד"
+                                isOpen={props.iseditjobmodalopen}
+                            >
+                            </SettingModal>
+                        </table>
+                    </div>
                 </Container>
             </CardBody>
         </Card>
