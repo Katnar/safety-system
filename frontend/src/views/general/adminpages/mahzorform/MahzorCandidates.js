@@ -64,7 +64,7 @@ const MahzorCandidates = (props) => {
                     </Row>
                     <Row style={{ direction: "rtl",paddingTop:'10px'}} >
                         {props.userstocandidate ? props.userstocandidate.map((user, index) => (
-                            <Col xs={12} md={6} key={index}>
+                            <Col xs={12} md={4} key={index}>
                                 <Row style={{ direction: "rtl",boxShadow:'0px 0px 5px 0px rgb(0 0 0 / 40%)',borderRadius:'10px'}}>
                                     <Col xs={12} md={2} style={{textAlign:'center',alignSelf:'center'}}>
                                         <img src={soldier} alt="bookmark" style={{ height: "2rem" }}/>
