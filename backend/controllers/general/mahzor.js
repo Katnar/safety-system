@@ -29,8 +29,7 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const mahzor = new Mahzor(req.body);
-  Mahzor.updateOne(mahzor)
+  Mahzor.findByIdAndUpdate(req.params.mahzorId,req.body)
     .then((mahzor) => res.json(mahzor))
     .catch((err) => res.status(400).json("Error: " + err));
 };

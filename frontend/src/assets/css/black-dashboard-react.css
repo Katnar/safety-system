@@ -11657,7 +11657,7 @@ hr {
   background: -o-linear-gradient(0deg, #ba54f5 0%, #e14eca 100%);
   background: -moz-linear-gradient(0deg, #ba54f5 0%, #e14eca 100%);
   background: linear-gradient(0deg, #ba54f5 0%, #e14eca 100%);
-  height: calc(100vh - 90px);
+  height: calc(100vh - 60px);
   width: 230px;
   position: fixed;
   top: 0;
@@ -12128,7 +12128,7 @@ hr {
   background: #141E30;
   /* fallback for old browsers */
   background: -webkit-gradient(linear, left top, right top, from(#0c2646), color-stop(60%, #204065), to(#2a5788));
-  background: linear-gradient(to right, #0c2646 0%, #204065 60%, #2a5788 100%);
+  background: linear-gradient( #2ee544 0%, #4fff64 100%);
   position: relative;
   overflow: hidden; }
   .panel-header .header .title {
@@ -12462,7 +12462,7 @@ code {
 .rtl .bootstrap-navbar {
   right: 0;
   left: auto;
-  margin-right: 20px;
+  margin-right: 17px;
   margin-left: 0; }
   .rtl .sidebar .nav i,
   .rtl .bootstrap-navbar .nav i {

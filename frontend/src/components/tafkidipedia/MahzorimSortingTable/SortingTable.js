@@ -77,6 +77,7 @@ const SortingTable = ({ match }) => {
                   </th>
                 ))}
                 <th></th>
+                <th></th>
               </tr>
             ))}
 
@@ -104,7 +105,17 @@ const SortingTable = ({ match }) => {
                     }
                     {/* {console.log(row)} */}
                     <td style={{ textAlign: "center" }}>
-                      <Link to={`/mahzorform/${row.original._id}`}>
+                      <Link to={`/jobsbymahzor/${row.original._id}`}>
+                        <button
+                          className="btn btn-success"
+                          style={{ padding: "0.5rem" }}
+                        >
+                         לצפייה בתפקידים
+                        </button>
+                      </Link>
+                    </td>
+                    <td style={{ textAlign: "center" }}>
+                      <Link to={`/displaymahzor/${row.original._id}`}>
                         <button
                           className="btn btn-success"
                           style={{ padding: "0.5rem" }}

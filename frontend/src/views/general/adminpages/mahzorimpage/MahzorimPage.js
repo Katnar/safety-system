@@ -29,6 +29,8 @@ function MahzorimPage() {
     <>
       <Container>
           <MahzorimSortingTable/>
+
+          <Link to={`mahzorform/0`}><Button>הוסף מחזור</Button></Link>
       </Container>
     </>
   );

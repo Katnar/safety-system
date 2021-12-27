@@ -23,9 +23,6 @@ import {
 
 import UserCard from "components/general/DashboardCards/UserCard/UserCard";
 
-import plus from "assets/img/add.png";
-import MahzorsDisplay from "./MahzorsDisplay";
-
 function AdminDashboard() {
 
   return (
@@ -35,7 +32,6 @@ function AdminDashboard() {
       </Container>
 
       <Container style={{ paddingTop: '2rem' }}>
-        <MahzorsDisplay />
       </Container>
     </>
   );

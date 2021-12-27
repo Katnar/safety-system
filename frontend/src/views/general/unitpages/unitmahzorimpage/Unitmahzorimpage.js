@@ -21,26 +21,17 @@ import {
   Collapse,
 } from "reactstrap";
 
-import { isAuthenticated } from 'auth/index';
+import UnitMahzorimSortingTable from 'components/tafkidipedia/UnitMahzorimSortingTable/SortingTable'
 
-import UserCard from "components/general/DashboardCards/UserCard/UserCard";
-
-import UserCandidatesComponent from "components/tafkidipedia/usercandidates/UserCandidatesComponent";
-
-function CandidateDashboard() {
-  const { user } = isAuthenticated();
+function Unitmahzorimpage() {
 
   return (
     <>
       <Container>
-        <UserCard />
-      </Container>
-
-      <Container style={{ paddingTop: '2rem' }}>
-        <UserCandidatesComponent id={user._id}/>
+          <UnitMahzorimSortingTable/>
       </Container>
     </>
   );
 }
 
-export default withRouter(CandidateDashboard);
+export default withRouter(Unitmahzorimpage);
