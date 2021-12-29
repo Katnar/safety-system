@@ -38,7 +38,8 @@ const CandidatePreferenceForm = ({ match }) => {
   }))
 
   const [candidatepreference, setCandidatePreference] = useState({})
-  const [mahzorjobs, setMahzorJobs] = useState([]);
+  const [certmahzorjobs, setCertMahzorJobs] = useState([]);
+  const [noncertmahzorjobs, setNonCertMahzorJobs] = useState([]);
 
   function handleChange(evt) {
     const value = evt.target.value;
@@ -68,16 +69,26 @@ const CandidatePreferenceForm = ({ match }) => {
   }
 
   const loadmahzorjobs = async () => {
-    let tempjobs = [];
+    let tempcertjobs = [];
+    let tempnoncertjobs = [];
 
     let result = await axios.get(`http://localhost:8000/api/jobsbymahzorid/${match.params.mahzorid}`)
     let jobs = result.data;
 
     for (let i = 0; i < jobs.length; i++) {
-      let tempjob = jobs[i];
-      tempjobs.push(tempjob)
+      if(jobs[i].certain==true) // תפקיד ודאי
+      {
+        let tempjob = jobs[i];
+        tempcertjobs.push(tempjob)
+      }
+      else{// תפקיד לא ודאי
+        let tempjob = jobs[i];
+        tempnoncertjobs.push(tempjob)
+      }
+
     }
-    setMahzorJobs(tempjobs);
+    setCertMahzorJobs(tempcertjobs);
+    setNonCertMahzorJobs(tempnoncertjobs);
   }
 
   const clickSubmit = event => {//CheckPreferenceData->AddPreferenceToDb
@@ -147,7 +158,7 @@ const CandidatePreferenceForm = ({ match }) => {
                   <FormGroup dir="rtl" >
                     <Input type="select" name="certjobpreference1" value={candidatepreference.certjobpreference1} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('certjobpreference1')}>
                       <option value={undefined}>{"בחר תפקיד"}</option>
-                      {mahzorjobs.map((job, index) => (
+                      {certmahzorjobs.map((job, index) => (
                         <option value={job._id}>{job.jobtype.jobname + "/" + job.unit.name}</option>
                       ))}
                     </Input>
@@ -159,7 +170,7 @@ const CandidatePreferenceForm = ({ match }) => {
                   <FormGroup dir="rtl" >
                     <Input type="select" name="certjobpreference2" value={candidatepreference.certjobpreference2} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('certjobpreference2')}>
                       <option value={undefined}>{"בחר תפקיד"}</option>
-                      {mahzorjobs.map((job, index) => (
+                      {certmahzorjobs.map((job, index) => (
                         <option value={job._id}>{job.jobtype.jobname + "/" + job.unit.name}</option>
                       ))}
                     </Input>
@@ -171,7 +182,7 @@ const CandidatePreferenceForm = ({ match }) => {
                   <FormGroup dir="rtl" >
                     <Input type="select" name="certjobpreference3" value={candidatepreference.certjobpreference3} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('certjobpreference3')}>
                       <option value={undefined}>{"בחר תפקיד"}</option>
-                      {mahzorjobs.map((job, index) => (
+                      {certmahzorjobs.map((job, index) => (
                         <option value={job._id}>{job.jobtype.jobname + "/" + job.unit.name}</option>
                       ))}
                     </Input>
@@ -187,7 +198,7 @@ const CandidatePreferenceForm = ({ match }) => {
                   <FormGroup dir="rtl" >
                     <Input type="select" name="noncertjobpreference1" value={candidatepreference.noncertjobpreference1} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('noncertjobpreference1')}>
                       <option value={undefined}>{"בחר תפקיד"}</option>
-                      {mahzorjobs.map((job, index) => (
+                      {noncertmahzorjobs.map((job, index) => (
                         <option value={job._id}>{job.jobtype.jobname + "/" + job.unit.name}</option>
                       ))}
                     </Input>
@@ -199,7 +210,7 @@ const CandidatePreferenceForm = ({ match }) => {
                   <FormGroup dir="rtl" >
                     <Input type="select" name="noncertjobpreference2" value={candidatepreference.noncertjobpreference2} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('noncertjobpreference2')}>
                       <option value={undefined}>{"בחר תפקיד"}</option>
-                      {mahzorjobs.map((job, index) => (
+                      {noncertmahzorjobs.map((job, index) => (
                         <option value={job._id}>{job.jobtype.jobname + "/" + job.unit.name}</option>
                       ))}
                     </Input>
@@ -211,7 +222,7 @@ const CandidatePreferenceForm = ({ match }) => {
                   <FormGroup dir="rtl" >
                     <Input type="select" name="noncertjobpreference3" value={candidatepreference.noncertjobpreference3} onChange={handleChange} onBlur={() => simpleValidator.current.showMessageFor('noncertjobpreference3')}>
                       <option value={undefined}>{"בחר תפקיד"}</option>
-                      {mahzorjobs.map((job, index) => (
+                      {noncertmahzorjobs.map((job, index) => (
                         <option value={job._id}>{job.jobtype.jobname + "/" + job.unit.name}</option>
                       ))}
                     </Input>

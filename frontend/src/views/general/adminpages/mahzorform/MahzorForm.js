@@ -134,15 +134,17 @@ const MahzorForm = ({ match }) => { //onsubmit moves to different page!!!!!!! (d
   }
 
   function CheckModalClosing() {
-    if(CheckModalData())
-    {
-    setJobsToAdd(jobstoadd => [...jobstoadd, tempjobtoadd]);
+    // if(CheckModalData())
+    // {
+    // setJobsToAdd(jobstoadd => [...jobstoadd, tempjobtoadd]);
+    // setTempJobToAdd({});
+    // setIsJobModalOpen(false)
+    // }
+    // else{
+    //   toast.error("אין לסגור את הטופס כשהוא לא תקין- לסגירה יש להחזירו למצב הקודם")
+    // }
     setTempJobToAdd({});
     setIsJobModalOpen(false)
-    }
-    else{
-      toast.error("אין לסגור את הטופס כשהוא לא תקין- לסגירה יש להחזירו למצב הקודם")
-    }
   }
 
   function CheckModalData() {
@@ -167,7 +169,7 @@ const MahzorForm = ({ match }) => { //onsubmit moves to different page!!!!!!! (d
   }
 
   function PrepEditModal(job) {
-    DeleteJobFromJobsToAdd(job)
+    //DeleteJobFromJobsToAdd(job)
     setTempJobToAdd(job)
     setIsJobModalOpen(true);
   }
@@ -378,6 +380,13 @@ const MahzorForm = ({ match }) => { //onsubmit moves to different page!!!!!!! (d
          //nothing
        }
      }
+
+    // console.log("jobsoriginalandnew")
+    // console.log(jobsoriginalandnew)
+    // console.log("jobsoriginalandnotnew")
+    // console.log(jobsoriginalandnotnew)
+    // console.log("jobsnotoriginalandnew")
+    // console.log(jobsnotoriginalandnew)
  
      for (let i = 0; i < jobsnotoriginalandnew.length; i++) { //add jobs thats no in db
       let tempjob = jobsnotoriginalandnew[i];

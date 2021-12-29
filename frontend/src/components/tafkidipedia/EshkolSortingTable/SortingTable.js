@@ -8,26 +8,20 @@ import style from 'components/Table.css'
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 
-const SortingTable = ({ match }) => {
+const SortingTable = (props) => {
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([])
 
   function init() {
-    getMahzorCabdidatePreferences();
+    getMahzorEshkol();
   }
 
-  const getMahzorCabdidatePreferences = async () => {//get + sort by mahzorid
+  const getMahzorEshkol = async () => {
     try {
-      await axios.get(`http://localhost:8000/api/smartcandidatepreference`)
+      await axios.get(`http://localhost:8000/api/eshkolbymahzorid/${props.mahzorid}`)
         .then(response => {
-          let tempdata = response.data;
-          let tempcandidatepreferences = [];
-          for (let i = 0; i < tempdata.length; i++) {
-            if (tempdata[i].mahzor._id == match.params.mahzorid)
-              tempcandidatepreferences.push(tempdata[i])
-          }
-          setData(tempcandidatepreferences)
+          setData(response.data)
         })
         .catch((error) => {
           console.log(error);
@@ -39,9 +33,13 @@ const SortingTable = ({ match }) => {
   }
 
   useEffect(() => {
-    init();
+    // init();
     setPageSize(5);
   }, []);
+
+  useEffect(() => {
+    init()
+  }, [props.refresh]);
 
   const {
     getTableProps,
@@ -70,21 +68,12 @@ const SortingTable = ({ match }) => {
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       <div className="table-responsive" style={{ overflow: 'auto' }}>
         <table {...getTableProps()}>
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th>
-                    <div {...column.getHeaderProps(column.getSortByToggleProps())}> {column.render('Header')} </div>
-                    <div>{column.canFilter ? column.render('Filter') : null}</div>
-                    <div>
-                      {column.isSorted ? (column.isSortedDesc ? '🔽' : '⬆️') : ''}
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            ))}
-
+          <thead style={{ backgroundColor: '#4fff64' }}>
+            <tr>
+            <th colSpan="1">תפקיד</th>
+            <th colSpan="1">ודאי/לא ודאי</th>
+            <th colSpan="100%">מועמדים</th>
+            </tr>
           </thead>
           <tbody {...getTableBodyProps()}>
             {
@@ -94,32 +83,17 @@ const SortingTable = ({ match }) => {
                   <tr {...row.getRowProps()}>
                     {
                       row.cells.map(cell => {
-                        // if (cell.column.id != "candidate.user.name") {
-                        //   return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                        // }
-                        // else {
-                        if (cell.column.id == "candidate.user.name") {
-                          return <td>{cell.value}{" "}{row.original.candidate.user.lastname}</td>
+                        if (cell.column.id == "job") {
+                          return <td>{cell.value.jobtype.jobname}/{cell.value.unit.name}</td>
                         }
-                        if (cell.column.id == "certjobpreference1") {
-                          return <td>{cell.value.jobtype.jobname}{"/"}{cell.value.unit.name}</td>
+                        if (cell.column.id == "job.certain") {
+                          return <td>{cell.value == true ? "ודאי" : "לא ודאי"}</td>
                         }
-                        if (cell.column.id == "certjobpreference2") {
-                          return <td>{cell.value.jobtype.jobname}{"/"}{cell.value.unit.name}</td>
+                        if (cell.column.id == "candidates") {
+                          return <> {cell.value.user.map((user, index) => (
+                            <td>{user.name} {user.lastname}</td>
+                          ))}</>
                         }
-                        if (cell.column.id == "certjobpreference3") {
-                          return <td>{cell.value.jobtype.jobname}{"/"}{cell.value.unit.name}</td>
-                        }
-                        if (cell.column.id == "noncertjobpreference1") {
-                          return <td>{cell.value.jobtype.jobname}{"/"}{cell.value.unit.name}</td>
-                        }
-                        if (cell.column.id == "noncertjobpreference2") {
-                          return <td>{cell.value.jobtype.jobname}{"/"}{cell.value.unit.name}</td>
-                        }
-                        if (cell.column.id == "noncertjobpreference3") {
-                          return <td>{cell.value.jobtype.jobname}{"/"}{cell.value.unit.name}</td>
-                        }
-                        // }
                       })
                     }
                     {/* {console.log(row)} */}

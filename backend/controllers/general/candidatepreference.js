@@ -339,3 +339,35 @@ exports.smartcandidatepreference = async (req, res) => {
       res.status(400).json('Error: ' + error);
     });
 }
+
+exports.candidatepreferencebymahzorid = (req, res) => {
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
+
+  let andquery = [];
+
+  //mahzorid
+  if (req.params.mahzorid != 'undefined') {
+    andquery.push({ "mahzor._id": mongoose.Types.ObjectId(req.params.mahzorid) });
+  }
+
+  if (andquery.length != 0) {
+    let matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
+  }
+
+  // console.log(matchquerry)
+  //console.log(andquery)
+
+  Candidatepreference.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
+};

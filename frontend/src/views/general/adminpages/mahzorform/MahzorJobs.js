@@ -128,7 +128,7 @@ const MahzorJobs = (props) => {
                             <th>דמ"ח</th>
                             <th>סיווג</th>
                             <th>ודאי/לא ודאי</th>
-                            <th>ערוך</th>
+                            {/* <th>ערוך</th> */}
                             <th>מחק</th>
                         </tr>
                         </thead>
@@ -145,7 +145,7 @@ const MahzorJobs = (props) => {
                                 <td style={{ textAlign: "center" }}>{job.damah == true ? "יש" : "אין"}</td>
                                 <td style={{ textAlign: "center" }}>{job.sivug}</td>
                                 <td style={{ textAlign: "center" }}>{job.certain == true ? "ודאי" : "לא ודאי"}</td>
-                                <td style={{ textAlign: "center" }}>
+                                {/* <td style={{ textAlign: "center" }}>
                                     <button
                                         className="btn btn-success"
                                         style={{ padding: "0.5rem" }}
@@ -157,7 +157,7 @@ const MahzorJobs = (props) => {
                                             style={{ height: "2rem" }}
                                         />
                                     </button>
-                                </td>
+                                </td> */}
                                 <td style={{ textAlign: "center" }}>
                                     <button
                                         className="btn btn-danger"
