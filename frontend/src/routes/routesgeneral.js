@@ -25,6 +25,7 @@ import JobsByMahzorAndUnit from "views/general/JobsByMahzorAndUnit";
 import DisplayMahzor from "views/general/adminpages/displaymahzor/DisplayMahzor";
 import DisplayJob from "views/general/DisplayJob";
 import Unitmahzorimpage from "views/general/unitpages/unitmahzorimpage/Unitmahzorimpage";
+import UnitPreferenceForm from "views/general/unitpages/unitpreferenceform/UnitPreferenceForm";
 
 const routesgeneral =
     (
@@ -56,7 +57,7 @@ const routesgeneral =
             {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
             <UnitRoute path="/unitdashboard/:unitid" exact component={UnitDashboard} />
             <UnitRoute path="/unitmahzorimpage/:unitid" exact component={Unitmahzorimpage} />
-            {/* <UnitRoute path="/unitpreferenceform/:mahzorid/:unitid" exact component={UnitDashboard} /> */}
+            <UnitRoute path="/unitpreferenceform/:mahzorid/:unitid/:jobid" exact component={UnitPreferenceForm} />
             {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
 
             {/*////////////////////////////////////////Candidate User//////////////////////////////////////////////////*/}

@@ -17,7 +17,7 @@ import {
 } from "reactstrap";
 
 import axios from 'axios';
-import SortingTable from 'components/tafkidipedia/EshkolSortingTable/SortingTable';
+import SortingTable from 'components/tafkidipedia/EshkolByMahzorSortingTable/SortingTable';
 
 function DisplayMahzorEshkol({ match }) {
     const [count, setCount] = useState(0); //to refresh table...
