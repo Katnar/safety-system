@@ -21,6 +21,8 @@ import axios from 'axios';
 import PanelHeader from "components/general/PanelHeader/PanelHeader";
 
 import MahzorCandidatesPreferencesSortingTable from 'components/tafkidipedia/MahzorCandidatesPreferencesSortingTable/SortingTable'
+import MahzorUnitsPreferencesSortingTable from 'components/tafkidipedia/MahzorUnitsPreferencesSortingTable/SortingTable'
+
 import DisplayMahzorEshkol from './DisplayMahzorEshkol';
 
 function DisplayMahzor({ match }) {
@@ -72,6 +74,7 @@ function DisplayMahzor({ match }) {
       <Card>
         <CardBody>
           <h3 style={{ textAlign: 'right', fontWeight: 'bold' }}>טבלת העדפות יחידות</h3>
+          <MahzorUnitsPreferencesSortingTable />
         </CardBody>
       </Card>
 

@@ -219,7 +219,8 @@ const MahzorForm = ({ match }) => { //onsubmit moves to different page!!!!!!! (d
   }
 
   const loadusers = () => {
-    axios.get(`http://localhost:8000/api/users`)
+    let candidaterole='2'
+    axios.get(`http://localhost:8000/api//usersbyrole/${candidaterole}`)
       .then(response => {
         setUsers(response.data);
       })

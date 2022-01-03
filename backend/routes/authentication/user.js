@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router()
 
-const { find,getuserbyid,update,remove,findvalidated,findnotvalidated } = require("../../controllers/authentication/user");
+const { find,getuserbyid,update,remove,findvalidated,findnotvalidated,usersbyrole } = require("../../controllers/authentication/user");
 
 router.post('/getuserbyid',getuserbyid)
 
@@ -14,5 +14,7 @@ router.post('/user/remove/:userId', remove )
 router.get('/usersvalidated', findvalidated)
 
 router.get('/usersnotvalidated', findnotvalidated)
+
+router.get('/usersbyrole/:role', usersbyrole)
 
 module.exports = router;

@@ -64,6 +64,70 @@ let readtipul = [
   },
 ];
 
+let readtipul2 = [
+  {
+    $lookup: {
+      from: "candidates",
+      localField: "candidates",
+      foreignField: "_id",
+      as: "candidates"
+    }
+  },
+  {
+    $lookup: {
+      from: "users",
+      localField: "candidates.user",
+      foreignField: "_id",
+      as: "candidates.users"
+    }
+  },
+  {
+    $lookup: {
+      from: "mahzors",
+      localField: "mahzor",
+      foreignField: "_id",
+      as: "mahzor"
+    }
+  },
+  {
+    $unwind: "$mahzor"
+  },
+  {
+    $lookup: {
+      from: "jobs",
+      localField: "job",
+      foreignField: "_id",
+      as: "job"
+    }
+  },
+  {
+    $unwind: "$job"
+  },
+  {
+    $lookup: {
+      from: "jobtypes",
+      localField: "job.jobtype",
+      foreignField: "_id",
+      as: "job.jobtype"
+    }
+  },
+  {
+    $unwind: "$job.jobtype"
+  },
+  {
+    $lookup: {
+      from: "units",
+      localField: "job.unit",
+      foreignField: "_id",
+      as: "job.unit"
+    }
+  },
+  {
+    $unwind: "$job.unit"
+  },
+];
+
+
 exports.findById = async(req, res) => {
   const unitpreference = await Unitpreference.findOne().where({_id:req.params.id})
   
@@ -123,6 +187,33 @@ exports.unitpreferencebyjobid = (req, res) => {
     };
     finalquerry.push(matchquerry)
   }
+
+  // console.log(matchquerry)
+  //console.log(andquery)
+
+  Unitpreference.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
+};
+
+exports.smartunitpreference = (req, res) => {
+  let tipulfindquerry = readtipul2.slice();
+  let finalquerry = tipulfindquerry;
+
+  // let andquery = [];
+
+  // if (andquery.length != 0) {
+  //   let matchquerry = {
+  //     "$match": {
+  //       "$and": andquery
+  //     }
+  //   };
+  //   finalquerry.push(matchquerry)
+  // }
 
   // console.log(matchquerry)
   //console.log(andquery)
