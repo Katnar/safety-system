@@ -61,50 +61,92 @@ function SidebarUnit() {
 
   return (
     <>
-    <div className="logo">
-      <img src={tafkidipedialogo}></img>
-    </div>
-    <Nav style={{ textAlign: "right"}}>
-      <li>
-        <NavLink to={`/unitdashboard/${user.unitid}`} style={{ margin: '0px' }} activeClassName="sidebar_active_link">
-          <Row style={{ direction: "rtl"}}>
-            <Col xs={12} md={3} style={{ paddingLeft: "0px",textAlign:'center',alignSelf:'center' }}>
-              <img src={home} style={{ height: "20px" }}></img>
-            </Col>
-            <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-              <h4 style={{ margin: "0px",paddingTop:'6px',paddingBottom:'6px' }}>
-                דף הבית
-              </h4>
-            </Col>
-          </Row>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to={`/unitmahzorimpage/${user.unitid}`} style={{ margin: '0px' }} activeClassName="sidebar_active_link">
-          <Row style={{ direction: "rtl" }}>
-          <Col xs={12} md={3} style={{ paddingLeft: "0px",textAlign:'center',alignSelf:'center' }}>
-              <img src={table} style={{ height: "20px" }}></img>
-            </Col>
-            <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-            <h4 style={{ margin: "0px",paddingTop:'6px',paddingBottom:'6px' }}>
-                מחזורים
-              </h4>
-            </Col>
-          </Row>
-        </NavLink>
-      </li>
-
-    </Nav>
-    <div style={{ justifyContent: 'center', textAlign: 'center', bottom: 0, width: '100%' }}>
-      <Button
-        onClick={clickSubmit}
-        className="btn-danger"
-        style={{ width: '80%' }}
+      <div className="logo">
+        <img src={tafkidipedialogo}></img>
+      </div>
+      <Nav style={{ textAlign: "right" }}>
+        <li>
+          <NavLink
+            to={`/unitdashboard/${user.unitid}`}
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={home} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  דף הבית
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to={`/unitmahzorimpage/${user.unitid}`}
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  מחזורים
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+      </Nav>
+      <div
+        style={{
+          justifyContent: "center",
+          textAlign: "center",
+          bottom: 0,
+          width: "100%",
+        }}
       >
-        התנתק
-      </Button>
-    </div>
-  </>
+        <Button
+          onClick={clickSubmit}
+          className="btn-danger"
+          style={{ width: "80%" }}
+        >
+          התנתק
+        </Button>
+      </div>
+    </>
   );
 }
 

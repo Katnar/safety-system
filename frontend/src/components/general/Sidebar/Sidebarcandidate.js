@@ -55,11 +55,9 @@ function SidebarCandidate() {
   const clickSubmit = (event) => {
     event.preventDefault();
     signout().then((response) => {
-
       history.push(`/signin`);
     });
   };
-
 
   return (
     <>
@@ -68,39 +66,50 @@ function SidebarCandidate() {
       </div>
       <Nav style={{ textAlign: "right" }}>
         <li>
-          <NavLink to={`/candidatedashboard/${user._id}`} style={{margin:'0px'}} activeClassName="sidebar_active_link">
+          <NavLink
+            to={`/candidatedashboard/${user._id}`}
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
             <Row style={{ direction: "rtl" }}>
               <Col xs={12} md={3} style={{ paddingLeft: "0px" }}>
                 <img src={home} style={{ height: "20px" }}></img>
               </Col>
               <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4>
-                  דף הבית
-                </h4>
+                <h4>דף הבית</h4>
               </Col>
             </Row>
           </NavLink>
         </li>
         <li>
-          <NavLink to={`/usermahzorimpage/${user._id}`} style={{margin:'0px'}} activeClassName="sidebar_active_link">
+          <NavLink
+            to={`/usermahzorimpage/${user._id}`}
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
             <Row style={{ direction: "rtl" }}>
               <Col xs={12} md={3} style={{ paddingLeft: "0px" }}>
                 <img src={table} style={{ height: "20px" }}></img>
               </Col>
               <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4>
-                  מועמדויות שלי
-                </h4>
+                <h4>מועמדויות שלי</h4>
               </Col>
             </Row>
           </NavLink>
         </li>
       </Nav>
-      <div style={{ justifyContent: 'center', textAlign: 'center', bottom: 0, width: '100%' }}>
+      <div
+        style={{
+          justifyContent: "center",
+          textAlign: "center",
+          bottom: 0,
+          width: "100%",
+        }}
+      >
         <Button
           onClick={clickSubmit}
           className="btn-danger"
-          style={{ width: '80%' }}
+          style={{ width: "80%" }}
         >
           התנתק
         </Button>
