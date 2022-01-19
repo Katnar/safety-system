@@ -14,12 +14,12 @@ const SortingTable = (props) => {
   const [data, setData] = useState([])
 
   function init() {
-    getUnitDetails();
+    getqualificationsDetails();
   }
 
-  const getUnitDetails = async () => {
+  const getqualificationsDetails = async () => {
     try {
-      await axios.get(`http://localhost:8000/api/unitId`)
+      await axios.get(`http://localhost:8000/api/safetyOfficersQualification`)
         .then(response => {
           setData(response.data)
         })
@@ -33,13 +33,10 @@ const SortingTable = (props) => {
   }
 
   useEffect(() => {
-    // init();
+    init();
     setPageSize(5);
   }, []);
 
-  useEffect(() => {
-    init()
-  }, [props.refresh]);
 
   const {
     getTableProps,
@@ -68,16 +65,21 @@ const SortingTable = (props) => {
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       <div className="table-responsive" style={{ overflow: 'auto' }}>
         <table {...getTableProps()}>
-          <thead style={{ backgroundColor: '#4fff64' }}>
-            <tr>
-            <th colSpan="1">שם היחידה</th>
-            <th colSpan="1">מיקום היחידה</th>
-            <th colSpan="1">מבנה היחידה</th>
-            <th colSpan="1">אמצעי היחידה</th>
-            <th colSpan="1">עיסוק מרכזי</th>
-            <th colSpan="1">עץ מבנה יחידה</th>
-            <th colSpan="1">עץ מבנה טנ"א</th>
-            </tr>
+        <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th  >
+                    <div {...column.getHeaderProps(column.getSortByToggleProps())}> {column.render('Header')} </div>
+                    <div>{column.canFilter ? column.render('Filter') : null}</div>
+                    <div>
+                      {column.isSorted ? (column.isSortedDesc ? '🔽' : '⬆️') : ''}
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            ))}
+
           </thead>
           <tbody {...getTableBodyProps()}>
             {
@@ -87,27 +89,22 @@ const SortingTable = (props) => {
                   <tr {...row.getRowProps()}>
                     {
                       row.cells.map(cell => {
-                        if (cell.column.id == "name") {
-                          return <td>{cell.value.unit.name}</td>
+                        if (cell.column.id == "personalNumber") {
+                          return <td>{cell.value}</td>
                         }
-                        if (cell.column.id == "location") {
-                          return <td>{cell.value.unit.location}</td>
+                        if (cell.column.id == "id") {
+                          return <td>{cell.value}</td>
                         }
-                        if (cell.column.id == "unitStructure") {
-                          return <td> {cell.value.unitStructure} </td>
+                        if (cell.column.id == "fullName") {
+                          return <td>{cell.value}</td>
                         }
-                        if (cell.column.id == "unitMeans") {
-                          return <td> {cell.value.unitMeans} </td>
+                        if (cell.column.id == "certificateIssuingDate") {
+                          return <td>{cell.value.slice(0, 10).split("-").reverse().join("-")}</td>
                         }
-                        if (cell.column.id == "mainOccupation") {
-                          return <td> {cell.value.mainOccupation} </td>
+                        if (cell.column.id == "numberOfSeminarDays") {
+                          return <td>{cell.value}</td>
                         }
-                        if (cell.column.id == "unitStructureTree") {
-                          return <td> {cell.value.unitStructureTree} </td>
-                        }
-                        if (cell.column.id == "TeneStructureTree") {
-                          return <td> {cell.value.TeneStructureTree} </td>
-                        }
+                       // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                       })
                     }
                     {/* {console.log(row)} */}
