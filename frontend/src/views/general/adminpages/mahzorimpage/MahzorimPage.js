@@ -21,7 +21,7 @@ import {
   Collapse,
 } from "reactstrap";
 
-import MahzorimSortingTable from 'components/tafkidipedia/MahzorimSortingTable/SortingTable'
+import MahzorimSortingTable from 'components/safetySystem/MahzorimSortingTable/SortingTable'
 
 function MahzorimPage() {
 

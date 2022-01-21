@@ -18,7 +18,7 @@ import {
 
 import { ThemeContext, themes } from "contexts/ThemeContext";
 
-import tafkidipedialogo from "assets/img/tafkidipedialogo.png";
+import logo from "assets/img/whiteLogo.jpg";
 import home from "assets/img/home3.png";
 import table from "assets/img/table.png";
 import followers from "assets/img/followers.png";
@@ -62,7 +62,7 @@ function SidebarUnit() {
   return (
     <>
       <div className="logo">
-        <img src={tafkidipedialogo}></img>
+        <img src={logo}></img>
       </div>
       <Nav style={{ textAlign: "right" }}>
         <li>

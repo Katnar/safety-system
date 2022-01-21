@@ -27,7 +27,7 @@ import { produce } from "immer";
 import { generate } from "shortid";
 import { toast } from "react-toastify";
 
-import JobsByMahzorAndUnitSortingTable from "components/tafkidipedia/JobsByMahzorAndUnitSortingTable/SortingTable";
+import JobsByMahzorAndUnitSortingTable from "components/safetySystem/JobsByMahzorAndUnitSortingTable/SortingTable";
 
 const JobsByMahzorAndUnit = (props) => {
   function init() {}

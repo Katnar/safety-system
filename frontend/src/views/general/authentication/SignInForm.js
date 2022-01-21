@@ -21,8 +21,7 @@ import {
 import axios from "axios";
 import history from "history.js";
 import { toast } from "react-toastify";
-
-import tafkidipedialogo from "assets/img/tafkidipedialogo.png";
+import logo from "assets/img/whiteLogo.jpg";
 
 function Signin() {
   const [values, setValues] = useState({
@@ -118,7 +117,7 @@ function Signin() {
             <Card className="shadow border-0">
               <CardBody className="px-lg-5 py-lg-5">
                 <div className="text-center text-muted mb-4">
-                  <img src={tafkidipedialogo}></img>
+                  <img src={logo}></img>
                 </div>
                 <div className="text-center text-muted mb-4">
                   <small>התחברות</small>

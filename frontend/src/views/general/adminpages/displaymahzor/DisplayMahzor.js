@@ -20,8 +20,8 @@ import axios from 'axios';
 
 import PanelHeader from "components/general/PanelHeader/PanelHeader";
 
-import MahzorCandidatesPreferencesSortingTable from 'components/tafkidipedia/MahzorCandidatesPreferencesSortingTable/SortingTable'
-import MahzorUnitsPreferencesSortingTable from 'components/tafkidipedia/MahzorUnitsPreferencesSortingTable/SortingTable'
+import MahzorCandidatesPreferencesSortingTable from 'components/safetySystem/MahzorCandidatesPreferencesSortingTable/SortingTable'
+import MahzorUnitsPreferencesSortingTable from 'components/safetySystem/MahzorUnitsPreferencesSortingTable/SortingTable'
 
 import DisplayMahzorEshkol from './DisplayMahzorEshkol';
 

@@ -65,9 +65,11 @@ app.use("/api", userRoutes);
 
 const safetyOfficersQualificationRoutes = require("./routes/general/safetyOfficersQualification");
 const unitIdRoutes = require("./routes/general/unitId");
+const certificationsManagementRoutes = require("./routes/general/certificationsManagement");
 
 app.use("/api", safetyOfficersQualificationRoutes);
 app.use("/api", unitIdRoutes);
+app.use("/api", certificationsManagementRoutes);
 
 
 if (process.env.NODE_ENV === "production") {

@@ -27,7 +27,7 @@ import { produce } from 'immer'
 import { generate } from 'shortid'
 import { toast } from "react-toastify";
 
-import JobsByMahzorSortingTable from 'components/tafkidipedia/JobsByMahzorSortingTable/SortingTable';
+import JobsByMahzorSortingTable from 'components/safetySystem/JobsByMahzorSortingTable/SortingTable';
 
 const JobsByMahzor = (props) => {
 

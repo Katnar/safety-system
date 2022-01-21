@@ -14,12 +14,12 @@ const SortingTable = (props) => {
   const [data, setData] = useState([])
 
   function init() {
-    getMahzorEshkol();
+    getCertificationsDetails();
   }
 
-  const getMahzorEshkol = async () => {
+  const getCertificationsDetails = async () => {
     try {
-      await axios.get(`http://localhost:8000/api/eshkolbymahzorid/${props.mahzorid}`)
+      await axios.get(`http://localhost:8000/api/certificationsManagement`)
         .then(response => {
           setData(response.data)
         })
@@ -33,13 +33,10 @@ const SortingTable = (props) => {
   }
 
   useEffect(() => {
-    // init();
+    init();
     setPageSize(5);
   }, []);
 
-  useEffect(() => {
-    init()
-  }, [props.refresh]);
 
   const {
     getTableProps,
@@ -68,12 +65,21 @@ const SortingTable = (props) => {
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       <div className="table-responsive" style={{ overflow: 'auto' }}>
         <table {...getTableProps()}>
-          <thead style={{ backgroundColor: '#4fff64' }}>
-            <tr>
-            <th colSpan="1">תפקיד</th>
-            <th colSpan="1">ודאי/לא ודאי</th>
-            <th colSpan="100%">מועמדים</th>
-            </tr>
+        <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th  >
+                    <div {...column.getHeaderProps(column.getSortByToggleProps())}> {column.render('Header')} </div>
+                    <div>{column.canFilter ? column.render('Filter') : null}</div>
+                    <div>
+                      {column.isSorted ? (column.isSortedDesc ? '🔽' : '⬆️') : ''}
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            ))}
+
           </thead>
           <tbody {...getTableBodyProps()}>
             {
@@ -83,17 +89,31 @@ const SortingTable = (props) => {
                   <tr {...row.getRowProps()}>
                     {
                       row.cells.map(cell => {
-                        if (cell.column.id == "job") {
-                          return <td>{cell.value.jobtype.jobname}/{cell.value.unit.name}</td>
+                        if (cell.column.id == "personalNumber") {
+                          return <td>{cell.value}</td>
                         }
-                        if (cell.column.id == "job.certain") {
-                          return <td>{cell.value == true ? "ודאי" : "לא ודאי"}</td>
+                        if (cell.column.id == "id") {
+                          return <td>{cell.value}</td>
                         }
-                        if (cell.column.id == "candidates") {
-                          return <> {cell.value.user.map((user, index) => (
-                            <td>{user.name} {user.lastname}</td>
-                          ))}</>
+                        if (cell.column.id == "fullNmae") {
+                          return <td>{cell.value}</td>
                         }
+                        if (cell.column.id == "rank") {
+                          return <td>{cell.value}</td>
+                        }
+                        if (cell.column.id == "profession") {
+                          return <td>{cell.value}</td>
+                        }
+                        if (cell.column.id == "certification") {
+                          return <td>{cell.value}</td>
+                        }
+                        if (cell.column.id == "certificationValidity") {
+                          return <td>{cell.value.slice(0, 10).split("-").reverse().join("-")}</td>
+                        }
+                        if (cell.column.id == "documentUpload") {
+                          return <td>{cell.value}</td>
+                        }
+                       // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                       })
                     }
                     {/* {console.log(row)} */}

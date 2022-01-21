@@ -22,7 +22,7 @@ import {
 } from "reactstrap";
 
 import { isAuthenticated } from 'auth/index';
-import CandidatesByUserSortingTable from "components/tafkidipedia/CandidatesByUserSortingTable/SortingTable";
+import CandidatesByUserSortingTable from "components/safetySystem/CandidatesByUserSortingTable/SortingTable";
 
 function Usermahzorimpage() {
 

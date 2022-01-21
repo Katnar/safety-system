@@ -8,27 +8,20 @@ import style from 'components/Table.css'
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 
-const SortingTable = ({ match }) => {
+const SortingTable = (props) => {
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([])
 
   function init() {
-    getMahzorUnitsPreferences();
+    getMahzorEshkol();
   }
 
-  const getMahzorUnitsPreferences = async () => {//get + sort by mahzorid
+  const getMahzorEshkol = async () => {
     try {
-      // await axios.get(`http://localhost:8000/api/smartunitpreference`)
-      await axios.get(`http://localhost:8000/api/smartunitpreference`)
+      await axios.get(`http://localhost:8000/api/eshkolbymahzorid/${props.mahzorid}`)
         .then(response => {
-          let tempdata = response.data;
-          let tempunitspreferences = [];
-          // for (let i = 0; i < tempdata.length; i++) {
-          //   if (tempdata[i].mahzor._id == match.params.mahzorid)
-          //   tempunitspreferences.push(tempdata[i])
-          // }
-          setData(tempdata)
+          setData(response.data)
         })
         .catch((error) => {
           console.log(error);
@@ -40,9 +33,13 @@ const SortingTable = ({ match }) => {
   }
 
   useEffect(() => {
-    init();
+    // init();
     setPageSize(5);
   }, []);
+
+  useEffect(() => {
+    init()
+  }, [props.refresh]);
 
   const {
     getTableProps,
@@ -71,7 +68,7 @@ const SortingTable = ({ match }) => {
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       <div className="table-responsive" style={{ overflow: 'auto' }}>
         <table {...getTableProps()}>
-        <thead style={{ backgroundColor: '#4fff64' }}>
+          <thead style={{ backgroundColor: '#4fa9ff' }}>
             <tr>
             <th colSpan="1">תפקיד</th>
             <th colSpan="1">ודאי/לא ודאי</th>
@@ -86,18 +83,14 @@ const SortingTable = ({ match }) => {
                   <tr {...row.getRowProps()}>
                     {
                       row.cells.map(cell => {
-                        // if (cell.column.id != "candidate.user.name") {
-                        //   return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                        // }
-                        // else {
-                        if (cell.column.id == "job.jobtype.jobname") {
-                          return <td>{cell.value}{"/"}{row.original.job.unit.name}</td>
+                        if (cell.column.id == "job") {
+                          return <td>{cell.value.jobtype.jobname}/{cell.value.unit.name}</td>
                         }
                         if (cell.column.id == "job.certain") {
                           return <td>{cell.value == true ? "ודאי" : "לא ודאי"}</td>
                         }
                         if (cell.column.id == "candidates") {
-                          return <> {cell.value.users.map((user, index) => (
+                          return <> {cell.value.user.map((user, index) => (
                             <td>{user.name} {user.lastname}</td>
                           ))}</>
                         }
