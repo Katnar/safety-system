@@ -64,8 +64,11 @@ app.use("/api", userRoutes);
 // app.use("/api", unitpreferenceRoutes);
 
 const safetyOfficersQualificationRoutes = require("./routes/general/safetyOfficersQualification");
+const unitIdRoutes = require("./routes/general/unitId");
 
 app.use("/api", safetyOfficersQualificationRoutes);
+app.use("/api", unitIdRoutes);
+
 
 if (process.env.NODE_ENV === "production") {
   //set static folder

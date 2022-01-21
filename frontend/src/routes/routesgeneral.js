@@ -27,7 +27,8 @@ import DisplayJob from "views/general/DisplayJob";
 import Unitmahzorimpage from "views/general/unitpages/unitmahzorimpage/Unitmahzorimpage";
 import UnitPreferenceForm from "views/general/unitpages/unitpreferenceform/UnitPreferenceForm";
 
-import Sortingtable from "components/tafkidipedia/safetyOfficersQualification/SortingTable";
+import safetyOfficersQualificationTable from "components/tafkidipedia/safetyOfficersQualification/SortingTable";
+import unitIdTable from "components/tafkidipedia/UnitId/SortingTable";
 
 const routesgeneral =
     (
@@ -55,7 +56,8 @@ const routesgeneral =
             <AdminRoute path="/mahzorimpage" exact component={MahzorimPage} />
             <AdminRoute path="/displaymahzor/:mahzorid" exact component={DisplayMahzor} />
 
-            <AdminRoute path="/sortingtable" exact component={Sortingtable} />
+            <AdminRoute path="/safetyOfficersQualificationTable" exact component={safetyOfficersQualificationTable} />
+            <AdminRoute path="/unitIdTable" exact component={unitIdTable} />
             {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
 
             {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}

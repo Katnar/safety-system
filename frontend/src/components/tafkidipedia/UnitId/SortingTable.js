@@ -33,13 +33,10 @@ const SortingTable = (props) => {
   }
 
   useEffect(() => {
-    // init();
+    init();
     setPageSize(5);
   }, []);
 
-  useEffect(() => {
-    init()
-  }, [props.refresh]);
 
   const {
     getTableProps,
@@ -68,16 +65,21 @@ const SortingTable = (props) => {
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       <div className="table-responsive" style={{ overflow: 'auto' }}>
         <table {...getTableProps()}>
-          <thead style={{ backgroundColor: '#4fff64' }}>
-            <tr>
-            <th colSpan="1">שם היחידה</th>
-            <th colSpan="1">מיקום היחידה</th>
-            <th colSpan="1">מבנה היחידה</th>
-            <th colSpan="1">אמצעי היחידה</th>
-            <th colSpan="1">עיסוק מרכזי</th>
-            <th colSpan="1">עץ מבנה יחידה</th>
-            <th colSpan="1">עץ מבנה טנ"א</th>
-            </tr>
+        <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th  >
+                    <div {...column.getHeaderProps(column.getSortByToggleProps())}> {column.render('Header')} </div>
+                    <div>{column.canFilter ? column.render('Filter') : null}</div>
+                    <div>
+                      {column.isSorted ? (column.isSortedDesc ? '🔽' : '⬆️') : ''}
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            ))}
+
           </thead>
           <tbody {...getTableBodyProps()}>
             {
@@ -88,26 +90,27 @@ const SortingTable = (props) => {
                     {
                       row.cells.map(cell => {
                         if (cell.column.id == "name") {
-                          return <td>{cell.value.unit.name}</td>
+                          return <td>{cell.value}</td>
                         }
                         if (cell.column.id == "location") {
-                          return <td>{cell.value.unit.location}</td>
+                          return <td>{cell.value}</td>
                         }
                         if (cell.column.id == "unitStructure") {
-                          return <td> {cell.value.unitStructure} </td>
+                          return <td>{cell.value}</td>
                         }
                         if (cell.column.id == "unitMeans") {
-                          return <td> {cell.value.unitMeans} </td>
+                          return <td>{cell.value}</td>
                         }
                         if (cell.column.id == "mainOccupation") {
-                          return <td> {cell.value.mainOccupation} </td>
+                          return <td>{cell.value}</td>
                         }
                         if (cell.column.id == "unitStructureTree") {
-                          return <td> {cell.value.unitStructureTree} </td>
+                          return <td>{cell.value}</td>
                         }
-                        if (cell.column.id == "TeneStructureTree") {
-                          return <td> {cell.value.TeneStructureTree} </td>
+                        if (cell.column.id == "teneStructureTree") {
+                          return <td>{cell.value}</td>
                         }
+                       // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                       })
                     }
                     {/* {console.log(row)} */}
