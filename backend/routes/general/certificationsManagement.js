@@ -7,17 +7,17 @@ const {
   update,
   remove,
   findById,
-} = require("../../controllers/general/unit");
+} = require("../../controllers/general/certificationsManagement");
 
 // find spec
-router.get("/unit/:id", findById);
+router.get("/certificationsManagement/:id", findById);
 //find all
-router.get("/unit", find);
+router.get("/certificationsManagement", find);
 //add
-router.post("/unit", create); /**/
+router.post("/certificationsManagement", create); /**/
 //update
-router.put("/unit/:unitId", update);
+router.put("/certificationsManagement/:certificationsManagementId", update);
 //delete
-router.delete("/unit/:id", remove);
+router.delete("/certificationsManagement/:id", remove);
 
 module.exports = router;

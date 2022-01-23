@@ -12,7 +12,7 @@ export const COLUMNS = [
   },
   {
     Header: "שם מלא",
-    accessor: "fullNmae",
+    accessor: "fullName",
     Filter: ColumnFilter,
   },
   {

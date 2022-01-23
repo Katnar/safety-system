@@ -31,6 +31,8 @@ import safetyOfficersQualificationTable from "components/safetySystem/safetyOffi
 import unitIdTable from "components/safetySystem/UnitId/SortingTable";
 import certificationsManagementTable from "components/safetySystem/certificationsManagement/SortingTable";
 
+import certificationManagementForm from "views/general/adminpages/certificationskmanagementsForm/certificationManagementDataComponent";
+
 const routesgeneral =
     (
         <>
@@ -60,6 +62,10 @@ const routesgeneral =
             <AdminRoute path="/safetyOfficersQualificationTable" exact component={safetyOfficersQualificationTable} />
             <AdminRoute path="/unitIdTable" exact component={unitIdTable} />
             <AdminRoute path="/certificationsManagementTable" exact component={certificationsManagementTable} />
+
+            <AdminRoute path="/certificationManagementForm" exact component={certificationManagementForm} />
+
+
             {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
 
             {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}

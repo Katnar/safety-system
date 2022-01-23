@@ -36,27 +36,27 @@ const signout = (event) => {
   });
 };
 
-function init() {
-  getUnitDetails();
-}
+// function init() {
+//   getUnitDetails();
+// }
 
-const getUnitDetails = async () => {
-  try {
-    await axios.get(`http://localhost:8000/api/unitId`)
-      .then(response => {
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
-  catch {
+// const getUnitDetails = async () => {
+//   try {
+//     await axios.get(`http://localhost:8000/api/unitId`)
+//       .then(response => {
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       })
+//   }
+//   catch {
 
-  }
-}
+//   }
+// }
 
-useEffect(() => {
-  init();
-}, []);
+// useEffect(() => {
+//   init();
+// }, []);
 
 const UserCard = (props) => {
   const { user } = isAuthenticated();

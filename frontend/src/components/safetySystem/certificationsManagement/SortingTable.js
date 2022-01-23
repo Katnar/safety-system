@@ -95,7 +95,7 @@ const SortingTable = (props) => {
                         if (cell.column.id == "id") {
                           return <td>{cell.value}</td>
                         }
-                        if (cell.column.id == "fullNmae") {
+                        if (cell.column.id == "fullName") {
                           return <td>{cell.value}</td>
                         }
                         if (cell.column.id == "rank") {
