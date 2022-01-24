@@ -31,14 +31,12 @@ import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 import SettingModal from "../../../../components/general/modal/SettingModal";
 
-const CertificationManagementDataComponent = ({ match }) => {
-  //mahzor
-  const [certification, setCertification] = useState({});
-  //mahzor
+const OccupationalSupervisionDataComponent = ({ match }) => {
+  const [data, setData] = useState({});
 
   function handleChange(evt) {
     const value = evt.target.value;
-    setCertification({ ...certification, [evt.target.name]: value });
+    setData({ ...data, [evt.target.name]: value });
   }
 
   const clickSubmit = (event) => {
@@ -64,12 +62,12 @@ const CertificationManagementDataComponent = ({ match }) => {
 
   async function SubmitData() {
     // console.log("post")
-    let tempCertificationData;
+    let tempOccupationalSupervisionData;
     let result = await axios.post(
-      "http://localhost:8000/api/certificationsManagement",
-      certification
+      "http://localhost:8000/api/occupationalSupervision",
+      data
     );
-    tempCertificationData = result.data;
+    tempOccupationalSupervisionData = result.data;
   }
 
   function init() {}
@@ -85,21 +83,12 @@ const CertificationManagementDataComponent = ({ match }) => {
           tag="h4"
           style={{ direction: "rtl", textAlign: "center", fontWeight: "bold" }}
         >
-          טופס ניהול הסמכות
+          טופס פיקוח תעסוקתי
         </CardTitle>
         {/*headline*/}
       </CardHeader>
       <CardBody style={{ direction: "rtl" }}>
         <Container>
-          <h5
-            style={{
-              textAlign: "right",
-              paddingTop: "10px",
-              fontWeight: "bold",
-            }}
-          >
-            פרטים כלליים
-          </h5>
           <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
@@ -109,7 +98,7 @@ const CertificationManagementDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="personalNumber"
-                  value={certification.personalNumber}
+                  value={data.personalNumber}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -122,7 +111,7 @@ const CertificationManagementDataComponent = ({ match }) => {
                 <Input
                   type="number"
                   name="id"
-                  value={certification.id}
+                  value={data.id}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -135,7 +124,7 @@ const CertificationManagementDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="fullName"
-                  value={certification.fullName}
+                  value={data.fullName}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -150,33 +139,33 @@ const CertificationManagementDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="rank"
-                  value={certification.rank}
+                  value={data.rank}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                מקצוע
+                תפקיד/מקצוע
               </div>
               <FormGroup dir="rtl">
                 <Input
                   type="text"
                   name="profession"
-                  value={certification.profession}
+                  value={data.profession}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                הסמכה
+                גורם מזיק
               </div>
               <FormGroup dir="rtl">
                 <Input
                   type="text"
-                  name="certification"
-                  value={certification.certification}
+                  name="harmfulCause"
+                  value={data.harmfulCause}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -185,30 +174,86 @@ const CertificationManagementDataComponent = ({ match }) => {
           <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                תוקף הסמכה
+                חקיקה ופקודות הצבא
               </div>
               <FormGroup dir="rtl">
                 <Input
-                  type="date"
-                  name="certificationValidity"
-                  value={certification.certificationValidity}
+                  type="text"
+                  name="legislationAndMilitaryOrders"
+                  value={data.legislationAndMilitaryOrders}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                צירוף מסמך
+                תדירות הבדיקות
+              </div>
+              <FormGroup dir="rtl">
+                <Input
+                  type="text"
+                  name="frequencyOfTests"
+                  value={data.frequencyOfTests}
+                  onChange={handleChange}
+                ></Input>
+              </FormGroup>
+            </Col>
+            <Col xs={12} md={4}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                תאריך ביצוע אחרון
+              </div>
+              <FormGroup dir="rtl">
+                <Input
+                  type="date"
+                  name="lastExecutionDate"
+                  value={data.lastExecutionDate}
+                  onChange={handleChange}
+                ></Input>
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} md={4}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                תאריך בדיקה הבאה
+              </div>
+              <FormGroup dir="rtl">
+                <Input
+                  type="date"
+                  name="nextTestDate"
+                  value={data.nextTestDate}
+                  onChange={handleChange}
+                ></Input>
+              </FormGroup>
+            </Col>
+            <Col xs={12} md={4}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                כשיר/לא כשיר
+              </div>
+              <FormGroup dir="rtl">
+                <Input
+                  type="text"
+                  name="fit"
+                  value={data.fit}
+                  onChange={handleChange}
+                ></Input>
+              </FormGroup>
+            </Col>
+            <Col xs={12} md={4}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                צירוף מסמכים סרוקים
               </div>
               <FormGroup dir="rtl">
                 <Input
                   type="text"
                   name="documentUpload"
-                  value={certification.documentUpload}
+                  value={data.documentUpload}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col>
+          </Row>
+          <Row>
             <Col xs={12} md={4}>
               <Button type="primary" onClick={() => clickSubmit()}>
                 הוסף נתונים
@@ -220,4 +265,4 @@ const CertificationManagementDataComponent = ({ match }) => {
     </Card>
   );
 };
-export default withRouter(CertificationManagementDataComponent);
+export default withRouter(OccupationalSupervisionDataComponent);

@@ -6,28 +6,28 @@ import {
   useFilters,
   usePagination,
 } from "react-table";
+import Button from "reactstrap/lib/Button";
 import { withRouter, Redirect, Link } from "react-router-dom";
 import { COLUMNS } from "./coulmns";
 import { GlobalFilter } from "./GlobalFilter";
 import axios from "axios";
-import Button from "reactstrap/lib/Button";
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 
-const SortingTable = (props) => {
+const SortingTable = ({ match }) => {
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([]);
 
   function init() {
-    getCertificationsDetails();
+    getOccupationalSupervisionDetails();
   }
 
-  const getCertificationsDetails = async () => {
+  const getOccupationalSupervisionDetails = async () => {
     try {
       await axios
-        .get(`http://localhost:8000/api/certificationsManagement`)
+        .get(`http://localhost:8000/api/occupationalSupervision`)
         .then((response) => {
           setData(response.data);
         })
@@ -35,6 +35,32 @@ const SortingTable = (props) => {
           console.log(error);
         });
     } catch {}
+  };
+
+  const occupationalSupervisionDetailsDelete = (
+    occupationalSupervisionDetailsId
+  ) => {
+    axios
+      .post(
+        `http://localhost:8000/api/occupationalSupervision/remove/${occupationalSupervisionDetailsId}`
+      )
+      .then((response) => {
+        loadOccupationalSupervisionDetails();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loadOccupationalSupervisionDetails = () => {
+    axios
+      .get("http://localhost:8000/api/occupationalSupervision")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   useEffect(() => {
@@ -99,6 +125,7 @@ const SortingTable = (props) => {
                     </div>
                   </th>
                 ))}
+                <th>מחק</th>
               </tr>
             ))}
           </thead>
@@ -123,10 +150,16 @@ const SortingTable = (props) => {
                     if (cell.column.id == "profession") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "certification") {
+                    if (cell.column.id == "harmfulCause") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "certificationValidity") {
+                    if (cell.column.id == "legislationAndMilitaryOrders") {
+                      return <td>{cell.value}</td>;
+                    }
+                    if (cell.column.id == "frequencyOfTests") {
+                      return <td>{cell.value}</td>;
+                    }
+                    if (cell.column.id == "lastExecutionDate") {
                       return (
                         <td>
                           {cell.value
@@ -137,12 +170,46 @@ const SortingTable = (props) => {
                         </td>
                       );
                     }
+                    if (cell.column.id == "nextTestDate") {
+                      return (
+                        <td>
+                          {cell.value
+                            .slice(0, 10)
+                            .split("-")
+                            .reverse()
+                            .join("-")}
+                        </td>
+                      );
+                    }
+                    if (cell.column.id == "fit") {
+                      return <td>{cell.value}</td>;
+                    }
                     if (cell.column.id == "documentUpload") {
                       return <td>{cell.value}</td>;
                     }
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
+                  <td role="cell">
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {" "}
+                      <button
+                        className="btn btn-danger"
+                        onClick={() =>
+                          occupationalSupervisionDetailsDelete(row.original._id)
+                        }
+                      >
+                        מחק
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               );
             })}
@@ -188,8 +255,8 @@ const SortingTable = (props) => {
           </select>
         </div>
       </div>
-      <Link to={`/certificationManagementForm`}>
-        <Button>הוסף הסמכה </Button>
+      <Link to={`/occupationalSupervisionForm`}>
+        <Button>הוסף פיקוח תעסוקתי</Button>
       </Link>
     </>
   );

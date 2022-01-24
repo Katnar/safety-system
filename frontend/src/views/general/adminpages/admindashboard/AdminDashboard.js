@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { Line, Bar } from "react-chartjs-2";
 
 import { Link, withRouter, Redirect } from "react-router-dom";
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -22,17 +22,17 @@ import {
 } from "reactstrap";
 
 import UserCard from "components/general/DashboardCards/UserCard/UserCard";
+import certificationsManagementTable from "components/safetySystem/certificationsManagement/SortingTable";
 
 function AdminDashboard() {
-
   return (
     <>
       <Container>
-        <UserCard />
+        {/* <UserCard /> */}
+        <certificationsManagementTable />
       </Container>
 
-      <Container style={{ paddingTop: '2rem' }}>
-      </Container>
+      <Container style={{ paddingTop: "2rem" }}></Container>
     </>
   );
 }
