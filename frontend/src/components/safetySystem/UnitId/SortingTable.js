@@ -39,7 +39,7 @@ const SortingTable = ({ match }) => {
 
   const UnitDelete = (UnitIdId) => {
     axios
-      .post(`http://localhost:8000/api/unitId/remove/${UnitIdId}`)
+      .delete(`http://localhost:8000/api/unitId/${UnitIdId}`)
       .then((response) => {
         loadUnits();
       })

@@ -37,6 +37,28 @@ const SortingTable = (props) => {
     } catch {}
   };
 
+  const Delete = (Id) => {
+    axios
+      .delete(`http://localhost:8000/api/certificationsManagement/${Id}`)
+      .then((response) => {
+        load();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const load = () => {
+    axios
+      .get("http://localhost:8000/api/certificationsManagement")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     init();
     setPageSize(5);
@@ -99,6 +121,7 @@ const SortingTable = (props) => {
                     </div>
                   </th>
                 ))}
+                <th>מחק</th>
               </tr>
             ))}
           </thead>
@@ -143,6 +166,24 @@ const SortingTable = (props) => {
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
+                  <td role="cell">
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {" "}
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => Delete(row.original._id)}
+                      >
+                        מחק
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               );
             })}

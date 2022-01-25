@@ -41,8 +41,8 @@ const SortingTable = ({ match }) => {
     occupationalSupervisionDetailsId
   ) => {
     axios
-      .post(
-        `http://localhost:8000/api/occupationalSupervision/remove/${occupationalSupervisionDetailsId}`
+      .delete(
+        `http://localhost:8000/api/occupationalSupervision/${occupationalSupervisionDetailsId}`
       )
       .then((response) => {
         loadOccupationalSupervisionDetails();
