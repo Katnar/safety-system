@@ -4,14 +4,25 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+// const exphbs = require("express-handlebars");
+// const nodemailer = require("nodemailer");
+// const path = require("path");
 
 require("dotenv").config();
 
 //app config
 const app = express();
 
+//View engine setup
+// app.engine("handlebars", exphbs());
+// app.set("view engine", "handlebars");
+
+//Static folder
+// app.use("/public", express.static(path.join(__dirname, "public")));
+
 //middlware
 app.use(cors());
+// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(morgan("dev"));
