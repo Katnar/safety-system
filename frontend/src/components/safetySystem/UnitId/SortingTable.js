@@ -59,6 +59,16 @@ const SortingTable = ({ match }) => {
       });
   };
 
+  const sendMail = () => {
+    axios.post("http://localhost:8000/api/sendMail")
+    .then((response) => {
+      setData(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
   useEffect(() => {
     init();
     setPageSize(5);
@@ -219,7 +229,7 @@ const SortingTable = ({ match }) => {
         </div>
       </div>
       <Link to={`/unitIdForm`}>
-        <Button>הוסף יחידה</Button>
+        <Button onClick={() => sendMail()} >הוסף יחידה</Button>
       </Link>
     </>
   );

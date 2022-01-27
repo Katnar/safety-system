@@ -47,6 +47,9 @@ const userRoutes = require("./routes/authentication/user");
 
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
+
+const mail = require("./routes/mail");
+app.use('/api', mail);
 //general routes
 // const affiliationRoutes = require("./routes/general/affiliation");
 // const candidateRoutes = require("./routes/general/candidate");
