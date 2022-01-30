@@ -60,14 +60,15 @@ const SortingTable = ({ match }) => {
   };
 
   const sendMail = () => {
-    axios.post("http://localhost:8000/api/sendMail")
-    .then((response) => {
-      setData(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+    axios
+      .put("http://localhost:8000/api/sendMail")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     init();
@@ -229,7 +230,7 @@ const SortingTable = ({ match }) => {
         </div>
       </div>
       <Link to={`/unitIdForm`}>
-        <Button onClick={() => sendMail()} >הוסף יחידה</Button>
+        <Button onClick={() => sendMail()}>הוסף יחידה</Button>
       </Link>
     </>
   );
