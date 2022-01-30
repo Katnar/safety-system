@@ -229,9 +229,6 @@ const SortingTable = ({ match }) => {
           </select>
         </div>
       </div>
-      <Link to={`/unitIdForm`}>
-        <Button onClick={() => sendMail()}>הוסף יחידה</Button>
-      </Link>
     </>
   );
 };

@@ -255,9 +255,6 @@ const SortingTable = ({ match }) => {
           </select>
         </div>
       </div>
-      <Link to={`/occupationalSupervisionForm`}>
-        <Button>הוסף פיקוח תעסוקתי</Button>
-      </Link>
     </>
   );
 };

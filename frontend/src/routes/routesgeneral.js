@@ -38,7 +38,10 @@ import safetyOfficersQualificationTable from "components/safetySystem/safetyOffi
 import unitIdTable from "components/safetySystem/UnitId/SortingTable";
 import certificationsManagementTable from "components/safetySystem/certificationsManagement/SortingTable";
 import occupationalSupervisionTable from "components/safetySystem/occupationalSupervision/SortingTable";
-import unitIdView from "views/general/adminpages/unitIdView/unitIdPage";
+import unitIdView from "views/general/adminpages/unitId/unitId";
+import certificationsManagementsView from "views/general/adminpages/certificationsManagements/certificationsManagements";
+import occupationalSupervisionView from "views/general/adminpages/occupationalSupervision/occupationalSupervision";
+import safetyOfficersQualificationView from "views/general/adminpages/safetyOfficersQualification/safetyOfficersQualification";
 
 import certificationManagementForm from "views/general/adminpages/certificationskmanagementsForm/certificationManagementDataComponent";
 import safetyOfficersQualificationForm from "views/general/adminpages/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
@@ -53,7 +56,7 @@ const routesgeneral = (
     {/*///////////////////////////////////////////UnLoggedIn Routes/////////////////////////////////////////////////*/}
 
     {/*///////////////////////////////////////////LoggedIn Routes/////////////////////////////////////////////////*/}
-    <LoggedinRoute
+    {/* <LoggedinRoute
       path="/jobsbymahzor/:mahzorid"
       exact
       component={JobsByMahzor}
@@ -63,11 +66,11 @@ const routesgeneral = (
       exact
       component={JobsByMahzorAndUnit}
     />
-    <LoggedinRoute path="/displayjob/:jobid" exact component={DisplayJob} />
+    <LoggedinRoute path="/displayjob/:jobid" exact component={DisplayJob} /> */}
     {/*///////////////////////////////////////////LoggedIn Routes/////////////////////////////////////////////////*/}
 
     {/*///////////////////////////////////////////Form Routes/////////////////////////////////////////////////*/}
-    <LoggedinRoute path="/mahzorform/:mahzorid" exact component={MahzorForm} />
+    {/* <LoggedinRoute path="/mahzorform/:mahzorid" exact component={MahzorForm} /> */}
     {/*///////////////////////////////////////////Form Routes/////////////////////////////////////////////////*/}
 
     {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
@@ -75,12 +78,12 @@ const routesgeneral = (
     <AdminRoute path="/edituser/:userid" exact component={EditUser} />
 
     <AdminRoute path="/dashboard" exact component={AdminDashboard} />
-    <AdminRoute path="/mahzorimpage" exact component={MahzorimPage} />
+    {/* <AdminRoute path="/mahzorimpage" exact component={MahzorimPage} />
     <AdminRoute
       path="/displaymahzor/:mahzorid"
       exact
       component={DisplayMahzor}
-    />
+    /> */}
 
     <AdminRoute
       path="/safetyOfficersQualificationTable"
@@ -99,6 +102,21 @@ const routesgeneral = (
       component={certificationsManagementTable}
     />
     <AdminRoute path="/unitId" exact component={unitIdView} />
+    <AdminRoute
+      path="/certificationsManagements"
+      exact
+      component={certificationsManagementsView}
+    />
+    <AdminRoute
+      path="/occupationalSupervision"
+      exact
+      component={occupationalSupervisionView}
+    />
+    <AdminRoute
+      path="/safetyOfficersQualification"
+      exact
+      component={safetyOfficersQualificationView}
+    />
 
     <AdminRoute
       path="/certificationManagementForm"

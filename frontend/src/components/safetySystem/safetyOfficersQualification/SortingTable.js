@@ -222,9 +222,6 @@ const SortingTable = (props) => {
           </select>
         </div>
       </div>
-      <Link to={`/safetyOfficersQualificationForm`}>
-        <Button>הוסף ממונה בטיחות</Button>
-      </Link>
     </>
   );
 };

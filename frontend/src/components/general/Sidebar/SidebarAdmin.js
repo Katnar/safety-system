@@ -102,7 +102,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/unitIdTable"
+            to="/unitId"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -134,7 +134,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/safetyOfficersQualificationTable"
+            to="/safetyOfficersQualification"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -166,7 +166,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/certificationsManagementTable"
+            to="/certificationsManagements"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -198,7 +198,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/occupationalSupervisionTable"
+            to="/occupationalSupervision"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
