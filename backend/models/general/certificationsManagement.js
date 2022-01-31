@@ -10,6 +10,7 @@ const certificationsManagementSchema = new mongoose.Schema({
   certification: { type: String },
   certificationValidity: { type: Date },
   documentUpload: { type: String },
+  gdod: {type: String},
 });
 
 const certificationsManagement = mongoose.model(

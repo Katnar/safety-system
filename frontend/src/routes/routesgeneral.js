@@ -34,10 +34,10 @@ import DisplayJob from "views/general/DisplayJob";
 import Unitmahzorimpage from "views/general/unitpages/unitmahzorimpage/Unitmahzorimpage";
 import UnitPreferenceForm from "views/general/unitpages/unitpreferenceform/UnitPreferenceForm";
 
-import safetyOfficersQualificationTable from "components/safetySystem/safetyOfficersQualification/SortingTable";
-import unitIdTable from "components/safetySystem/UnitId/SortingTable";
-import certificationsManagementTable from "components/safetySystem/certificationsManagement/SortingTable";
-import occupationalSupervisionTable from "components/safetySystem/occupationalSupervision/SortingTable";
+import safetyOfficersQualificationTable from "components/safetySystem/adminPages/safetyOfficersQualification/SortingTable";
+import unitIdTable from "components/safetySystem/adminPages/UnitId/SortingTable";
+import certificationsManagementTable from "components/safetySystem/adminPages/certificationsManagement/SortingTable";
+import occupationalSupervisionTable from "components/safetySystem/adminPages/occupationalSupervision/SortingTable";
 import unitIdView from "views/general/adminpages/unitId/unitId";
 import certificationsManagementsView from "views/general/adminpages/certificationsManagements/certificationsManagements";
 import occupationalSupervisionView from "views/general/adminpages/occupationalSupervision/occupationalSupervision";

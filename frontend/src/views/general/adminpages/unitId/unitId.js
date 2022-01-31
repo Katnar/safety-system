@@ -18,7 +18,7 @@ import {
   Collapse,
 } from "reactstrap";
 
-import UnitIdTable from "components/safetySystem/UnitId/SortingTable";
+import UnitIdTable from "components/safetySystem/adminPages/UnitId/SortingTable";
 
 function unitId() {
   return (

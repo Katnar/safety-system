@@ -22,7 +22,7 @@ import { ThemeContext, themes } from "contexts/ThemeContext";
 
 import history from "../../../../history";
 
-import unitIdTable from "components/safetySystem/UnitId/SortingTable"
+import unitIdTable from "components/safetySystem/adminPages/UnitId/SortingTable"
 
 import soldier from "assets/img/soldier.png";
 import safetyHazard from "assets/img/trip-hazard.png";

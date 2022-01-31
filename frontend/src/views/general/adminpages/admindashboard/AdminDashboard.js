@@ -22,7 +22,7 @@ import {
 } from "reactstrap";
 
 import UserCard from "components/general/DashboardCards/UserCard/UserCard";
-import certificationsManagementTable from "components/safetySystem/certificationsManagement/SortingTable";
+import certificationsManagementTable from "components/safetySystem/adminPages/certificationsManagement/SortingTable";
 
 function AdminDashboard() {
   return (

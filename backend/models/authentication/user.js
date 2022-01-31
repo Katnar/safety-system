@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema({
     salt: String,
     role:{type: String,default:"0"},
     validated:{type: Boolean,default:false},
+    gdod: {type: String},
+    hativa: {type: String},
+    ogda: {type: String},
+    pikod: {type: String},
 }, {timestamps: true})
 
 // virtual field

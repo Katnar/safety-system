@@ -15,6 +15,7 @@ const occupationalSupervisionSchema = new mongoose.Schema({
   nextTestDate: { type: String },
   fit: { type: Boolean },
   documentUpload: { type: String },
+  gdod: {type: String},
 });
 
 const occupationalSupervision = mongoose.model(

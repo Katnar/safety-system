@@ -7,6 +7,7 @@ const safetyOfficersQualificationSchema = new mongoose.Schema({
   fullName: { type: String },
   certificateIssuingDate: { type: Date },
   numberOfSeminarDays: { type: Number },
+  gdod: {type: String},
 });
 
 const safetyOfficersQualification = mongoose.model(

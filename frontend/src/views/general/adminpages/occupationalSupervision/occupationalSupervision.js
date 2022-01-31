@@ -18,7 +18,7 @@ import {
   Collapse,
 } from "reactstrap";
 
-import OccupationalSupervisionTable from "components/safetySystem/occupationalSupervision/SortingTable";
+import OccupationalSupervisionTable from "components/safetySystem/adminPages/occupationalSupervision/SortingTable";
 
 function occupationalSupervision() {
   return (

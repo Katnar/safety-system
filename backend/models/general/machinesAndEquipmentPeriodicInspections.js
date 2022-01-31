@@ -13,6 +13,7 @@ const machinesAndEquipmentPeriodicInspectionsSchema = new mongoose.Schema({
   comments: { type: String },
   meanQuantity: { type: Number },
   documentUpload: { type: String },
+  gdod: {type: String},
 });
 
 const machinesAndEquipmentPeriodicInspections = mongoose.model(

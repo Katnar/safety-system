@@ -9,6 +9,7 @@ const unitIdSchema = new mongoose.Schema({
   mainOccupation: { type: String },
   unitStructureTree: { type: String },
   teneStructureTree: { type: String },
+  gdod: {type: String},
 });
 
 const UnitId = mongoose.model("UnitId", unitIdSchema);

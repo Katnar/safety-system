@@ -18,7 +18,7 @@ import {
   Collapse,
 } from "reactstrap";
 
-import CertificationsManagementTable from "components/safetySystem/certificationsManagement/SortingTable";
+import CertificationsManagementTable from "components/safetySystem/adminPages/certificationsManagement/SortingTable";
 
 function certificationsManagements() {
   return (

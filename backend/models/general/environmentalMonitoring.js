@@ -9,6 +9,7 @@ const certificationsManagementSchema = new mongoose.Schema({
   executionStatus: { type: String },
   surveyDate: { type: Date },
   documentUpload: { type: String },
+  gdod: {type: String},
 });
 
 const certificationsManagement = mongoose.model(

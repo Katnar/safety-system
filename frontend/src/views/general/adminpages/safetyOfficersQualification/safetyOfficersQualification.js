@@ -18,7 +18,7 @@ import {
   Collapse,
 } from "reactstrap";
 
-import SafetyOfficersQualificationTable from "components/safetySystem/safetyOfficersQualification/SortingTable";
+import SafetyOfficersQualificationTable from "components/safetySystem/adminPages/safetyOfficersQualification/SortingTable";
 
 function safetyOfficersQualification() {
   return (
