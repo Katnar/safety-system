@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
+
 // reactstrap components
 import {
   Button,
@@ -190,12 +191,12 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 תדירות הבדיקות
               </div>
               <FormGroup dir="rtl">
-                <Input
-                  type="text"
-                  name="frequencyOfTests"
-                  value={data.frequencyOfTests}
-                  onChange={handleChange}
-                ></Input>
+                <Input type='select' value={data.frequencyOfTests} onChange={handleChange}>
+                  <option value='יומיות'>יומיות</option>
+                  <option value='שבועיות'>שבועיות</option>
+                  <option value='חודשיות'>חודשיות</option>
+                  <option value='שנתיות'>שנתיות</option>
+                </Input>
               </FormGroup>
             </Col>
             <Col xs={12} md={4}>
@@ -231,12 +232,10 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 כשיר/לא כשיר
               </div>
               <FormGroup dir="rtl">
-                <Input
-                  type="text"
-                  name="fit"
-                  value={data.fit}
-                  onChange={handleChange}
-                ></Input>
+                <Input type='select' value={data.fit} onChange={handleChange}>
+                  <option value='כשיר'>כשיר</option>
+                  <option value='לא כשיר'>לא כשיר</option>
+                </Input>
               </FormGroup>
             </Col>
             <Col xs={12} md={4}>
