@@ -15,7 +15,7 @@ import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 
-const SortingTable = ({ match }) => {
+const SortingTable = (props) => {
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([]);
@@ -29,13 +29,21 @@ const SortingTable = ({ match }) => {
       await axios
         .get(`http://localhost:8000/api/unitId`)
         .then((response) => {
-          setData(response.data);
+          let tempData = [];
+          for (let i = 0; i < response.data.length; i++) {
+            console.log(props)
+              if(response.data[i].gdod == props.userData.user.gdod){
+                tempData.push(response.data[i]);
+              }
+          }
+          setData(tempData);
         })
         .catch((error) => {
           console.log(error);
         });
     } catch {}
   };
+
 
   const UnitDelete = (UnitIdId) => {
     axios

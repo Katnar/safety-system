@@ -122,6 +122,7 @@ export default function SignUpForm() {
       personalnumber: data.personalnumber,
       unitid: data.unitid,
       role: data.role,
+      gdod: data.gdod,
     };
     axios
       .post(`http://localhost:8000/api/signup`, user)
@@ -218,6 +219,16 @@ export default function SignUpForm() {
                       name="personalnumber"
                       type="string"
                       value={data.personalnumber}
+                      onChange={handleChange}
+                    />
+                  </FormGroup>
+
+                  <FormGroup className="mb-3" dir="rtl">
+                    <Input
+                      placeholder="גדוד"
+                      name="gdod"
+                      type="string"
+                      value={data.gdod}
                       onChange={handleChange}
                     />
                   </FormGroup>

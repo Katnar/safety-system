@@ -19,22 +19,26 @@ import {
 } from "reactstrap";
 
 import UnitIdTable from "components/safetySystem/adminPages/UnitId/SortingTable";
+import { isAuthenticated } from "auth";
 
 function unitId() {
+  const user = isAuthenticated();
   return (
     <>
       {/* <Container> */}
-      <Card>
+      {user ?  <Card>
         <CardBody>
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
             טבלת תעודת זהות יחידה
           </h3>
-          <UnitIdTable />
+          <UnitIdTable userData={user}/>
           <Link to={`/unitIdForm`}>
             <Button>הוסף יחידה</Button>
           </Link>
         </CardBody>
       </Card>
+      : null}
+     
       {/* </Container> */}
     </>
   );

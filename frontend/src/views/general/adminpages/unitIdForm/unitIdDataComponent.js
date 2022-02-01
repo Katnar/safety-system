@@ -185,6 +185,19 @@ const UnitIdDataComponent = ({ match }) => {
               </FormGroup>
             </Col>
             <Col xs={12} md={4}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                גדוד
+              </div>
+              <FormGroup dir="rtl">
+                <Input
+                  type="text"
+                  name="gdod"
+                  value={unit.gdod}
+                  onChange={handleChange}
+                ></Input>
+              </FormGroup>
+            </Col>
+            <Col xs={12} md={4}>
               <Button type="primary" onClick={() => clickSubmit()}>
                 הוסף נתונים
               </Button>
