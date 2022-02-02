@@ -191,7 +191,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 תדירות הבדיקות
               </div>
               <FormGroup dir="rtl">
-                <Input type='select' value={data.frequencyOfTests} onChange={handleChange}>
+                <Input type='select' name='frequencyOfTests' value={data.frequencyOfTests} onChange={handleChange}>
                   <option value='יומיות'>יומיות</option>
                   <option value='שבועיות'>שבועיות</option>
                   <option value='חודשיות'>חודשיות</option>
@@ -232,7 +232,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 כשיר/לא כשיר
               </div>
               <FormGroup dir="rtl">
-                <Input type='select' value={data.fit} onChange={handleChange}>
+                <Input type='select' name='fit' value={data.fit} onChange={handleChange}>
                   <option value='כשיר'>כשיר</option>
                   <option value='לא כשיר'>לא כשיר</option>
                 </Input>

@@ -13,7 +13,7 @@ const occupationalSupervisionSchema = new mongoose.Schema({
   frequencyOfTests: { type: String },
   lastExecutionDate: { type: Date },
   nextTestDate: { type: String },
-  fit: { type: Boolean },
+  fit: { type: String },
   documentUpload: { type: String },
   gdod: {type: String},
 });
