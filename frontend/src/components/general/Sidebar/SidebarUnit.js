@@ -17,13 +17,15 @@ import {
 } from "contexts/BackgroundColorContext";
 
 import { ThemeContext, themes } from "contexts/ThemeContext";
-
 import logo from "assets/img/whiteLogo.jpg";
 import home from "assets/img/home3.png";
 import table from "assets/img/table.png";
 import followers from "assets/img/followers.png";
 import shortlist from "assets/img/shortlist.png";
 import people from "assets/img/people.png";
+import editusers from "assets/img/editusers.png";
+import links from "assets/img/links.png";
+import setting from "assets/img/setting.png";
 import { signout } from "auth/index";
 import history from "../../../history";
 
@@ -47,11 +49,9 @@ import {
   Col,
 } from "reactstrap";
 
-import { signin, authenticate, isAuthenticated } from "auth/index";
+import { isAuthenticated } from "auth/index";
 
 function SidebarUnit() {
-  const { user } = isAuthenticated();
-
   const clickSubmit = (event) => {
     event.preventDefault();
     signout().then((response) => {
@@ -62,12 +62,15 @@ function SidebarUnit() {
   return (
     <>
       <div className="logo">
-        <img src={logo}></img>
+        <img
+          src={logo}
+          style={{ paddingLeft: "3vw", width: "100%", height: "100%" }}
+        ></img>
       </div>
       <Nav style={{ textAlign: "right" }}>
         <li>
           <NavLink
-            to={`/unitdashboard/${user.unitid}`}
+            to="/dashboard"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -99,7 +102,7 @@ function SidebarUnit() {
         </li>
         <li>
           <NavLink
-            to={`/unitmahzorimpage/${user.unitid}`}
+            to="/UnitIdGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -123,7 +126,135 @@ function SidebarUnit() {
                     paddingBottom: "6px",
                   }}
                 >
-                  מחזורים
+                  תעודת זהות יחידה
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/safetyOfficersQualification"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  כשירות ממונים על הבטחיות
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/certificationsManagements"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  ניהול הסמכות
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/occupationalSupervision"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  פיקוח תעסוקתי
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/manageusers"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={editusers} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  עריכת משתמשים
                 </h4>
               </Col>
             </Row>

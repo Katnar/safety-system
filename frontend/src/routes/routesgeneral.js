@@ -12,6 +12,7 @@ import {
 import LoggedinRoute from "auth/LoggedinRoute";
 import UnloggedinRoute from "auth/UnloggedinRoute";
 import AdminRoute from "auth/AdminRoute.js";
+import GdodRoute from "auth/GdodRoute";
 import CandidateRoute from "auth/CandidateRoute";
 import UnitRoute from "auth/UnitRoute";
 
@@ -47,6 +48,9 @@ import certificationManagementForm from "views/general/adminpages/certifications
 import safetyOfficersQualificationForm from "views/general/adminpages/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
 import occupationalSupervisionForm from "views/general/adminpages/occupationalSupervisionForm/occupationalSupervisionDataComponent";
 import UnitIdForm from "views/general/adminpages/unitIdForm/unitIdDataComponent";
+
+import unitIdGdod from 'views/general/gdodpages/unitId/unitId';
+
 
 const routesgeneral = (
   <>
@@ -136,6 +140,8 @@ const routesgeneral = (
     <AdminRoute path="/UnitIdForm" exact component={UnitIdForm} />
 
     {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
+
+    <GdodRoute path='/UnitIdGdod' exact component={unitIdGdod} />
 
     {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
     <UnitRoute path="/unitdashboard/:unitid" exact component={UnitDashboard} />

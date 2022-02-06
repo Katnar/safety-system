@@ -18,7 +18,7 @@ import {
   Collapse,
 } from "reactstrap";
 
-import UnitIdTable from "components/safetySystem/adminPages/UnitId/SortingTable";
+import UnitIdTable from "components/safetySystem/gdodPages/UnitId/SortingTable";
 import { isAuthenticated } from "auth";
 
 function unitId() {

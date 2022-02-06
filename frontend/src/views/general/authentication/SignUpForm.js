@@ -109,6 +109,12 @@ export default function SignUpForm() {
     if (data.role === "2") {
       delete data.unitid;
     }
+    if (data.role === "3") {
+      delete data.unitid;
+    }
+    if (data.role === "4") {
+      delete data.unitid;
+    }
     SignUp(event);
   };
 
@@ -242,9 +248,11 @@ export default function SignUpForm() {
                     >
                       <option value="">הרשאה</option>
                       <option value="0">מנהל מערכת</option>
-                      <option value="1">הרשאת יחידה</option>
-                      <option value="2">הרשאת מתמודד</option>
-                    </Input>
+                      <option value="1">הרשאת גדוד</option>
+                      <option value="2">הרשאת חטיבה</option>
+                      <option value="3">הרשאת אוגדה</option>
+                      <option value="4">הרשאת פיקוד</option>
+                    </Input>.
                   </FormGroup>
 
                   {data.role === "0" ? (

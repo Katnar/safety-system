@@ -42,9 +42,11 @@ mongoose
   .catch((err) => console.log(err));
 
 //user routes
+// const signUpRouts = require('/routes/genral/unit');
 const authRoutes = require("./routes/authentication/auth");
 const userRoutes = require("./routes/authentication/user");
 
+// app.use('/api', signUpRouts);
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 
@@ -61,7 +63,7 @@ app.use('/api', mail);
 // const jobRoutes = require("./routes/general/job");
 // const jobtypeRoutes = require("./routes/general/jobtype");
 // const mahzorRoutes = require("./routes/general/mahzor");
-// const unitRoutes = require("./routes/general/unit");
+const unitRoutes = require("./routes/general/unit");
 // const unitpreferenceRoutes = require("./routes/general/unitpreference");
 
 // app.use("/api", affiliationRoutes);
@@ -74,7 +76,7 @@ app.use('/api', mail);
 // app.use("/api", jobRoutes);
 // app.use("/api", jobtypeRoutes);
 // app.use("/api", mahzorRoutes);
-// app.use("/api", unitRoutes);
+app.use("/api", unitRoutes);
 // app.use("/api", unitpreferenceRoutes);
 
 const safetyOfficersQualificationRoutes = require("./routes/general/safetyOfficersQualification");
