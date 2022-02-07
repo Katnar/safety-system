@@ -7,17 +7,17 @@ const {
   update,
   remove,
   findById,
-} = require("../../controllers/general/unit");
+} = require("../../controllers/general/environmentalMonitoring");
 
 // find spec
-router.get("/unit/:id", findById);
+router.get("/environmentalMonitoring/:id", findById);
 //find all
-router.get("/unit", find);
+router.get("/environmentalMonitoring", find);
 //add
-router.post("/unit", create); /**/
+router.post("/environmentalMonitoring", create); /**/
 //update
-router.put("/unit/:unitId", update);
+router.put("/environmentalMonitoring/:environmentalMonitoringId", update);
 //delete
-router.delete("/unit/:id", remove);
+router.delete("/environmentalMonitoring/:id", remove);
 
 module.exports = router;

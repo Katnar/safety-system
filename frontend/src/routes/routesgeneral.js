@@ -39,18 +39,20 @@ import safetyOfficersQualificationTable from "components/safetySystem/adminPages
 import unitIdTable from "components/safetySystem/adminPages/UnitId/SortingTable";
 import certificationsManagementTable from "components/safetySystem/adminPages/certificationsManagement/SortingTable";
 import occupationalSupervisionTable from "components/safetySystem/adminPages/occupationalSupervision/SortingTable";
+
 import unitIdView from "views/general/adminpages/unitId/unitId";
 import certificationsManagementsView from "views/general/adminpages/certificationsManagements/certificationsManagements";
 import occupationalSupervisionView from "views/general/adminpages/occupationalSupervision/occupationalSupervision";
 import safetyOfficersQualificationView from "views/general/adminpages/safetyOfficersQualification/safetyOfficersQualification";
+import trainingProgramView from "views/general/adminpages/trainingProgram/trainingProgram";
+import equipmentAndMaterialsPeriodicInspectionsView from "views/general/adminpages/equipmentAndMaterialsPeriodicInspections/equipmentAndMaterialsPeriodicInspections";
 
 import certificationManagementForm from "views/general/adminpages/certificationskmanagementsForm/certificationManagementDataComponent";
 import safetyOfficersQualificationForm from "views/general/adminpages/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
 import occupationalSupervisionForm from "views/general/adminpages/occupationalSupervisionForm/occupationalSupervisionDataComponent";
 import UnitIdForm from "views/general/adminpages/unitIdForm/unitIdDataComponent";
 
-import unitIdGdod from 'views/general/gdodpages/unitId/unitId';
-
+import unitIdGdod from "views/general/gdodpages/unitId/unitId";
 
 const routesgeneral = (
   <>
@@ -89,6 +91,8 @@ const routesgeneral = (
       component={DisplayMahzor}
     /> */}
 
+    {/*///////////////////////////////////////////Admin Views/////////////////////////////////////////////////*/}
+
     <AdminRoute
       path="/safetyOfficersQualificationTable"
       exact
@@ -121,6 +125,14 @@ const routesgeneral = (
       exact
       component={safetyOfficersQualificationView}
     />
+    <AdminRoute path="/trainingProgram" exact component={trainingProgramView} />
+    <AdminRoute
+      path="/equipmentAndMaterialsPeriodicInspections"
+      exact
+      component={equipmentAndMaterialsPeriodicInspectionsView}
+    />
+
+    {/*///////////////////////////////////////////Admin Forms/////////////////////////////////////////////////*/}
 
     <AdminRoute
       path="/certificationManagementForm"
@@ -141,7 +153,7 @@ const routesgeneral = (
 
     {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
 
-    <GdodRoute path='/UnitIdGdod' exact component={unitIdGdod} />
+    <GdodRoute path="/UnitIdGdod" exact component={unitIdGdod} />
 
     {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
     <UnitRoute path="/unitdashboard/:unitid" exact component={UnitDashboard} />

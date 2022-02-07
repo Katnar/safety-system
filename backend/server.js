@@ -51,7 +51,7 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 
 const mail = require("./routes/mail");
-app.use('/api', mail);
+app.use("/api", mail);
 //general routes
 // const affiliationRoutes = require("./routes/general/affiliation");
 // const candidateRoutes = require("./routes/general/candidate");
@@ -83,11 +83,15 @@ const safetyOfficersQualificationRoutes = require("./routes/general/safetyOffice
 const unitIdRoutes = require("./routes/general/unitId");
 const certificationsManagementRoutes = require("./routes/general/certificationsManagement");
 const occupationalSupervisionRoutes = require("./routes/general/occupationalSupervision");
+const trainingProgramRoutes = require("./routes/general/trainingProgram");
+const equipmentAndMaterialsPeriodicInspectionsRoutes = require("./routes/general/equipmentAndMaterialsPeriodicInspections");
 
 app.use("/api", safetyOfficersQualificationRoutes);
 app.use("/api", unitIdRoutes);
 app.use("/api", certificationsManagementRoutes);
 app.use("/api", occupationalSupervisionRoutes);
+app.use("/api", trainingProgramRoutes);
+app.use("/api", equipmentAndMaterialsPeriodicInspectionsRoutes);
 
 if (process.env.NODE_ENV === "production") {
   //set static folder
