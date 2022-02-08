@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
-const certificationsManagementSchema = new mongoose.Schema({
+const environmentalMonitoringSchema = new mongoose.Schema({
   harmfulCauses: { type: String },
   locationInUnit: { type: String },
   lastMonitoringDate: { type: Date },
@@ -12,9 +12,9 @@ const certificationsManagementSchema = new mongoose.Schema({
   gdod: {type: String},
 });
 
-const certificationsManagement = mongoose.model(
-  "certificationsManagement",
-  certificationsManagementSchema
+const environmentalMonitoring = mongoose.model(
+  "environmentalMonitoring",
+  environmentalMonitoringSchema
 );
 
-module.exports = certificationsManagement;
+module.exports = environmentalMonitoring;

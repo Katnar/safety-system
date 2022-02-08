@@ -51,7 +51,7 @@ import {
 
 import { isAuthenticated } from "auth/index";
 
-function SidebarUnit() {
+function SidebarGdod() {
   const clickSubmit = (event) => {
     event.preventDefault();
     signout().then((response) => {
@@ -281,4 +281,4 @@ function SidebarUnit() {
   );
 }
 
-export default SidebarUnit;
+export default SidebarGdod;

@@ -85,6 +85,8 @@ const certificationsManagementRoutes = require("./routes/general/certificationsM
 const occupationalSupervisionRoutes = require("./routes/general/occupationalSupervision");
 const trainingProgramRoutes = require("./routes/general/trainingProgram");
 const equipmentAndMaterialsPeriodicInspectionsRoutes = require("./routes/general/equipmentAndMaterialsPeriodicInspections");
+const environmentalMonitoringRoutes = require("./routes/general/environmentalMonitoring");
+const machinesAndEquipmentPeriodicInspectionsRoutes = require("./routes/general/machinesAndEquipmentPeriodicInspections");
 
 app.use("/api", safetyOfficersQualificationRoutes);
 app.use("/api", unitIdRoutes);
@@ -92,6 +94,8 @@ app.use("/api", certificationsManagementRoutes);
 app.use("/api", occupationalSupervisionRoutes);
 app.use("/api", trainingProgramRoutes);
 app.use("/api", equipmentAndMaterialsPeriodicInspectionsRoutes);
+app.use("/api", environmentalMonitoringRoutes);
+app.use("/api", machinesAndEquipmentPeriodicInspectionsRoutes);
 
 if (process.env.NODE_ENV === "production") {
   //set static folder

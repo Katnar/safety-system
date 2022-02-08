@@ -45,7 +45,7 @@ import {
 import { signin, authenticate, isAuthenticated } from "auth/index";
 
 import SidebarAdmin from "components/general/Sidebar/SidebarAdmin";
-import SidebarUnit from "components/general/Sidebar/SidebarUnit";
+import SidebarGdod from "components/general/Sidebar/SidebarGdod";
 import SidebarCandidate from "../Sidebar/Sidebarcandidate";
 
 function Sidebar() {
@@ -76,7 +76,7 @@ function Sidebar() {
           {user.role === "0" ? (
             <SidebarAdmin />
           ) : user.role === "1" ? (
-            <SidebarUnit />
+            <SidebarGdod />
           ) : user.role === "2" ? (
             <SidebarCandidate />
           ) : null}

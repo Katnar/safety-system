@@ -46,6 +46,8 @@ import occupationalSupervisionView from "views/general/adminpages/occupationalSu
 import safetyOfficersQualificationView from "views/general/adminpages/safetyOfficersQualification/safetyOfficersQualification";
 import trainingProgramView from "views/general/adminpages/trainingProgram/trainingProgram";
 import equipmentAndMaterialsPeriodicInspectionsView from "views/general/adminpages/equipmentAndMaterialsPeriodicInspections/equipmentAndMaterialsPeriodicInspections";
+import environmentalMonitoringView from "views/general/adminpages/environmentalMonitoring/environmentalMonitoring";
+import machinesAndEquipmentPeriodicInspectionsView from "views/general/adminpages/machinesAndEquipmentPeriodicInspections/machinesAndEquipmentPeriodicInspections";
 
 import certificationManagementForm from "views/general/adminpages/certificationskmanagementsForm/certificationManagementDataComponent";
 import safetyOfficersQualificationForm from "views/general/adminpages/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
@@ -130,6 +132,16 @@ const routesgeneral = (
       path="/equipmentAndMaterialsPeriodicInspections"
       exact
       component={equipmentAndMaterialsPeriodicInspectionsView}
+    />
+    <AdminRoute
+      path="/environmentalMonitoring"
+      exact
+      component={environmentalMonitoringView}
+    />
+    <AdminRoute
+      path="/machinesAndEquipmentPeriodicInspectionsView"
+      exact
+      component={machinesAndEquipmentPeriodicInspectionsView}
     />
 
     {/*///////////////////////////////////////////Admin Forms/////////////////////////////////////////////////*/}

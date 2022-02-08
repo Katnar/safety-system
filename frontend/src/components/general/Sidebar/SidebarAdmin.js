@@ -198,7 +198,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/occupationalSupervision"
+            to="/safetyOfficersQualification"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -223,6 +223,103 @@ function SidebarAdmin() {
                   }}
                 >
                   פיקוח תעסוקתי
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/trainingProgram"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  תכנית הדרכות 
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/equipmentAndMaterialsPeriodicInspections"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                 בדיקות תקופתיות לציוד וחומרים
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/environmentalMonitoring"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  ניטורים סביבתיים
                 </h4>
               </Col>
             </Row>

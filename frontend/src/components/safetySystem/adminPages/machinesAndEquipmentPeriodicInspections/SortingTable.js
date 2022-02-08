@@ -27,7 +27,7 @@ const SortingTable = (props) => {
   const getDetails = async () => {
     try {
       await axios
-        .get(`http://localhost:8000/api/trainingProgram`)
+        .get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections`)
         .then((response) => {
           setData(response.data);
         })
@@ -39,7 +39,7 @@ const SortingTable = (props) => {
 
   const Delete = (Id) => {
     axios
-      .delete(`http://localhost:8000/api/trainingProgram/${Id}`)
+      .delete(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections/${Id}`)
       .then((response) => {
         loadData();
       })
@@ -50,7 +50,7 @@ const SortingTable = (props) => {
 
   const loadData = () => {
     axios
-      .get("http://localhost:8000/api/trainingProgram")
+      .get("http://localhost:8000/api/machinesAndEquipmentPeriodicInspections")
       .then((response) => {
         setData(response.data);
       })
@@ -142,25 +142,53 @@ const SortingTable = (props) => {
               return (
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
-                    if (cell.column.id == "trainingDate") {
+                    if (cell.column.id == "equipmentType") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "locatrainingSubjecttion") {
+                    if (cell.column.id == "meanName") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "presentationUpload") {
+                    if (cell.column.id == "mstb") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "requireTest") {
+                    if (cell.column.id == "mkt") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "requiredWorkersList") {
+                    if (cell.column.id == "manufacturer") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "trainingStatus") {
+                    if (cell.column.id == "testDate") {
+                      return (
+                        <td>
+                          {cell.value
+                            .slice(0, 10)
+                            .split("-")
+                            .reverse()
+                            .join("-")}
+                        </td>
+                      );
+                    }
+                    if (cell.column.id == "nextTestDate") {
+                      return (
+                        <td>
+                          {cell.value
+                            .slice(0, 10)
+                            .split("-")
+                            .reverse()
+                            .join("-")}
+                        </td>
+                      );
+                    }
+                    if (cell.column.id == "findings") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "requiredWorkersStatus") {
+                    if (cell.column.id == "comments") {
+                      return <td>{cell.value}</td>;
+                    }
+                    if (cell.column.id == "meanQuantity") {
+                      return <td>{cell.value}</td>;
+                    }
+                    if (cell.column.id == "documentUpload") {
                       return <td>{cell.value}</td>;
                     }
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
