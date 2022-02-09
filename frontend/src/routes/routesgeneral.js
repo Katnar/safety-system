@@ -53,6 +53,8 @@ import monthlySafetyCommitteesMonitoringView from "views/general/adminpages/mont
 import hazardsMonitoringView from "views/general/adminpages/hazardsMonitoring/hazardsMonitoring";
 import homsManagementMonitoringView from "views/general/adminpages/homsManagementMonitoring/homsManagementMonitoring";
 import personalProtectiveEquipmentMonitoringView from "views/general/adminpages/personalProtectiveEquipmentMonitoring/personalProtectiveEquipmentMonitoring";
+import groundingTestsViews from "views/general/adminpages/groundingTests/groundingTests";
+import reviewsDocumentationView from "views/general/adminpages/reviewsDocumentation/reviewsDocumentation";
 
 import certificationManagementForm from "views/general/adminpages/certificationskmanagementsForm/certificationManagementDataComponent";
 import safetyOfficersQualificationForm from "views/general/adminpages/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
@@ -172,6 +174,12 @@ const routesgeneral = (
       path="/personalProtectiveEquipmentMonitoring"
       exact
       component={personalProtectiveEquipmentMonitoringView}
+    />
+    <AdminRoute path="/groundingTests" exact component={groundingTestsViews} />
+    <AdminRoute
+      path="/reviewsDocumentation"
+      exact
+      component={reviewsDocumentationView}
     />
 
     {/*///////////////////////////////////////////Admin Forms/////////////////////////////////////////////////*/}
