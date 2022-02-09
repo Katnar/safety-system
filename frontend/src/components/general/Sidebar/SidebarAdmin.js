@@ -423,6 +423,102 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
+            to="/hazardsMonitoring"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  מעקב סקר מפגעים
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/homsManagementMonitoring"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  מעקב ניהול חומ"ס
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/personalProtectiveEquipmentMonitoring"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  מעקב ציוד מגן אישי
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
             to="/manageusers"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
