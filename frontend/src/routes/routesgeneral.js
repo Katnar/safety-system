@@ -48,6 +48,8 @@ import trainingProgramView from "views/general/adminpages/trainingProgram/traini
 import equipmentAndMaterialsPeriodicInspectionsView from "views/general/adminpages/equipmentAndMaterialsPeriodicInspections/equipmentAndMaterialsPeriodicInspections";
 import environmentalMonitoringView from "views/general/adminpages/environmentalMonitoring/environmentalMonitoring";
 import machinesAndEquipmentPeriodicInspectionsView from "views/general/adminpages/machinesAndEquipmentPeriodicInspections/machinesAndEquipmentPeriodicInspections";
+import riskManagementMonitoringView from "views/general/adminpages/riskManagementMonitoring/riskManagementMonitoring";
+import monthlySafetyCommitteesMonitoringView from "views/general/adminpages/monthlySafetyCommitteesMonitoring/monthlySafetyCommitteesMonitoring";
 
 import certificationManagementForm from "views/general/adminpages/certificationskmanagementsForm/certificationManagementDataComponent";
 import safetyOfficersQualificationForm from "views/general/adminpages/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
@@ -142,6 +144,16 @@ const routesgeneral = (
       path="/machinesAndEquipmentPeriodicInspections"
       exact
       component={machinesAndEquipmentPeriodicInspectionsView}
+    />
+    <AdminRoute
+      path="/riskManagementMonitoring"
+      exact
+      component={riskManagementMonitoringView}
+    />
+    <AdminRoute
+      path="/monthlySafetyCommitteesMonitoring"
+      exact
+      component={monthlySafetyCommitteesMonitoringView}
     />
 
     {/*///////////////////////////////////////////Admin Forms/////////////////////////////////////////////////*/}
