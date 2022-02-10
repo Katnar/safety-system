@@ -41,6 +41,17 @@ const UnitIdDataComponent = ({ match }) => {
     setUnit({ ...unit, [evt.target.name]: value });
   }
 
+  const loadunits = () => {
+      axios.get(`http://localhost:8000/api/unitId/${match.params.unitIdId}`)
+      .then(response => {
+        let tempunits = response.data;
+        setUnit(tempunits) 
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   const clickSubmit = (event) => {
     if (CheckFormData()) {
       SubmitData();
@@ -63,13 +74,28 @@ const UnitIdDataComponent = ({ match }) => {
   }
 
   async function SubmitData() {
-    // console.log("post")
     let tempUnitData;
+    if (match.params.unitIdId == '0') { //new mahzor
+      let result = await axios.post("http://localhost:8000/api/unitId", unit);
+      tempUnitData = result.data;
+    }
+    else { // update mahzor
+      let tempUnitWithDeleteId=unit;
+      delete tempUnitWithDeleteId._id;
+      let result = await axios.put(`http://localhost:8000/api/unitId/${match.params.unitIdId}`, tempUnitWithDeleteId);
+      tempUnitData = result.data;
+    }
+
+    // console.log("post")
     let result = await axios.post("http://localhost:8000/api/unitId", unit);
     tempUnitData = result.data;
   }
 
-  function init() {}
+  function init() {
+    if (match.params.unitIdId != '0') {
+      loadunits()
+    }
+  }
 
   useEffect(() => {
     init();
