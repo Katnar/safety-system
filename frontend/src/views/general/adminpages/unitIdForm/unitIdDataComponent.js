@@ -99,6 +99,7 @@ const UnitIdDataComponent = ({ match }) => {
 
   useEffect(() => {
     init();
+    console.log(match.params)
   }, []);
 
   return (

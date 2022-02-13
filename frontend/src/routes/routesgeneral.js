@@ -199,7 +199,7 @@ const routesgeneral = (
       exact
       component={occupationalSupervisionForm}
     />
-    <AdminRoute path="/UnitIdForm" exact component={UnitIdForm} />
+    <AdminRoute path="/UnitIdForm/:unitIdId" exact component={UnitIdForm} />
 
     {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
 
