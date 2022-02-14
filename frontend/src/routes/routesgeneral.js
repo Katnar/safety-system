@@ -185,7 +185,7 @@ const routesgeneral = (
     {/*///////////////////////////////////////////Admin Forms/////////////////////////////////////////////////*/}
 
     <AdminRoute
-      path="/certificationManagementForm/:certificationManagementId"
+      path="/certificationManagementForm/:certificationsManagementId"
       exact
       component={certificationManagementForm}
     />
