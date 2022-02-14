@@ -33,13 +33,27 @@ import SettingModal from "../../../../components/general/modal/SettingModal";
 
 const CertificationManagementDataComponent = ({ match }) => {
   //mahzor
-  const [certification, setCertification] = useState({});
+  const [data, setData] = useState({});
   //mahzor
 
   function handleChange(evt) {
     const value = evt.target.value;
-    setCertification({ ...certification, [evt.target.name]: value });
+    setData({ ...data, [evt.target.name]: value });
   }
+
+  const loadDatas = () => {
+    axios
+      .get(
+        `http://localhost:8000/api/certificationsManagement/${match.params.certificationManagementId}`
+      )
+      .then((response) => {
+        let tempdatas = response.data;
+        setData(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const clickSubmit = (event) => {
     if (CheckFormData()) {
@@ -63,16 +77,38 @@ const CertificationManagementDataComponent = ({ match }) => {
   }
 
   async function SubmitData() {
+    let tempData;
+    if (match.params.certificationManagementId == "0") {
+      //new mahzor
+      let result = await axios.post(
+        "http://localhost:8000/api/certificationsManagement",
+        data
+      );
+      tempData = result.data;
+    } else {
+      // update mahzor
+      let tempWithDeleteId = data;
+      delete tempWithDeleteId._id;
+      let result = await axios.put(
+        `http://localhost:8000/api/certificationsManagement/${match.params.certificationsManagementId}`,
+        tempWithDeleteId
+      );
+      tempData = result.data;
+    }
+
     // console.log("post")
-    let tempCertificationData;
     let result = await axios.post(
       "http://localhost:8000/api/certificationsManagement",
-      certification
+      data
     );
-    tempCertificationData = result.data;
+    tempData = result.data;
   }
 
-  function init() {}
+  function init() {
+    if (match.params.certificationManagementId != "0") {
+      loadDatas();
+    }
+  }
 
   useEffect(() => {
     init();
@@ -109,7 +145,7 @@ const CertificationManagementDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="personalNumber"
-                  value={certification.personalNumber}
+                  value={data.personalNumber}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -122,7 +158,7 @@ const CertificationManagementDataComponent = ({ match }) => {
                 <Input
                   type="number"
                   name="id"
-                  value={certification.id}
+                  value={data.id}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -135,7 +171,7 @@ const CertificationManagementDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="fullName"
-                  value={certification.fullName}
+                  value={data.fullName}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -150,7 +186,7 @@ const CertificationManagementDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="rank"
-                  value={certification.rank}
+                  value={data.rank}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -163,7 +199,7 @@ const CertificationManagementDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="profession"
-                  value={certification.profession}
+                  value={data.profession}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -176,7 +212,7 @@ const CertificationManagementDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="certification"
-                  value={certification.certification}
+                  value={data.certification}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -191,7 +227,7 @@ const CertificationManagementDataComponent = ({ match }) => {
                 <Input
                   type="date"
                   name="certificationValidity"
-                  value={certification.certificationValidity}
+                  value={data.certificationValidity}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -204,7 +240,7 @@ const CertificationManagementDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="documentUpload"
-                  value={certification.documentUpload}
+                  value={data.documentUpload}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>

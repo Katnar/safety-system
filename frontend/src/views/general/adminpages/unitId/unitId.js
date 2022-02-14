@@ -26,19 +26,20 @@ function unitId() {
   return (
     <>
       {/* <Container> */}
-      {user ?  <Card>
-        <CardBody>
-          <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
-            טבלת תעודת זהות יחידה
-          </h3>
-          <UnitIdTable userData={user}/>
-          <Link to={`/unitIdForm`}>
-            <Button>הוסף יחידה</Button>
-          </Link>
-        </CardBody>
-      </Card>
-      : null}
-     
+      {user ? (
+        <Card>
+          <CardBody>
+            <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
+              טבלת תעודת זהות יחידה
+            </h3>
+            <UnitIdTable userData={user} />
+            <Link to={`/unitIdForm/0`}>
+              <Button>הוסף יחידה</Button>
+            </Link>
+          </CardBody>
+        </Card>
+      ) : null}
+
       {/* </Container> */}
     </>
   );

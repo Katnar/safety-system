@@ -30,7 +30,10 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
   const certificationsManagement = new CertificationsManagement(req.body);
-  CertificationsManagement.updateOne(certificationsManagement)
+  CertificationsManagement.findByIdAndUpdate(
+    req.params.certificationsManagementId,
+    certificationsManagement
+  )
     .then((certificationsManagement) => res.json(certificationsManagement))
     .catch((err) => res.status(400).json("Error: " + err));
 };

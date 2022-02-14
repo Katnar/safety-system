@@ -30,7 +30,7 @@ function certificationsManagements() {
             טבלת ניהול הסמכות
           </h3>
           <CertificationsManagementTable />
-          <Link to={`/certificationManagementForm`}>
+          <Link to={`/certificationManagementForm/0`}>
             <Button>הוסף הסמכה </Button>
           </Link>
         </CardBody>
