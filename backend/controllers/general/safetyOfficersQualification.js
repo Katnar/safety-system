@@ -31,8 +31,8 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const safetyOfficersQualification = new SafetyOfficersQualification(req.body);
-  SafetyOfficersQualification.updateOne(safetyOfficersQualification)
+  const safetyOfficersQualification = req.body;
+  SafetyOfficersQualification.findByIdAndUpdate(req.params.id, safetyOfficersQualification)
     .then((safetyOfficersQualification) =>
       res.json(safetyOfficersQualification)
     )

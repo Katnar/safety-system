@@ -17,7 +17,7 @@ router.get("/safetyOfficersQualification", find);
 router.post("/safetyOfficersQualification", create); /**/
 //update
 router.put(
-  "/safetyOfficersQualification/:safetyOfficersQualificationId",
+  "/safetyOfficersQualification/:id",
   update
 );
 //delete

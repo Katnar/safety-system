@@ -33,13 +33,28 @@ import SettingModal from "../../../../components/general/modal/SettingModal";
 
 const SafetyOfficersQualificationDataComponent = ({ match }) => {
   //mahzor
-  const [qualification, setQualification] = useState({});
+  const [state, setState] = useState({});
   //mahzor
 
   function handleChange(evt) {
     const value = evt.target.value;
-    setQualification({ ...qualification, [evt.target.name]: value });
+    setState({ ...state, [evt.target.name]: value });
   }
+
+    const loadDatas = () => {
+      axios
+        .get(
+          `http://localhost:8000/api/safetyOfficersQualification/${match.params.id}`
+        )
+        .then((response) => {
+          let tempdatas = response.data;
+          setState(tempdatas);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
 
   const clickSubmit = (event) => {
     if (CheckFormData()) {
@@ -63,16 +78,37 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
   }
 
   async function SubmitData() {
-    // console.log("post")
-    let tempCertificationData;
-    let result = await axios.post(
-      "http://localhost:8000/api/safetyOfficersQualification",
-      qualification
-    );
-    tempCertificationData = result.data;
+    let tempData;
+    if (match.params.id == "0") {
+      //new mahzor
+      let result = await axios.post(
+        "http://localhost:8000/api/safetyOfficersQualification",
+        state
+      );
+      tempData = result.data;
+    } else {
+      // update mahzor
+      let tempWithDeleteId = state;
+      delete tempWithDeleteId._id;
+      let result = await axios.put(
+        `http://localhost:8000/api/safetyOfficersQualification/${match.params.id}`,
+        tempWithDeleteId
+      );
+      tempData = result.data;
+    }
+
+      // let result = await axios.post(
+      //   "http://localhost:8000/api/safetyOfficersQualification",
+      //   state
+      // );
+      // tempData = result.data;
   }
 
-  function init() {}
+  function init() {
+    if(match.params.id != "0") {
+      loadDatas();
+    }
+  }
 
   useEffect(() => {
     init();
@@ -100,7 +136,7 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="personalNumber"
-                  value={qualification.personalNumber}
+                  value={state.personalNumber}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -113,7 +149,7 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
                 <Input
                   type="number"
                   name="id"
-                  value={qualification.id}
+                  value={state.id}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -126,7 +162,7 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="fullName"
-                  value={qualification.fullName}
+                  value={state.fullName}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -141,7 +177,7 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
                 <Input
                   type="date"
                   name="certificateIssuingDate"
-                  value={qualification.certificateIssuingDate}
+                  value={state.certificateIssuingDate}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -154,7 +190,7 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
                 <Input
                   type="number"
                   name="numberOfSeminarDays"
-                  value={qualification.numberOfSeminarDays}
+                  value={state.numberOfSeminarDays}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>

@@ -198,7 +198,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/safetyOfficersQualification"
+            to="/occupationalSupervision"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >

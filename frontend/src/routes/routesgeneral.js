@@ -190,12 +190,12 @@ const routesgeneral = (
       component={certificationManagementForm}
     />
     <AdminRoute
-      path="/safetyOfficersQualificationForm"
+      path="/safetyOfficersQualificationForm/:id"
       exact
       component={safetyOfficersQualificationForm}
     />
     <AdminRoute
-      path="/occupationalSupervisionForm"
+      path="/occupationalSupervisionForm/:id"
       exact
       component={occupationalSupervisionForm}
     />
