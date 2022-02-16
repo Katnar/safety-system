@@ -29,9 +29,9 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const certificationsManagement = new CertificationsManagement(req.body);
+  const certificationsManagement = req.body;
   CertificationsManagement.findByIdAndUpdate(
-    req.params.certificationsManagementId,
+    req.params.id,
     certificationsManagement
   )
     .then((certificationsManagement) => res.json(certificationsManagement))

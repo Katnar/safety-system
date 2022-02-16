@@ -16,7 +16,7 @@ router.get("/certificationsManagement", find);
 //add
 router.post("/certificationsManagement", create); /**/
 //update
-router.put("/certificationsManagement/:certificationsManagementId", update);
+router.put("/certificationsManagement/:id", update);
 //delete
 router.delete("/certificationsManagement/:id", remove);
 

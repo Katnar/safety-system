@@ -44,7 +44,7 @@ const CertificationManagementDataComponent = ({ match }) => {
   const loadDatas = () => {
     axios
       .get(
-        `http://localhost:8000/api/certificationsManagement/${match.params.certificationsManagementId}`
+        `http://localhost:8000/api/certificationsManagement/${match.params.id}`
       )
       .then((response) => {
         let tempdatas = response.data;
@@ -78,7 +78,7 @@ const CertificationManagementDataComponent = ({ match }) => {
 
   async function SubmitData() {
     let tempData;
-    if (match.params.certificationsManagementId == "0") {
+    if (match.params.id == "0") {
       //new mahzor
       let result = await axios.post(
         "http://localhost:8000/api/certificationsManagement",
@@ -90,7 +90,7 @@ const CertificationManagementDataComponent = ({ match }) => {
       let tempWithDeleteId = data;
       delete tempWithDeleteId._id;
       let result = await axios.put(
-        `http://localhost:8000/api/certificationsManagement/${match.params.certificationsManagementId}`,
+        `http://localhost:8000/api/certificationsManagement/${match.params.id}`,
         tempWithDeleteId
       );
       tempData = result.data;
@@ -105,7 +105,7 @@ const CertificationManagementDataComponent = ({ match }) => {
   }
 
   function init() {
-    if (match.params.certificationsManagementId != "0") {
+    if (match.params.id != "0") {
       loadDatas();
     }
   }
