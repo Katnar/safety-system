@@ -16,7 +16,7 @@ router.get("/environmentalMonitoring", find);
 //add
 router.post("/environmentalMonitoring", create); /**/
 //update
-router.put("/environmentalMonitoring/:environmentalMonitoringId", update);
+router.put("/environmentalMonitoring/:id", update);
 //delete
 router.delete("/environmentalMonitoring/:id", remove);
 

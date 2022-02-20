@@ -16,7 +16,7 @@ router.get("/groundingTests", find);
 //add
 router.post("/groundingTests", create); /**/
 //update
-router.put("/groundingTests/:groundingTestsId", update);
+router.put("/groundingTests/:id", update);
 //delete
 router.delete("/groundingTests/:id", remove);
 

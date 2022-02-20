@@ -16,7 +16,7 @@ router.get("/trainingProgram", find);
 //add
 router.post("/trainingProgram", create); /**/
 //update
-router.put("/trainingProgram/:trainingProgramId", update);
+router.put("/trainingProgram/:id", update);
 //delete
 router.delete("/trainingProgram/:id", remove);
 

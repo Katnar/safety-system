@@ -16,7 +16,7 @@ router.get("/occupationalSupervision", find);
 //add
 router.post("/occupationalSupervision", create); /**/
 //update
-router.put("/occupationalSupervision/:occupationalSupervisionId", update);
+router.put("/occupationalSupervision/:id", update);
 //delete
 router.delete("/occupationalSupervision/:id", remove);
 

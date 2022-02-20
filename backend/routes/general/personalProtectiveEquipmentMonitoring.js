@@ -16,10 +16,7 @@ router.get("/personalProtectiveEquipmentMonitoring", find);
 //add
 router.post("/personalProtectiveEquipmentMonitoring", create); /**/
 //update
-router.put(
-  "/personalProtectiveEquipmentMonitoring/:personalProtectiveEquipmentMonitoringId",
-  update
-);
+router.put("/personalProtectiveEquipmentMonitoring/:id", update);
 //delete
 router.delete("/personalProtectiveEquipmentMonitoring/:id", remove);
 

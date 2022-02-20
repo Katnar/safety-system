@@ -16,7 +16,7 @@ router.get("/riskManagementMonitoring", find);
 //add
 router.post("/riskManagementMonitoring", create); /**/
 //update
-router.put("/riskManagementMonitoring/:riskManagementMonitoringId", update);
+router.put("/riskManagementMonitoring/:id", update);
 //delete
 router.delete("/riskManagementMonitoring/:id", remove);
 

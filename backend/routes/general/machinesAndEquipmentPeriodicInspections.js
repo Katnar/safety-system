@@ -16,10 +16,7 @@ router.get("/machinesAndEquipmentPeriodicInspections", find);
 //add
 router.post("/machinesAndEquipmentPeriodicInspections", create); /**/
 //update
-router.put(
-  "/machinesAndEquipmentPeriodicInspections/:machinesAndEquipmentPeriodicInspectionsId",
-  update
-);
+router.put("/machinesAndEquipmentPeriodicInspections/:id", update);
 //delete
 router.delete("/machinesAndEquipmentPeriodicInspections/:id", remove);
 

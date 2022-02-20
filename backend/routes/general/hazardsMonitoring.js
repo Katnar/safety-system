@@ -16,7 +16,7 @@ router.get("/hazardsMonitoring", find);
 //add
 router.post("/hazardsMonitoring", create); /**/
 //update
-router.put("/hazardsMonitoring/:hazardsMonitoringId", update);
+router.put("/hazardsMonitoring/:id", update);
 //delete
 router.delete("/hazardsMonitoring/:id", remove);
 

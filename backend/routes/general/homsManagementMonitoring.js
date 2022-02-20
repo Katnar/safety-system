@@ -16,7 +16,7 @@ router.get("/homsManagementMonitoring", find);
 //add
 router.post("/homsManagementMonitoring", create); /**/
 //update
-router.put("/homsManagementMonitoring/:homsManagementMonitoringId", update);
+router.put("/homsManagementMonitoring/:id", update);
 //delete
 router.delete("/homsManagementMonitoring/:id", remove);
 

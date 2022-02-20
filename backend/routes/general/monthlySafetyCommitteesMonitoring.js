@@ -16,10 +16,7 @@ router.get("/monthlySafetyCommitteesMonitoring", find);
 //add
 router.post("/monthlySafetyCommitteesMonitoring", create); /**/
 //update
-router.put(
-  "/monthlySafetyCommitteesMonitoring/:monthlySafetyCommitteesMonitoringId",
-  update
-);
+router.put("/monthlySafetyCommitteesMonitoring/:id", update);
 //delete
 router.delete("/monthlySafetyCommitteesMonitoring/:id", remove);
 

@@ -16,7 +16,7 @@ router.get("/reviewsDocumentation", find);
 //add
 router.post("/reviewsDocumentation", create); /**/
 //update
-router.put("/reviewsDocumentation/:reviewsDocumentationId", update);
+router.put("/reviewsDocumentation/:id", update);
 //delete
 router.delete("/reviewsDocumentation/:id", remove);
 

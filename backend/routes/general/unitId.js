@@ -16,7 +16,7 @@ router.get("/unitId", find);
 //add
 router.post("/unitId", create); /**/
 //update
-router.put("/unitId/:unitIdId", update);
+router.put("/unitId/:id", update);
 //delete
 router.delete("/unitId/:id", remove);
 
