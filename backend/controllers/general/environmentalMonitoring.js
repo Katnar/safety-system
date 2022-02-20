@@ -30,8 +30,11 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const environmentalMonitoring = new EnvironmentalMonitoring(req.body);
-  EnvironmentalMonitoring.updateOne(environmentalMonitoring)
+  const environmentalMonitoring = req.body;
+  EnvironmentalMonitoring.findByIdAndUpdate(
+    req.params.id,
+    environmentalMonitoring
+  )
     .then((environmentalMonitoring) => res.json(environmentalMonitoring))
     .catch((err) => res.status(400).json("Error: " + err));
 };

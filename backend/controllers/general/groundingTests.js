@@ -30,8 +30,8 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const groundingTests = new GroundingTests(req.body);
-  GroundingTests.updateOne(groundingTests)
+  const groundingTests = req.body;
+  GroundingTests.findByIdAndUpdate(req.params.id, groundingTests)
     .then((groundingTests) => res.json(groundingTests))
     .catch((err) => res.status(400).json("Error: " + err));
 };

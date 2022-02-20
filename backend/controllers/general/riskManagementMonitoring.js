@@ -29,8 +29,11 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const riskManagementMonitoring = new RiskManagementMonitoring(req.body);
-  RiskManagementMonitoring.updateOne(riskManagementMonitoring)
+  const riskManagementMonitoring = req.body;
+  RiskManagementMonitoring.findByIdAndUpdate(
+    req.params.id,
+    riskManagementMonitoring
+  )
     .then((riskManagementMonitoring) => res.json(riskManagementMonitoring))
     .catch((err) => res.status(400).json("Error: " + err));
 };

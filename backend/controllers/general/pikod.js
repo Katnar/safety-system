@@ -1,13 +1,12 @@
 const Pikod = require("../../models/general/pikod");
-exports.findById = async(req, res) => {
-  const pikod = await Pikod.findOne().where({_id:req.params.id})
-  console.log(pikod.id)
-  if(!pikod){
-      res.status(500).json({success: false})
+exports.findById = async (req, res) => {
+  const pikod = await Pikod.findOne().where({ _id: req.params.id });
+  console.log(pikod.id);
+  if (!pikod) {
+    res.status(500).json({ success: false });
   }
-  res.send(pikod)
-  
- }
+  res.send(pikod);
+};
 
 exports.find = (req, res) => {
   Pikod.find()
@@ -27,8 +26,8 @@ exports.create = (req, res) => {
   });
 };
 exports.update = (req, res) => {
-  const pikod = new Pikod(req.body);
-  Pikod.updateOne(pikod)
+  const pikod = req.body;
+  Pikod.findByIdAndUpdate(req.params.id, pikod)
     .then((pikods) => res.json(pikods))
     .catch((err) => res.status(400).json("Error: " + err));
 };
@@ -39,31 +38,29 @@ exports.remove = (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
-
 exports.findpikodbyid = (req, res) => {
-  Pikod.find({_id: req.body})
-  .then(job => res.json(job))
-  .catch(err => res.status(400).json('Error: ' + err));
-}
-
+  Pikod.find({ _id: req.body })
+    .then((job) => res.json(job))
+    .catch((err) => res.status(400).json("Error: " + err));
+};
 
 exports.updateogdas = (req, res) => {
-  Pikod.updateOne({_id: req.body[0]},{ogda:req.body[1]})
-  .then(orders => res.json(orders))
-  .catch(err => res.status(400).json('Error: ' + err));;
- // console.log(req.body);
-}
+  Pikod.updateOne({ _id: req.body[0] }, { ogda: req.body[1] })
+    .then((orders) => res.json(orders))
+    .catch((err) => res.status(400).json("Error: " + err));
+  // console.log(req.body);
+};
 
 exports.updatekshirot = (req, res) => {
-  Pikod.updateOne({_id: req.body[0]},{kshirot:req.body[1]})
-  .then(orders => res.json(orders))
-  .catch(err => res.status(400).json('Error: ' + err));;
- // console.log(req.body);
-}
+  Pikod.updateOne({ _id: req.body[0] }, { kshirot: req.body[1] })
+    .then((orders) => res.json(orders))
+    .catch((err) => res.status(400).json("Error: " + err));
+  // console.log(req.body);
+};
 
 exports.updatehistory = (req, res) => {
-  Pikod.updateOne({_id: req.body[0]}, { $push: { history: req.body[1] } })
-  .then(orders => res.json(orders))
-  .catch(err => res.status(400).json('Error: ' + err));;
- // console.log(req.body);
-}
+  Pikod.updateOne({ _id: req.body[0] }, { $push: { history: req.body[1] } })
+    .then((orders) => res.json(orders))
+    .catch((err) => res.status(400).json("Error: " + err));
+  // console.log(req.body);
+};

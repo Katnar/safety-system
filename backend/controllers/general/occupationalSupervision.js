@@ -30,8 +30,11 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const occupationalSupervision = new OccupationalSupervision(req.body);
-  OccupationalSupervision.updateOne(occupationalSupervision)
+  const occupationalSupervision = req.body;
+  OccupationalSupervision.findByIdAndUpdate(
+    req.params.id,
+    occupationalSupervision
+  )
     .then((occupationalSupervision) => res.json(occupationalSupervision))
     .catch((err) => res.status(400).json("Error: " + err));
 };

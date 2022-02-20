@@ -34,9 +34,9 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const personalProtectiveEquipmentMonitoring =
-    new PersonalProtectiveEquipmentMonitoring(req.body);
-  PersonalProtectiveEquipmentMonitoring.updateOne(
+  const personalProtectiveEquipmentMonitoring = req.body;
+  PersonalProtectiveEquipmentMonitoring.findByIdAndUpdate(
+    req.params.id,
     personalProtectiveEquipmentMonitoring
   )
     .then((personalProtectiveEquipmentMonitoring) =>

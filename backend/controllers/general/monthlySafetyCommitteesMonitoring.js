@@ -34,9 +34,11 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const monthlySafetyCommitteesMonitoring =
-    new MonthlySafetyCommitteesMonitoring(req.body);
-  MonthlySafetyCommitteesMonitoring.updateOne(monthlySafetyCommitteesMonitoring)
+  const monthlySafetyCommitteesMonitoring = req.body;
+  MonthlySafetyCommitteesMonitoring.findByIdAndUpdate(
+    req.params.id,
+    monthlySafetyCommitteesMonitoring
+  )
     .then((monthlySafetyCommitteesMonitoring) =>
       res.json(monthlySafetyCommitteesMonitoring)
     )

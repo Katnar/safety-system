@@ -30,8 +30,8 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const reviewsDocumentation = new ReviewsDocumentation(req.body);
-  ReviewsDocumentation.updateOne(reviewsDocumentation)
+  const reviewsDocumentation = req.body;
+  ReviewsDocumentation.findByIdAndUpdate(req.params.id, reviewsDocumentation)
     .then((reviewsDocumentation) => res.json(reviewsDocumentation))
     .catch((err) => res.status(400).json("Error: " + err));
 };

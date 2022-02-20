@@ -29,8 +29,11 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const homsManagementMonitoring = new HomsManagementMonitoring(req.body);
-  HomsManagementMonitoring.updateOne(homsManagementMonitoring)
+  const homsManagementMonitoring = req.body;
+  HomsManagementMonitoring.findByIdAndUpdate(
+    req.params.id,
+    homsManagementMonitoring
+  )
     .then((homsManagementMonitoring) => res.json(homsManagementMonitoring))
     .catch((err) => res.status(400).json("Error: " + err));
 };

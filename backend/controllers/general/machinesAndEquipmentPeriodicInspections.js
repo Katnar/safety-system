@@ -34,9 +34,9 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const machinesAndEquipmentPeriodicInspections =
-    new MachinesAndEquipmentPeriodicInspections(req.body);
-  MachinesAndEquipmentPeriodicInspections.updateOne(
+  const machinesAndEquipmentPeriodicInspections = req.body;
+  MachinesAndEquipmentPeriodicInspections.findByIdAndUpdate(
+    req.params.id,
     machinesAndEquipmentPeriodicInspections
   )
     .then((machinesAndEquipmentPeriodicInspections) =>

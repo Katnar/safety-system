@@ -30,8 +30,8 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const trainingProgram = new TrainingProgram(req.body);
-  TrainingProgram.updateOne(trainingProgram)
+  const trainingProgram = req.body;
+  TrainingProgram.findByIdAndUpdate(req.params.id, trainingProgram)
     .then((trainingProgram) => res.json(trainingProgram))
     .catch((err) => res.status(400).json("Error: " + err));
 };

@@ -1,14 +1,12 @@
 const Ogda = require("../../models/general/ogda");
 
-
-exports.findById = async(req, res) => {
-  const ogda = await Ogda.findOne().where({_id:req.params.id})
-  if(!ogda){
-      res.status(500).json({success: false})
+exports.findById = async (req, res) => {
+  const ogda = await Ogda.findOne().where({ _id: req.params.id });
+  if (!ogda) {
+    res.status(500).json({ success: false });
   }
-  res.send(ogda)
-  
- }
+  res.send(ogda);
+};
 
 exports.find = (req, res) => {
   Ogda.find()
@@ -28,8 +26,8 @@ exports.create = (req, res) => {
   });
 };
 exports.update = (req, res) => {
-  const ogda = new Ogda(req.body);
-  Ogda.updateOne(ogda)
+  const ogda = req.body;
+  Ogda.findByIdAndUpdate(req.body.id, ogda)
     .then((ogda) => res.json(ogda))
     .catch((err) => res.status(400).json("Error: " + err));
 };
@@ -42,27 +40,27 @@ exports.remove = (req, res) => {
 
 exports.findogdabyid = (req, res) => {
   Ogda.find({ _id: req.body })
-    .then(job => res.json(job))
-    .catch(err => res.status(400).json('Error: ' + err));
-}
+    .then((job) => res.json(job))
+    .catch((err) => res.status(400).json("Error: " + err));
+};
 
 exports.updatepikod = (req, res) => {
   Ogda.updateOne({ _id: req.body[0] }, { pikod: req.body[1] })
-    .then(orders => res.json(orders))
-    .catch(err => res.status(400).json('Error: ' + err));;
+    .then((orders) => res.json(orders))
+    .catch((err) => res.status(400).json("Error: " + err));
   // console.log(req.body);
-}
+};
 
 exports.updatehativas = (req, res) => {
   Ogda.updateOne({ _id: req.body[0] }, { hativa: req.body[1] })
-    .then(orders => res.json(orders))
-    .catch(err => res.status(400).json('Error: ' + err));;
+    .then((orders) => res.json(orders))
+    .catch((err) => res.status(400).json("Error: " + err));
   // console.log(req.body);
-}
+};
 
 exports.ogdasbypikodid = (req, res) => {
   Ogda.find({ pikod: req.body.pikod })
-    .then(orders => res.json(orders))
-    .catch(err => res.status(400).json('Error: ' + err));;
+    .then((orders) => res.json(orders))
+    .catch((err) => res.status(400).json("Error: " + err));
   // console.log(req.body);
-}
+};
