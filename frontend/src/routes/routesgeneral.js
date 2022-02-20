@@ -62,6 +62,7 @@ import occupationalSupervisionForm from "views/general/adminpages/occupationalSu
 import UnitIdForm from "views/general/adminpages/unitIdForm/unitIdDataComponent";
 import trainingProgramForm from "views/general/adminpages/trainingProgramForm/trainingProgramForm";
 import equipmentAndMaterialsPeriodicInspectionsForm from "views/general/adminpages/equipmentAndMaterialsPeriodicInspectionsForm/equipmentAndMaterialsPeriodicInspectionsForm";
+import environmentalMonitoringForm from "views/general/adminpages/environmentalMonitoringForm/environmentalMonitoringForm";
 
 import unitIdGdod from "views/general/gdodpages/unitId/unitId";
 
@@ -211,6 +212,11 @@ const routesgeneral = (
       path="/equipmentAndMaterialsPeriodicInspectionsForm/:id"
       exact
       component={equipmentAndMaterialsPeriodicInspectionsForm}
+    />
+    <AdminRoute
+      path="/environmentalMonitoringForm/:id"
+      exact
+      component={environmentalMonitoringForm}
     />
 
     {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}

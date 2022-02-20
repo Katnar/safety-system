@@ -28,10 +28,10 @@ function EnvironmentalMonitoring() {
       <Card>
         <CardBody>
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
-          טבלת ניטורים סביבתיים
+            טבלת ניטורים סביבתיים
           </h3>
           <EnvironmentalMonitoringTable />
-          <Link to={`/unitIdForm`}>
+          <Link to={`/environmentalMonitoringForm/0`}>
             <Button>הוסף ניטור סביבתי</Button>
           </Link>
         </CardBody>
