@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
+//תיעוד ביקורות
 const reviewsDocumentationSchema = new mongoose.Schema({
-  //פיקוח תעסוקתי
   date: { type: Date },
   location: { type: String },
   documentUpload: { type: String },

@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
+//מעקב ציוד מגן אישי
 const personalProtectiveEquipmentMonitoringSchema = new mongoose.Schema({
-  //פיקוח תעסוקתי
   msd: { type: Number },
   equipmentName: { type: String },
   mkt: { type: String },

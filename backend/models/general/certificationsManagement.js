@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
+//ניהול הסמכות
 const certificationsManagementSchema = new mongoose.Schema({
   personalNumber: { type: String },
   id: { type: Number },
@@ -10,7 +11,7 @@ const certificationsManagementSchema = new mongoose.Schema({
   certification: { type: String },
   certificationValidity: { type: Date },
   documentUpload: { type: String },
-  gdod: {type: String},
+  gdod: { type: String },
 });
 
 const certificationsManagement = mongoose.model(

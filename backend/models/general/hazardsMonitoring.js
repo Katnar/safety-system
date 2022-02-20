@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
+//מעקב סקר מפגעים
 const hazardsMonitoringSchema = new mongoose.Schema({
   personalNumber: { type: String },
   rank: { type: String },

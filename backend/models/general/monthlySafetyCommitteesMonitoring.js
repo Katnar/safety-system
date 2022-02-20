@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
+//מעקב וועדות בטיחות חודשיות
 const monthlySafetyCommitteesMonitoringSchema = new mongoose.Schema({
   unit: { type: String },
   date: { type: Date },

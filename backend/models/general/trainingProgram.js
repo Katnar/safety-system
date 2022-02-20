@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
+//תכנית הדרכות
 const trainingProgramSchema = new mongoose.Schema({
   trainingDate: { type: Date },
   trainingSubject: { type: String },

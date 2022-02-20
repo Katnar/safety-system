@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
+//מעקב ניהול סיכונים
 const riskManagementMonitoringSchema = new mongoose.Schema({
   processStage: { type: String },
   riskFactor: { type: String },

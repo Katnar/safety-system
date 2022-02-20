@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
+//ניטורים סביבתיים
 const environmentalMonitoringSchema = new mongoose.Schema({
   harmfulCauses: { type: String },
   locationInUnit: { type: String },
@@ -9,7 +10,7 @@ const environmentalMonitoringSchema = new mongoose.Schema({
   executionStatus: { type: String },
   surveyDate: { type: Date },
   documentUpload: { type: String },
-  gdod: {type: String},
+  gdod: { type: String },
 });
 
 const environmentalMonitoring = mongoose.model(

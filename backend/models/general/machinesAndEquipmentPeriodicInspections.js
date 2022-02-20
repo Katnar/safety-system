@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
+//בדיקות תקופתיות למכונות וציוד
 const machinesAndEquipmentPeriodicInspectionsSchema = new mongoose.Schema({
   equipmentType: { type: String },
   meanName: { type: String },
@@ -13,7 +14,7 @@ const machinesAndEquipmentPeriodicInspectionsSchema = new mongoose.Schema({
   comments: { type: String },
   meanQuantity: { type: Number },
   documentUpload: { type: String },
-  gdod: {type: String},
+  gdod: { type: String },
 });
 
 const machinesAndEquipmentPeriodicInspections = mongoose.model(

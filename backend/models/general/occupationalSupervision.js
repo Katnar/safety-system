@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
+//פיקוח תעסוקתי
 const occupationalSupervisionSchema = new mongoose.Schema({
-  //פיקוח תעסוקתי
   personalNumber: { type: String },
   id: { type: Number },
   fullName: { type: String },
@@ -15,7 +15,7 @@ const occupationalSupervisionSchema = new mongoose.Schema({
   nextTestDate: { type: String },
   fit: { type: String },
   documentUpload: { type: String },
-  gdod: {type: String},
+  gdod: { type: String },
 });
 
 const occupationalSupervision = mongoose.model(

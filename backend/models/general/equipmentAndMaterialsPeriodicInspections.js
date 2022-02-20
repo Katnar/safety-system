@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
+//בדיקות תקופתיות לציוד וחומרים
 const equipmentAndMaterialsPeriodicInspectionsSchema = new mongoose.Schema({
   equipmentType: { type: String },
   manufacturer: { type: String },
