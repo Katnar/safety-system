@@ -31,7 +31,7 @@ function trainigProgram() {
             טבלת בדיקות תקופתיות לציוד וחומרים
           </h3>
           <EquipmentAndMaterialsPeriodicInspectionsTable />
-          <Link to={`/unitIdForm`}>
+          <Link to={`/equipmentAndMaterialsPeriodicInspectionsForm/0`}>
             <Button>הוסף בדיקה</Button>
           </Link>
         </CardBody>

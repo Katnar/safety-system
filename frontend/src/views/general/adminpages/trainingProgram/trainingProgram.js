@@ -31,7 +31,7 @@ function trainigProgram() {
             טבלת תכנית הדרכות
           </h3>
           <TrainingProgramTable />
-          <Link to={`/unitIdForm`}>
+          <Link to={`/trainingProgramForm/0`}>
             <Button>הוסף תכנית הדרכה</Button>
           </Link>
         </CardBody>

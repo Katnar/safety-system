@@ -132,6 +132,7 @@ const SortingTable = (props) => {
                     </div>
                   </th>
                 ))}
+                <th>ערוך</th>
                 <th>מחק</th>
               </tr>
             ))}
@@ -149,7 +150,7 @@ const SortingTable = (props) => {
                       return <td>{cell.value}</td>;
                     }
                     if (cell.column.id == "lastMonitoringDate") {
-                       return (
+                      return (
                         <td>
                           {cell.value
                             .slice(0, 10)
@@ -160,7 +161,7 @@ const SortingTable = (props) => {
                       );
                     }
                     if (cell.column.id == "nextMonitoringDate") {
-                       return (
+                      return (
                         <td>
                           {cell.value
                             .slice(0, 10)
@@ -190,6 +191,23 @@ const SortingTable = (props) => {
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
+                  <td role="cell">
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {" "}
+                      <Link
+                        to={`/certificationManagementForm/${row.original._id}`}
+                      >
+                        <button className="btn btn-success">ערוך</button>
+                      </Link>
+                    </div>
+                  </td>
                   <td role="cell">
                     {" "}
                     <div

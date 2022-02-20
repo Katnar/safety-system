@@ -97,11 +97,11 @@ const CertificationManagementDataComponent = ({ match }) => {
     }
 
     // console.log("post")
-    let result = await axios.post(
-      "http://localhost:8000/api/certificationsManagement",
-      data
-    );
-    tempData = result.data;
+    // let result = await axios.post(
+    //   "http://localhost:8000/api/certificationsManagement",
+    //   data
+    // );
+    // tempData = result.data;
   }
 
   function init() {

@@ -132,6 +132,7 @@ const SortingTable = (props) => {
                     </div>
                   </th>
                 ))}
+                <th>ערוך</th>
                 <th>מחק</th>
               </tr>
             ))}
@@ -143,7 +144,15 @@ const SortingTable = (props) => {
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
                     if (cell.column.id == "trainingDate") {
-                      return <td>{cell.value}</td>;
+                      return (
+                        <td>
+                          {cell.value
+                            .slice(0, 10)
+                            .split("-")
+                            .reverse()
+                            .join("-")}
+                        </td>
+                      );
                     }
                     if (cell.column.id == "locatrainingSubjecttion") {
                       return <td>{cell.value}</td>;
@@ -166,6 +175,21 @@ const SortingTable = (props) => {
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
+                  <td role="cell">
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {" "}
+                      <Link to={`/trainingProgramForm/${row.original._id}`}>
+                        <button className="btn btn-success">ערוך</button>
+                      </Link>
+                    </div>
+                  </td>
                   <td role="cell">
                     {" "}
                     <div
