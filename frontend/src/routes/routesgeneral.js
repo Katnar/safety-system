@@ -56,13 +56,18 @@ import personalProtectiveEquipmentMonitoringView from "views/general/adminpages/
 import groundingTestsViews from "views/general/adminpages/groundingTests/groundingTests";
 import reviewsDocumentationView from "views/general/adminpages/reviewsDocumentation/reviewsDocumentation";
 
-import certificationManagementForm from "views/general/adminpages/certificationskmanagementsForm/certificationManagementDataComponent";
-import safetyOfficersQualificationForm from "views/general/adminpages/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
-import occupationalSupervisionForm from "views/general/adminpages/occupationalSupervisionForm/occupationalSupervisionDataComponent";
 import UnitIdForm from "views/general/adminpages/unitIdForm/unitIdDataComponent";
+import safetyOfficersQualificationForm from "views/general/adminpages/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
+import certificationManagementForm from "views/general/adminpages/certificationskmanagementsForm/certificationManagementDataComponent";
+import occupationalSupervisionForm from "views/general/adminpages/occupationalSupervisionForm/occupationalSupervisionDataComponent";
 import trainingProgramForm from "views/general/adminpages/trainingProgramForm/trainingProgramForm";
 import equipmentAndMaterialsPeriodicInspectionsForm from "views/general/adminpages/equipmentAndMaterialsPeriodicInspectionsForm/equipmentAndMaterialsPeriodicInspectionsForm";
 import environmentalMonitoringForm from "views/general/adminpages/environmentalMonitoringForm/environmentalMonitoringForm";
+import machinesAndEquipmentPeriodicInspectionsForm from "views/general/adminpages/machinesAndEquipmentPeriodicInspectionsForm/machinesAndEquipmentPeriodicInspectionsForm";
+import riskManagementMonitoringForm from "views/general/adminpages/riskManagementMonitoringForm/riskManagementMonitoringForm";
+import monthlySafetyCommitteesMonitoringForm from "views/general/adminpages/monthlySafetyCommitteesMonitoringForm/monthlySafetyCommitteesMonitoringForm";
+import hazardsMonitoringForm from "views/general/adminpages/hazardsMonitoringForm/hazardsMonitoringForm";
+import homsManagementMonitoringForm from "views/general/adminpages/homsManagementMonitoringForm/homsManagementMonitoringForm";
 
 import unitIdGdod from "views/general/gdodpages/unitId/unitId";
 
@@ -217,6 +222,31 @@ const routesgeneral = (
       path="/environmentalMonitoringForm/:id"
       exact
       component={environmentalMonitoringForm}
+    />
+    <AdminRoute
+      path="/machinesAndEquipmentPeriodicInspectionsForm/:id"
+      exact
+      component={machinesAndEquipmentPeriodicInspectionsForm}
+    />
+    <AdminRoute
+      path="/riskManagementMonitoringForm/:id"
+      exact
+      component={riskManagementMonitoringForm}
+    />
+    <AdminRoute
+      path="/monthlySafetyCommitteesMonitoringForm/:id"
+      exact
+      component={monthlySafetyCommitteesMonitoringForm}
+    />
+    <AdminRoute
+      path="/hazardsMonitoringForm/:id"
+      exact
+      component={hazardsMonitoringForm}
+    />
+    <AdminRoute
+      path="/homsManagementMonitoringForm/:id"
+      exact
+      component={homsManagementMonitoringForm}
     />
 
     {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
