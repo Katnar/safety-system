@@ -75,6 +75,8 @@ import reviewsDocumentationForm from "views/general/adminpages/reviewsDocumentat
 
 import unitIdGdod from "views/general/gdodpages/unitId/unitId";
 
+import UnitIdGdodForm from "views/general/gdodpages/unitIdForm/unitIdDataComponent";
+
 const routesgeneral = (
   <>
     {/*///////////////////////////////////////////UnLoggedIn Routes/////////////////////////////////////////////////*/}
@@ -271,6 +273,7 @@ const routesgeneral = (
     {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
 
     <GdodRoute path="/UnitIdGdod" exact component={unitIdGdod} />
+    <GdodRoute path="/UnitIdGdodForm" exact component={UnitIdGdodForm} />
 
     {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
     <UnitRoute path="/unitdashboard/:unitid" exact component={UnitDashboard} />

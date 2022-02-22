@@ -32,7 +32,7 @@ function unitId() {
             טבלת תעודת זהות יחידה
           </h3>
           <UnitIdTable userData={user}/>
-          <Link to={`/unitIdForm/0`}>
+          <Link to={`/unitIdGdodForm/0`}>
             <Button>הוסף יחידה</Button>
           </Link>
         </CardBody>

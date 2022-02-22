@@ -29,13 +29,21 @@ const SortingTable = (props) => {
       await axios
         .get(`http://localhost:8000/api/unitId`)
         .then((response) => {
-          setData(response.data);
+          let tempData = [];
+          for (let i = 0; i < response.data.length; i++) {
+            console.log(props)
+              if(response.data[i].gdod == props.userData.user.gdod){
+                tempData.push(response.data[i]);
+              }
+          }
+          setData(tempData);
         })
         .catch((error) => {
           console.log(error);
         });
     } catch {}
   };
+
 
   const UnitDelete = (UnitIdId) => {
     axios
@@ -71,6 +79,7 @@ const SortingTable = (props) => {
   };
 
   useEffect(() => {
+
     init();
     setPageSize(5);
   }, []);
@@ -164,6 +173,7 @@ const SortingTable = (props) => {
                     if (cell.column.id == "teneStructureTree") {
                       return <td>{cell.value}</td>;
                     }
+                    console.log(row.original.userData._id)
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
@@ -177,7 +187,7 @@ const SortingTable = (props) => {
                       }}
                     >
                       {" "}
-                      <Link to={`/UnitIdForm/${row.original._id}`}>
+                      <Link to={`/UnitIdGdodForm/${row.original._id}`}>
                         <button className="btn btn-success">ערוך</button>
                       </Link>
                     </div>
