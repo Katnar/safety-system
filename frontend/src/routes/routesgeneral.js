@@ -34,6 +34,7 @@ import CandidateDashboard from "views/general/candidatepages/candidatedashboard/
 // import DisplayJob from "views/general/DisplayJob";
 // import Unitmahzorimpage from "views/general/unitpages/unitmahzorimpage/Unitmahzorimpage";
 // import UnitPreferenceForm from "views/general/unitpages/unitpreferenceform/UnitPreferenceForm";
+import Home from "views/Home/Home";
 
 import safetyOfficersQualificationTable from "components/safetySystem/adminPages/safetyOfficersQualification/SortingTable";
 import unitIdTable from "components/safetySystem/adminPages/UnitId/SortingTable";
@@ -68,6 +69,9 @@ import riskManagementMonitoringForm from "views/general/adminpages/riskManagemen
 import monthlySafetyCommitteesMonitoringForm from "views/general/adminpages/monthlySafetyCommitteesMonitoringForm/monthlySafetyCommitteesMonitoringForm";
 import hazardsMonitoringForm from "views/general/adminpages/hazardsMonitoringForm/hazardsMonitoringForm";
 import homsManagementMonitoringForm from "views/general/adminpages/homsManagementMonitoringForm/homsManagementMonitoringForm";
+import personalProtectiveEquipmentMonitoringForm from "views/general/adminpages/personalProtectiveEquipmentMonitoringForm/personalProtectiveEquipmentMonitoringForm";
+import groundingTestsForm from "views/general/adminpages/groundingTestsForm/groundingTestsForm";
+import reviewsDocumentationForm from "views/general/adminpages/reviewsDocumentationForm/reviewsDocumentationForm";
 
 import unitIdGdod from "views/general/gdodpages/unitId/unitId";
 
@@ -100,7 +104,7 @@ const routesgeneral = (
     <AdminRoute path="/manageusers" exact component={ManageUsers} />
     <AdminRoute path="/edituser/:userid" exact component={EditUser} />
 
-    <AdminRoute path="/dashboard" exact component={AdminDashboard} />
+    <AdminRoute path="/dashboard" exact component={Home} />
     {/* <AdminRoute path="/mahzorimpage" exact component={MahzorimPage} />
     <AdminRoute
       path="/displaymahzor/:mahzorid"
@@ -247,6 +251,21 @@ const routesgeneral = (
       path="/homsManagementMonitoringForm/:id"
       exact
       component={homsManagementMonitoringForm}
+    />
+    <AdminRoute
+      path="/personalProtectiveEquipmentMonitoringForm/:id"
+      exact
+      component={personalProtectiveEquipmentMonitoringForm}
+    />
+    <AdminRoute
+      path="/groundingTestsForm/:id"
+      exact
+      component={groundingTestsForm}
+    />
+    <AdminRoute
+      path="/reviewsDocumentationForm/:id"
+      exact
+      component={reviewsDocumentationForm}
     />
 
     {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}

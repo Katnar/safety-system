@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // react plugin used to create charts
 
 import { Link, withRouter, Redirect } from "react-router-dom";
+import Page from 'react-page-loading';
 
 // reactstrap components
 import {
@@ -25,8 +26,10 @@ function unitId() {
   const user = isAuthenticated();
   return (
     <>
+    
       {/* <Container> */}
       {user ? (
+                <Page loader={"resize-spin"} color={"#A9A9A9"} size={4}>
         <Card>
           <CardBody>
             <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
@@ -38,6 +41,7 @@ function unitId() {
             </Link>
           </CardBody>
         </Card>
+        </Page>
       ) : null}
 
       {/* </Container> */}

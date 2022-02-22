@@ -31,7 +31,7 @@ function GroundingTests() {
             טבלת בדיקת הארכות חשמל ומבנים
           </h3>
           <GroundingTestsTable />
-          <Link to={`/unitIdForm`}>
+          <Link to={`/groundingTestsForm/0`}>
             <Button>הוסף בדיקה</Button>
           </Link>
         </CardBody>

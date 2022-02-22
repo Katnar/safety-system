@@ -132,6 +132,7 @@ const SortingTable = (props) => {
                     </div>
                   </th>
                 ))}
+                <th>ערוך</th>
                 <th>מחק</th>
               </tr>
             ))}
@@ -163,6 +164,23 @@ const SortingTable = (props) => {
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
+                  <td role="cell">
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {" "}
+                      <Link
+                        to={`/reviewsDocumentationForm/${row.original._id}`}
+                      >
+                        <button className="btn btn-success">ערוך</button>
+                      </Link>
+                    </div>
+                  </td>
                   <td role="cell">
                     {" "}
                     <div

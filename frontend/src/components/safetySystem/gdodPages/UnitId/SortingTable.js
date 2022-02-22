@@ -29,21 +29,13 @@ const SortingTable = (props) => {
       await axios
         .get(`http://localhost:8000/api/unitId`)
         .then((response) => {
-          let tempData = [];
-          for (let i = 0; i < response.data.length; i++) {
-            console.log(props)
-              if(response.data[i].gdod == props.userData.user.gdod){
-                tempData.push(response.data[i]);
-              }
-          }
-          setData(tempData);
+          setData(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
     } catch {}
   };
-
 
   const UnitDelete = (UnitIdId) => {
     axios
@@ -140,6 +132,7 @@ const SortingTable = (props) => {
                     </div>
                   </th>
                 ))}
+                <th>ערוך</th>
                 <th>מחק</th>
               </tr>
             ))}
@@ -174,6 +167,21 @@ const SortingTable = (props) => {
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
+                  <td role="cell">
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {" "}
+                      <Link to={`/UnitIdForm/${row.original._id}`}>
+                        <button className="btn btn-success">ערוך</button>
+                      </Link>
+                    </div>
+                  </td>
                   <td role="cell">
                     {" "}
                     <div

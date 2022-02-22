@@ -30,7 +30,7 @@ function HazardsMonitoring() {
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
             טבלת מעקב סקר מפגעים
           </h3>
-          {/* <HazardsMonitoringTable /> */}
+          <HazardsMonitoringTable />
           <Link to={`/hazardsMonitoringForm/0`}>
             <Button>הוסף מעקב מפגע </Button>
           </Link>
