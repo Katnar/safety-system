@@ -43,7 +43,7 @@ const UnitIdDataComponent = ({ match }) => {
 
   const loadunits = () => {
     axios
-      .get(`http://localhost:8000/api/unitId/${match.params.unitIdId}`)
+      .get(`http://localhost:8000/api/unitId/${match.params.id}`)
       .then((response) => {
         let tempunits = response.data;
         setUnit(tempunits);
@@ -76,7 +76,7 @@ const UnitIdDataComponent = ({ match }) => {
 
   async function SubmitData() {
     let tempUnitData;
-    if (match.params.unitIdId == "0") {
+    if (match.params.id == "0") {
       //new mahzor
       let result = await axios.post("http://localhost:8000/api/unitId", unit);
       tempUnitData = result.data;
@@ -85,7 +85,7 @@ const UnitIdDataComponent = ({ match }) => {
       let tempUnitWithDeleteId = unit;
       delete tempUnitWithDeleteId._id;
       let result = await axios.put(
-        `http://localhost:8000/api/unitId/${match.params.unitIdId}`,
+        `http://localhost:8000/api/unitId/${match.params.id}`,
         tempUnitWithDeleteId
       );
       tempUnitData = result.data;
@@ -97,14 +97,14 @@ const UnitIdDataComponent = ({ match }) => {
   }
 
   function init() {
-    if (match.params.unitIdId != "0") {
+    if (match.params.id != "0") {
       loadunits();
     }
   }
 
   useEffect(() => {
     init();
-    console.log(match.params);
+    console.log("banana");
   }, []);
 
   return (
@@ -116,7 +116,6 @@ const UnitIdDataComponent = ({ match }) => {
         >
           טופס תעודת זהות יחידה
         </CardTitle>
-        {/*headline*/}
       </CardHeader>
       <CardBody style={{ direction: "rtl" }}>
         <Container>
@@ -216,7 +215,7 @@ const UnitIdDataComponent = ({ match }) => {
                 ></Input>
               </FormGroup>
             </Col>
-            <Col xs={12} md={4}>
+            {/* <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 גדוד
               </div>
@@ -228,7 +227,7 @@ const UnitIdDataComponent = ({ match }) => {
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
-            </Col>
+            </Col> */}
             <Col xs={12} md={4}>
               <Button type="primary" onClick={() => clickSubmit()}>
                 הוסף נתונים

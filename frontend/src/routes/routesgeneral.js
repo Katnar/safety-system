@@ -35,6 +35,7 @@ import CandidateDashboard from "views/general/candidatepages/candidatedashboard/
 // import Unitmahzorimpage from "views/general/unitpages/unitmahzorimpage/Unitmahzorimpage";
 // import UnitPreferenceForm from "views/general/unitpages/unitpreferenceform/UnitPreferenceForm";
 import Home from "views/Home/Home";
+// import GdodHome from "views/Home/Home";
 
 import safetyOfficersQualificationTable from "components/safetySystem/adminPages/safetyOfficersQualification/SortingTable";
 import unitIdTable from "components/safetySystem/adminPages/UnitId/SortingTable";
@@ -273,7 +274,7 @@ const routesgeneral = (
     {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
 
     <GdodRoute path="/UnitIdGdod" exact component={unitIdGdod} />
-    <GdodRoute path="/UnitIdGdodForm" exact component={UnitIdGdodForm} />
+    <GdodRoute path="/UnitIdGdodForm/:id" exact component={UnitIdGdodForm} />
 
     {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
     <UnitRoute path="/unitdashboard/:unitid" exact component={UnitDashboard} />
