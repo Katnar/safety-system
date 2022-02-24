@@ -17,7 +17,8 @@ import {
 } from "contexts/BackgroundColorContext";
 
 import { ThemeContext, themes } from "contexts/ThemeContext";
-import logo from "assets/img/whiteLogo.jpg";
+import darkLogo from "assets/img/darkWideLogo.png";
+import lightLogo from "assets/img/wideLogo.png";
 import home from "assets/img/home3.png";
 import table from "assets/img/table.png";
 import followers from "assets/img/followers.png";
@@ -61,12 +62,22 @@ function SidebarAdmin() {
 
   return (
     <>
-      <div className="logo">
+    <ThemeContext.Consumer>
+    {({ changeTheme, theme }) =>
+        theme == "white-content" ?
+         <div className="logo">
         <img
-          src={logo}
-          style={{ paddingLeft: "3vw", width: "100%", height: "100%" }}
+          src={lightLogo}
+          style={{ width: "100%", height: "100%" }}
         ></img>
-      </div>
+      </div>:
+      <div className="logo">
+      <img
+        src={darkLogo}
+        style={{ width: "100%", height: "100%" }}
+      ></img>
+    </div> }
+    </ThemeContext.Consumer>
       <Nav style={{ textAlign: "right" }}>
         <li>
           <NavLink

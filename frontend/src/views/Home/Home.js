@@ -6,6 +6,7 @@ import Axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import certificationsManagementsIcon from "assets/img/quality-control.png";
 // @material-ui/icons
 // import Store from "@material-ui/icons/Store";
 import Warning from "@material-ui/icons/Warning";
@@ -45,6 +46,7 @@ import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardS
 import { Link } from "react-router-dom";
 import { Check, Eco, People } from "@material-ui/icons";
 import moment from "moment";
+import UserCard from "components/general/DashboardCards/UserCard/UserCard";
 
 const useStyles = makeStyles(dashboardStyle);
 
@@ -87,10 +89,11 @@ export default function Home() {
     return (
         <Page loader={"resize-spin"} color={"#A9A9A9"} size={4}>
             <div>
+            <UserCard/>
                 <GridContainer>
                     <GridItem xs={12} sm={6} md={3}>
                         <Link to={'certificationsManagements'}>
-                            <Card>
+                            <Card style={{color: '#000'}}>
                                 <CardHeader color="warning" stats icon>
                                     <CardIcon color="warning">
                                         <People />
@@ -153,7 +156,7 @@ export default function Home() {
                         <Card>
                             <CardHeader color="danger" stats icon>
                                 <CardIcon color="danger">
-                                    <Icon>info_outline</Icon>
+                                <VerifiedUserIcon />
                                 </CardIcon>
                                 <p className={classes.cardCategory}>ניטורים תקופתיים</p>
                                 <h3 className={classes.cardTitle}>30/30</h3>
