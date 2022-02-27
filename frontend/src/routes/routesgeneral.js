@@ -75,8 +75,10 @@ import groundingTestsForm from "views/general/adminpages/groundingTestsForm/grou
 import reviewsDocumentationForm from "views/general/adminpages/reviewsDocumentationForm/reviewsDocumentationForm";
 
 import unitIdGdod from "views/general/gdodpages/unitId/unitId";
+import safetyOfficersQualificationGdod from "views/general/gdodpages/safetyOfficersQualification/safetyOfficersQualification";
 
 import UnitIdGdodForm from "views/general/gdodpages/unitIdForm/unitIdDataComponent";
+import safetyOfficersQualificationGdodForm from "views/general/gdodpages/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
 
 const routesgeneral = (
   <>
@@ -271,10 +273,12 @@ const routesgeneral = (
       component={reviewsDocumentationForm}
     />
 
-    {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
+    {/*///////////////////////////////////////////Gdod Routes/////////////////////////////////////////////////*/}
 
     <GdodRoute path="/UnitIdGdod" exact component={unitIdGdod} />
+    <GdodRoute path="/safetyOfficersQualificationGdod" exact component={safetyOfficersQualificationGdod} />
     <GdodRoute path="/UnitIdGdodForm/:id" exact component={UnitIdGdodForm} />
+    <GdodRoute path="/safetyOfficersQualificationGdodForm/:id" exact component={safetyOfficersQualificationGdodForm} />
 
     {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
     <UnitRoute path="/unitdashboard/:unitid" exact component={UnitDashboard} />

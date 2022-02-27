@@ -9,9 +9,9 @@ import {
   UncontrolledCarousel
 } from "reactstrap";
 
-import tenepic1 from "assets/img/tenepic1.jpg";
-import tenepic2 from "assets/img/tenepic2.jpg";
-import tenepic3 from "assets/img/tenepic3.jpg";
+import tenepic1 from "assets/img/steak.jfif";
+import tenepic2 from "assets/img/sabat.jfif";
+import tenepic3 from "assets/img/menu.jpg";
 
 
 const UserCarousel = (props) => {

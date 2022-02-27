@@ -18,24 +18,27 @@ import {
   Collapse,
 } from "reactstrap";
 
+
 import SafetyOfficersQualificationTable from "components/safetySystem/adminPages/safetyOfficersQualification/SortingTable";
+import { isAuthenticated } from "auth";
 
 function safetyOfficersQualification() {
   const user = isAuthenticated();
   return (
     <>
       {/* <Container> */}
-      <Card>
+      {user ? <Card>
         <CardBody>
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
             טבלת כשירות ממונים על הבטיחות
           </h3>
           <SafetyOfficersQualificationTable userData={user}/>
-          <Link to={`/safetyOfficersQualificationForm`}>
+          <Link to={`/safetyOfficersQualificationForm/0`}>
             <Button>הוסף ממונה בטיחות</Button>
           </Link>
         </CardBody>
-      </Card>
+      </Card> 
+      : null}
       {/* </Container> */}
     </>
   );
