@@ -19,7 +19,7 @@ import {
 } from "reactstrap";
 
 
-import SafetyOfficersQualificationTable from "components/safetySystem/adminPages/safetyOfficersQualification/SortingTable";
+import SafetyOfficersQualificationTable from "components/safetySystem/gdodPages/safetyOfficersQualification/SortingTable";
 import { isAuthenticated } from "auth";
 
 function safetyOfficersQualification() {
@@ -33,7 +33,7 @@ function safetyOfficersQualification() {
             טבלת כשירות ממונים על הבטיחות
           </h3>
           <SafetyOfficersQualificationTable userData={user}/>
-          <Link to={`/safetyOfficersQualificationForm/0`}>
+          <Link to={`/safetyOfficersQualificationGdodForm/0`}>
             <Button>הוסף ממונה בטיחות</Button>
           </Link>
         </CardBody>

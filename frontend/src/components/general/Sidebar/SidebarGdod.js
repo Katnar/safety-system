@@ -134,7 +134,7 @@ function SidebarGdod() {
         </li>
         <li>
           <NavLink
-            to="/safetyOfficersQualification"
+            to="/safetyOfficersQualificationGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -166,7 +166,7 @@ function SidebarGdod() {
         </li>
         <li>
           <NavLink
-            to="/certificationsManagements"
+            to="/certificationManagementGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -198,7 +198,7 @@ function SidebarGdod() {
         </li>
         <li>
           <NavLink
-            to="/occupationalSupervision"
+            to="/occupationalSupervisionGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >

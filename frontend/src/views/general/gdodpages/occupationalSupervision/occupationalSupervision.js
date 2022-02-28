@@ -18,7 +18,8 @@ import {
   Collapse,
 } from "reactstrap";
 
-import OccupationalSupervisionTable from "components/safetySystem/adminPages/occupationalSupervision/SortingTable";
+import OccupationalSupervisionTable from "components/safetySystem/gdodPages/occupationalSupervision/SortingTable";
+import { isAuthenticated } from "auth";
 
 function occupationalSupervision() {
   const user = isAuthenticated();
@@ -31,7 +32,7 @@ function occupationalSupervision() {
             טבלת פיקוח תעסוקתי
           </h3>
           <OccupationalSupervisionTable userData={user}/>
-          <Link to={`/occupationalSupervisionForm`}>
+          <Link to={`/occupationalSupervisionGdodForm/0`}>
             <Button>הוסף פיקוח תעסוקתי</Button>
           </Link>
         </CardBody>

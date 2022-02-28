@@ -76,9 +76,13 @@ import reviewsDocumentationForm from "views/general/adminpages/reviewsDocumentat
 
 import unitIdGdod from "views/general/gdodpages/unitId/unitId";
 import safetyOfficersQualificationGdod from "views/general/gdodpages/safetyOfficersQualification/safetyOfficersQualification";
+import certificationManagementGdod from "views/general/gdodpages/certificationsManagements/certificationsManagements";
+import occupationalSupervisionGdod from "views/general/gdodpages/occupationalSupervision/occupationalSupervision";
 
 import UnitIdGdodForm from "views/general/gdodpages/unitIdForm/unitIdDataComponent";
 import safetyOfficersQualificationGdodForm from "views/general/gdodpages/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
+import certificationsManagementsGdodForm from "views/general/gdodpages/certificationManagementsForm/certificationManagementDataComponent";
+import occupationalSupervisionGdodForm from "views/general/gdodpages/occupationalSupervisionForm/occupationalSupervisionDataComponent";
 
 const routesgeneral = (
   <>
@@ -277,8 +281,15 @@ const routesgeneral = (
 
     <GdodRoute path="/UnitIdGdod" exact component={unitIdGdod} />
     <GdodRoute path="/safetyOfficersQualificationGdod" exact component={safetyOfficersQualificationGdod} />
+    <GdodRoute path="/certificationManagementGdod" exact component={certificationManagementGdod} />
+    <GdodRoute path="/occupationalSupervisionGdod" exact component={occupationalSupervisionGdod} />
+    
+    {/*///////////////////////////////////////////Gdod Forms/////////////////////////////////////////////////*/}
+
     <GdodRoute path="/UnitIdGdodForm/:id" exact component={UnitIdGdodForm} />
     <GdodRoute path="/safetyOfficersQualificationGdodForm/:id" exact component={safetyOfficersQualificationGdodForm} />
+    <GdodRoute path="/certificationManagementGdodForm/:id" exact component={certificationsManagementsGdodForm} />
+    <GdodRoute path="/occupationalSupervisionGdodForm/:id" exact component={occupationalSupervisionGdodForm} />
 
     {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
     <UnitRoute path="/unitdashboard/:unitid" exact component={UnitDashboard} />

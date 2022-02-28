@@ -27,7 +27,7 @@ const SortingTable = (props) => {
   const getCertificationsDetails = async () => {
     try {
       await axios
-      .get(`http://localhost:8000/api/certificationsManagement`)
+        .get(`http://localhost:8000/api/certificationsManagement`)
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
@@ -128,6 +128,7 @@ const SortingTable = (props) => {
                     </div>
                   </th>
                 ))}
+                <th>ערוך</th>
                 <th>מחק</th>
               </tr>
             ))}
@@ -173,6 +174,23 @@ const SortingTable = (props) => {
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
+                  <td role="cell">
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {" "}
+                      <Link
+                        to={`/certificationManagementGdodForm/${row.original._id}`}
+                      >
+                        <button className="btn btn-success">ערוך</button>
+                      </Link>
+                    </div>
+                  </td>
                   <td role="cell">
                     {" "}
                     <div

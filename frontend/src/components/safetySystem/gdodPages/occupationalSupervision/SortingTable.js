@@ -15,7 +15,7 @@ import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 
-const SortingTable = ({ match }) => {
+const SortingTable = (props) => {
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([]);
@@ -27,7 +27,7 @@ const SortingTable = ({ match }) => {
   const getOccupationalSupervisionDetails = async () => {
     try {
       await axios
-      .get(`http://localhost:8000/api/occupationalSupervision`)
+        .get(`http://localhost:8000/api/occupationalSupervision`)
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
@@ -132,6 +132,7 @@ const SortingTable = ({ match }) => {
                     </div>
                   </th>
                 ))}
+                <th>ערוך</th>
                 <th>מחק</th>
               </tr>
             ))}
@@ -197,6 +198,23 @@ const SortingTable = ({ match }) => {
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
+                  <td role="cell">
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {" "}
+                      <Link
+                        to={`/occupationalSupervisionGdodForm/${row.original._id}`}
+                      >
+                        <button className="btn btn-success">ערוך</button>
+                      </Link>
+                    </div>
+                  </td>
                   <td role="cell">
                     {" "}
                     <div
