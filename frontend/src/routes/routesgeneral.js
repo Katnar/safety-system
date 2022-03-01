@@ -34,7 +34,8 @@ import CandidateDashboard from "views/general/candidatepages/candidatedashboard/
 // import DisplayJob from "views/general/DisplayJob";
 // import Unitmahzorimpage from "views/general/unitpages/unitmahzorimpage/Unitmahzorimpage";
 // import UnitPreferenceForm from "views/general/unitpages/unitpreferenceform/UnitPreferenceForm";
-import Home from "views/Home/Home";
+import Home from "views/Home/adminDashboard";
+import gdodHome from "views/Home/adminDashboard";
 // import GdodHome from "views/Home/Home";
 
 import safetyOfficersQualificationTable from "components/safetySystem/adminPages/safetyOfficersQualification/SortingTable";
@@ -78,11 +79,17 @@ import unitIdGdod from "views/general/gdodpages/unitId/unitId";
 import safetyOfficersQualificationGdod from "views/general/gdodpages/safetyOfficersQualification/safetyOfficersQualification";
 import certificationManagementGdod from "views/general/gdodpages/certificationsManagements/certificationsManagements";
 import occupationalSupervisionGdod from "views/general/gdodpages/occupationalSupervision/occupationalSupervision";
+import trainingProgramGdod from "views/general/gdodpages/trainingProgram/trainingProgram";
+import equipmentAndMaterialsPeriodicInspectionsGdod from "views/general/gdodpages/equipmentAndMaterialsPeriodicInspections/equipmentAndMaterialsPeriodicInspections";
+import environmentalMonitoringGdod from "views/general/gdodpages/environmentalMonitoring/environmentalMonitoring";
 
 import UnitIdGdodForm from "views/general/gdodpages/unitIdForm/unitIdDataComponent";
 import safetyOfficersQualificationGdodForm from "views/general/gdodpages/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
 import certificationsManagementsGdodForm from "views/general/gdodpages/certificationManagementsForm/certificationManagementDataComponent";
 import occupationalSupervisionGdodForm from "views/general/gdodpages/occupationalSupervisionForm/occupationalSupervisionDataComponent";
+import trainingProgramGdodForm from "views/general/gdodpages/trainingProgramForm/trainingProgramForm";
+import equipmentAndMaterialsPeriodicInspectionsGdodForm from "views/general/gdodpages/equipmentAndMaterialsPeriodicInspectionsForm/equipmentAndMaterialsPeriodicInspectionsForm";
+import environmentalMonitoringGdodForm from "views/general/gdodpages/environmentalMonitoringForm/environmentalMonitoringForm";
 
 const routesgeneral = (
   <>
@@ -113,7 +120,8 @@ const routesgeneral = (
     <AdminRoute path="/manageusers" exact component={ManageUsers} />
     <AdminRoute path="/edituser/:userid" exact component={EditUser} />
 
-    <AdminRoute path="/dashboard" exact component={Home} />
+    <AdminRoute path="/adminDashboard" exact component={Home} />
+    <GdodRoute path="/gdodDashboard/:gdod" exact component={gdodHome} />
     {/* <AdminRoute path="/mahzorimpage" exact component={MahzorimPage} />
     <AdminRoute
       path="/displaymahzor/:mahzorid"
@@ -283,6 +291,9 @@ const routesgeneral = (
     <GdodRoute path="/safetyOfficersQualificationGdod" exact component={safetyOfficersQualificationGdod} />
     <GdodRoute path="/certificationManagementGdod" exact component={certificationManagementGdod} />
     <GdodRoute path="/occupationalSupervisionGdod" exact component={occupationalSupervisionGdod} />
+    <GdodRoute path="/trainingProgramGdod" exact component={trainingProgramGdod} />
+    <GdodRoute path="/equipmentAndMaterialsPeriodicInspectionsGdod" exact component={equipmentAndMaterialsPeriodicInspectionsGdod} />
+    <GdodRoute path="/environmentalMonitoringGdod" exact component={environmentalMonitoringGdod} />
     
     {/*///////////////////////////////////////////Gdod Forms/////////////////////////////////////////////////*/}
 
@@ -290,6 +301,9 @@ const routesgeneral = (
     <GdodRoute path="/safetyOfficersQualificationGdodForm/:id" exact component={safetyOfficersQualificationGdodForm} />
     <GdodRoute path="/certificationManagementGdodForm/:id" exact component={certificationsManagementsGdodForm} />
     <GdodRoute path="/occupationalSupervisionGdodForm/:id" exact component={occupationalSupervisionGdodForm} />
+    <GdodRoute path="/trainingProgramGdodForm/:id" exact component={trainingProgramGdodForm} />
+    <GdodRoute path="/equipmentAndMaterialsPeriodicInspectionsGdodForm/:id" exact component={equipmentAndMaterialsPeriodicInspectionsGdodForm} />
+    <GdodRoute path="/environmentalMonitoringGdodForm/:id" exact component={environmentalMonitoringGdodForm} />
 
     {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
     <UnitRoute path="/unitdashboard/:unitid" exact component={UnitDashboard} />

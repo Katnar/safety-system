@@ -7,11 +7,14 @@ const {
   update,
   remove,
   findById,
+  findByGdod,
 } = require("../../controllers/general/certificationsManagement");
 
 // find spec
 router.get("/certificationsManagement/:id", findById);
 //find all
+router.get("/certificationsManagement/bygdod/:gdod", findByGdod);
+
 router.get("/certificationsManagement", find);
 //add
 router.post("/certificationsManagement", create); /**/

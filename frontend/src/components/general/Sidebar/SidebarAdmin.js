@@ -65,14 +65,14 @@ function SidebarAdmin() {
     <ThemeContext.Consumer>
     {({ changeTheme, theme }) =>
         theme == "white-content" ?
-        <Link to="/dashboard">
+        <Link to="/adminDashboard">
          <div className="logo">
         <img
           src={lightLogo}
           style={{ width: "100%", height: "100%" }}
         ></img>
       </div></Link>:
-      <Link to="/dashboard">
+      <Link to="/adminDashboard">
       <div className="logo">
       <img
         src={darkLogo}
@@ -83,7 +83,7 @@ function SidebarAdmin() {
       <Nav style={{ textAlign: "right" }}>
         <li>
           <NavLink
-            to="/dashboard"
+            to="/adminDashboard"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >

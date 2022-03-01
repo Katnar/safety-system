@@ -1,17 +1,5 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
 import Axios from "axios";
-import {
-    Button,
-    ButtonGroup,
-    Card,
-    CardHeader,
-    CardBody,
-    CardTitle,
-    Row,
-    Container,
-    Col,
-    Collapse,
-  } from "reactstrap";
 // react plugin for creating charts
 // import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -59,7 +47,6 @@ import { Link } from "react-router-dom";
 import { Check, Eco, People } from "@material-ui/icons";
 import moment from "moment";
 import UserCard from "components/general/DashboardCards/UserCard/UserCard";
-import { container } from "webpack";
 
 const useStyles = makeStyles(dashboardStyle);
 
@@ -73,7 +60,8 @@ export default function Home() {
 
     useEffect(() => {
         Axios.get('http://localhost:8000/api/certificationsManagement').then((response) => {
-            console.log(response.data[0].certificationValidity)
+            console.log(response.data);
+            console.log(response.data[0].certificationValidity);
             var valid = 0;
             var expired = 0;
             var isExpired = false;
@@ -86,8 +74,8 @@ export default function Home() {
                     expired++;
                     isExpired = true;
                 }
-                if(moment(response.data[i].certificationValidity).diff(moment(today),'days')<14){
-                    isAlert=true;
+                if (moment(response.data[i].certificationValidity).diff(moment(today), 'days') < 14) {
+                    isAlert = true;
                 }
             }
             console.log(valid);
@@ -102,25 +90,22 @@ export default function Home() {
     return (
         <Page loader={"resize-spin"} color={"#A9A9A9"} size={4}>
             <div>
-                <Container>
-                    <UserCard/>
-                </Container>
-            
+                <UserCard />
                 <GridContainer>
                     <GridItem xs={12} sm={6} md={3}>
                         <Link to={'certificationsManagements'}>
-                            <Card style={{color: '#000'}}>
+                            <Card style={{ color: '#000' }}>
                                 <CardHeader color="warning" stats icon>
                                     <CardIcon color="warning">
                                         <People />
                                     </CardIcon>
-                                    <h3 style={{color:"white"}} className={classes.cardCategory}>ניהול הסמכות</h3>
-                                    <h3 style={{color:"white"}} className={classes.cardTitle}>
+                                    <h3 style={{ color: "white" }} className={classes.cardCategory}>ניהול הסמכות</h3>
+                                    <h3 style={{ color: "white" }} className={classes.cardTitle}>
                                         {validCerts}/{validCerts + expiredCerts} <small> בתוקף</small>
                                     </h3>
                                 </CardHeader>
                                 {isExpiredCerts ? (
-                                    
+
                                     <CardFooter stats>
                                         <div className={classes.stats}>
                                             <Danger>
@@ -136,17 +121,17 @@ export default function Home() {
                                         לא נדרשת פעולה מיידית
                                     </div>
                                 </CardFooter>)}
-                                
+
                                 {isAlertCerts ? (
-                                <CardFooter stats>
-                                    <div className={classes.stats}>
-                                        <Danger>
-                                            <DateRange />
-                                        </Danger>
-                                        <a href="#pablo" onClick={e => e.preventDefault()}>
-                                            הסמכות מסוימות יפוגו בשבועיים הקרובים</a>
-                                    </div>
-                                </CardFooter>
+                                    <CardFooter stats>
+                                        <div className={classes.stats}>
+                                            <Danger>
+                                                <DateRange />
+                                            </Danger>
+                                            <a href="#pablo" onClick={e => e.preventDefault()}>
+                                                הסמכות מסוימות יפוגו בשבועיים הקרובים</a>
+                                        </div>
+                                    </CardFooter>
                                 ) : (<></>)}
                             </Card>
                         </Link>
@@ -172,7 +157,7 @@ export default function Home() {
                         <Card>
                             <CardHeader color="danger" stats icon>
                                 <CardIcon color="danger">
-                                <VerifiedUserIcon />
+                                    <VerifiedUserIcon />
                                 </CardIcon>
                                 <p className={classes.cardCategory}>ניטורים תקופתיים</p>
                                 <h3 className={classes.cardTitle}>30/30</h3>

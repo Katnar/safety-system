@@ -17,6 +17,8 @@ import {
 } from "contexts/BackgroundColorContext";
 
 import { ThemeContext, themes } from "contexts/ThemeContext";
+import darkLogo from "assets/img/darkWideLogo.png";
+import lightLogo from "assets/img/wideLogo.png";
 import logo from "assets/img/whiteLogo.jpg";
 import home from "assets/img/home3.png";
 import table from "assets/img/table.png";
@@ -61,16 +63,28 @@ function SidebarGdod() {
 
   return (
     <>
-      <div className="logo">
+     <ThemeContext.Consumer>
+    {({ changeTheme, theme }) =>
+        theme == "white-content" ?
+        <Link to="/gdodDashboard">
+         <div className="logo">
         <img
-          src={logo}
-          style={{ paddingLeft: "3vw", width: "100%", height: "100%" }}
+          src={lightLogo}
+          style={{ width: "100%", height: "100%" }}
         ></img>
-      </div>
+      </div></Link>:
+      <Link to="/gdodDashboard">
+      <div className="logo">
+      <img
+        src={darkLogo}
+        style={{ width: "100%", height: "100%" }}
+      ></img>
+    </div> </Link>}
+    </ThemeContext.Consumer>
       <Nav style={{ textAlign: "right" }}>
         <li>
           <NavLink
-            to="/dashboard"
+            to="/gdodDashboard"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >

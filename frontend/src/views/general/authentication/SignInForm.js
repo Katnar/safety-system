@@ -68,10 +68,10 @@ function Signin() {
       console.log(user);
       if (user && user.validated == true) {
         if (user.role === "0") {
-          history.push(`/dashboard`);
+          history.push(`/adminDashboard`);
         }
         if (user.role === "1") {
-          history.push(`/unitdashboard/${user.unitid}`);
+          history.push(`/gdodDashboard/${user.gdod}`);
         }
         if (user.role === "2") {
           history.push(`/candidatedashboard/${user._id}`);

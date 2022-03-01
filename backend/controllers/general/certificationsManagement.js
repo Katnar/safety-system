@@ -10,6 +10,17 @@ exports.findById = async (req, res) => {
   res.send(certificationsManagement);
 };
 
+exports.findByGdod = async (req, res) => {
+  const certificationsManagement = await CertificationsManagement.find().where({
+    gdod: req.params.gdod,
+  });
+
+  if (!certificationsManagement) {
+    res.status(500).json({ success: false });
+  }
+  res.send(certificationsManagement);
+};
+
 exports.find = (req, res) => {
   CertificationsManagement.find()
     .then((certificationsManagement) => res.json(certificationsManagement))
