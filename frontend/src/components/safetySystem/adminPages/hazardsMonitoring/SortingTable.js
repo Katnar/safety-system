@@ -169,7 +169,6 @@ const SortingTable = (props) => {
                     if (cell.column.id == "digitalSignature") {
                       return <td>{cell.value}</td>;
                     }
-
                     if (cell.column.id == "msd") {
                       return <td>{cell.value}</td>;
                     }

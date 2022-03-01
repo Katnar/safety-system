@@ -228,9 +228,9 @@ function SidebarGdod() {
             </Row>
           </NavLink>
         </li>
-        {/* <li>
+        <li>
           <NavLink
-            to="/manageusers"
+            to="/trainingProgramGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -244,7 +244,7 @@ function SidebarGdod() {
                   alignSelf: "center",
                 }}
               >
-                <img src={editusers} style={{ height: "20px" }}></img>
+                <img src={table} style={{ height: "20px" }}></img>
               </Col>
               <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
                 <h4
@@ -254,12 +254,332 @@ function SidebarGdod() {
                     paddingBottom: "6px",
                   }}
                 >
-                  עריכת משתמשים
+                  תכנית הדרכות
                 </h4>
               </Col>
             </Row>
           </NavLink>
-        </li> */}
+        </li>
+        <li>
+          <NavLink
+            to="/equipmentAndMaterialsPeriodicInspectionsGdod"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  בדיקות תקופתיות לציוד וחומרים
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/environmentalMonitoringGdod"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  ניטורים סביבתיים
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/machinesAndEquipmentPeriodicInspectionsGdod"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  בדיקות תקופתיות למכונות וציוד
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/riskManagementMonitoringGdod"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  מעקב ניהול סיכונים
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/monthlySafetyCommitteesMonitoringGdod"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  מעקב וועדות בטיחות חודשיות
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/hazardsMonitoringGdod"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  מעקב סקר מפגעים
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/homsManagementMonitoringGdod"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  מעקב ניהול חומ"ס
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/personalProtectiveEquipmentMonitoringGdod"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  מעקב ציוד מגן אישי
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/groundingTestsGdod"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  בדיקת הארכות חשמל ומבנים
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/reviewsDocumentationGdod"
+            style={{ margin: "0px" }}
+            activeClassName="sidebar_active_link"
+          >
+            <Row style={{ direction: "rtl" }}>
+              <Col
+                xs={12}
+                md={3}
+                style={{
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <img src={table} style={{ height: "20px" }}></img>
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4
+                  style={{
+                    margin: "0px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                  }}
+                >
+                  תיעוד ביקורות
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
       </Nav>
       <div
         style={{

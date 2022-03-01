@@ -117,7 +117,7 @@ const RiskManagementMonitoringForm = ({ match }) => {
     <Card>
       <CardHeader style={{ direction: "rtl" }}>
         <CardTitle
-          tag="h4"
+          tag="h3"
           style={{ direction: "rtl", textAlign: "center", fontWeight: "bold" }}
         >
             טופס מעקב ניהול סיכונים
@@ -251,12 +251,15 @@ const RiskManagementMonitoringForm = ({ match }) => {
               </FormGroup>
             </Col>
             </Row>
+            <hr style={{borderTop: "1px solid darkGray"}}/>
             <Row>
+            <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" onClick={() => clickSubmit()}>
+              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
                 הוסף נתונים
               </Button>
             </Col>
+            <Col xs={12} md={4}></Col>
           </Row>
         </Container>
       </CardBody>

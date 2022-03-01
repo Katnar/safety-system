@@ -65,18 +65,20 @@ function SidebarAdmin() {
     <ThemeContext.Consumer>
     {({ changeTheme, theme }) =>
         theme == "white-content" ?
+        <Link to="/dashboard">
          <div className="logo">
         <img
           src={lightLogo}
           style={{ width: "100%", height: "100%" }}
         ></img>
-      </div>:
+      </div></Link>:
+      <Link to="/dashboard">
       <div className="logo">
       <img
         src={darkLogo}
         style={{ width: "100%", height: "100%" }}
       ></img>
-    </div> }
+    </div> </Link>}
     </ThemeContext.Consumer>
       <Nav style={{ textAlign: "right" }}>
         <li>
