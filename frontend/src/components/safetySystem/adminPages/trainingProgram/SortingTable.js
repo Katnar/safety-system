@@ -154,7 +154,7 @@ const SortingTable = (props) => {
                         </td>
                       );
                     }
-                    if (cell.column.id == "locatrainingSubjecttion") {
+                    if (cell.column.id == "trainingSubject") {
                       return <td>{cell.value}</td>;
                     }
                     if (cell.column.id == "presentationUpload") {
@@ -172,6 +172,7 @@ const SortingTable = (props) => {
                     if (cell.column.id == "requiredWorkersStatus") {
                       return <td>{cell.value}</td>;
                     }
+       
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
@@ -185,7 +186,7 @@ const SortingTable = (props) => {
                       }}
                     >
                       {" "}
-                      <Link to={`/trainingProgramForm/${row.original._id}`}>
+                      <Link to={`/trainingProgramGdodForm/${row.original._id}`}>
                         <button className="btn btn-success">ערוך</button>
                       </Link>
                     </div>

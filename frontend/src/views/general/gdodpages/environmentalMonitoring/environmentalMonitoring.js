@@ -31,7 +31,7 @@ function EnvironmentalMonitoring() {
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
             טבלת ניטורים סביבתיים
           </h3>
-          <EnvironmentalMonitoringTable />
+          <EnvironmentalMonitoringTable userData={user}/>
           <Link to={`/environmentalMonitoringGdodForm/0`}>
             <Button>הוסף ניטור סביבתי</Button>
           </Link>

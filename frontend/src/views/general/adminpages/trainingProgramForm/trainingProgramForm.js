@@ -230,6 +230,19 @@ const TrainingProgramForm = ({ match }) => {
                 </Input>
               </FormGroup>
             </Col>
+            <Col xs={12} md={4}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                גדוד
+              </div>
+              <FormGroup dir="rtl">
+                <Input
+                  type="text"
+                  name="gdod"
+                  value={state.gdod}
+                  onChange={handleChange}
+                ></Input>
+              </FormGroup>
+            </Col>
             </Row>
             <hr style={{borderTop: "1px solid darkGray"}}/>
             <Row>

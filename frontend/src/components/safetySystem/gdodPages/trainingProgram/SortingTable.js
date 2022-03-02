@@ -14,14 +14,17 @@ import axios from "axios";
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
+import { isAuthenticated } from "auth";
 
 const SortingTable = (props) => {
+  const user  = isAuthenticated();
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([]);
 
   function init() {
     getDetails();
+    // console.log("testfdsfdsaf")
   }
 
   const getDetails = async () => {
@@ -31,7 +34,9 @@ const SortingTable = (props) => {
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
-            console.log(props)
+            // console.log(props)
+            console.log(response.data[i].gdod)
+            console.log(props.userData.user.gdod)
               if(response.data[i].gdod == props.userData.user.gdod){
                 tempData.push(response.data[i]);
               }
@@ -161,7 +166,7 @@ const SortingTable = (props) => {
                         </td>
                       );
                     }
-                    if (cell.column.id == "locatrainingSubjecttion") {
+                    if (cell.column.id == "trainingSubject") {
                       return <td>{cell.value}</td>;
                     }
                     if (cell.column.id == "presentationUpload") {
@@ -179,6 +184,7 @@ const SortingTable = (props) => {
                     if (cell.column.id == "requiredWorkersStatus") {
                       return <td>{cell.value}</td>;
                     }
+       
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
@@ -192,7 +198,7 @@ const SortingTable = (props) => {
                       }}
                     >
                       {" "}
-                      <Link to={`/trainingProgramForm/${row.original._id}`}>
+                      <Link to={`/trainingProgramGdodForm/${row.original._id}`}>
                         <button className="btn btn-success">ערוך</button>
                       </Link>
                     </div>

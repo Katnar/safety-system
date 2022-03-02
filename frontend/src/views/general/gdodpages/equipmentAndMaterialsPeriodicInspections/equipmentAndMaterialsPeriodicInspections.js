@@ -31,7 +31,7 @@ function trainigProgram() {
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
             טבלת בדיקות תקופתיות לציוד וחומרים
           </h3>
-          <EquipmentAndMaterialsPeriodicInspectionsTable />
+          <EquipmentAndMaterialsPeriodicInspectionsTable userData={user}/>
           <Link to={`/equipmentAndMaterialsPeriodicInspectionsGdodForm/0`}>
             <Button>הוסף בדיקה</Button>
           </Link>

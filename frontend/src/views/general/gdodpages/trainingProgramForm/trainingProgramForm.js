@@ -35,7 +35,7 @@ import { isAuthenticated } from "auth";
 const TrainingProgramForm = ({ match }) => {
   const user = isAuthenticated();
   //mahzor
-  const [state, setState] = useState({});
+  const [state, setState] = useState({...state, gdod: user.user.gdod});
   //mahzor
 
   function handleChange(evt) {
@@ -210,7 +210,7 @@ const TrainingProgramForm = ({ match }) => {
                 >
                   <option value="מתוכנן">מתוכנן</option>
                   <option value="בוצע">בוצע</option>
-                  <option value="בוטל">בוטל</option>
+                  <option value="בוטל">בוטל</option> 
                 </Input>
               </FormGroup>
             </Col>

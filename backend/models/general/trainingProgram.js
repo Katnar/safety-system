@@ -10,6 +10,7 @@ const trainingProgramSchema = new mongoose.Schema({
   requiredWorkersList: { type: [String] },
   trainingStatus: { type: String },
   requiredWorkersStatus: { type: [String] },
+  gdod: {type: String},
 });
 
 const trainingProgram = mongoose.model(

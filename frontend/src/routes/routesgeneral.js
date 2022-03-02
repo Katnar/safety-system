@@ -301,7 +301,7 @@ const routesgeneral = (
     <GdodRoute path="/safetyOfficersQualificationGdodForm/:id" exact component={safetyOfficersQualificationGdodForm} />
     <GdodRoute path="/certificationManagementGdodForm/:id" exact component={certificationsManagementsGdodForm} />
     <GdodRoute path="/occupationalSupervisionGdodForm/:id" exact component={occupationalSupervisionGdodForm} />
-    <GdodRoute path="/trainingProgramGdodForm/:id" exact component={trainingProgramGdodForm} />
+    <Route path="/trainingProgramGdodForm/:id" exact component={trainingProgramGdodForm} />
     <GdodRoute path="/equipmentAndMaterialsPeriodicInspectionsGdodForm/:id" exact component={equipmentAndMaterialsPeriodicInspectionsGdodForm} />
     <GdodRoute path="/environmentalMonitoringGdodForm/:id" exact component={environmentalMonitoringGdodForm} />
 

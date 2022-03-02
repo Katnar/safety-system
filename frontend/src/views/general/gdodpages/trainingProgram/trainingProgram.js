@@ -18,7 +18,7 @@ import {
   Collapse,
 } from "reactstrap";
 
-import TrainingProgramTable from "components/safetySystem/adminPages/trainingProgram/SortingTable";
+import TrainingProgramTable from "components/safetySystem/gdodPages/trainingProgram/SortingTable";
 import { isAuthenticated } from "auth";
 
 function trainigProgram() {
@@ -31,7 +31,7 @@ function trainigProgram() {
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
             טבלת תכנית הדרכות
           </h3>
-          <TrainingProgramTable />
+          <TrainingProgramTable userData={user}/>
           <Link to={`/trainingProgramGdodForm/0`}>
             <Button>הוסף תכנית הדרכה</Button>
           </Link>
