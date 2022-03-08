@@ -5,7 +5,10 @@ import Axios from "axios";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
+// import certificationIcon from "@material-ui/icons/VerifiedUser";
+// import ScienceIcon from "@mui/icons-material/Science";
+// import certificationIcon from "@material-ui/icons/WorkspacePremium";
 import certificationsManagementsIcon from "assets/img/quality-control.png";
 // @material-ui/icons
 // import Store from "@material-ui/icons/Store";
@@ -32,7 +35,7 @@ import CardIcon from "components/Card/CardIcon.js";
 // import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 // import Certifications from "views/Certifications/Certifications.js";
-import Page from 'react-page-loading';
+import Page from "react-page-loading";
 
 // import { bugs, website, server } from "variables/general.js";
 
@@ -47,151 +50,184 @@ import { Link } from "react-router-dom";
 import { Check, Eco, People } from "@material-ui/icons";
 import moment from "moment";
 import UserCard from "components/general/DashboardCards/UserCard/UserCard";
+import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles(dashboardStyle);
 
-
 export default function Home() {
+  const [validCerts, setValidCerts] = useState("");
+  const [expiredCerts, setExpiredCerts] = useState("");
+  const [isExpiredCerts, setIsExpiredCerts] = useState("");
+  const [isAlertCerts, setIsAlertCerts] = useState("");
 
-    const [validCerts, setValidCerts] = useState("");
-    const [expiredCerts, setExpiredCerts] = useState("");
-    const [isExpiredCerts, setIsExpiredCerts] = useState("");
-    const [isAlertCerts, setIsAlertCerts] = useState("");
+  useEffect(() => {
+    Axios.get("http://localhost:8000/api/certificationsManagement").then(
+      (response) => {
+        console.log(response.data);
+        console.log(response.data[0].certificationValidity);
+        var valid = 0;
+        var expired = 0;
+        var isExpired = false;
+        var isAlert = false;
+        var today = new Date();
+        for (var i = 0; i < response.data.length; i++) {
+          if (Date.parse(response.data[i].certificationValidity) > today)
+            valid++;
+          else {
+            expired++;
+            isExpired = true;
+          }
+          if (
+            moment(response.data[i].certificationValidity).diff(
+              moment(today),
+              "days"
+            ) < 14
+          ) {
+            isAlert = true;
+          }
+        }
+        console.log(valid);
+        console.log(isAlert);
+        setIsAlertCerts(isAlert);
+        setExpiredCerts(expired);
+        setValidCerts(valid);
+        setIsExpiredCerts(isExpired);
+      }
+    );
+  });
+  const classes = useStyles();
+  return (
+    <Page loader={"resize-spin"} color={"#A9A9A9"} size={4}>
+      <div>
+        <Container>
+          <UserCard />
+        </Container>
 
-    useEffect(() => {
-        Axios.get('http://localhost:8000/api/certificationsManagement').then((response) => {
-            console.log(response.data);
-            console.log(response.data[0].certificationValidity);
-            var valid = 0;
-            var expired = 0;
-            var isExpired = false;
-            var isAlert = false;
-            var today = new Date();
-            for (var i = 0; i < response.data.length; i++) {
-                if (Date.parse(response.data[i].certificationValidity) > today)
-                    valid++;
-                else {
-                    expired++;
-                    isExpired = true;
-                }
-                if (moment(response.data[i].certificationValidity).diff(moment(today), 'days') < 14) {
-                    isAlert = true;
-                }
-            }
-            console.log(valid);
-            console.log(isAlert);
-            setIsAlertCerts(isAlert);
-            setExpiredCerts(expired);
-            setValidCerts(valid);
-            setIsExpiredCerts(isExpired);
-        })
-    });
-    const classes = useStyles();
-    return (
-        <Page loader={"resize-spin"} color={"#A9A9A9"} size={4}>
-            <div>
-                <UserCard />
-                <GridContainer>
-                    <GridItem xs={12} sm={6} md={3}>
-                        <Link to={'certificationsManagements'}>
-                            <Card style={{ color: '#000' }}>
-                                <CardHeader color="warning" stats icon>
-                                    <CardIcon color="warning">
-                                        <People />
-                                    </CardIcon>
-                                    <h3 style={{ color: "white" }} className={classes.cardCategory}>ניהול הסמכות</h3>
-                                    <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                                        {validCerts}/{validCerts + expiredCerts} <small> בתוקף</small>
-                                    </h3>
-                                </CardHeader>
-                                {isExpiredCerts ? (
+        <GridContainer>
+          <GridItem xs={12} sm={6} md={3}>
+            <Link to={"certificationsManagements"}>
+              <Card style={{ color: "#000", height: "13rem" }}>
+                <CardHeader color="warning" stats icon>
+                  <CardIcon color="warning">
+                    <certificationIcon />
+                  </CardIcon>
+                  <h3
+                    style={{ color: "white" }}
+                    className={classes.cardCategory}
+                  >
+                    ניהול הסמכות
+                  </h3>
+                  <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                    {validCerts}/{validCerts + expiredCerts}{" "}
+                    <small> בתוקף</small>
+                  </h3>
+                </CardHeader>
+                {isExpiredCerts ? (
+                  <CardFooter stats>
+                    <div className={classes.stats}>
+                      <Danger>
+                        <Warning />
+                      </Danger>
+                      <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                        שים לב! חלק מההסמכות הן פגות תוקף
+                      </a>
+                    </div>
+                  </CardFooter>
+                ) : (
+                  <CardFooter stats>
+                    <div className={classes.stats}>
+                      <Check />
+                      לא נדרשת פעולה מיידית
+                    </div>
+                  </CardFooter>
+                )}
 
-                                    <CardFooter stats>
-                                        <div className={classes.stats}>
-                                            <Danger>
-                                                <Warning />
-                                            </Danger>
-                                            <a href="#pablo" onClick={e => e.preventDefault()}>
-                                                שים לב! חלק מההסמכות הן פגות תוקף</a>
-                                        </div>
-                                    </CardFooter>
-                                ) : (<CardFooter stats>
-                                    <div className={classes.stats}>
-                                        <Check />
-                                        לא נדרשת פעולה מיידית
-                                    </div>
-                                </CardFooter>)}
-
-                                {isAlertCerts ? (
-                                    <CardFooter stats>
-                                        <div className={classes.stats}>
-                                            <Danger>
-                                                <DateRange />
-                                            </Danger>
-                                            <a href="#pablo" onClick={e => e.preventDefault()}>
-                                                הסמכות מסוימות יפוגו בשבועיים הקרובים</a>
-                                        </div>
-                                    </CardFooter>
-                                ) : (<></>)}
-                            </Card>
-                        </Link>
-                    </GridItem>
-                    <GridItem xs={12} sm={6} md={3}>
-                        <Card>
-                            <CardHeader color="success" stats icon>
-                                <CardIcon color="success">
-                                    <VerifiedUserIcon />
-                                </CardIcon>
-                                <p className={classes.cardCategory}>בדיקות ציוד תקופתיות</p>
-                                <h3 className={classes.cardTitle}>100%</h3>
-                            </CardHeader>
-                            <CardFooter stats>
-                                <div className={classes.stats}>
-                                    <Check />
-                                    לא נדרשת פעולה מיידית
-                                </div>
-                            </CardFooter>
-                        </Card>
-                    </GridItem>
-                    <GridItem xs={12} sm={6} md={3}>
-                        <Card>
-                            <CardHeader color="danger" stats icon>
-                                <CardIcon color="danger">
-                                    <VerifiedUserIcon />
-                                </CardIcon>
-                                <p className={classes.cardCategory}>ניטורים תקופתיים</p>
-                                <h3 className={classes.cardTitle}>30/30</h3>
-                            </CardHeader>
-                            <CardFooter stats>
-                                <div className={classes.stats}>
-                                    <Danger>
-                                        <DateRange />
-                                    </Danger>
-                                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                                        אישורים מסוימים יפוגו בחודשיים הקרובים</a>
-                                </div>
-                            </CardFooter>
-                        </Card>
-                    </GridItem>
-                    <GridItem xs={12} sm={6} md={3}>
-                        <Card>
-                            <CardHeader color="info" stats icon>
-                                <CardIcon color="info">
-                                    <Eco />
-                                </CardIcon>
-                                <p className={classes.cardCategory}>ניהול חומ"ס</p>
-                                <h3 className={classes.cardTitle}></h3>
-                            </CardHeader>
-                            <CardFooter stats>
-                                <div className={classes.stats}>
-                                    <Update />
-
-                                </div>
-                            </CardFooter>
-                        </Card>
-                    </GridItem>
-                </GridContainer>
-                {/*  <GridContainer>
+                {isAlertCerts ? (
+                  <CardFooter stats>
+                    <div className={classes.stats}>
+                      <Danger>
+                        <DateRange />
+                      </Danger>
+                      <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                        הסמכות מסוימות יפוגו בשבועיים הקרובים
+                      </a>
+                    </div>
+                  </CardFooter>
+                ) : (
+                  <></>
+                )}
+              </Card>
+            </Link>
+          </GridItem>
+          <GridItem xs={12} sm={6} md={3}>
+            <Card style={{ color: "#000", height: "13rem" }}>
+              <CardHeader color="success" stats icon>
+                <CardIcon color="success">
+                  <VerifiedUserIcon />
+                </CardIcon>
+                <h3 style={{ color: "white" }} className={classes.cardCategory}>
+                  פיקוח תעסוקתי
+                </h3>
+                <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                  100%
+                </h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  <Check />
+                  לא נדרשת פעולה מיידית
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={6} md={3}>
+            <Card style={{ color: "#000", height: "13rem" }}>
+              <CardHeader color="danger" stats icon>
+                <CardIcon color="danger">
+                  <VerifiedUserIcon />
+                </CardIcon>
+                <h3 style={{ color: "white" }} className={classes.cardCategory}>
+                  בדיקות תקופתיות לציוד וחומרים
+                </h3>
+                <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                  30/30
+                </h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  <Danger>
+                    <DateRange />
+                  </Danger>
+                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                    אישורים מסוימים יפוגו בחודשיים הקרובים
+                  </a>
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={6} md={3}>
+            <Card style={{ color: "#000", height: "13rem" }}>
+              <CardHeader color="info" stats icon>
+                <CardIcon color="info">
+                  <Eco />
+                </CardIcon>
+                <h3 style={{ color: "white" }} className={classes.cardCategory}>
+                  ניטורים סביבתיים
+                </h3>
+                <h3
+                  style={{ color: "white" }}
+                  className={classes.cardTitle}
+                ></h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  <Update />
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+        </GridContainer>
+        {/*  <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
                     <Card chart>
                         <CardHeader color="success">
@@ -321,7 +357,9 @@ export default function Home() {
                     </Card>
                 </GridItem>
             </GridContainer>*/}
-            </div>
-        </Page>
-    );
+      </div>
+    </Page>
+  );
 }
+
+// "@material-ui/data-grid": "*",

@@ -17,7 +17,7 @@ import {
 } from "reactstrap";
 import axios from "axios";
 import ToggleButton from "react-toggle-button";
-import history from 'history.js'
+import history from "history.js";
 import { toast } from "react-toastify";
 
 export default function SignUpForm() {
@@ -79,17 +79,17 @@ export default function SignUpForm() {
     if (data.role == "") {
       flag = false;
       ErrorReason += "הרשאה ריקה \n";
-    } else {
-      if (data.role === "0") {
-
-      }
-      if (data.role === "1") {
-        if (data.unitid === "") {
-          flag = false;
-          ErrorReason += "יחידה ריקה \n";
-        }
-      }
     }
+    //  else {
+    //   if (data.role === "0") {
+    //   }
+    //   if (data.role === "1") {
+    //     if (data.unitid === "") {
+    //       flag = false;
+    //       ErrorReason += "יחידה ריקה \n";
+    //     }
+    //   }
+    // }
 
     if (flag == true) {
       FixUser(event);
@@ -104,7 +104,6 @@ export default function SignUpForm() {
       delete data.unitid;
     }
     if (data.role === "1") {
-
     }
     if (data.role === "2") {
       delete data.unitid;
@@ -126,7 +125,7 @@ export default function SignUpForm() {
       lastname: data.lastname,
       password: data.password,
       personalnumber: data.personalnumber,
-      unitid: data.unitid,
+      // unitid: data.unitid,
       role: data.role,
       gdod: data.gdod,
     };
@@ -252,10 +251,11 @@ export default function SignUpForm() {
                       <option value="2">הרשאת חטיבה</option>
                       <option value="3">הרשאת אוגדה</option>
                       <option value="4">הרשאת פיקוד</option>
-                    </Input>.
+                    </Input>
+                    .
                   </FormGroup>
 
-                  {data.role === "0" ? (
+                  {/* {data.role === "0" ? (
                     <div>מנהל מערכת</div>
                   ) : data.role === "1" ? (
                     <>
@@ -276,7 +276,7 @@ export default function SignUpForm() {
                         </Input>
                       </FormGroup>
                     </>
-                  ) : null}
+                  ) : null} */}
                   <div className="text-center">
                     <button onClick={clickSubmit} className="btn btn-primary">
                       הרשם

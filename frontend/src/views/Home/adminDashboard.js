@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
@@ -19,21 +19,20 @@ import {
   Col,
   Collapse,
 } from "reactstrap";
-import axios from 'axios';
+import axios from "axios";
 
-import Home from "components/Home/Home"
+import Home from "components/Home/Home";
 
 import plus from "assets/img/add.png";
 
 function UnitDashboard({ match }) {
-
   useEffect(() => {
     // init();
-  }, [])
+  }, []);
 
   return (
     <>
-        <Home/>
+      <Home />
     </>
   );
 }
