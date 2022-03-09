@@ -6,7 +6,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 // const exphbs = require("express-handlebars");
 // const nodemailer = require("nodemailer");
-// const path = require("path");
+const path = require("path");
+const fileRoutes = require('./routes/file-upload-routes');
 
 require("dotenv").config();
 
@@ -27,6 +28,8 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/api', fileRoutes.routes);
 
 // Configure Mongo
 const db = "mongodb://localhost/SafetySystem";

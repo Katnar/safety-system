@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
-import {singleFileUpload} from '../../../../data/api';
 // reactstrap components
 import {
   Button,
@@ -32,7 +31,7 @@ import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 import SettingModal from "../../../../components/general/modal/SettingModal";
 
-const CertificationManagementDataComponent = ({ match }) => {
+const CertificationManagementDataComponentTest = ({ match }) => {
   //mahzor
   const [data, setData] = useState({});
   //mahzor
@@ -56,7 +55,7 @@ const CertificationManagementDataComponent = ({ match }) => {
       });
   };
 
-  const clickSubmit = async (event) => {
+  const clickSubmit = (event) => {
     if (CheckFormData()) {
       SubmitData();
       toast.success("הטופס עודכן בהצלחה");
@@ -77,13 +76,6 @@ const CertificationManagementDataComponent = ({ match }) => {
     return flag;
   }
 
-  const UploadFile = async (id) =>{
-    const formData = new FormData();
-    const collec = "certificationsManagement";
-    formData.append('file', singleFile);
-    await singleFileUpload(formData, collec, id);
-    console.log(singleFile);
-  }
   async function SubmitData() {
     let tempData;
     if (match.params.id == "0") {
@@ -104,8 +96,6 @@ const CertificationManagementDataComponent = ({ match }) => {
       tempData = result.data;
     }
 
-    UploadFile(tempData._id);
-
     // console.log("post")
     // let result = await axios.post(
     //   "http://localhost:8000/api/certificationsManagement",
@@ -125,16 +115,11 @@ const CertificationManagementDataComponent = ({ match }) => {
     console.log(match.params);
   }, []);
 
-  const[singleFile,setSingleFile] = useState('');
-  const SingleFileChange = (e) => {
-    setSingleFile(e.target.files[0]);
-  }
-
   return (
     <Card>
       <CardHeader style={{ direction: "rtl" }}>
         <CardTitle
-          tag="h3"
+          tag="h4"
           style={{ direction: "rtl", textAlign: "center", fontWeight: "bold" }}
         >
           טופס ניהול הסמכות
@@ -143,7 +128,15 @@ const CertificationManagementDataComponent = ({ match }) => {
       </CardHeader>
       <CardBody style={{ direction: "rtl" }}>
         <Container>
-
+          <h5
+            style={{
+              textAlign: "right",
+              paddingTop: "10px",
+              fontWeight: "bold",
+            }}
+          >
+            פרטים כלליים
+          </h5>
           <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
@@ -244,27 +237,24 @@ const CertificationManagementDataComponent = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מסמך
               </div>
-              <input
-                type="file"
-                name="documentUpload"
-                value={data.documentUpload}
-                onChange={(e) => SingleFileChange(e)}
-              ></input>
+              <FormGroup dir="rtl">
+                <input
+                  type="file"
+                  name="documentUpload"
+                  value={data.documentUpload}
+                  onChange={handleChange}
+                ></input>
+              </FormGroup>
             </Col>
-          </Row>
-          <hr style={{ borderTop: "1px solid darkGray" }} />
-          <Row>
-            <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{ width: "100%" }} onClick={() => clickSubmit()}>
+              <Button type="primary" onClick={() => clickSubmit()}>
                 הוסף נתונים
               </Button>
             </Col>
-            <Col xs={12} md={4}></Col>
           </Row>
         </Container>
       </CardBody>
     </Card>
   );
 };
-export default withRouter(CertificationManagementDataComponent);
+export default CertificationManagementDataComponentTest;

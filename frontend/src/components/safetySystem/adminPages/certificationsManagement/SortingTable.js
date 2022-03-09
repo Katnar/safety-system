@@ -14,6 +14,7 @@ import Button from "reactstrap/lib/Button";
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
+import {FaFileDownload} from 'react-icons/fa';
 
 const SortingTable = (props) => {
   const columns = useMemo(() => COLUMNS, []);
@@ -162,7 +163,7 @@ const SortingTable = (props) => {
                       );
                     }
                     if (cell.column.id == "documentUpload") {
-                      return <td>{cell.value}</td>;
+                      return <td><FaFileDownload/></td>;
                     }
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
