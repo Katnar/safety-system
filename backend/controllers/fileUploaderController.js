@@ -3,24 +3,25 @@ const SingleFile = require('../models/singlefile');
 const MultipleFile = require('../models/multiplefile');
 
 //moves the $file to $dir2
-var moveFile = (file, dir2)=>{
+var moveFile = (file, dir2, newName) => {
     //include the fs, path modules
     var fs = require('fs');
     var path = require('path');
-  
+
     //gets file name and adds it to dir2
-    var f = path.basename(file);
+    var f = newName + path.extname(file);
     var dest = path.resolve(dir2, f);
-  
-    fs.rename(file, dest, (err)=>{
-      if(err) throw err;
-      else console.log('Successfully moved');
+
+    fs.rename(file, dest, (err) => {
+        if (err) throw err;
+        else console.log('Successfully moved');
     });
-  };
-  
+};
+
 const singleFileUpload = async (req, res, next) => {
-    console.log(req.body);
-    try{
+    //console.log(req.body);
+    //const filePath = './uploads/' + req.body.collection + '/' + req.body.id + path.extname(req.file.path);
+    try {
         const file = new SingleFile({
             fileName: req.file.originalname,
             filePath: req.file.path,
@@ -30,14 +31,14 @@ const singleFileUpload = async (req, res, next) => {
             fileSize: fileSizeFormatter(req.file.size, 2) // 0.00
         });
         await file.save();
-        moveFile('./'+file.filePath, './uploads/'+req.body.collection);
+        moveFile('./' + file.filePath, './uploads/' + req.body.collection, req.body.id);
         res.status(201).send('File Uploaded Successfully');
-    }catch(error) {
+    } catch (error) {
         res.status(400).send(error.message);
     }
 }
 const multipleFileUpload = async (req, res, next) => {
-    try{
+    try {
         let filesArray = [];
         req.files.forEach(element => {
             const file = {
@@ -55,30 +56,31 @@ const multipleFileUpload = async (req, res, next) => {
         });
         await multipleFiles.save();
         res.status(201).send('Files Uploaded Successfully');
-    }catch(error) {
+    } catch (error) {
         res.status(400).send(error.message);
     }
 }
 
 const getallSingleFiles = async (req, res, next) => {
-    try{
+    try {
         const files = await SingleFile.find();
         res.status(200).send(files);
-    }catch(error) {
+    } catch (error) {
         res.status(400).send(error.message);
     }
 }
+
 const getallMultipleFiles = async (req, res, next) => {
-    try{
+    try {
         const files = await MultipleFile.find();
         res.status(200).send(files);
-    }catch(error) {
+    } catch (error) {
         res.status(400).send(error.message);
     }
 }
 
 const fileSizeFormatter = (bytes, decimal) => {
-    if(bytes === 0){
+    if (bytes === 0) {
         return '0 Bytes';
     }
     const dm = decimal || 2;
@@ -88,9 +90,41 @@ const fileSizeFormatter = (bytes, decimal) => {
 
 }
 
+var findType = (col, id) => {
+    const folder = 'uploads/'+col;
+    const fs = require('fs');
+    var path = require('path');
+    fs.readdirSync(folder).forEach(file => {
+        if(file.startsWith(id)){
+            return(path.extname(file));
+        }
+    });
+}
+
+const downloadFile = async (req, res, next) => {
+    const col = req.query.collec;
+    const id = req.query.id;
+    const folder = 'uploads/'+col;
+    const fs = require('fs');
+    var path = require('path');
+    var ext;
+    fs.readdirSync(folder).forEach(file => {
+        if(file.startsWith(id)){
+            ext = path.extname(file);
+        }
+    });
+    try {
+        res.download("uploads/" + col + '/' + id + ext);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
 module.exports = {
     singleFileUpload,
     multipleFileUpload,
     getallSingleFiles,
-    getallMultipleFiles
+    getallMultipleFiles,
+    downloadFile,
 }

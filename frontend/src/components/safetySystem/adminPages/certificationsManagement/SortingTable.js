@@ -162,8 +162,8 @@ const SortingTable = (props) => {
                         </td>
                       );
                     }
-                    if (cell.column.id == "documentUpload") {
-                      return <td><FaFileDownload/></td>;
+                    if (cell.column.id == "_id") {
+                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=certificationsManagement&id="+cell.value.toString()} target="_blank"><FaFileDownload/></a></td>;
                     }
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
