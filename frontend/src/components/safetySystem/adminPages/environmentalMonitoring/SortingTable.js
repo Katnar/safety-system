@@ -202,7 +202,7 @@ const SortingTable = (props) => {
                     >
                       {" "}
                       <Link
-                        to={`/certificationManagementForm/${row.original._id}`}
+                        to={`/environmentalMonitoringForm/${row.original._id}`}
                       >
                         <button className="btn btn-success">ערוך</button>
                       </Link>
