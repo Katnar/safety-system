@@ -17,7 +17,7 @@ import deletepic from "assets/img/delete.png";
 import { isAuthenticated } from "auth";
 
 const SortingTable = (props) => {
-  const user  = isAuthenticated();
+  const user = isAuthenticated();
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([]);
@@ -35,11 +35,11 @@ const SortingTable = (props) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
             // console.log(props)
-            console.log(response.data[i].gdod)
-            console.log(props.userData.user.gdod)
-              if(response.data[i].gdod == props.userData.user.gdod){
-                tempData.push(response.data[i]);
-              }
+            console.log(response.data[i].gdod);
+            console.log(props.userData.user.gdod);
+            if (response.data[i].gdod == props.userData.user.gdod) {
+              tempData.push(response.data[i]);
+            }
           }
           setData(tempData);
         })
@@ -145,7 +145,7 @@ const SortingTable = (props) => {
                   </th>
                 ))}
                 <th>ערוך</th>
-                <th>מחק</th>
+                {/* <th>מחק</th> */}
               </tr>
             ))}
           </thead>
@@ -184,7 +184,7 @@ const SortingTable = (props) => {
                     if (cell.column.id == "requiredWorkersStatus") {
                       return <td>{cell.value}</td>;
                     }
-       
+
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
@@ -203,7 +203,7 @@ const SortingTable = (props) => {
                       </Link>
                     </div>
                   </td>
-                  <td role="cell">
+                  {/* <td role="cell">
                     {" "}
                     <div
                       style={{
@@ -220,7 +220,7 @@ const SortingTable = (props) => {
                         מחק
                       </button>
                     </div>
-                  </td>
+                  </td> */}
                 </tr>
               );
             })}

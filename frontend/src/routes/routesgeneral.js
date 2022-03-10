@@ -82,6 +82,14 @@ import occupationalSupervisionGdod from "views/general/gdodpages/occupationalSup
 import trainingProgramGdod from "views/general/gdodpages/trainingProgram/trainingProgram";
 import equipmentAndMaterialsPeriodicInspectionsGdod from "views/general/gdodpages/equipmentAndMaterialsPeriodicInspections/equipmentAndMaterialsPeriodicInspections";
 import environmentalMonitoringGdod from "views/general/gdodpages/environmentalMonitoring/environmentalMonitoring";
+import machinesAndEquipmentPeriodicInspectionsGdod from "views/general/gdodpages/machinesAndEquipmentPeriodicInspections/machinesAndEquipmentPeriodicInspections";
+import riskManagementMonitoringGdod from "views/general/gdodpages/riskManagementMonitoring/riskManagementMonitoring";
+import monthlySafetyCommitteesMonitoringGdod from "views/general/gdodpages/monthlySafetyCommitteesMonitoring/monthlySafetyCommitteesMonitoring";
+import hazardsMonitoringGdod from "views/general/gdodpages/hazardsMonitoring/hazardsMonitoring";
+import homsManagementMonitoringGdod from "views/general/gdodpages/homsManagementMonitoring/homsManagementMonitoring";
+import personalProtectiveEquipmentMonitoringGdod from "views/general/gdodpages/personalProtectiveEquipmentMonitoring/personalProtectiveEquipmentMonitoring";
+import groundingTestsGdod from "views/general/gdodpages/groundingTests/groundingTests";
+import reviewsDocumentationGdod from "views/general/gdodpages/reviewsDocumentation/reviewsDocumentation";
 
 import UnitIdGdodForm from "views/general/gdodpages/unitIdForm/unitIdDataComponent";
 import safetyOfficersQualificationGdodForm from "views/general/gdodpages/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
@@ -90,6 +98,14 @@ import occupationalSupervisionGdodForm from "views/general/gdodpages/occupationa
 import trainingProgramGdodForm from "views/general/gdodpages/trainingProgramForm/trainingProgramForm";
 import equipmentAndMaterialsPeriodicInspectionsGdodForm from "views/general/gdodpages/equipmentAndMaterialsPeriodicInspectionsForm/equipmentAndMaterialsPeriodicInspectionsForm";
 import environmentalMonitoringGdodForm from "views/general/gdodpages/environmentalMonitoringForm/environmentalMonitoringForm";
+import machinesAndEquipmentPeriodicInspectionsGdodForm from "views/general/gdodpages/machinesAndEquipmentPeriodicInspectionsForm/machinesAndEquipmentPeriodicInspectionsForm";
+import riskManagementMonitoringGdodForm from "views/general/gdodpages/riskManagementMonitoringForm/riskManagementMonitoringForm";
+import monthlySafetyCommitteesMonitoringGdodForm from "views/general/gdodpages/monthlySafetyCommitteesMonitoringForm/monthlySafetyCommitteesMonitoringForm";
+import hazardsMonitoringGdodForm from "views/general/gdodpages/hazardsMonitoringForm/hazardsMonitoringForm";
+import homsManagementMonitoringGdodForm from "views/general/gdodpages/homsManagementMonitoringForm/homsManagementMonitoringForm";
+import personalProtectiveEquipmentMonitoringGdodForm from "views/general/gdodpages/personalProtectiveEquipmentMonitoringForm/personalProtectiveEquipmentMonitoringForm";
+import groundingTestsGdodForm from "views/general/gdodpages/groundingTestsForm/groundingTestsForm";
+import reviewsDocumentationGdodForm from "views/general/gdodpages/reviewsDocumentationForm/reviewsDocumentationForm";
 
 const routesgeneral = (
   <>
@@ -288,22 +304,150 @@ const routesgeneral = (
     {/*///////////////////////////////////////////Gdod Routes/////////////////////////////////////////////////*/}
 
     <GdodRoute path="/UnitIdGdod" exact component={unitIdGdod} />
-    <GdodRoute path="/safetyOfficersQualificationGdod" exact component={safetyOfficersQualificationGdod} />
-    <GdodRoute path="/certificationManagementGdod" exact component={certificationManagementGdod} />
-    <GdodRoute path="/occupationalSupervisionGdod" exact component={occupationalSupervisionGdod} />
-    <GdodRoute path="/trainingProgramGdod" exact component={trainingProgramGdod} />
-    <GdodRoute path="/equipmentAndMaterialsPeriodicInspectionsGdod" exact component={equipmentAndMaterialsPeriodicInspectionsGdod} />
-    <GdodRoute path="/environmentalMonitoringGdod" exact component={environmentalMonitoringGdod} />
-    
+    <GdodRoute
+      path="/safetyOfficersQualificationGdod"
+      exact
+      component={safetyOfficersQualificationGdod}
+    />
+    <GdodRoute
+      path="/certificationManagementGdod"
+      exact
+      component={certificationManagementGdod}
+    />
+    <GdodRoute
+      path="/occupationalSupervisionGdod"
+      exact
+      component={occupationalSupervisionGdod}
+    />
+    <GdodRoute
+      path="/trainingProgramGdod"
+      exact
+      component={trainingProgramGdod}
+    />
+    <GdodRoute
+      path="/equipmentAndMaterialsPeriodicInspectionsGdod"
+      exact
+      component={equipmentAndMaterialsPeriodicInspectionsGdod}
+    />
+    <GdodRoute
+      path="/environmentalMonitoringGdod"
+      exact
+      component={environmentalMonitoringGdod}
+    />
+    <GdodRoute
+      path="/machinesAndEquipmentPeriodicInspectionsGdod"
+      exact
+      component={machinesAndEquipmentPeriodicInspectionsGdod}
+    />
+    <GdodRoute
+      path="/riskManagementMonitoringGdod"
+      exact
+      component={riskManagementMonitoringGdod}
+    />
+    <GdodRoute
+      path="/monthlySafetyCommitteesMonitoringGdod"
+      exact
+      component={monthlySafetyCommitteesMonitoringGdod}
+    />
+    <GdodRoute
+      path="/hazardsMonitoringGdod"
+      exact
+      component={hazardsMonitoringGdod}
+    />
+    <GdodRoute
+      path="/homsManagementMonitoringGdod"
+      exact
+      component={homsManagementMonitoringGdod}
+    />
+    <GdodRoute
+      path="/personalProtectiveEquipmentMonitoringGdod"
+      exact
+      component={personalProtectiveEquipmentMonitoringGdod}
+    />
+    <GdodRoute
+      path="/groundingTestsGdod"
+      exact
+      component={groundingTestsGdod}
+    />
+    <GdodRoute
+      path="/reviewsDocumentationGdod"
+      exact
+      component={reviewsDocumentationGdod}
+    />
+
     {/*///////////////////////////////////////////Gdod Forms/////////////////////////////////////////////////*/}
 
     <GdodRoute path="/UnitIdGdodForm/:id" exact component={UnitIdGdodForm} />
-    <GdodRoute path="/safetyOfficersQualificationGdodForm/:id" exact component={safetyOfficersQualificationGdodForm} />
-    <GdodRoute path="/certificationManagementGdodForm/:id" exact component={certificationsManagementsGdodForm} />
-    <GdodRoute path="/occupationalSupervisionGdodForm/:id" exact component={occupationalSupervisionGdodForm} />
-    <Route path="/trainingProgramGdodForm/:id" exact component={trainingProgramGdodForm} />
-    <GdodRoute path="/equipmentAndMaterialsPeriodicInspectionsGdodForm/:id" exact component={equipmentAndMaterialsPeriodicInspectionsGdodForm} />
-    <GdodRoute path="/environmentalMonitoringGdodForm/:id" exact component={environmentalMonitoringGdodForm} />
+    <GdodRoute
+      path="/safetyOfficersQualificationGdodForm/:id"
+      exact
+      component={safetyOfficersQualificationGdodForm}
+    />
+    <GdodRoute
+      path="/certificationManagementGdodForm/:id"
+      exact
+      component={certificationsManagementsGdodForm}
+    />
+    <GdodRoute
+      path="/occupationalSupervisionGdodForm/:id"
+      exact
+      component={occupationalSupervisionGdodForm}
+    />
+    <Route
+      path="/trainingProgramGdodForm/:id"
+      exact
+      component={trainingProgramGdodForm}
+    />
+    <GdodRoute
+      path="/equipmentAndMaterialsPeriodicInspectionsGdodForm/:id"
+      exact
+      component={equipmentAndMaterialsPeriodicInspectionsGdodForm}
+    />
+    <GdodRoute
+      path="/environmentalMonitoringGdodForm/:id"
+      exact
+      component={environmentalMonitoringGdodForm}
+    />
+    <GdodRoute
+      path="/machinesAndEquipmentPeriodicInspectionsGdodForm/:id"
+      exact
+      component={machinesAndEquipmentPeriodicInspectionsGdodForm}
+    />
+    <GdodRoute
+      path="/riskManagementMonitoringGdodForm/:id"
+      exact
+      component={riskManagementMonitoringGdodForm}
+    />
+    <GdodRoute
+      path="/monthlySafetyCommitteesMonitoringGdodForm/:id"
+      exact
+      component={monthlySafetyCommitteesMonitoringGdodForm}
+    />
+    <GdodRoute
+      path="/hazardsMonitoringGdodForm/:id"
+      exact
+      component={hazardsMonitoringGdodForm}
+    />
+    <GdodRoute
+      path="/homsManagementMonitoringGdodForm/:id"
+      exact
+      component={homsManagementMonitoringGdodForm}
+    />
+    <GdodRoute
+      path="/personalProtectiveEquipmentMonitoringGdodForm/:id"
+      exact
+      component={personalProtectiveEquipmentMonitoringGdodForm}
+    />
+    <GdodRoute
+      path="/groundingTestsGdodForm/:id"
+      exact
+      component={groundingTestsGdodForm}
+    />
+    <GdodRoute
+      path="/reviewsDocumentationGdodForm/:id"
+      exact
+      component={reviewsDocumentationGdodForm}
+    />
 
     {/*////////////////////////////////////////Unit User//////////////////////////////////////////////////*/}
     <UnitRoute path="/unitdashboard/:unitid" exact component={UnitDashboard} />

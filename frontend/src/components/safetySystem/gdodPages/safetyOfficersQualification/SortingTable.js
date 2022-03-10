@@ -27,14 +27,14 @@ const SortingTable = (props) => {
   const getqualificationsDetails = async () => {
     try {
       await axios
-      .get(`http://localhost:8000/api/safetyOfficersQualification`)
+        .get(`http://localhost:8000/api/safetyOfficersQualification`)
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
-            console.log(props)
-              if(response.data[i].gdod == props.userData.user.gdod){
-                tempData.push(response.data[i]);
-              }
+            console.log(props);
+            if (response.data[i].gdod == props.userData.user.gdod) {
+              tempData.push(response.data[i]);
+            }
           }
           setData(tempData);
         })
@@ -46,9 +46,7 @@ const SortingTable = (props) => {
 
   const safetyOfficerDelete = (id) => {
     axios
-      .delete(
-        `http://localhost:8000/api/safetyOfficersQualification/${id}`
-      )
+      .delete(`http://localhost:8000/api/safetyOfficersQualification/${id}`)
       .then((response) => {
         loadSafetyOfficers();
       })
@@ -131,7 +129,7 @@ const SortingTable = (props) => {
                   </th>
                 ))}
                 <th>ערוך</th>
-                <th>מחק</th>
+                {/* <th>מחק</th> */}
               </tr>
             ))}
           </thead>
@@ -184,7 +182,7 @@ const SortingTable = (props) => {
                       </Link>
                     </div>
                   </td>
-                  <td role="cell">
+                  {/* <td role="cell">
                     {" "}
                     <div
                       style={{
@@ -201,7 +199,7 @@ const SortingTable = (props) => {
                         מחק
                       </button>
                     </div>
-                  </td>
+                  </td> */}
                 </tr>
               );
             })}

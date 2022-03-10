@@ -18,7 +18,7 @@ import {
   Collapse,
 } from "reactstrap";
 
-import EnvironmentalMonitoringTable from "components/safetySystem/adminPages/environmentalMonitoring/SortingTable";
+import EnvironmentalMonitoringTable from "components/safetySystem/gdodPages/environmentalMonitoring/SortingTable";
 import { isAuthenticated } from "auth";
 
 function EnvironmentalMonitoring() {
@@ -26,17 +26,19 @@ function EnvironmentalMonitoring() {
   return (
     <>
       {/* <Container> */}
-      {user ? <Card>
-        <CardBody>
-          <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
-            טבלת ניטורים סביבתיים
-          </h3>
-          <EnvironmentalMonitoringTable userData={user}/>
-          <Link to={`/environmentalMonitoringGdodForm/0`}>
-            <Button>הוסף ניטור סביבתי</Button>
-          </Link>
-        </CardBody>
-      </Card> : null}
+      {user ? (
+        <Card>
+          <CardBody>
+            <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
+              טבלת ניטורים סביבתיים
+            </h3>
+            <EnvironmentalMonitoringTable userData={user} />
+            <Link to={`/environmentalMonitoringGdodForm/0`}>
+              <Button>הוסף ניטור סביבתי</Button>
+            </Link>
+          </CardBody>
+        </Card>
+      ) : null}
 
       {/* </Container> */}
     </>

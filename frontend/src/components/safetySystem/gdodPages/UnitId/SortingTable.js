@@ -31,10 +31,10 @@ const SortingTable = (props) => {
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
-            console.log(props)
-              if(response.data[i].gdod == props.userData.user.gdod){
-                tempData.push(response.data[i]);
-              }
+            console.log(props);
+            if (response.data[i].gdod == props.userData.user.gdod) {
+              tempData.push(response.data[i]);
+            }
           }
           setData(tempData);
         })
@@ -43,7 +43,6 @@ const SortingTable = (props) => {
         });
     } catch {}
   };
-
 
   const UnitDelete = (UnitIdId) => {
     axios
@@ -79,7 +78,6 @@ const SortingTable = (props) => {
   };
 
   useEffect(() => {
-
     init();
     setPageSize(5);
   }, []);
@@ -142,7 +140,7 @@ const SortingTable = (props) => {
                   </th>
                 ))}
                 <th>ערוך</th>
-                <th>מחק</th>
+                {/* <th>מחק</th> */}
               </tr>
             ))}
           </thead>
@@ -173,7 +171,7 @@ const SortingTable = (props) => {
                     if (cell.column.id == "teneStructureTree") {
                       return <td>{cell.value}</td>;
                     }
-                    console.log(row.original.userData._id)
+                    console.log(row.original.userData._id);
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
@@ -192,7 +190,7 @@ const SortingTable = (props) => {
                       </Link>
                     </div>
                   </td>
-                  <td role="cell">
+                  {/* <td role="cell">
                     {" "}
                     <div
                       style={{
@@ -209,7 +207,7 @@ const SortingTable = (props) => {
                         מחק
                       </button>
                     </div>
-                  </td>
+                  </td> */}
                 </tr>
               );
             })}

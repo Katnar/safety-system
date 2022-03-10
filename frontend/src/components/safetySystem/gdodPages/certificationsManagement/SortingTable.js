@@ -31,10 +31,10 @@ const SortingTable = (props) => {
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
-            console.log(props)
-              if(response.data[i].gdod == props.userData.user.gdod){
-                tempData.push(response.data[i]);
-              }
+            console.log(props);
+            if (response.data[i].gdod == props.userData.user.gdod) {
+              tempData.push(response.data[i]);
+            }
           }
           setData(tempData);
         })
@@ -129,7 +129,7 @@ const SortingTable = (props) => {
                   </th>
                 ))}
                 <th>ערוך</th>
-                <th>מחק</th>
+                {/* <th>מחק</th> */}
               </tr>
             ))}
           </thead>
@@ -191,7 +191,7 @@ const SortingTable = (props) => {
                       </Link>
                     </div>
                   </td>
-                  <td role="cell">
+                  {/* <td role="cell">
                     {" "}
                     <div
                       style={{
@@ -208,7 +208,7 @@ const SortingTable = (props) => {
                         מחק
                       </button>
                     </div>
-                  </td>
+                  </td> */}
                 </tr>
               );
             })}

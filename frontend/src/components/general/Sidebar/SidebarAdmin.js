@@ -30,6 +30,8 @@ import setting from "assets/img/setting.png";
 import { signout } from "auth/index";
 import history from "../../../history";
 
+import { Icon } from "@iconify/react";
+
 import {
   Button,
   Card,
@@ -62,24 +64,29 @@ function SidebarAdmin() {
 
   return (
     <>
-    <ThemeContext.Consumer>
-    {({ changeTheme, theme }) =>
-        theme == "white-content" ?
-        <Link to="/adminDashboard">
-         <div className="logo">
-        <img
-          src={lightLogo}
-          style={{ width: "100%", height: "100%" }}
-        ></img>
-      </div></Link>:
-      <Link to="/adminDashboard">
-      <div className="logo">
-      <img
-        src={darkLogo}
-        style={{ width: "100%", height: "100%" }}
-      ></img>
-    </div> </Link>}
-    </ThemeContext.Consumer>
+      <ThemeContext.Consumer>
+        {({ changeTheme, theme }) =>
+          theme == "white-content" ? (
+            <Link to="/adminDashboard">
+              <div className="logo">
+                <img
+                  src={lightLogo}
+                  style={{ width: "100%", height: "100%" }}
+                ></img>
+              </div>
+            </Link>
+          ) : (
+            <Link to="/adminDashboard">
+              <div className="logo">
+                <img
+                  src={darkLogo}
+                  style={{ width: "100%", height: "100%" }}
+                ></img>
+              </div>{" "}
+            </Link>
+          )
+        }
+      </ThemeContext.Consumer>
       <Nav style={{ textAlign: "right" }}>
         <li>
           <NavLink

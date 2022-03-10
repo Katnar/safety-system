@@ -18,7 +18,7 @@ import {
   Collapse,
 } from "reactstrap";
 
-import EquipmentAndMaterialsPeriodicInspectionsTable from "components/safetySystem/adminPages/equipmentAndMaterialsPeriodicInspections/SortingTable";
+import EquipmentAndMaterialsPeriodicInspectionsTable from "components/safetySystem/gdodPages/equipmentAndMaterialsPeriodicInspections/SortingTable";
 import { isAuthenticated } from "auth";
 
 function trainigProgram() {
@@ -26,17 +26,19 @@ function trainigProgram() {
   return (
     <>
       {/* <Container> */}
-      {user ? <Card>
-        <CardBody>
-          <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
-            טבלת בדיקות תקופתיות לציוד וחומרים
-          </h3>
-          <EquipmentAndMaterialsPeriodicInspectionsTable userData={user}/>
-          <Link to={`/equipmentAndMaterialsPeriodicInspectionsGdodForm/0`}>
-            <Button>הוסף בדיקה</Button>
-          </Link>
-        </CardBody>
-      </Card> : null}
+      {user ? (
+        <Card>
+          <CardBody>
+            <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
+              טבלת בדיקות תקופתיות לציוד וחומרים
+            </h3>
+            <EquipmentAndMaterialsPeriodicInspectionsTable userData={user} />
+            <Link to={`/equipmentAndMaterialsPeriodicInspectionsGdodForm/0`}>
+              <Button>הוסף בדיקה</Button>
+            </Link>
+          </CardBody>
+        </Card>
+      ) : null}
 
       {/* </Container> */}
     </>

@@ -9,6 +9,7 @@ const equipmentAndMaterialsPeriodicInspectionsSchema = new mongoose.Schema({
   testDate: { type: Date },
   nextTestDate: { type: Date },
   documentUpload: { type: String },
+  gdod: { type: String },
 });
 
 const equipmentAndMaterialsPeriodicInspections = mongoose.model(
