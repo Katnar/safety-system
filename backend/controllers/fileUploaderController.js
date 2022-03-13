@@ -12,6 +12,9 @@ var moveFile = (file, dir2, newName) => {
     var f = newName + path.extname(file);
     var dest = path.resolve(dir2, f);
 
+    if(!fs.existsSync(dir2))
+    fs.mkdirSync(dir2);
+
     fs.rename(file, dest, (err) => {
         if (err) throw err;
         else console.log('Successfully moved');
@@ -88,17 +91,6 @@ const fileSizeFormatter = (bytes, decimal) => {
     const index = Math.floor(Math.log(bytes) / Math.log(1000));
     return parseFloat((bytes / Math.pow(1000, index)).toFixed(dm)) + ' ' + sizes[index];
 
-}
-
-var findType = (col, id) => {
-    const folder = 'uploads/'+col;
-    const fs = require('fs');
-    var path = require('path');
-    fs.readdirSync(folder).forEach(file => {
-        if(file.startsWith(id)){
-            return(path.extname(file));
-        }
-    });
 }
 
 const downloadFile = async (req, res, next) => {
