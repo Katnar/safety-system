@@ -30,7 +30,6 @@ import setting from "assets/img/setting.png";
 import { signout } from "auth/index";
 import history from "../../../history";
 
-import { Icon } from "@iconify/react";
 
 import {
   Button,

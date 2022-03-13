@@ -21,7 +21,7 @@ import {
 import axios from "axios";
 import history from "history.js";
 import { toast } from "react-toastify";
-import logo from "assets/img/whiteLogo.jpg";
+import logo from "assets/img/wideLogo.png";
 
 function Signin() {
   const [values, setValues] = useState({

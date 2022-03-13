@@ -19,6 +19,7 @@ import axios from "axios";
 import ToggleButton from "react-toggle-button";
 import history from "history.js";
 import { toast } from "react-toastify";
+import logo from "assets/img/wideLogo.png";
 
 export default function SignUpForm() {
   const [data, setData] = useState({
@@ -35,12 +36,24 @@ export default function SignUpForm() {
   });
 
   const [units, setUnits] = useState([]);
+  const [gdods, setGdods] = useState([]);
 
   const loadUnits = () => {
     axios
       .get("http://localhost:8000/api/unit")
       .then((response) => {
         setUnits(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -181,6 +194,7 @@ export default function SignUpForm() {
 
   useEffect(() => {
     loadUnits();
+    loadGdods();
   }, []);
 
   useEffect(() => {
@@ -194,6 +208,9 @@ export default function SignUpForm() {
           <Col lg="5" md="7">
             <Card className="shadow border-0">
               <CardBody className="px-lg-5 py-lg-5">
+              <div className="text-center text-muted mb-4">
+                  <img src={logo}></img>
+                </div>
                 <div className="text-center text-muted mb-4">
                   <small>הרשמה</small>
                 </div>
@@ -232,10 +249,15 @@ export default function SignUpForm() {
                     <Input
                       placeholder="גדוד"
                       name="gdod"
-                      type="string"
+                      type="select"
                       value={data.gdod}
                       onChange={handleChange}
-                    />
+                    >
+                    <option value={""}>גדוד</option>
+                            {gdods.map((gdod, index) => (
+                              <option value={gdod._id}>{gdod.name}</option>
+                            ))}
+                    </Input> 
                   </FormGroup>
 
                   <FormGroup dir="rtl">
