@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
+import {singleFileUpload} from '../../../../data/api';
 // reactstrap components
 import {
   Button,
@@ -55,7 +56,7 @@ const CertificationManagementDataComponent = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
+  const clickSubmit = async (event) => {
     if (CheckFormData()) {
       SubmitData();
       toast.success("הטופס עודכן בהצלחה");
@@ -76,6 +77,13 @@ const CertificationManagementDataComponent = ({ match }) => {
     return flag;
   }
 
+  const UploadFile = async (id) =>{
+    const formData = new FormData();
+    const collec = "certificationsManagement";
+    formData.append('file', singleFile);
+    await singleFileUpload(formData, collec, id);
+    console.log(singleFile);
+  }
   async function SubmitData() {
     let tempData;
     if (match.params.id == "0") {
@@ -96,6 +104,8 @@ const CertificationManagementDataComponent = ({ match }) => {
       tempData = result.data;
     }
 
+    await UploadFile(tempData._id);
+
     // console.log("post")
     // let result = await axios.post(
     //   "http://localhost:8000/api/certificationsManagement",
@@ -115,6 +125,11 @@ const CertificationManagementDataComponent = ({ match }) => {
     console.log(match.params);
   }, []);
 
+  const[singleFile,setSingleFile] = useState('');
+  const SingleFileChange = (e) => {
+    setSingleFile(e.target.files[0]);
+  }
+
   return (
     <Card>
       <CardHeader style={{ direction: "rtl" }}>
@@ -128,7 +143,7 @@ const CertificationManagementDataComponent = ({ match }) => {
       </CardHeader>
       <CardBody style={{ direction: "rtl" }}>
         <Container>
-        
+
           <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
@@ -229,21 +244,19 @@ const CertificationManagementDataComponent = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מסמך
               </div>
-              <FormGroup dir="rtl">
-                <Input
-                  type="text"
-                  name="documentUpload"
-                  value={data.documentUpload}
-                  onChange={handleChange}
-                ></Input>
-              </FormGroup>
+              <input
+                type="file"
+                name="documentUpload"
+                value={data.documentUpload}
+                onChange={(e) => SingleFileChange(e)}
+              ></input>
             </Col>
-            </Row>
-            <hr style={{borderTop: "1px solid darkGray"}}/>
-            <Row>
+          </Row>
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+          <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
+              <Button type="primary" className="btn btn-info" style={{ width: "100%" }} onClick={() => clickSubmit()}>
                 הוסף נתונים
               </Button>
             </Col>

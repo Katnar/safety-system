@@ -37,7 +37,7 @@ export const COLUMNS = [
   },
   {
     Header: "מסמכים",
-    accessor: "documentUpload",
+    accessor: "_id",
     Filter: ColumnFilter,
   },
 ];
