@@ -1,6 +1,7 @@
 'use strict';
 const multer = require('multer');
 const path = require('path');
+var fs = require('fs');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         console.log(req.body);

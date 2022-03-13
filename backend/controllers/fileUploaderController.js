@@ -12,9 +12,8 @@ var moveFile = (file, dir2, newName) => {
     var f = newName + path.extname(file);
     var dest = path.resolve(dir2, f);
 
-    if(!fs.existsSync(dir2))
-    fs.mkdirSync(dir2);
-
+    if (!fs.existsSync(dir2))
+        fs.mkdirSync(dir2);
     fs.rename(file, dest, (err) => {
         if (err) throw err;
         else console.log('Successfully moved');
@@ -22,8 +21,24 @@ var moveFile = (file, dir2, newName) => {
 };
 
 const singleFileUpload = async (req, res, next) => {
-    //console.log(req.body);
-    //const filePath = './uploads/' + req.body.collection + '/' + req.body.id + path.extname(req.file.path);
+    const path = require('path');
+    const fs = require('fs')
+    const ext = path.extname(req.file.path);
+    try {
+        fs.readdirSync(('./uploads/'+req.body.collection)).forEach(file => {
+            if (file.startsWith(req.body.id)) {
+                console.log('File exists! moving to archive');
+                moveFile('./uploads/' + req.body.collection + '/' + req.body.id + path.extname(file), './uploads/archive/' + req.body.collection, req.body.id + '#' + Math.random() * (100000000000000 - 0) + 0);
+
+            }
+        });
+        // if (fs.existsSync('./uploads/' + req.body.collection + '/' + req.body.id + path.extname(filename))) {
+        //     console.log('File exists! moving to archive');
+        //     moveFile('./uploads/' + req.body.collection + '/' + req.body.id + path.extname(filename), './uploads/archive/' + req.body.collection, req.body.id + '#' + Math.random() * (100000000000000 - 0) + 0);
+        // }
+    } catch (err) {
+        console.error(err)
+    }
     try {
         const file = new SingleFile({
             fileName: req.file.originalname,
@@ -96,12 +111,12 @@ const fileSizeFormatter = (bytes, decimal) => {
 const downloadFile = async (req, res, next) => {
     const col = req.query.collec;
     const id = req.query.id;
-    const folder = 'uploads/'+col;
+    const folder = 'uploads/' + col;
     const fs = require('fs');
     var path = require('path');
     var ext;
     fs.readdirSync(folder).forEach(file => {
-        if(file.startsWith(id)){
+        if (file.startsWith(id)) {
             ext = path.extname(file);
         }
     });
