@@ -164,6 +164,7 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
                   value={state.testingFrequency}
                   onChange={handleChange}
                 >
+                  <option value="">בחר תדירות</option>
                   <option value="יומיות">יומיות</option>
                   <option value="שבועיות">שבועיות</option>
                   <option value="חודשיות">חודשיות</option>
@@ -212,12 +213,17 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
                 ></Input>
               </FormGroup>
             </Col>
-            </Row>
-            <hr style={{borderTop: "1px solid darkGray"}}/>
-            <Row>
+          </Row>
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+          <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
+              <Button
+                type="primary"
+                className="btn btn-info"
+                style={{ width: "100%" }}
+                onClick={() => clickSubmit()}
+              >
                 הוסף נתונים
               </Button>
             </Col>

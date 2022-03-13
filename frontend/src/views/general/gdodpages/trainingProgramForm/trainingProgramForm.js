@@ -35,7 +35,7 @@ import { isAuthenticated } from "auth";
 const TrainingProgramForm = ({ match }) => {
   const user = isAuthenticated();
   //mahzor
-  const [state, setState] = useState({...state, gdod: user.user.gdod});
+  const [state, setState] = useState({ ...state, gdod: user.user.gdod });
   //mahzor
 
   function handleChange(evt) {
@@ -179,6 +179,7 @@ const TrainingProgramForm = ({ match }) => {
                   value={state.requireTest}
                   onChange={handleChange}
                 >
+                  <option value="">בחר סטטוס</option>
                   <option value="כן">כן</option>
                   <option value="לא">לא</option>
                 </Input>
@@ -208,9 +209,10 @@ const TrainingProgramForm = ({ match }) => {
                   value={state.trainingStatus}
                   onChange={handleChange}
                 >
+                  <option value="">בחר סטטוס</option>
                   <option value="מתוכנן">מתוכנן</option>
                   <option value="בוצע">בוצע</option>
-                  <option value="בוטל">בוטל</option> 
+                  <option value="בוטל">בוטל</option>
                 </Input>
               </FormGroup>
             </Col>
@@ -227,6 +229,7 @@ const TrainingProgramForm = ({ match }) => {
                   value={state.requiredWorkersStatus}
                   onChange={handleChange}
                 >
+                  <option value="">בחר סטטוס</option>
                   <option value="נוכח">נוכח</option>
                   <option value="לא נוכח">לא נוכח</option>
                 </Input>
@@ -242,16 +245,21 @@ const TrainingProgramForm = ({ match }) => {
                   name="gdod"
                   value={user.user.gdod}
                   onChange={handleChange}
-                  disabled = {true}
+                  disabled={true}
                 ></Input>
               </FormGroup>
             </Col>
-            </Row>
-            <hr style={{borderTop: "1px solid darkGray"}}/>
-            <Row>
+          </Row>
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+          <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
+              <Button
+                type="primary"
+                className="btn btn-info"
+                style={{ width: "100%" }}
+                onClick={() => clickSubmit()}
+              >
                 הוסף נתונים
               </Button>
             </Col>

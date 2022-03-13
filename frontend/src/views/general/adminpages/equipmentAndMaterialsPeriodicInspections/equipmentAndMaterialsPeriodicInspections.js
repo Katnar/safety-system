@@ -22,20 +22,23 @@ import EquipmentAndMaterialsPeriodicInspectionsTable from "components/safetySyst
 import { isAuthenticated } from "auth";
 
 function trainigProgram() {
+  const user = isAuthenticated();
   return (
     <>
       {/* <Container> */}
-      <Card>
-        <CardBody>
-          <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
-            טבלת בדיקות תקופתיות לציוד וחומרים
-          </h3>
-          <EquipmentAndMaterialsPeriodicInspectionsTable />
-          <Link to={`/equipmentAndMaterialsPeriodicInspectionsForm/0`}>
-            <Button>הוסף בדיקה</Button>
-          </Link>
-        </CardBody>
-      </Card>
+      {user ? (
+        <Card>
+          <CardBody>
+            <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
+              טבלת בדיקות תקופתיות לציוד וחומרים
+            </h3>
+            <EquipmentAndMaterialsPeriodicInspectionsTable userData={user} />
+            <Link to={`/equipmentAndMaterialsPeriodicInspectionsForm/0`}>
+              <Button>הוסף בדיקה</Button>
+            </Link>
+          </CardBody>
+        </Card>
+      ) : null}
 
       {/* </Container> */}
     </>

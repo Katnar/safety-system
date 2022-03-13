@@ -33,7 +33,7 @@ import SettingModal from "../../../../components/general/modal/SettingModal";
 import { isAuthenticated } from "auth";
 
 const EnvironmentalMonitoringForm = ({ match }) => {
-  const user = isAuthenticated()
+  const user = isAuthenticated();
   //mahzor
   const [state, setState] = useState({});
   //mahzor
@@ -194,6 +194,7 @@ const EnvironmentalMonitoringForm = ({ match }) => {
                   value={state.executionStatus}
                   onChange={handleChange}
                 >
+                  <option value="">בחר סטטוס</option>
                   <option value="בוצע">בוצע</option>
                   <option value="לא בוצע">לא בוצע</option>
                 </Input>
@@ -237,16 +238,21 @@ const EnvironmentalMonitoringForm = ({ match }) => {
                   name="gdod"
                   value={user.user.gdod}
                   onChange={handleChange}
-                  disabled = {true}
+                  disabled={true}
                 ></Input>
               </FormGroup>
             </Col>
-            </Row>
-            <hr style={{borderTop: "1px solid darkGray"}}/>
-            <Row>
+          </Row>
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+          <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
+              <Button
+                type="primary"
+                className="btn btn-info"
+                style={{ width: "100%" }}
+                onClick={() => clickSubmit()}
+              >
                 הוסף נתונים
               </Button>
             </Col>

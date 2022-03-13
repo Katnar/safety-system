@@ -172,22 +172,7 @@ const GroundingTestsForm = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מסמכים
               </div>
-              <FormGroup dir="rtl">
-                <Input
-                  type="select"
-                  name="fit"
-                  value={state.fit}
-                  onChange={handleChange}
-                >
-                  <option value="כשיר">כשיר</option>
-                  <option value="לא כשיר">לא כשיר</option>
-                </Input>
-              </FormGroup>
-            </Col>
-            <Col xs={12} md={4}>
-              <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                מיקום הציוד
-              </div>
+
               <FormGroup dir="rtl">
                 <Input
                   type="text"

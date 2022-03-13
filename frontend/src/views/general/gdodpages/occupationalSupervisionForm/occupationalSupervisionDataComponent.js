@@ -34,7 +34,6 @@ import SettingModal from "../../../../components/general/modal/SettingModal";
 import { isAuthenticated } from "auth";
 
 const OccupationalSupervisionDataComponent = ({ match }) => {
-
   const user = isAuthenticated();
 
   const [data, setData] = useState({});
@@ -213,6 +212,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                   value={data.frequencyOfTests}
                   onChange={handleChange}
                 >
+                  <option value="">בחר תדירות</option>
                   <option value="יומיות">יומיות</option>
                   <option value="שבועיות">שבועיות</option>
                   <option value="חודשיות">חודשיות</option>
@@ -259,6 +259,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                   value={data.fit}
                   onChange={handleChange}
                 >
+                  <option value="">בחר סטטוס</option>
                   <option value="כשיר">כשיר</option>
                   <option value="לא כשיר">לא כשיר</option>
                 </Input>
@@ -287,16 +288,21 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                   name="gdod"
                   value={user.user.gdod}
                   onChange={handleChange}
-                  disabled = "disabled"
+                  disabled="disabled"
                 ></Input>
               </FormGroup>
             </Col>
-            </Row>
-            <hr style={{borderTop: "1px solid darkGray"}}/>
-            <Row>
+          </Row>
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+          <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
+              <Button
+                type="primary"
+                className="btn btn-info"
+                style={{ width: "100%" }}
+                onClick={() => clickSubmit()}
+              >
                 הוסף נתונים
               </Button>
             </Col>

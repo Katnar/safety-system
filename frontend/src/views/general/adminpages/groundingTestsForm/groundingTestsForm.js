@@ -43,9 +43,7 @@ const GroundingTestsForm = ({ match }) => {
 
   const loadDatas = () => {
     axios
-      .get(
-        `http://localhost:8000/api/groundingTests/${match.params.id}`
-      )
+      .get(`http://localhost:8000/api/groundingTests/${match.params.id}`)
       .then((response) => {
         let tempdatas = response.data;
         setState(tempdatas);
@@ -120,7 +118,7 @@ const GroundingTestsForm = ({ match }) => {
           tag="h3"
           style={{ direction: "rtl", textAlign: "center", fontWeight: "bold" }}
         >
-           טופס בדיקת הארקות חשמל ומבנים
+          טופס בדיקת הארקות חשמל ומבנים
         </CardTitle>
         {/*headline*/}
       </CardHeader>
@@ -129,7 +127,7 @@ const GroundingTestsForm = ({ match }) => {
           <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-              שם מבנה נבדק
+                שם מבנה נבדק
               </div>
               <FormGroup dir="rtl">
                 <Input
@@ -142,7 +140,7 @@ const GroundingTestsForm = ({ match }) => {
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-           תאריך בדיקה
+                תאריך בדיקה
               </div>
               <FormGroup dir="rtl">
                 <Input
@@ -155,7 +153,7 @@ const GroundingTestsForm = ({ match }) => {
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-            תאריך בדיקה הבא
+                תאריך בדיקה הבא
               </div>
               <FormGroup dir="rtl">
                 <Input
@@ -163,31 +161,14 @@ const GroundingTestsForm = ({ match }) => {
                   name="nextTestDate"
                   value={state.nextTestDate}
                   onChange={handleChange}
-                >
-                </Input>
+                ></Input>
               </FormGroup>
             </Col>
           </Row>
           <Row>
-          <Col xs={12} md={4}>
-              <div style={{ textAlign: "center", paddingTop: "10px" }}>
-             צירוף מסמכים
-              </div>
-              <FormGroup dir="rtl">
-                <Input
-                  type="select"
-                  name="fit"
-                  value={state.fit}
-                  onChange={handleChange}
-                >
-                    <option value="כשיר">כשיר</option>
-                  <option value="לא כשיר">לא כשיר</option>
-                </Input>
-              </FormGroup>
-            </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-               מיקום הציוד
+                צירוף מסמכים
               </div>
               <FormGroup dir="rtl">
                 <Input
@@ -195,16 +176,20 @@ const GroundingTestsForm = ({ match }) => {
                   name="documentUpload"
                   value={state.documentUpload}
                   onChange={handleChange}
-                >
-                </Input>
+                ></Input>
               </FormGroup>
             </Col>
-            </Row>
-            <hr style={{borderTop: "1px solid darkGray"}}/>
-            <Row>
+          </Row>
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+          <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
+              <Button
+                type="primary"
+                className="btn btn-info"
+                style={{ width: "100%" }}
+                onClick={() => clickSubmit()}
+              >
                 הוסף נתונים
               </Button>
             </Col>

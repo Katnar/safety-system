@@ -22,20 +22,23 @@ import EnvironmentalMonitoringTable from "components/safetySystem/adminPages/env
 import { isAuthenticated } from "auth";
 
 function EnvironmentalMonitoring() {
+  const user = isAuthenticated();
   return (
     <>
       {/* <Container> */}
-      <Card>
-        <CardBody>
-          <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
-            טבלת ניטורים סביבתיים
-          </h3>
-          <EnvironmentalMonitoringTable />
-          <Link to={`/environmentalMonitoringForm/0`}>
-            <Button>הוסף ניטור סביבתי</Button>
-          </Link>
-        </CardBody>
-      </Card>
+      {user ? (
+        <Card>
+          <CardBody>
+            <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
+              טבלת ניטורים סביבתיים
+            </h3>
+            <EnvironmentalMonitoringTable userData={user} />
+            <Link to={`/environmentalMonitoringForm/0`}>
+              <Button>הוסף ניטור סביבתי</Button>
+            </Link>
+          </CardBody>
+        </Card>
+      ) : null}
 
       {/* </Container> */}
     </>
