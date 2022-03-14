@@ -34,6 +34,8 @@ import SettingModal from "../../../../components/general/modal/SettingModal";
 const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
   //mahzor
   const [state, setState] = useState({});
+  const [gdods, setGdods] = useState([]);
+
   //mahzor
 
   function handleChange(evt) {
@@ -49,6 +51,17 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
       .then((response) => {
         let tempdatas = response.data;
         setState(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -107,6 +120,7 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
     if (match.params.id != "0") {
       loadDatas();
     }
+    loadGdods();
   }
 
   useEffect(() => {
@@ -120,7 +134,7 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
           tag="h3"
           style={{ direction: "rtl", textAlign: "center", fontWeight: "bold" }}
         >
-            טופס מעקב ציוד מגן אישי
+          טופס מעקב ציוד מגן אישי
         </CardTitle>
         {/*headline*/}
       </CardHeader>
@@ -163,13 +177,12 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
                   name="mkt"
                   value={state.mkt}
                   onChange={handleChange}
-                >
-                </Input>
+                ></Input>
               </FormGroup>
             </Col>
           </Row>
           <Row>
-          <Col xs={12} md={4}>
+            <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 כמות
               </div>
@@ -179,13 +192,12 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
                   name="amount"
                   value={state.amount}
                   onChange={handleChange}
-                >
-                </Input>
+                ></Input>
               </FormGroup>
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-               מיקום הציוד
+                מיקום הציוד
               </div>
               <FormGroup dir="rtl">
                 <Input
@@ -193,8 +205,7 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
                   name="equipmentLocation"
                   value={state.equipmentLocation}
                   onChange={handleChange}
-                >
-                </Input>
+                ></Input>
               </FormGroup>
             </Col>
             <Col xs={12} md={4}>
@@ -207,12 +218,11 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
                   name="testDate"
                   value={state.testDate}
                   onChange={handleChange}
-                >
-                </Input>
+                ></Input>
               </FormGroup>
             </Col>
-            </Row>
-            <Row>
+          </Row>
+          <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 אחראי הציוד
@@ -223,13 +233,31 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
                   name="equipmentGuarantor"
                   value={state.equipmentGuarantor}
                   onChange={handleChange}
+                ></Input>
+              </FormGroup>
+            </Col>
+            <Col xs={12} md={4}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                גדוד
+              </div>
+              <FormGroup className="mb-3" dir="rtl">
+                <Input
+                  placeholder="גדוד"
+                  name="gdod"
+                  type="select"
+                  value={state.gdod}
+                  onChange={handleChange}
                 >
+                  <option value={""}>גדוד</option>
+                  {gdods.map((gdod, index) => (
+                    <option value={gdod._id}>{gdod.name}</option>
+                  ))}
                 </Input>
               </FormGroup>
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-               הערות
+                הערות
               </div>
               <FormGroup dir="rtl">
                 <Input
@@ -237,16 +265,20 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
                   name="comments"
                   value={state.comments}
                   onChange={handleChange}
-                >
-                </Input>
+                ></Input>
               </FormGroup>
             </Col>
-            </Row>
-            <hr style={{borderTop: "1px solid darkGray"}}/>
-            <Row>
+          </Row>
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+          <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
+              <Button
+                type="primary"
+                className="btn btn-info"
+                style={{ width: "100%" }}
+                onClick={() => clickSubmit()}
+              >
                 הוסף נתונים
               </Button>
             </Col>

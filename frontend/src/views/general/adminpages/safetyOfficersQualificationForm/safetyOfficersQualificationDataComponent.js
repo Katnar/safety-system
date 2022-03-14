@@ -34,6 +34,8 @@ import SettingModal from "../../../../components/general/modal/SettingModal";
 const SafetyOfficersQualificationDataComponent = ({ match }) => {
   //mahzor
   const [state, setState] = useState({});
+  const [gdods, setGdods] = useState([]);
+
   //mahzor
 
   function handleChange(evt) {
@@ -41,20 +43,30 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
     setState({ ...state, [evt.target.name]: value });
   }
 
-    const loadDatas = () => {
-      axios
-        .get(
-          `http://localhost:8000/api/safetyOfficersQualification/${match.params.id}`
-        )
-        .then((response) => {
-          let tempdatas = response.data;
-          setState(tempdatas);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
+  const loadDatas = () => {
+    axios
+      .get(
+        `http://localhost:8000/api/safetyOfficersQualification/${match.params.id}`
+      )
+      .then((response) => {
+        let tempdatas = response.data;
+        setState(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const clickSubmit = (event) => {
     if (CheckFormData()) {
@@ -97,17 +109,18 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
       tempData = result.data;
     }
 
-      // let result = await axios.post(
-      //   "http://localhost:8000/api/safetyOfficersQualification",
-      //   state
-      // );
-      // tempData = result.data;
+    // let result = await axios.post(
+    //   "http://localhost:8000/api/safetyOfficersQualification",
+    //   state
+    // );
+    // tempData = result.data;
   }
 
   function init() {
-    if(match.params.id != "0") {
+    if (match.params.id != "0") {
       loadDatas();
     }
+    loadGdods();
   }
 
   useEffect(() => {
@@ -195,12 +208,36 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
                 ></Input>
               </FormGroup>
             </Col>
-            </Row>
-            <hr style={{borderTop: "1px solid darkGray"}}/>
-            <Row>
+            <Col xs={12} md={4}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                גדוד
+              </div>
+              <FormGroup className="mb-3" dir="rtl">
+                <Input
+                  placeholder="גדוד"
+                  name="gdod"
+                  type="select"
+                  value={state.gdod}
+                  onChange={handleChange}
+                >
+                  <option value={""}>גדוד</option>
+                  {gdods.map((gdod, index) => (
+                    <option value={gdod._id}>{gdod.name}</option>
+                  ))}
+                </Input>
+              </FormGroup>
+            </Col>
+          </Row>
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+          <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
+              <Button
+                type="primary"
+                className="btn btn-info"
+                style={{ width: "100%" }}
+                onClick={() => clickSubmit()}
+              >
                 הוסף נתונים
               </Button>
             </Col>

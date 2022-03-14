@@ -34,6 +34,8 @@ import SettingModal from "../../../../components/general/modal/SettingModal";
 const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
   //mahzor
   const [state, setState] = useState({});
+  const [gdods, setGdods] = useState([]);
+
   //mahzor
 
   function handleChange(evt) {
@@ -49,6 +51,17 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
       .then((response) => {
         let tempdatas = response.data;
         setState(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -107,6 +120,7 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
     if (match.params.id != "0") {
       loadDatas();
     }
+    loadGdods();
   }
 
   useEffect(() => {
@@ -120,7 +134,7 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
           tag="h3"
           style={{ direction: "rtl", textAlign: "center", fontWeight: "bold" }}
         >
-            טופס בדיקות תקופתיות למכונות וציוד
+          טופס בדיקות תקופתיות למכונות וציוד
         </CardTitle>
         {/*headline*/}
       </CardHeader>
@@ -163,13 +177,12 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
                   name="mstb"
                   value={state.mstb}
                   onChange={handleChange}
-                >
-                </Input>
+                ></Input>
               </FormGroup>
             </Col>
           </Row>
           <Row>
-          <Col xs={12} md={4}>
+            <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 מק"ט
               </div>
@@ -179,8 +192,7 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
                   name="mkt"
                   value={state.mkt}
                   onChange={handleChange}
-                >
-                </Input>
+                ></Input>
               </FormGroup>
             </Col>
             <Col xs={12} md={4}>
@@ -198,7 +210,7 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-               מועד בדיקה נוכחי
+                מועד בדיקה נוכחי
               </div>
               <FormGroup dir="rtl">
                 <Input
@@ -209,8 +221,8 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
                 ></Input>
               </FormGroup>
             </Col>
-            </Row>
-            <Row>
+          </Row>
+          <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 מועד בדיקה הבא
@@ -250,8 +262,8 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
                 ></Input>
               </FormGroup>
             </Col>
-            </Row>
-            <Row>
+          </Row>
+          <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 כמות מכל אמצעי
@@ -267,6 +279,25 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                גדוד
+              </div>
+              <FormGroup className="mb-3" dir="rtl">
+                <Input
+                  placeholder="גדוד"
+                  name="gdod"
+                  type="select"
+                  value={state.gdod}
+                  onChange={handleChange}
+                >
+                  <option value={""}>גדוד</option>
+                  {gdods.map((gdod, index) => (
+                    <option value={gdod._id}>{gdod.name}</option>
+                  ))}
+                </Input>
+              </FormGroup>
+            </Col>
+            <Col xs={12} md={4}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מסמכים
               </div>
               <FormGroup dir="rtl">
@@ -278,12 +309,17 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
                 ></Input>
               </FormGroup>
             </Col>
-            </Row>
-            <hr style={{borderTop: "1px solid darkGray"}}/>
-            <Row>
+          </Row>
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+          <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
+              <Button
+                type="primary"
+                className="btn btn-info"
+                style={{ width: "100%" }}
+                onClick={() => clickSubmit()}
+              >
                 הוסף נתונים
               </Button>
             </Col>

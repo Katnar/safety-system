@@ -77,7 +77,7 @@ export default function Home() {
   const [isExpiredEnviorment, setIsExpiredEnviorment] = useState("");
   const [isAlertEnviorment, setIsAlertEnviorment] = useState("");
 
-  const certsLoad = () =>
+  const certsLoad = () => {
     Axios.get(
       `http://localhost:8000/api/certificationsManagement/bygdod/${user.user.gdod}}`
     ).then((response) => {
@@ -111,9 +111,10 @@ export default function Home() {
       setValidCerts(valid);
       setIsExpiredCerts(isExpired);
     });
+  };
 
-  const superLoad = async () => {
-    await Axios.get(
+  const superLoad = () => {
+    Axios.get(
       `http://localhost:8000/api/occupationalSupervision/${user.user.gdod}`
     ).then((response) => {
       console.log(response.data);

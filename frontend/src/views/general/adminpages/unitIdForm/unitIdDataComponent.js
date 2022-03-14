@@ -34,6 +34,8 @@ import SettingModal from "../../../../components/general/modal/SettingModal";
 const UnitIdDataComponent = ({ match }) => {
   //mahzor
   const [unit, setUnit] = useState({});
+  const [gdods, setGdods] = useState([]);
+
   //mahzor
 
   function handleChange(evt) {
@@ -47,6 +49,17 @@ const UnitIdDataComponent = ({ match }) => {
       .then((response) => {
         let tempunits = response.data;
         setUnit(tempunits);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -100,6 +113,7 @@ const UnitIdDataComponent = ({ match }) => {
     if (match.params.id != "0") {
       loadunits();
     }
+    loadGdods();
   }
 
   useEffect(() => {
@@ -220,21 +234,32 @@ const UnitIdDataComponent = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 גדוד
               </div>
-              <FormGroup dir="rtl">
+              <FormGroup className="mb-3" dir="rtl">
                 <Input
-                  type="text"
+                  placeholder="גדוד"
                   name="gdod"
+                  type="select"
                   value={unit.gdod}
                   onChange={handleChange}
-                ></Input>
+                >
+                  <option value={""}>גדוד</option>
+                  {gdods.map((gdod, index) => (
+                    <option value={gdod._id}>{gdod.name}</option>
+                  ))}
+                </Input>
               </FormGroup>
             </Col>
-            </Row>
-            <hr style={{borderTop: "1px solid darkGray"}}/>
-            <Row>
+          </Row>
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+          <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
+              <Button
+                type="primary"
+                className="btn btn-info"
+                style={{ width: "100%" }}
+                onClick={() => clickSubmit()}
+              >
                 הוסף נתונים
               </Button>
             </Col>

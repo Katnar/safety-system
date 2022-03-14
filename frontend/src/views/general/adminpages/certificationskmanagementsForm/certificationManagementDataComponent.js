@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
-import {singleFileUpload} from '../../../../data/api';
+import { singleFileUpload } from "../../../../data/api";
 // reactstrap components
 import {
   Button,
@@ -35,6 +35,7 @@ import SettingModal from "../../../../components/general/modal/SettingModal";
 const CertificationManagementDataComponent = ({ match }) => {
   //mahzor
   const [data, setData] = useState({});
+  const [gdods, setGdods] = useState([]);
   //mahzor
 
   function handleChange(evt) {
@@ -50,6 +51,17 @@ const CertificationManagementDataComponent = ({ match }) => {
       .then((response) => {
         let tempdatas = response.data;
         setData(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -77,13 +89,13 @@ const CertificationManagementDataComponent = ({ match }) => {
     return flag;
   }
 
-  const UploadFile = async (id) =>{
+  const UploadFile = async (id) => {
     const formData = new FormData();
     const collec = "certificationsManagement";
-    formData.append('file', singleFile);
+    formData.append("file", singleFile);
     await singleFileUpload(formData, collec, id);
     console.log(singleFile);
-  }
+  };
   async function SubmitData() {
     let tempData;
     if (match.params.id == "0") {
@@ -118,6 +130,7 @@ const CertificationManagementDataComponent = ({ match }) => {
     if (match.params.id != "0") {
       loadDatas();
     }
+    loadGdods();
   }
 
   useEffect(() => {
@@ -125,10 +138,10 @@ const CertificationManagementDataComponent = ({ match }) => {
     console.log(match.params);
   }, []);
 
-  const[singleFile,setSingleFile] = useState('');
+  const [singleFile, setSingleFile] = useState("");
   const SingleFileChange = (e) => {
     setSingleFile(e.target.files[0]);
-  }
+  };
 
   return (
     <Card>
@@ -143,7 +156,6 @@ const CertificationManagementDataComponent = ({ match }) => {
       </CardHeader>
       <CardBody style={{ direction: "rtl" }}>
         <Container>
-
           <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
@@ -242,6 +254,25 @@ const CertificationManagementDataComponent = ({ match }) => {
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                גדוד
+              </div>
+              <FormGroup className="mb-3" dir="rtl">
+                <Input
+                  placeholder="גדוד"
+                  name="gdod"
+                  type="select"
+                  value={data.gdod}
+                  onChange={handleChange}
+                >
+                  <option value={""}>גדוד</option>
+                  {gdods.map((gdod, index) => (
+                    <option value={gdod._id}>{gdod.name}</option>
+                  ))}
+                </Input>
+              </FormGroup>
+            </Col>
+            <Col xs={12} md={4}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מסמך
               </div>
               <input
@@ -256,7 +287,12 @@ const CertificationManagementDataComponent = ({ match }) => {
           <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{ width: "100%" }} onClick={() => clickSubmit()}>
+              <Button
+                type="primary"
+                className="btn btn-info"
+                style={{ width: "100%" }}
+                onClick={() => clickSubmit()}
+              >
                 הוסף נתונים
               </Button>
             </Col>

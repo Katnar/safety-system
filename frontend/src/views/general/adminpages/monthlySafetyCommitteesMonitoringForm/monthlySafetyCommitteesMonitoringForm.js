@@ -34,6 +34,8 @@ import SettingModal from "../../../../components/general/modal/SettingModal";
 const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
   //mahzor
   const [state, setState] = useState({});
+  const [gdods, setGdods] = useState([]);
+
   //mahzor
 
   function handleChange(evt) {
@@ -49,6 +51,17 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
       .then((response) => {
         let tempdatas = response.data;
         setState(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -107,6 +120,7 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
     if (match.params.id != "0") {
       loadDatas();
     }
+    loadGdods();
   }
 
   useEffect(() => {
@@ -120,7 +134,7 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
           tag="h3"
           style={{ direction: "rtl", textAlign: "center", fontWeight: "bold" }}
         >
-            טופס מעקב וועדות בטיחות חודשיות
+          טופס מעקב וועדות בטיחות חודשיות
         </CardTitle>
         {/*headline*/}
       </CardHeader>
@@ -163,13 +177,12 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
                   name="committeeExecuter"
                   value={state.committeeExecuter}
                   onChange={handleChange}
-                >
-                </Input>
+                ></Input>
               </FormGroup>
             </Col>
           </Row>
           <Row>
-          <Col xs={12} md={4}>
+            <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 הערכת סיכונים ראשונית (מתוך ח,ס,ה)
               </div>
@@ -179,16 +192,39 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
                   name="documentUpload"
                   value={state.documentUpload}
                   onChange={handleChange}
+                ></Input>
+              </FormGroup>
+            </Col>
+            <Col xs={12} md={4}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                גדוד
+              </div>
+              <FormGroup className="mb-3" dir="rtl">
+                <Input
+                  placeholder="גדוד"
+                  name="gdod"
+                  type="select"
+                  value={state.gdod}
+                  onChange={handleChange}
                 >
+                  <option value={""}>גדוד</option>
+                  {gdods.map((gdod, index) => (
+                    <option value={gdod._id}>{gdod.name}</option>
+                  ))}
                 </Input>
               </FormGroup>
             </Col>
-            </Row>
-            <hr style={{borderTop: "1px solid darkGray"}}/>
-            <Row>
+          </Row>
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+          <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
+              <Button
+                type="primary"
+                className="btn btn-info"
+                style={{ width: "100%" }}
+                onClick={() => clickSubmit()}
+              >
                 הוסף נתונים
               </Button>
             </Col>

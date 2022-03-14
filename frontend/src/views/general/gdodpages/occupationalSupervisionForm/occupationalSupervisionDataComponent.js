@@ -53,6 +53,20 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
     }
   };
 
+  const loadDatas = () => {
+    axios
+      .get(
+        `http://localhost:8000/api/occupationalSupervision/${match.params.id}`
+      )
+      .then((response) => {
+        let tempdatas = response.data;
+        setData(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   function CheckFormData() {
     let flag = true;
     let error = "";
@@ -86,7 +100,11 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
     }
   }
 
-  function init() {}
+  function init() {
+    if (match.params.id != "0") {
+      loadDatas();
+    }
+  }
 
   useEffect(() => {
     init();

@@ -111,10 +111,10 @@ export default function Home() {
         // console.log("test")
       }
     );
-  }
+  };
 
-  const superLoad = async () => {
-    await Axios.get("http://localhost:8000/api/occupationalSupervision").then(
+  const superLoad = () => {
+    Axios.get("http://localhost:8000/api/occupationalSupervision").then(
       (response) => {
         console.log(response.data);
         console.log(response.data[0].nextTestDate);
@@ -124,76 +124,69 @@ export default function Home() {
         var isAlert = false;
         var today = new Date();
         for (var i = 0; i < response.data.length; i++) {
-          if (Date.parse(response.data[i].nextTestDate) > today)
-            valid++;
+          if (Date.parse(response.data[i].nextTestDate) > today) valid++;
           else {
             expired++;
             isExpired = true;
           }
           if (
-            moment(response.data[i].nextTestDate).diff(
-              moment(today),
-              "days"
-            ) < 14
+            moment(response.data[i].nextTestDate).diff(moment(today), "days") <
+            14
           ) {
             isAlert = true;
           }
-        }      
+        }
         // console.log(valid);
         // console.log(isAlert);
 
-         setValidSuper(valid);
-         setExpiredSuper(expired);
-         setIsExpiredSuper(isExpired);
+        setValidSuper(valid);
+        setExpiredSuper(expired);
+        setIsExpiredSuper(isExpired);
         setIsAlertSuper(isAlert);
         console.log(validSuper);
         console.log(expiredSuper);
-        console.log("test")
+        console.log("test");
       }
     );
-  }
+  };
 
   const equipLoad = () => {
-    Axios.get("http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections").then(
-      (response) => {
-        console.log(response.data);
-        console.log(response.data[0].nextTestDate);
-        var valid = 0;
-        var expired = 0;
-        var isExpired = false;
-        var isAlert = false;
-        var today = new Date();
-        for (var i = 0; i < response.data.length; i++) {
-          if (Date.parse(response.data[i].nextTestDate) > today)
-            valid++;
-          else {
-            expired++;
-            isExpired = true;
-          }
-          if (
-            moment(response.data[i].nextTestDate).diff(
-              moment(today),
-              "days"
-            ) < 14
-          ) {
-            isAlert = true;
-          }
-        }      
-        // console.log(valid);
-        // console.log(isAlert);
-
-        setValidEquip(valid);
-        setExpiredEquip(expired);
-        setIsExpiredEquip(isExpired);
-        setIsAlertEquip(isAlert);
-        console.log(validEquip);
-        console.log(expiredEquip);
-        console.log("test")
+    Axios.get(
+      "http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections"
+    ).then((response) => {
+      console.log(response.data);
+      console.log(response.data[0].nextTestDate);
+      var valid = 0;
+      var expired = 0;
+      var isExpired = false;
+      var isAlert = false;
+      var today = new Date();
+      for (var i = 0; i < response.data.length; i++) {
+        if (Date.parse(response.data[i].nextTestDate) > today) valid++;
+        else {
+          expired++;
+          isExpired = true;
+        }
+        if (
+          moment(response.data[i].nextTestDate).diff(moment(today), "days") < 14
+        ) {
+          isAlert = true;
+        }
       }
-    );
-  }
+      // console.log(valid);
+      // console.log(isAlert);
 
-const enviormentLoad = () => {
+      setValidEquip(valid);
+      setExpiredEquip(expired);
+      setIsExpiredEquip(isExpired);
+      setIsAlertEquip(isAlert);
+      console.log(validEquip);
+      console.log(expiredEquip);
+      console.log("test");
+    });
+  };
+
+  const enviormentLoad = () => {
     Axios.get("http://localhost:8000/api/environmentalMonitoring").then(
       (response) => {
         console.log(response.data);
@@ -204,8 +197,7 @@ const enviormentLoad = () => {
         var isAlert = false;
         var today = new Date();
         for (var i = 0; i < response.data.length; i++) {
-          if (Date.parse(response.data[i].nextMonitoringDate) > today)
-            valid++;
+          if (Date.parse(response.data[i].nextMonitoringDate) > today) valid++;
           else {
             expired++;
             isExpired = true;
@@ -218,7 +210,7 @@ const enviormentLoad = () => {
           ) {
             isAlert = true;
           }
-        }      
+        }
         // console.log(valid);
         // console.log(isAlert);
 
@@ -228,20 +220,17 @@ const enviormentLoad = () => {
         setIsAlertEnviorment(isAlert);
         console.log(validEnviorment);
         console.log(expiredEnviorment);
-        console.log("test")
+        console.log("test");
       }
     );
-  }
-
-
+  };
 
   useEffect(() => {
     certsLoad();
     superLoad();
     equipLoad();
     enviormentLoad();
-  },[]);
-
+  }, []);
 
   const classes = useStyles();
 
@@ -310,7 +299,7 @@ const enviormentLoad = () => {
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
             <Link to={"occupationalSupervision"}>
-            <Card style={{ color: "#000", height: "13rem" }}>
+              <Card style={{ color: "#000", height: "13rem" }}>
                 <CardHeader color="info" stats icon>
                   <CardIcon color="info">
                     <CertificationIcon />
@@ -319,7 +308,7 @@ const enviormentLoad = () => {
                     style={{ color: "white" }}
                     className={classes.cardCategory}
                   >
-                   פיקוח תעסוקתי
+                    פיקוח תעסוקתי
                   </h3>
                   <h3 style={{ color: "white" }} className={classes.cardTitle}>
                     {validSuper}/{validSuper + expiredSuper}{" "}
@@ -365,7 +354,7 @@ const enviormentLoad = () => {
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
             <Link to={"equipmentAndMaterialsPeriodicInspections"}>
-            <Card style={{ color: "#000", height: "13rem" }}>
+              <Card style={{ color: "#000", height: "13rem" }}>
                 <CardHeader color="info" stats icon>
                   <CardIcon color="info">
                     <CertificationIcon />
@@ -374,7 +363,7 @@ const enviormentLoad = () => {
                     style={{ color: "white" }}
                     className={classes.cardCategory}
                   >
-                   בדיקות תקופתיות לציוד וחומרים
+                    בדיקות תקופתיות לציוד וחומרים
                   </h3>
                   <h3 style={{ color: "white" }} className={classes.cardTitle}>
                     {validEquip}/{validEquip + expiredEquip}{" "}
@@ -420,7 +409,7 @@ const enviormentLoad = () => {
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
             <Link to={"environmentalMonitoring"}>
-            <Card style={{ color: "#000", height: "13rem" }}>
+              <Card style={{ color: "#000", height: "13rem" }}>
                 <CardHeader color="info" stats icon>
                   <CardIcon color="info">
                     <CertificationIcon />
@@ -475,7 +464,7 @@ const enviormentLoad = () => {
           </GridItem>
         </GridContainer>
         <GridContainer>
-          <GridItem xs={2} sm={6} md={3}>
+          <GridItem xs={12} sm={6} md={3}>
             <Link to={"unitId"}>
               <Card style={{ color: "#000", height: "13rem" }}>
                 <CardHeader color="success" stats icon>
