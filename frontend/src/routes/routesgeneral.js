@@ -35,7 +35,7 @@ import CandidateDashboard from "views/general/candidatepages/candidatedashboard/
 // import Unitmahzorimpage from "views/general/unitpages/unitmahzorimpage/Unitmahzorimpage";
 // import UnitPreferenceForm from "views/general/unitpages/unitpreferenceform/UnitPreferenceForm";
 import Home from "views/Home/adminDashboard";
-import gdodHome from "views/Home/adminDashboard";
+import gdodHome from "views/Home/gdodDashboard";
 // import GdodHome from "views/Home/Home";
 
 import safetyOfficersQualificationTable from "components/safetySystem/adminPages/safetyOfficersQualification/SortingTable";

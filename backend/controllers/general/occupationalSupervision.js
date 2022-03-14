@@ -11,6 +11,17 @@ exports.findById = async (req, res) => {
   res.send(occupationalSupervision);
 };
 
+exports.findByGdod = async (req, res) => {
+  const occupationalSupervision = await OccupationalSupervision.find().where({
+    gdod: req.params.gdod,
+  });
+
+  if (!occupationalSupervision) {
+    res.status(500).json({ success: false });
+  }
+  res.send(occupationalSupervision);
+};
+
 exports.find = (req, res) => {
   OccupationalSupervision.find()
     .then((occupationalSupervision) => res.json(occupationalSupervision))

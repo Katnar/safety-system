@@ -12,6 +12,17 @@ exports.findById = async (req, res) => {
   res.send(equipmentAndMaterialsPeriodicInspections);
 };
 
+exports.findByGdod = async (req, res) => {
+  const equipmentAndMaterialsPeriodicInspections = await EquipmentAndMaterialsPeriodicInspections.find().where({
+    gdod: req.params.gdod,
+  });
+
+  if (!equipmentAndMaterialsPeriodicInspections) {
+    res.status(500).json({ success: false });
+  }
+  res.send(equipmentAndMaterialsPeriodicInspections);
+};
+
 exports.find = (req, res) => {
   EquipmentAndMaterialsPeriodicInspections.find()
     .then((equipmentAndMaterialsPeriodicInspections) =>

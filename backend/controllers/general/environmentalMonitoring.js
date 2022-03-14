@@ -11,6 +11,17 @@ exports.findById = async (req, res) => {
   res.send(environmentalMonitoring);
 };
 
+exports.findByGdod = async (req, res) => {
+  const environmentalMonitoring = await EnvironmentalMonitoring.find().where({
+    gdod: req.params.gdod,
+  });
+
+  if (!environmentalMonitoring) {
+    res.status(500).json({ success: false });
+  }
+  res.send(environmentalMonitoring);
+};
+
 exports.find = (req, res) => {
   EnvironmentalMonitoring.find()
     .then((environmentalMonitoring) => res.json(environmentalMonitoring))

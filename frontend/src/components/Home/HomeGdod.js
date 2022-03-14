@@ -11,6 +11,8 @@ import certificationsManagementsIcon from "assets/img/quality-control.png";
 // import Store from "@material-ui/icons/Store";
 import Warning from "@material-ui/icons/Warning";
 import DateRange from "@material-ui/icons/DateRange";
+import CertificationIcon from "@material-ui/icons/VerifiedUser";
+
 // import LocalOffer from "@material-ui/icons/LocalOffer";
 import Update from "@material-ui/icons/Update";
 // import ArrowUpward from "@material-ui/icons/ArrowUpward";
@@ -33,6 +35,8 @@ import CardIcon from "components/Card/CardIcon.js";
 import CardFooter from "components/Card/CardFooter.js";
 // import Certifications from "views/Certifications/Certifications.js";
 import Page from 'react-page-loading';
+import { Container } from "@material-ui/core";
+
 
 // import { bugs, website, server } from "variables/general.js";
 
@@ -47,8 +51,11 @@ import { Link } from "react-router-dom";
 import { Check, Eco, People } from "@material-ui/icons";
 import moment from "moment";
 import UserCard from "components/general/DashboardCards/UserCard/UserCard";
+import { isAuthenticated } from "auth";
 
 const useStyles = makeStyles(dashboardStyle);
+
+const user = isAuthenticated();
 
 
 export default function Home() {
@@ -58,139 +65,700 @@ export default function Home() {
     const [isExpiredCerts, setIsExpiredCerts] = useState("");
     const [isAlertCerts, setIsAlertCerts] = useState("");
 
-    useEffect(() => {
-        Axios.get('http://localhost:8000/api/certificationsManagement/bygdod/testgdod').then((response) => {
+    const [validSuper, setValidSuper] = useState("");
+  const [expiredSuper, setExpiredSuper] = useState("");
+  const [isExpiredSuper, setIsExpiredSuper] = useState("");
+  const [isAlertSuper, setIsAlertSuper] = useState("");
+
+  const [validEquip, setValidEquip] = useState("");
+  const [expiredEquip, setExpiredEquip] = useState("");
+  const [isExpiredEquip, setIsExpiredEquip] = useState("");
+  const [isAlertEquip, setIsAlertEquip] = useState("");
+
+  const [validEnviorment, setValidEnviorment] = useState("");
+  const [expiredEnviorment, setExpiredEnviorment] = useState("");
+  const [isExpiredEnviorment, setIsExpiredEnviorment] = useState("");
+  const [isAlertEnviorment, setIsAlertEnviorment] = useState("");
+
+  const certsLoad = () => 
+    Axios.get(`http://localhost:8000/api/certificationsManagement/bygdod/${user.user.gdod}}`).then((response) => {
+        console.log(user.user.gdod)
+        console.log(response.data);
+        console.log(response.data[0].certificationValidity);
+        var valid = 0;
+        var expired = 0;
+        var isExpired = false;
+        var isAlert = false;
+        var today = new Date();
+        for (var i = 0; i < response.data.length; i++) {
+            if (Date.parse(response.data[i].certificationValidity) > today)
+                valid++;
+            else {
+                expired++;
+                isExpired = true;
+            }
+            if (moment(response.data[i].certificationValidity).diff(moment(today), 'days') < 14) {
+                isAlert = true;
+            }
+        }
+        console.log(valid);
+        console.log(isAlert);
+        setIsAlertCerts(isAlert);
+        setExpiredCerts(expired);
+        setValidCerts(valid);
+        setIsExpiredCerts(isExpired);
+    })
+  
+    const superLoad = async () => {
+        await Axios.get(`http://localhost:8000/api/occupationalSupervision/${user.user.gdod}`).then(
+          (response) => {
             console.log(response.data);
-            console.log(response.data[0].certificationValidity);
+            console.log(response.data[0].nextTestDate);
             var valid = 0;
             var expired = 0;
             var isExpired = false;
             var isAlert = false;
             var today = new Date();
             for (var i = 0; i < response.data.length; i++) {
-                if (Date.parse(response.data[i].certificationValidity) > today)
-                    valid++;
-                else {
-                    expired++;
-                    isExpired = true;
-                }
-                if (moment(response.data[i].certificationValidity).diff(moment(today), 'days') < 14) {
-                    isAlert = true;
-                }
-            }
-            console.log(valid);
-            console.log(isAlert);
-            setIsAlertCerts(isAlert);
-            setExpiredCerts(expired);
-            setValidCerts(valid);
-            setIsExpiredCerts(isExpired);
-        })
-    });
+              if (Date.parse(response.data[i].nextTestDate) > today)
+                valid++;
+              else {
+                expired++;
+                isExpired = true;
+              }
+              if (
+                moment(response.data[i].nextTestDate).diff(
+                  moment(today),
+                  "days"
+                ) < 14
+              ) {
+                isAlert = true;
+              }
+            }      
+            // console.log(valid);
+            // console.log(isAlert);
+    
+             setValidSuper(valid);
+             setExpiredSuper(expired);
+             setIsExpiredSuper(isExpired);
+            setIsAlertSuper(isAlert);
+            console.log(validSuper);
+            console.log(expiredSuper);
+            console.log("test")
+          }
+        );
+      }
+    
+      const equipLoad = () => {
+        Axios.get(`http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections/${user.user.gdod}`).then(
+          (response) => {
+            console.log(response.data);
+            console.log(response.data[0].nextTestDate);
+            var valid = 0;
+            var expired = 0;
+            var isExpired = false;
+            var isAlert = false;
+            var today = new Date();
+            for (var i = 0; i < response.data.length; i++) {
+              if (Date.parse(response.data[i].nextTestDate) > today)
+                valid++;
+              else {
+                expired++;
+                isExpired = true;
+              }
+              if (
+                moment(response.data[i].nextTestDate).diff(
+                  moment(today),
+                  "days"
+                ) < 14
+              ) {
+                isAlert = true;
+              }
+            }      
+            // console.log(valid);
+            // console.log(isAlert);
+    
+            setValidEquip(valid);
+            setExpiredEquip(expired);
+            setIsExpiredEquip(isExpired);
+            setIsAlertEquip(isAlert);
+            console.log(validEquip);
+            console.log(expiredEquip);
+            console.log("test")
+          }
+        );
+      }
+
+      const enviormentLoad = () => {
+        Axios.get(`http://localhost:8000/api/environmentalMonitoring/${user.user.gdod}`).then(
+          (response) => {
+            console.log(response.data);
+            console.log(response.data[0].nextMonitoringDate);
+            var valid = 0;
+            var expired = 0;
+            var isExpired = false;
+            var isAlert = false;
+            var today = new Date();
+            for (var i = 0; i < response.data.length; i++) {
+              if (Date.parse(response.data[i].nextMonitoringDate) > today)
+                valid++;
+              else {
+                expired++;
+                isExpired = true;
+              }
+              if (
+                moment(response.data[i].nextMonitoringDate).diff(
+                  moment(today),
+                  "days"
+                ) < 14
+              ) {
+                isAlert = true;
+              }
+            }      
+            // console.log(valid);
+            // console.log(isAlert);
+    
+            setValidEnviorment(valid);
+            setExpiredEnviorment(expired);
+            setIsExpiredEnviorment(isExpired);
+            setIsAlertEnviorment(isAlert);
+            console.log(validEnviorment);
+            console.log(expiredEnviorment);
+            console.log("test")
+          }
+        );
+      }
+
+      useEffect(() => {
+        certsLoad();
+        superLoad();
+        equipLoad();
+        enviormentLoad();
+      },[]);
+
+      
     const classes = useStyles();
     return (
         <Page loader={"resize-spin"} color={"#A9A9A9"} size={4}>
-            <div>
-                <UserCard />
-                <GridContainer>
-                    <GridItem xs={12} sm={6} md={3}>
-                        <Link to={'certificationsManagements'}>
-                            <Card style={{ color: '#000' }}>
-                                <CardHeader color="warning" stats icon>
-                                    <CardIcon color="warning">
-                                        <People />
-                                    </CardIcon>
-                                    <h3 style={{ color: "white" }} className={classes.cardCategory}>ניהול הסמכות</h3>
-                                    <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                                        {validCerts}/{validCerts + expiredCerts} <small> בתוקף</small>
-                                    </h3>
-                                </CardHeader>
-                                {isExpiredCerts ? (
-
-                                    <CardFooter stats>
-                                        <div className={classes.stats}>
-                                            <Danger>
-                                                <Warning />
-                                            </Danger>
-                                            <a href="#pablo" onClick={e => e.preventDefault()}>
-                                                שים לב! חלק מההסמכות הן פגות תוקף</a>
-                                        </div>
-                                    </CardFooter>
-                                ) : (<CardFooter stats>
-                                    <div className={classes.stats}>
-                                        <Check />
-                                        לא נדרשת פעולה מיידית
-                                    </div>
-                                </CardFooter>)}
-
-                                {isAlertCerts ? (
-                                    <CardFooter stats>
-                                        <div className={classes.stats}>
-                                            <Danger>
-                                                <DateRange />
-                                            </Danger>
-                                            <a href="#pablo" onClick={e => e.preventDefault()}>
-                                                הסמכות מסוימות יפוגו בשבועיים הקרובים</a>
-                                        </div>
-                                    </CardFooter>
-                                ) : (<></>)}
-                            </Card>
-                        </Link>
-                    </GridItem>
-                    <GridItem xs={12} sm={6} md={3}>
-                        <Card>
-                            <CardHeader color="success" stats icon>
-                                <CardIcon color="success">
-                                    <VerifiedUserIcon />
-                                </CardIcon>
-                                <p className={classes.cardCategory}>בדיקות ציוד תקופתיות</p>
-                                <h3 className={classes.cardTitle}>100%</h3>
-                            </CardHeader>
-                            <CardFooter stats>
-                                <div className={classes.stats}>
-                                    <Check />
-                                    לא נדרשת פעולה מיידית
-                                </div>
-                            </CardFooter>
-                        </Card>
-                    </GridItem>
-                    <GridItem xs={12} sm={6} md={3}>
-                        <Card>
-                            <CardHeader color="danger" stats icon>
-                                <CardIcon color="danger">
-                                    <VerifiedUserIcon />
-                                </CardIcon>
-                                <p className={classes.cardCategory}>ניטורים תקופתיים</p>
-                                <h3 className={classes.cardTitle}>30/30</h3>
-                            </CardHeader>
-                            <CardFooter stats>
-                                <div className={classes.stats}>
-                                    <Danger>
-                                        <DateRange />
-                                    </Danger>
-                                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                                        אישורים מסוימים יפוגו בחודשיים הקרובים</a>
-                                </div>
-                            </CardFooter>
-                        </Card>
-                    </GridItem>
-                    <GridItem xs={12} sm={6} md={3}>
-                        <Card>
-                            <CardHeader color="info" stats icon>
-                                <CardIcon color="info">
-                                    <Eco />
-                                </CardIcon>
-                                <p className={classes.cardCategory}>ניהול חומ"ס</p>
-                                <h3 className={classes.cardTitle}></h3>
-                            </CardHeader>
-                            <CardFooter stats>
-                                <div className={classes.stats}>
-                                    <Update />
-
-                                </div>
-                            </CardFooter>
-                        </Card>
-                    </GridItem>
-                </GridContainer>
+          <div>
+            <Container>
+              <UserCard />
+            </Container>
+    
+            <GridContainer>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"certificationsManagements"}>
+                  <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="info" stats icon>
+                      <CardIcon color="info">
+                        <CertificationIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        ניהול הסמכות
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        {validCerts}/{validCerts + expiredCerts}{" "}
+                        <small> בתוקף</small>
+                      </h3>
+                    </CardHeader>
+                    {isExpiredCerts ? (
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <Danger>
+                            <Warning />
+                          </Danger>
+                          <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                            שים לב! חלק מההסמכות הן פגות תוקף
+                          </a>
+                        </div>
+                      </CardFooter>
+                    ) : (
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <Check />
+                          לא נדרשת פעולה מיידית
+                        </div>
+                      </CardFooter>
+                    )}
+    
+                    {isAlertCerts ? (
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <Danger>
+                            <DateRange />
+                          </Danger>
+                          <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                            הסמכות מסוימות יפוגו בשבועיים הקרובים
+                          </a>
+                        </div>
+                      </CardFooter>
+                    ) : (
+                      <></>
+                    )}
+                  </Card>
+                </Link>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"occupationalSupervision"}>
+                <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="info" stats icon>
+                      <CardIcon color="info">
+                        <CertificationIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                       פיקוח תעסוקתי
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        {validSuper}/{validSuper + expiredSuper}{" "}
+                        <small> בתוקף</small>
+                      </h3>
+                    </CardHeader>
+                    {isExpiredSuper ? (
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <Danger>
+                            <Warning />
+                          </Danger>
+                          <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                            שים לב! חלק מההסמכות הן פגות תוקף
+                          </a>
+                        </div>
+                      </CardFooter>
+                    ) : (
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <Check />
+                          לא נדרשת פעולה מיידית
+                        </div>
+                      </CardFooter>
+                    )}
+    
+                    {isAlertSuper ? (
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <Danger>
+                            <DateRange />
+                          </Danger>
+                          <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                            הסמכות מסוימות יפוגו בשבועיים הקרובים
+                          </a>
+                        </div>
+                      </CardFooter>
+                    ) : (
+                      <></>
+                    )}
+                  </Card>
+                </Link>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"equipmentAndMaterialsPeriodicInspections"}>
+                <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="info" stats icon>
+                      <CardIcon color="info">
+                        <CertificationIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                       בדיקות תקופתיות לציוד וחומרים
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        {validEquip}/{validEquip + expiredEquip}{" "}
+                        <small> בתוקף</small>
+                      </h3>
+                    </CardHeader>
+                    {isExpiredEquip ? (
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <Danger>
+                            <Warning />
+                          </Danger>
+                          <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                            שים לב! חלק מההסמכות הן פגות תוקף
+                          </a>
+                        </div>
+                      </CardFooter>
+                    ) : (
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <Check />
+                          לא נדרשת פעולה מיידית
+                        </div>
+                      </CardFooter>
+                    )}
+    
+                    {isAlertEquip ? (
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <Danger>
+                            <DateRange />
+                          </Danger>
+                          <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                            הסמכות מסוימות יפוגו בשבועיים הקרובים
+                          </a>
+                        </div>
+                      </CardFooter>
+                    ) : (
+                      <></>
+                    )}
+                  </Card>
+                </Link>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"environmentalMonitoring"}>
+                <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="info" stats icon>
+                      <CardIcon color="info">
+                        <CertificationIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        ניטורים סביבתיים
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        {validEnviorment}/{validEnviorment + expiredEnviorment}{" "}
+                        <small> בתוקף</small>
+                      </h3>
+                    </CardHeader>
+                    {isExpiredEnviorment ? (
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <Danger>
+                            <Warning />
+                          </Danger>
+                          <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                            שים לב! חלק מההסמכות הן פגות תוקף
+                          </a>
+                        </div>
+                      </CardFooter>
+                    ) : (
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <Check />
+                          לא נדרשת פעולה מיידית
+                        </div>
+                      </CardFooter>
+                    )}
+    
+                    {isAlertEnviorment ? (
+                      <CardFooter stats>
+                        <div className={classes.stats}>
+                          <Danger>
+                            <DateRange />
+                          </Danger>
+                          <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                            הסמכות מסוימות יפוגו בשבועיים הקרובים
+                          </a>
+                        </div>
+                      </CardFooter>
+                    ) : (
+                      <></>
+                    )}
+                  </Card>
+                </Link>
+              </GridItem>
+            </GridContainer>
+            <GridContainer>
+              <GridItem xs={2} sm={6} md={3}>
+                <Link to={"unitId"}>
+                  <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="success" stats icon>
+                      <CardIcon color="success">
+                        <VerifiedUserIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        תעודת זהות יחידה
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        100%
+                      </h3>
+                    </CardHeader>
+                    <CardFooter stats>
+                      <div className={classes.stats}>
+                        <Check />
+                        לא נדרשת פעולה מיידית
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"safetyOfficersQualification"}>
+                  <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="success" stats icon>
+                      <CardIcon color="success">
+                        <VerifiedUserIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        כשירות ממונים על הבטיחות
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        100%
+                      </h3>
+                    </CardHeader>
+                    <CardFooter stats>
+                      <div className={classes.stats}>
+                        <Check />
+                        לא נדרשת פעולה מיידית
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"trainingProgram"}>
+                  <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="success" stats icon>
+                      <CardIcon color="success">
+                        <VerifiedUserIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        תכנית הדרכות
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        100%
+                      </h3>
+                    </CardHeader>
+                    <CardFooter stats>
+                      <div className={classes.stats}>
+                        <Check />
+                        לא נדרשת פעולה מיידית
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"machinesAndEquipmentPeriodicInspections"}>
+                  <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="success" stats icon>
+                      <CardIcon color="success">
+                        <VerifiedUserIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        בדיקות תקופתיות למכונות וציוד
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        100%
+                      </h3>
+                    </CardHeader>
+                    <CardFooter stats>
+                      <div className={classes.stats}>
+                        <Check />
+                        לא נדרשת פעולה מיידית
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </GridItem>
+            </GridContainer>
+            <GridContainer>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"riskManagementMonitoring"}>
+                  <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="success" stats icon>
+                      <CardIcon color="success">
+                        <VerifiedUserIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        מעקב ניהול סיכונים
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        100%
+                      </h3>
+                    </CardHeader>
+                    <CardFooter stats>
+                      <div className={classes.stats}>
+                        <Check />
+                        לא נדרשת פעולה מיידית
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"monthlySafetyCommitteesMonitoring"}>
+                  <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="success" stats icon>
+                      <CardIcon color="success">
+                        <VerifiedUserIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        מעקב וועדות בטיחות חודשיות
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        100%
+                      </h3>
+                    </CardHeader>
+                    <CardFooter stats>
+                      <div className={classes.stats}>
+                        <Check />
+                        לא נדרשת פעולה מיידית
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"hazardsMonitoring"}>
+                  <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="success" stats icon>
+                      <CardIcon color="success">
+                        <VerifiedUserIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        מעקב סקר מפגעים
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        100%
+                      </h3>
+                    </CardHeader>
+                    <CardFooter stats>
+                      <div className={classes.stats}>
+                        <Check />
+                        לא נדרשת פעולה מיידית
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"homsManagementMonitoring"}>
+                  <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="success" stats icon>
+                      <CardIcon color="success">
+                        <VerifiedUserIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        מעקב ניהול חומ"ס
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        100%
+                      </h3>
+                    </CardHeader>
+                    <CardFooter stats>
+                      <div className={classes.stats}>
+                        <Check />
+                        לא נדרשת פעולה מיידית
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </GridItem>
+            </GridContainer>
+            <GridContainer>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"personalProtectiveEquipmentMonitoring"}>
+                  <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="success" stats icon>
+                      <CardIcon color="success">
+                        <VerifiedUserIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        מעקב ציוד מגן אישי
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        100%
+                      </h3>
+                    </CardHeader>
+                    <CardFooter stats>
+                      <div className={classes.stats}>
+                        <Check />
+                        לא נדרשת פעולה מיידית
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"groundingTests"}>
+                  <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="success" stats icon>
+                      <CardIcon color="success">
+                        <VerifiedUserIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        בדיקות הארקות חשמל ומבנים
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        100%
+                      </h3>
+                    </CardHeader>
+                    <CardFooter stats>
+                      <div className={classes.stats}>
+                        <Check />
+                        לא נדרשת פעולה מיידית
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={3}>
+                <Link to={"reviewsDocumentation"}>
+                  <Card style={{ color: "#000", height: "13rem" }}>
+                    <CardHeader color="success" stats icon>
+                      <CardIcon color="success">
+                        <VerifiedUserIcon />
+                      </CardIcon>
+                      <h3
+                        style={{ color: "white" }}
+                        className={classes.cardCategory}
+                      >
+                        תיעוד ביקורות
+                      </h3>
+                      <h3 style={{ color: "white" }} className={classes.cardTitle}>
+                        100%
+                      </h3>
+                    </CardHeader>
+                    <CardFooter stats>
+                      <div className={classes.stats}>
+                        <Check />
+                        לא נדרשת פעולה מיידית
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </GridItem>
+            </GridContainer>
                 {/*  <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
                     <Card chart>

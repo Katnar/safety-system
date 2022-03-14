@@ -7,10 +7,13 @@ const {
   update,
   remove,
   findById,
+  findByGdod,
 } = require("../../controllers/general/equipmentAndMaterialsPeriodicInspections");
 
 // find spec
 router.get("/equipmentAndMaterialsPeriodicInspections/:id", findById);
+
+router.get("/equipmentAndMaterialsPeriodicInspections/bygdod/:gdod", findByGdod);
 //find all
 router.get("/equipmentAndMaterialsPeriodicInspections", find);
 //add

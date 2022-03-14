@@ -215,8 +215,8 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
                 ></Input>
               </FormGroup>
             </Col>
-          </Row>
-          <Row>
+            </Row>
+            <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 גדוד
@@ -227,21 +227,16 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
                   name="gdod"
                   value={user.user.gdod}
                   onChange={handleChange}
-                  disabled="disabled"
+                  disabled = "disabled"
                 ></Input>
               </FormGroup>
             </Col>
-          </Row>
-          <hr style={{ borderTop: "1px solid darkGray" }} />
-          <Row>
+            </Row>
+            <hr style={{borderTop: "1px solid darkGray"}}/>
+            <Row>
             <Col xs={12} md={4}></Col>
             <Col xs={12} md={4}>
-              <Button
-                type="primary"
-                className="btn btn-info"
-                style={{ width: "100%" }}
-                onClick={() => clickSubmit()}
-              >
+              <Button type="primary" className="btn btn-info" style={{width: "100%"}} onClick={() => clickSubmit()}>
                 הוסף נתונים
               </Button>
             </Col>
