@@ -61,19 +61,21 @@ function SidebarGdod() {
     });
   };
 
+  const user = isAuthenticated();
+
   return (
     <>
      <ThemeContext.Consumer>
     {({ changeTheme, theme }) =>
         theme == "white-content" ?
-        <Link to="/gdodDashboard">
+        <Link  to={`/gdodDashboard/${user.user.gdod}`}>
          <div className="logo">
         <img
           src={lightLogo}
           style={{ width: "100%", height: "100%" }}
         ></img>
       </div></Link>:
-      <Link to="/gdodDashboard">
+      <Link  to={`/gdodDashboard/${user.user.gdod}`}>
       <div className="logo">
       <img
         src={darkLogo}
@@ -84,7 +86,7 @@ function SidebarGdod() {
       <Nav style={{ textAlign: "right" }}>
         <li>
           <NavLink
-            to="/gdodDashboard"
+            to={`/gdodDashboard/${user.user.gdod}`}
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >

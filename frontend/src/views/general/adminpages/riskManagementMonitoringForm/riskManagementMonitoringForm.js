@@ -188,11 +188,16 @@ const RiskManagementMonitoringForm = ({ match }) => {
               </div>
               <FormGroup dir="rtl">
                 <Input
-                  type="text"
+                  type="select"
                   name="initialRiskAssessment"
                   value={state.initialRiskAssessment}
                   onChange={handleChange}
-                ></Input>
+                >
+                   <option value="">בחר אפשרות</option>
+                  <option value="ח">ח</option>
+                  <option value="ס">ס</option>
+                  <option value="ה">ה</option>
+                  </Input>
               </FormGroup>
             </Col>
             <Col xs={12} md={4}>
@@ -214,11 +219,16 @@ const RiskManagementMonitoringForm = ({ match }) => {
               </div>
               <FormGroup dir="rtl">
                 <Input
-                  type="text"
+                  type="select"
                   name="secondRiskAssessment"
                   value={state.secondRiskAssessment}
                   onChange={handleChange}
-                ></Input>
+                >
+                   <option value="">בחר אפשרות</option>
+                  <option value="ח">ח</option>
+                  <option value="ס">ס</option>
+                  <option value="ה">ה</option>
+                  </Input>
               </FormGroup>
             </Col>
           </Row>

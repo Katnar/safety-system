@@ -35,7 +35,7 @@ import { isAuthenticated } from "auth";
 const HomsManagementMonitoringForm = ({ match }) => {
   const user = isAuthenticated();
   //mahzor
-  const [state, setState] = useState({});
+  const [state, setState] = useState({ ...state, gdod: user.user.gdod });
   //mahzor
 
   function handleChange(evt) {

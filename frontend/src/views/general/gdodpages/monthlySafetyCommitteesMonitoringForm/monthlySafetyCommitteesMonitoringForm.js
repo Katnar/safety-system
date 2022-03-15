@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
+import { singleFileUpload } from "../../../../data/api";
+
 // reactstrap components
 import {
   Button,
@@ -78,6 +80,15 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
     return flag;
   }
 
+  const UploadFile = async (id) => {
+    const formData = new FormData();
+    const collec = "monthlySafetyCommitteesMonitoring";
+    formData.append("file", singleFile);
+    await singleFileUpload(formData, collec, id);
+    console.log(singleFile);
+  };
+
+
   async function SubmitData() {
     let tempData;
     if (match.params.id == "0") {
@@ -98,6 +109,9 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
       tempData = result.data;
     }
 
+    await UploadFile(tempData._id);
+
+
     // let result = await axios.post(
     //   "http://localhost:8000/api/monthlySafetyCommitteesMonitoring",
     //   state
@@ -115,6 +129,11 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
     init();
   }, []);
 
+  const [singleFile, setSingleFile] = useState("");
+  const SingleFileChange = (e) => {
+    setSingleFile(e.target.files[0]);
+  };
+
   return (
     <Card>
       <CardHeader style={{ direction: "rtl" }}>
@@ -131,7 +150,7 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
           <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                שלב התהליך
+          יחידה
               </div>
               <FormGroup dir="rtl">
                 <Input
@@ -144,7 +163,7 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                גורם הסיכון
+          תאריך
               </div>
               <FormGroup dir="rtl">
                 <Input
@@ -157,7 +176,7 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                גורם (מתוך M5) סיבות ותרחישים
+     מבצע הוועדה
               </div>
               <FormGroup dir="rtl">
                 <Input
@@ -172,16 +191,16 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
           <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                הערכת סיכונים ראשונית (מתוך ח,ס,ה)
+            צירוף מסמכים סרוקים
               </div>
-              <FormGroup dir="rtl">
+              {/* <FormGroup dir="rtl"> */}
                 <Input
-                  type="text"
+                  type="file"
                   name="documentUpload"
                   value={state.documentUpload}
-                  onChange={handleChange}
-                ></Input>
-              </FormGroup>
+                  onChange={(e) => SingleFileChange(e)}
+                  ></Input>
+              {/* </FormGroup> */}
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>

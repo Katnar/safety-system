@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
+import { singleFileUpload } from "../../../../data/api";
 
 // reactstrap components
 import {
@@ -87,6 +88,14 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
     return flag;
   }
 
+  const UploadFile = async (id) => {
+    const formData = new FormData();
+    const collec = "occupationalSupervision";
+    formData.append("file", singleFile);
+    await singleFileUpload(formData, collec, id);
+    console.log(singleFile);
+  };
+
   async function SubmitData() {
     // console.log("post")
     let tempOccupationalSupervisionData;
@@ -107,6 +116,9 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
       );
       tempOccupationalSupervisionData = result.data;
     }
+
+    await UploadFile(tempOccupationalSupervisionData._id);
+
   }
 
   function init() {
@@ -119,6 +131,11 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
   useEffect(() => {
     init();
   }, []);
+
+  const [singleFile, setSingleFile] = useState("");
+  const SingleFileChange = (e) => {
+    setSingleFile(e.target.files[0]);
+  };
 
   return (
     <Card>
@@ -318,14 +335,14 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מסמכים סרוקים
               </div>
-              <FormGroup dir="rtl">
+              {/* <FormGroup dir="rtl"> */}
                 <Input
-                  type="text"
+                  type="file"
                   name="documentUpload"
                   value={data.documentUpload}
-                  onChange={handleChange}
+                  onChange={(e) => SingleFileChange(e)}
                 ></Input>
-              </FormGroup>
+              {/* </FormGroup> */}
             </Col>
           </Row>
           <hr style={{ borderTop: "1px solid darkGray" }} />

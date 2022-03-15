@@ -96,6 +96,7 @@ const CertificationManagementDataComponent = ({ match }) => {
     await singleFileUpload(formData, collec, id);
     console.log(singleFile);
   };
+
   async function SubmitData() {
     let tempData;
     if (match.params.id == "0") {
@@ -275,12 +276,12 @@ const CertificationManagementDataComponent = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מסמך
               </div>
-              <input
+              <Input
                 type="file"
                 name="documentUpload"
                 value={data.documentUpload}
                 onChange={(e) => SingleFileChange(e)}
-              ></input>
+              ></Input>
             </Col>
           </Row>
           <hr style={{ borderTop: "1px solid darkGray" }} />

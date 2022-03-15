@@ -31,9 +31,12 @@ const SortingTable = (props) => {
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
-            console.log(props);
+            // console.log(props);
+            console.log(response.data[i].gdod);
+            console.log(props.userData.user.gdod);
             if (response.data[i].gdod == props.userData.user.gdod) {
               tempData.push(response.data[i]);
+        
             }
           }
           setData(tempData);

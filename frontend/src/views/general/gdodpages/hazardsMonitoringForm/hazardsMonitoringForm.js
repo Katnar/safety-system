@@ -35,7 +35,7 @@ import { isAuthenticated } from "auth";
 const HazardsMonitoringForm = ({ match }) => {
   const user = isAuthenticated();
   //mahzor
-  const [state, setState] = useState({});
+  const [state, setState] = useState({ ...state, gdod: user.user.gdod });
   //mahzor
 
   function handleChange(evt) {
@@ -208,7 +208,8 @@ const HazardsMonitoringForm = ({ match }) => {
               </FormGroup>
             </Col>
           </Row>
-          <br />
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+
           <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
@@ -331,6 +332,7 @@ const HazardsMonitoringForm = ({ match }) => {
                 ></Input>
               </FormGroup>
             </Col>
+            </Row>
             <Row>
               <Col xs={12} md={4}>
                 <div style={{ textAlign: "center", paddingTop: "10px" }}>
@@ -346,7 +348,7 @@ const HazardsMonitoringForm = ({ match }) => {
                   ></Input>
                 </FormGroup>
               </Col>
-            </Row>
+            
           </Row>
           <hr style={{ borderTop: "1px solid darkGray" }} />
           <Row>

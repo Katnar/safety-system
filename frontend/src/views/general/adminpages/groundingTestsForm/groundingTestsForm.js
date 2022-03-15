@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
+import { singleFileUpload } from "../../../../data/api";
+
 // reactstrap components
 import {
   Button,
@@ -87,6 +89,14 @@ const GroundingTestsForm = ({ match }) => {
     return flag;
   }
 
+  const UploadFile = async (id) => {
+    const formData = new FormData();
+    const collec = "groundingTests";
+    formData.append("file", singleFile);
+    await singleFileUpload(formData, collec, id);
+    console.log(singleFile);
+  };
+
   async function SubmitData() {
     let tempData;
     if (match.params.id == "0") {
@@ -107,6 +117,9 @@ const GroundingTestsForm = ({ match }) => {
       tempData = result.data;
     }
 
+    await UploadFile(tempData._id);
+
+
     // let result = await axios.post(
     //   "http://localhost:8000/api/groundingTests",
     //   state
@@ -124,6 +137,11 @@ const GroundingTestsForm = ({ match }) => {
   useEffect(() => {
     init();
   }, []);
+
+  const [singleFile, setSingleFile] = useState("");
+  const SingleFileChange = (e) => {
+    setSingleFile(e.target.files[0]);
+  };
 
   return (
     <Card>
@@ -203,14 +221,14 @@ const GroundingTestsForm = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מסמכים
               </div>
-              <FormGroup dir="rtl">
+              {/* <FormGroup dir="rtl"> */}
                 <Input
-                  type="text"
+                  type="file"
                   name="documentUpload"
                   value={state.documentUpload}
-                  onChange={handleChange}
-                ></Input>
-              </FormGroup>
+                  onChange={(e) => SingleFileChange(e)}
+                  ></Input>
+              {/* </FormGroup> */}
             </Col>
           </Row>
           <hr style={{ borderTop: "1px solid darkGray" }} />

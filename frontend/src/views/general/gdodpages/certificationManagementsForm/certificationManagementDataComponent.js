@@ -36,7 +36,7 @@ const CertificationManagementDataComponent = ({ match }) => {
 
   const user = isAuthenticated();
   //mahzor
-  const [data, setData] = useState({});
+  const [data, setData] = useState({ ...data, gdod: user.user.gdod });
   //mahzor
 
   function handleChange(evt) {

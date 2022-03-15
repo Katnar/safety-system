@@ -37,7 +37,7 @@ const UnitIdDataComponent = ({ match }) => {
 
   const user = isAuthenticated();
   //mahzor
-  const [unit, setUnit] = useState({});
+  const [unit, setUnit] = useState({ ...unit, gdod: user.user.gdod });
   //mahzor
 
   function handleChange(evt) {

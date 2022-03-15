@@ -36,7 +36,7 @@ import { isAuthenticated } from "auth";
 const OccupationalSupervisionDataComponent = ({ match }) => {
   const user = isAuthenticated();
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState({ ...data, gdod: user.user.gdod });
 
   function handleChange(evt) {
     const value = evt.target.value;

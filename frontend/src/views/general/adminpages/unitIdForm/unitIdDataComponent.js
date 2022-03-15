@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
+import { singleFileUpload } from "../../../../data/api";
 // reactstrap components
 import {
   Button,
@@ -55,6 +56,8 @@ const UnitIdDataComponent = ({ match }) => {
       });
   };
 
+
+
   const loadGdods = () => {
     axios
       .get("http://localhost:8000/api/gdod")
@@ -87,6 +90,14 @@ const UnitIdDataComponent = ({ match }) => {
     return flag;
   }
 
+  const UploadFile = async (id) => {
+    const formData = new FormData();
+    const collec = "unitId";
+    formData.append("file", singleFile);
+    await singleFileUpload(formData, collec, id);
+    console.log(singleFile);
+  };
+
   async function SubmitData() {
     let tempUnitData;
     if (match.params.id == "0") {
@@ -104,6 +115,9 @@ const UnitIdDataComponent = ({ match }) => {
       tempUnitData = result.data;
     }
 
+    await UploadFile(tempUnitData._id);
+
+
     // console.log("post")
     // let result = await axios.post("http://localhost:8000/api/unitId", unit);
     // tempUnitData = result.data;
@@ -120,6 +134,12 @@ const UnitIdDataComponent = ({ match }) => {
     init();
     console.log(match.params);
   }, []);
+
+
+  const [singleFile, setSingleFile] = useState("");
+  const SingleFileChange = (e) => {
+    setSingleFile(e.target.files[0]);
+  };
 
   return (
     <Card>
@@ -206,14 +226,14 @@ const UnitIdDataComponent = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 עץ מבנה יחידה
               </div>
-              <FormGroup dir="rtl">
+              {/* <FormGroup dir="rtl"> */}
                 <Input
-                  type="text"
+                  type="file"
                   name="unitStructureTree"
                   value={unit.unitStructureTree}
-                  onChange={handleChange}
+                  onChange={(e) => SingleFileChange(e)}
                 ></Input>
-              </FormGroup>
+              {/* </FormGroup> */}
             </Col>
           </Row>
           <Row>
@@ -221,14 +241,14 @@ const UnitIdDataComponent = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 עץ מבנה מחלקת טנ"א
               </div>
-              <FormGroup dir="rtl">
+              {/* <FormGroup dir="rtl"> */}
                 <Input
-                  type="text"
+                  type="file"
                   name="teneStructureTree"
                   value={unit.teneStructureTree}
-                  onChange={handleChange}
+                  onChange={(e) => SingleFileChange(e)}
                 ></Input>
-              </FormGroup>
+              {/* </FormGroup> */}
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>

@@ -220,7 +220,9 @@ const HazardsMonitoringForm = ({ match }) => {
               </FormGroup>
             </Col>
           </Row>
-          <br />
+          {/* <br /> */}
+          <hr style={{ borderTop: "1px solid darkGray" }} />
+{/* <br/> */}
           <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
@@ -343,6 +345,7 @@ const HazardsMonitoringForm = ({ match }) => {
                 ></Input>
               </FormGroup>
             </Col>
+            </Row>
             <Row>
               <Col xs={12} md={4}>
                 <div style={{ textAlign: "center", paddingTop: "10px" }}>
@@ -363,7 +366,7 @@ const HazardsMonitoringForm = ({ match }) => {
                   </Input>
                 </FormGroup>
               </Col>
-            </Row>
+            
           </Row>
           <hr style={{ borderTop: "1px solid darkGray" }} />
           <Row>

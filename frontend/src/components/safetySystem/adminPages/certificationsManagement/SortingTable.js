@@ -15,11 +15,14 @@ import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 import {FaFileDownload} from 'react-icons/fa';
+import { isAuthenticated } from "auth";
 
 const SortingTable = (props) => {
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([]);
+
+  const user = isAuthenticated();
 
   function init() {
     getCertificationsDetails();
@@ -30,6 +33,8 @@ const SortingTable = (props) => {
       await axios
         .get(`http://localhost:8000/api/certificationsManagement`)
         .then((response) => {
+          // console.log(response.data);
+          // console.log("asdasd");
           setData(response.data);
         })
         .catch((error) => {
