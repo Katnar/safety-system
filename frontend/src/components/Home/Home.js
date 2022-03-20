@@ -51,7 +51,8 @@ import { Link } from "react-router-dom";
 import { Check, Eco, People } from "@material-ui/icons";
 import moment from "moment";
 import UserCard from "components/general/DashboardCards/UserCard/UserCard";
-import { Container } from "@material-ui/core";
+// import { Container } from "@material-ui/core";
+import CardTable from "components/Card/CardTable";
 
 const useStyles = makeStyles(dashboardStyle);
 
@@ -297,6 +298,7 @@ export default function Home() {
               </Card>
             </Link>
           </GridItem>
+
           <GridItem xs={12} sm={6} md={3}>
             <Link to={"occupationalSupervision"}>
               <Card style={{ color: "#000", height: "13rem" }}>
@@ -464,427 +466,39 @@ export default function Home() {
           </GridItem>
         </GridContainer>
         <GridContainer>
-          <GridItem xs={8} sm={4} md={2}>
-            <Link to={"unitId"}>
-            <Card style={{ color: "#000", height: "6rem" }}>
-                <CardHeader color="success" stats icon>
-                  <CardIcon color="success">
-                    <VerifiedUserIcon />
-                  </CardIcon>
-                  <h1
-                    style={{ color: "white", fontSize: "20px" }}
-                    className={classes.cardCategory}
-                  >
-                    תעודת זהות יחידה
-                  </h1>
-                  {/* <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                    100%
-                  </h3> */}
-                </CardHeader>
-                {/* <CardFooter stats> */}
-                  {/* <div className={classes.stats}>
-                    <Check />
-                    לא נדרשת פעולה מיידית
-                  </div> */}
-                {/* </CardFooter> */}
-              </Card>
-            </Link>
-          </GridItem>
-          <GridItem xs={8} sm={4} md={2}>
-            <Link to={"safetyOfficersQualification"}>
-            <Card style={{ color: "#000", height: "6rem" }}>
-                <CardHeader color="success" stats icon>
-                  <CardIcon color="success">
-                    <VerifiedUserIcon />
-                  </CardIcon>
-                  <h1
-                    style={{ color: "white", fontSize: "20px" }}
-                    className={classes.cardCategory}
-                  >
-                   כשירות ממונים על הבטיחות
-                  </h1>
-                  {/* <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                    100%
-                  </h3> */}
-                </CardHeader>
-                {/* <CardFooter stats> */}
-                  {/* <div className={classes.stats}>
-                    <Check />
-                    לא נדרשת פעולה מיידית
-                  </div> */}
-                {/* </CardFooter> */}
-              </Card>
-            </Link>
-          </GridItem>
-          <GridItem xs={8} sm={4} md={2}>
-            <Link to={"trainingProgram"}>
-            <Card style={{ color: "#000", height: "6rem" }}>
-                <CardHeader color="success" stats icon>
-                  <CardIcon color="success">
-                    <VerifiedUserIcon />
-                  </CardIcon>
-                  <h1
-                    style={{ color: "white", fontSize: "20px" }}
-                    className={classes.cardCategory}
-                  >
-       תכנית הדרכות
-                  </h1>
-                  {/* <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                    100%
-                  </h3> */}
-                </CardHeader>
-                {/* <CardFooter stats> */}
-                  {/* <div className={classes.stats}>
-                    <Check />
-                    לא נדרשת פעולה מיידית
-                  </div> */}
-                {/* </CardFooter> */}
-              </Card>
-            </Link>
-          </GridItem>
-          <GridItem xs={8} sm={4} md={2}>
-            <Link to={"machinesAndEquipmentPeriodicInspections"}>
-            <Card style={{ color: "#000", height: "6rem" }}>
-                <CardHeader color="success" stats icon>
-                  <CardIcon color="success">
-                    <VerifiedUserIcon />
-                  </CardIcon>
-                  <h1
-                    style={{ color: "white", fontSize: "20px" }}
-                    className={classes.cardCategory}
-                  >
-                 בדיקות תקופתיות למכונות וציוד
-                  </h1>
-                  {/* <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                    100%
-                  </h3> */}
-                </CardHeader>
-                {/* <CardFooter stats> */}
-                  {/* <div className={classes.stats}>
-                    <Check />
-                    לא נדרשת פעולה מיידית
-                  </div> */}
-                {/* </CardFooter> */}
-              </Card>
-            </Link>
-          </GridItem>
- 
-           <GridItem xs={8} sm={4} md={2}>
-            <Link to={"riskManagementMonitoring"}>
-            <Card style={{ color: "#000", height: "6rem" }}>
-                <CardHeader color="success" stats icon>
-                  <CardIcon color="success">
-                    <VerifiedUserIcon />
-                  </CardIcon>
-                  <h1
-                    style={{ color: "white", fontSize: "20px" }}
-                    className={classes.cardCategory}
-                  >
-                  מעקב ניהול סיכונים
-                  </h1>
-                  {/* <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                    100%
-                  </h3> */}
-                </CardHeader>
-                {/* <CardFooter stats> */}
-                  {/* <div className={classes.stats}>
-                    <Check />
-                    לא נדרשת פעולה מיידית
-                  </div> */}
-                {/* </CardFooter> */}
-              </Card>
-            </Link>
-          </GridItem>
-           <GridItem xs={8} sm={4} md={2}>
-            <Link to={"monthlySafetyCommitteesMonitoring"}>
-            <Card style={{ color: "#000", height: "6rem" }}>
-                <CardHeader color="success" stats icon>
-                  <CardIcon color="success">
-                    <VerifiedUserIcon />
-                  </CardIcon>
-                  <h1
-                    style={{ color: "white", fontSize: "20px" }}
-                    className={classes.cardCategory}
-                  >
-                    מעקב וועדות בטיחות חודשיות
-                  </h1>
-                  {/* <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                    100%
-                  </h3> */}
-                </CardHeader>
-                {/* <CardFooter stats> */}
-                  {/* <div className={classes.stats}>
-                    <Check />
-                    לא נדרשת פעולה מיידית
-                  </div> */}
-                {/* </CardFooter> */}
-              </Card>
-            </Link>
-          </GridItem>
-          </GridContainer>
-        <GridContainer>
-           <GridItem xs={8} sm={4} md={2}>
-            <Link to={"hazardsMonitoring"}>
-            <Card style={{ color: "#000", height: "6rem" }}>
-                <CardHeader color="success" stats icon>
-                  <CardIcon color="success">
-                    <VerifiedUserIcon />
-                  </CardIcon>
-                  <h1
-                    style={{ color: "white", fontSize: "20px" }}
-                    className={classes.cardCategory}
-                  >
-                   מעקב סקר מפגעים
-                  </h1>
-                  {/* <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                    100%
-                  </h3> */}
-                </CardHeader>
-                {/* <CardFooter stats> */}
-                  {/* <div className={classes.stats}>
-                    <Check />
-                    לא נדרשת פעולה מיידית
-                  </div> */}
-                {/* </CardFooter> */}
-              </Card>
-            </Link>
-          </GridItem>
-           <GridItem xs={8} sm={4} md={2}>
-            <Link to={"homsManagementMonitoring"}>
-            <Card style={{ color: "#000", height: "6rem" }}>
-                <CardHeader color="success" stats icon>
-                  <CardIcon color="success">
-                    <VerifiedUserIcon />
-                  </CardIcon>
-                  <h1
-                    style={{ color: "white", fontSize: "20px" }}
-                    className={classes.cardCategory}
-                  >
-                  מעקב ניהול חומ"ס
-                  </h1>
-                  {/* <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                    100%
-                  </h3> */}
-                </CardHeader>
-                {/* <CardFooter stats> */}
-                  {/* <div className={classes.stats}>
-                    <Check />
-                    לא נדרשת פעולה מיידית
-                  </div> */}
-                {/* </CardFooter> */}
-              </Card>
-            </Link>
-          </GridItem>
-   
-           <GridItem xs={8} sm={4} md={2}>
-            <Link to={"personalProtectiveEquipmentMonitoring"}>
-            <Card style={{ color: "#000", height: "6rem" }}>
-                <CardHeader color="success" stats icon>
-                  <CardIcon color="success">
-                    <VerifiedUserIcon />
-                  </CardIcon>
-                  <h1
-                    style={{ color: "white", fontSize: "20px" }}
-                    className={classes.cardCategory}
-                  >
-                 מעקב ציוד מגן אישי
-                  </h1>
-                  {/* <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                    100%
-                  </h3> */}
-                </CardHeader>
-                {/* <CardFooter stats> */}
-                  {/* <div className={classes.stats}>
-                    <Check />
-                    לא נדרשת פעולה מיידית
-                  </div> */}
-                {/* </CardFooter> */}
-              </Card>
-            </Link>
-          </GridItem>
-           <GridItem xs={8} sm={4} md={2}>
-            <Link to={"groundingTests"}>
-            <Card style={{ color: "#000", height: "6rem" }}>
-                <CardHeader color="success" stats icon>
-                  <CardIcon color="success">
-                    <VerifiedUserIcon />
-                  </CardIcon>
-                  <h1
-                    style={{ color: "white", fontSize: "20px" }}
-                    className={classes.cardCategory}
-                  >
-                    בדיקות הארקות חשמל ומבנים
-                  </h1>
-                  {/* <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                    100%
-                  </h3> */}
-                </CardHeader>
-                {/* <CardFooter stats> */}
-                  {/* <div className={classes.stats}>
-                    <Check />
-                    לא נדרשת פעולה מיידית
-                  </div> */}
-                {/* </CardFooter> */}
-              </Card>
-            </Link>
-          </GridItem>
-           <GridItem xs={8} sm={4} md={2}>
-            <Link to={"reviewsDocumentation"}>
-            <Card style={{ color: "#000", height: "6rem" }}>
-                <CardHeader color="success" stats icon>
-                  <CardIcon color="success">
-                    <VerifiedUserIcon />
-                  </CardIcon>
-                  <h1
-                    style={{ color: "white", fontSize: "20px" }}
-                    className={classes.cardCategory}
-                  >
-                    תיעוד ביקורות
-                  </h1>
-                  {/* <h3 style={{ color: "white" }} className={classes.cardTitle}>
-                    100%
-                  </h3> */}
-                </CardHeader>
-                {/* <CardFooter stats> */}
-                  {/* <div className={classes.stats}>
-                    <Check />
-                    לא נדרשת פעולה מיידית
-                  </div> */}
-                {/* </CardFooter> */}
-              </Card>
-            </Link>
-          </GridItem>
+          <CardTable name={["תעודת זהות יחידה", "unitId"]} />
+          <CardTable
+            name={["כשירות ממונים על הבטיחות", "safetyOfficersQualification"]}
+          />
+          <CardTable name={["תכנית הדרכות", "trainingProgram"]} />
+          <CardTable
+            name={[
+              "בדיקות תקופתיות למכונות וציוד",
+              "machinesAndEquipmentPeriodicInspections",
+            ]}
+          />
+          <CardTable
+            name={["מעקב ניהול סיכונים", "riskManagementMonitoring"]}
+          />
+          <CardTable
+            name={[
+              "מעקב וועדות בטיחות חודשיות",
+              "monthlySafetyCommitteesMonitoring",
+            ]}
+          />
         </GridContainer>
-        {/*  <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                    <Card chart>
-                        <CardHeader color="success">
-                            <ChartistGraph
-                                className="ct-chart"
-                                data={dailySalesChart.data}
-                                type="Line"
-                                options={dailySalesChart.options}
-                                listener={dailySalesChart.animation}
-                            />
-                        </CardHeader>
-                        <CardBody>
-                            <h4 className={classes.cardTitle}>Daily Sales</h4>
-                            <p className={classes.cardCategory}>
-                                <span className={classes.successText}>
-                                    <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                </span>{" "}
-                increase in today sales.
-              </p>
-                        </CardBody>
-                        <CardFooter chart>
-                            <div className={classes.stats}>
-                                <AccessTime /> updated 4 minutes ago
-              </div>
-                        </CardFooter>
-                    </Card>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                    <Card chart>
-                        <CardHeader color="warning">
-                            <ChartistGraph
-                                className="ct-chart"
-                                data={emailsSubscriptionChart.data}
-                                type="Bar"
-                                options={emailsSubscriptionChart.options}
-                                responsiveOptions={emailsSubscriptionChart.responsiveOptions}
-                                listener={emailsSubscriptionChart.animation}
-                            />
-                        </CardHeader>
-                        <CardBody>
-                            <h4 className={classes.cardTitle}>Email Subscriptions</h4>
-                            <p className={classes.cardCategory}>Last Campaign Performance</p>
-                        </CardBody>
-                        <CardFooter chart>
-                            <div className={classes.stats}>
-                                <AccessTime /> campaign sent 2 days ago
-              </div>
-                        </CardFooter>
-                    </Card>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                    <Card chart>
-                        <CardHeader color="danger">
-                            <ChartistGraph
-                                className="ct-chart"
-                                data={completedTasksChart.data}
-                                type="Line"
-                                options={completedTasksChart.options}
-                                listener={completedTasksChart.animation}
-                            />
-                        </CardHeader>
-                        <CardBody>
-                            <h4 className={classes.cardTitle}>Completed Tasks</h4>
-                            <p className={classes.cardCategory}>Last Campaign Performance</p>
-                        </CardBody>
-                        <CardFooter chart>
-                            <div className={classes.stats}>
-                                <AccessTime /> campaign sent 2 days ago
-              </div>
-                        </CardFooter>
-                    </Card>
-                </GridItem>
-            </GridContainer>
-            <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
-                    <CustomTabs
-                        title="Tasks:"
-                        headerColor="primary"
-                        tabs={[
-                            {
-                                tabName: "Bugs",
-                                tabIcon: BugReport,
-                                tabContent: (
-                                    <Tasks
-                                        checkedIndexes={[0, 3]}
-                                        tasksIndexes={[0, 1, 2, 3]}
-                                        tasks={bugs}
-                                    />
-                                )
-                            },
-                            {
-                                tabName: "Website",
-                                tabIcon: Code,
-                                tabContent: (
-                                    <Tasks
-                                        checkedIndexes={[0]}
-                                        tasksIndexes={[0, 1]}
-                                        tasks={website}
-                                    />
-                                )
-                            },
-                            {
-                                tabName: "Server",
-                                tabIcon: Cloud,
-                                tabContent: (
-                                    <Tasks
-                                        checkedIndexes={[1]}
-                                        tasksIndexes={[0, 1, 2]}
-                                        tasks={server}
-                                    />
-                                )
-                            }
-                        ]}
-                    />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                    <Card>
-                        <CardHeader color="warning">
-                            <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
-                            <p className={classes.cardCategoryWhite}>
-                                New employees on 15th September, 2016
-              </p>
-                        </CardHeader>
-                        <CardBody>
-
-                        </CardBody>
-                    </Card>
-                </GridItem>
-            </GridContainer>*/}
+        <GridContainer>
+          <CardTable name={["מעקב סקר מפגעים", "hazardsMonitoring"]} />
+          <CardTable name={['מעקב ניהול חומ"ס', "homsManagementMonitoring"]} />
+          <CardTable
+            name={[
+              "מעקב ציוד מגן אישי",
+              "personalProtectiveEquipmentMonitoring",
+            ]}
+          />
+          <CardTable name={["בדיקות הארקות חשמל ומבנים", "groundingTests"]} />
+          <CardTable name={["תיעוד ביקורות", "reviewsDocumentation"]} />
+        </GridContainer>
       </div>
     </Page>
   );
