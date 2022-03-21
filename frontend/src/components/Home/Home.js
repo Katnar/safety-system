@@ -3,6 +3,8 @@ import Page from "react-page-loading";
 import GridContainer from "components/Grid/GridContainer.js";
 import CardTableCalc from "components/Card/CardTableCalc";
 import CardTable from "components/Card/CardTable";
+import Post from "components/forum/post";
+import Comment from "components/forum/comment";
 
 export default function Home() {
 
@@ -16,7 +18,7 @@ export default function Home() {
           <CardTableCalc name={["ניטורים סביבתיים", "environmentalMonitoring", "שים לב! חלק מהניטורים פגי תוקף", "nextMonitoringDate", "environmentalMonitoring"]}/>
         </GridContainer>
         <GridContainer>
-          <CardTable name={["תעודת זהות יחידה", "unitId"]} />
+          <CardTable name={["תעודת זהות יחידה", "unitId"]}/>
           <CardTable name={["כשירות ממונים על הבטיחות", "safetyOfficersQualification"]}/>
           <CardTable name={["תכנית הדרכות", "trainingProgram"]} />
           <CardTable name={["בדיקות תקופתיות למכונות וציוד", "machinesAndEquipmentPeriodicInspections"]}/>
@@ -30,6 +32,9 @@ export default function Home() {
           <CardTable name={["בדיקות הארקות חשמל ומבנים", "groundingTests"]} />
           <CardTable name={["תיעוד ביקורות", "reviewsDocumentation"]} />
         </GridContainer>
+        <Post/>
+        {/* <Comment/> */}
+        {/* <Post/> */}
       </div>
     </Page>
   );
