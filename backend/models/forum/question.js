@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 const questionSchema = new mongoose.Schema({
-  user: { type: _id },
+  user: { type: ObjectId, ref: "user"},
   text: { type: String },
   createdAt: { type: DataView },
-  answer: { type: _id },
+  answer: { type: ObjectId, ref: "answer"},
 });
 
 const question = mongoose.model("question", questionSchema);
