@@ -4,7 +4,7 @@ const { ObjectId } = mongoose.Schema;
 const questionSchema = new mongoose.Schema({
   user: { type: ObjectId, ref: "user"},
   text: { type: String },
-  createdAt: { type: DataView },
+  createdAt: { type: Date },
   answer: { type: ObjectId, ref: "answer"},
 });
 
