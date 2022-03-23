@@ -99,6 +99,8 @@ const homsManagementMonitoringRoutes = require("./routes/general/homsManagementM
 const personalProtectiveEquipmentMonitoringRoutes = require("./routes/general/personalProtectiveEquipmentMonitoring");
 const groundingTestsRoutes = require("./routes/general/groundingTests");
 const reviewsDocumentationRoutes = require("./routes/general/reviewsDocumentation");
+const questionRoutes = require("./routes/forum/question");
+const answerRoutes = require("./routes/forum/answer");
 
 app.use("/api", safetyOfficersQualificationRoutes);
 app.use("/api", unitIdRoutes);
@@ -115,6 +117,8 @@ app.use("/api", homsManagementMonitoringRoutes);
 app.use("/api", personalProtectiveEquipmentMonitoringRoutes);
 app.use("/api", groundingTestsRoutes);
 app.use("/api", reviewsDocumentationRoutes);
+app.use("/api", questionRoutes);
+app.use("/api", answerRoutes);
 
 if (process.env.NODE_ENV === "production") {
   //set static folder

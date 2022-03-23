@@ -3,8 +3,7 @@ import Page from "react-page-loading";
 import GridContainer from "components/Grid/GridContainer.js";
 import CardTableCalc from "components/Card/CardTableCalc";
 import CardTable from "components/Card/CardTable";
-import Post from "components/forum/post";
-import Comment from "components/forum/comment";
+import Faq from "components/forum/faq";
 
 export default function Home() {
 
@@ -32,9 +31,7 @@ export default function Home() {
           <CardTable name={["בדיקות הארקות חשמל ומבנים", "groundingTests"]} />
           <CardTable name={["תיעוד ביקורות", "reviewsDocumentation"]} />
         </GridContainer>
-        <Post/>
-        {/* <Comment/> */}
-        {/* <Post/> */}
+        <Faq style={{direction: "rtl"}}/>
       </div>
     </Page>
   );

@@ -55,11 +55,11 @@ function WorkplanNavbar(props) {
                   {/* <img src={Logoeged} height='50px'></img> */}
                 </Col>
                 <Col xs={12} md={4}>
+                  <p style={{ fontWeight: 'bold', textAlign: "center", alignContent: "center",alignItems:"center", fontSize: "22px" }}> שלום, {user.name + ' ' + user.lastname}</p>
 
                 </Col>
                 <Col xs={12} md={4} style={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {/* <ToggleDarkModeButton /> */}
-                  {/* <p style={{ fontWeight: 'bold', paddingLeft: '30px' }}> שלום, {user.name + ' ' + user.lastname}</p> */}
                 </Col>
               </Row>
             </Navbar>

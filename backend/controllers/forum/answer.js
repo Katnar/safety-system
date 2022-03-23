@@ -1,4 +1,4 @@
-const Answer = require("../../models/general/answer");
+const Answer = require("../../models/forum/answer");
 
 exports.findById = async (req, res) => {
   const answer =

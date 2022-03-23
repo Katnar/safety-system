@@ -16,13 +16,13 @@ const CardTable = (props) => {
     <>
       <GridItem xs={8} sm={4} md={2}>
         <Link to={props.name[1]}>
-          <Card style={{ color: "#000", height: "6rem" }}>
-            <CardHeader color="success" stats icon>
-              <CardIcon color="success">
+          <Card style={{ borderRadius: "15px", backgroundColor: "#B0E7FD", boxShadow: "0 0 1rem 0", height: "5rem" }}>
+            <CardHeader color="#BCB6FF" stats icon>
+              {/* <CardIcon color="#BCB6FF">
                 <VerifiedUserIcon />
-              </CardIcon>
+              </CardIcon> */}
               <h1
-                style={{ color: "white", fontSize: "16px" }}
+                style={{ color: "#000", fontSize: "20px" }}
                 // className={classes.cardCategory}
               >
                 <br />

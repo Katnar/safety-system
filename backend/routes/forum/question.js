@@ -7,7 +7,7 @@ const {
   update,
   remove,
   findById,
-} = require("../../controllers/general/question");
+} = require("../../controllers/forum/question");
 
 // find spec
 router.get("/question/:id", findById);

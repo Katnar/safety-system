@@ -34,7 +34,7 @@ import {
 
 // const [data, SetData] = useState();
 
-const Post = (props) => {
+const AskQ = (props) => {
   return (
     
     <Card>
@@ -88,4 +88,4 @@ const Post = (props) => {
   );
 };
 
-export default withRouter(Post);
+export default withRouter(AskQ);
