@@ -106,6 +106,8 @@ import homsManagementMonitoringGdodForm from "views/general/gdodpages/homsManage
 import personalProtectiveEquipmentMonitoringGdodForm from "views/general/gdodpages/personalProtectiveEquipmentMonitoringForm/personalProtectiveEquipmentMonitoringForm";
 import groundingTestsGdodForm from "views/general/gdodpages/groundingTestsForm/groundingTestsForm";
 import reviewsDocumentationGdodForm from "views/general/gdodpages/reviewsDocumentationForm/reviewsDocumentationForm";
+import tableView from "views/general/modular/tables/tableView";
+import FormView from "views/general/modular/forms/formView";
 
 const routesgeneral = (
   <>
@@ -135,6 +137,9 @@ const routesgeneral = (
     {/*///////////////////////////////////////////Admin Routes/////////////////////////////////////////////////*/}
     <AdminRoute path="/manageusers" exact component={ManageUsers} />
     <AdminRoute path="/edituser/:userid" exact component={EditUser} />
+    <AdminRoute path="/tableView/:collection?" exact component={tableView} />
+    <AdminRoute path="/formView/:id?" exact component={FormView} />
+    
 
     <AdminRoute path="/adminDashboard" exact component={Home} />
     <GdodRoute path="/gdodDashboard/:gdod" exact component={gdodHome} />
@@ -480,6 +485,11 @@ const routesgeneral = (
       component={CandidatePreferenceForm}
     /> */}
     {/*////////////////////////////////////////Candidate User//////////////////////////////////////////////////*/}
+
+
+    
+    <AdminRoute path="/tableView/:collection?" exact component={tableView} />
+    <AdminRoute path="/formView/:id?" exact component={FormView} />
   </>
 );
 

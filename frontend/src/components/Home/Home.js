@@ -79,8 +79,6 @@ export default function Home() {
   const certsLoad = () => {
     Axios.get("http://localhost:8000/api/certificationsManagement").then(
       (response) => {
-        // console.log(response.data);
-        // console.log(response.data[0].certificationValidity);
         var valid = 0;
         var expired = 0;
         var isExpired = false;
@@ -116,8 +114,6 @@ export default function Home() {
   const superLoad = () => {
     Axios.get("http://localhost:8000/api/occupationalSupervision").then(
       (response) => {
-        console.log(response.data);
-        console.log(response.data[0].nextTestDate);
         var valid = 0;
         var expired = 0;
         var isExpired = false;
@@ -154,8 +150,6 @@ export default function Home() {
     Axios.get(
       "http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections"
     ).then((response) => {
-      console.log(response.data);
-      console.log(response.data[0].nextTestDate);
       var valid = 0;
       var expired = 0;
       var isExpired = false;
@@ -189,8 +183,6 @@ export default function Home() {
   const enviormentLoad = () => {
     Axios.get("http://localhost:8000/api/environmentalMonitoring").then(
       (response) => {
-        console.log(response.data);
-        console.log(response.data[0].nextMonitoringDate);
         var valid = 0;
         var expired = 0;
         var isExpired = false;
