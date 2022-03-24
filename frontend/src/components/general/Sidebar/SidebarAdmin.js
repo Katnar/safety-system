@@ -20,6 +20,7 @@ import { ThemeContext, themes } from "contexts/ThemeContext";
 import darkLogo from "assets/img/darkWideLogo.png";
 import lightLogo from "assets/img/wideLogo.png";
 import home from "assets/img/home3.png";
+import homeGif from "assets/img/home.gif";
 import table from "assets/img/table.png";
 import followers from "assets/img/followers.png";
 import shortlist from "assets/img/shortlist.png";
@@ -27,9 +28,9 @@ import people from "assets/img/people.png";
 import editusers from "assets/img/editusers.png";
 import links from "assets/img/links.png";
 import setting from "assets/img/setting.png";
+import forum from "assets/img/conversation.png";
 import { signout } from "auth/index";
 import history from "../../../history";
-
 
 import {
   Button,
@@ -616,7 +617,7 @@ function SidebarAdmin() {
                   alignSelf: "center",
                 }}
               >
-                <img src={table} style={{ height: "20px" }}></img>
+                <img src={forum} style={{ height: "20px" }}></img>
               </Col>
               <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
                 <h4
