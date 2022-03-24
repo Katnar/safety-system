@@ -1,5 +1,32 @@
 const Question = require("../../models/forum/question");
 
+let readQuestion = [
+  {
+    $lookup: {
+      from: "users",
+      localField: "user",
+      foreignField: "_id",
+      as: "user"
+    }
+  },
+  {
+    $unwind: "$user"
+  },
+];
+
+exports.smartQuestions = (req, res) => {
+  let tipulfindquerry = readQuestion.slice();
+  let finalquerry = tipulfindquerry;
+
+  Question.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
+};
+
 exports.findById = async (req, res) => {
   const question =
     await Question.findOne().where({ _id: req.params.id });

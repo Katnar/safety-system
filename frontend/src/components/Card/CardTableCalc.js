@@ -105,7 +105,8 @@ DataLoad();
        <GridItem xs={12} sm={6} md={3}>
             <Link to={props.name[1]}>
               <Card style={{ color: "#000", height: "13rem" }}>
-                <CardHeader color="info" stats icon>
+                <CardHeader color="
+                " stats icon>
                   <CardIcon color="info">
                     <CertificationIcon />
                   </CardIcon>
