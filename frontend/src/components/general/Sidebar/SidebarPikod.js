@@ -19,8 +19,8 @@ import {
 import { ThemeContext, themes } from "contexts/ThemeContext";
 import darkLogo from "assets/img/darkWideLogo.png";
 import lightLogo from "assets/img/wideLogo.png";
+import logo from "assets/img/whiteLogo.jpg";
 import home from "assets/img/home3.png";
-import homeGif from "assets/img/home.gif";
 import table from "assets/img/table.png";
 import followers from "assets/img/followers.png";
 import shortlist from "assets/img/shortlist.png";
@@ -28,10 +28,8 @@ import people from "assets/img/people.png";
 import editusers from "assets/img/editusers.png";
 import links from "assets/img/links.png";
 import setting from "assets/img/setting.png";
-import forum from "assets/img/conversation.png";
 import { signout } from "auth/index";
 import history from "../../../history";
-import teamLogo from "assets/img/team100.png"
 
 import {
   Button,
@@ -55,7 +53,7 @@ import {
 
 import { isAuthenticated } from "auth/index";
 
-function SidebarAdmin() {
+function SidebarGdod() {
   const clickSubmit = (event) => {
     event.preventDefault();
     signout().then((response) => {
@@ -63,35 +61,32 @@ function SidebarAdmin() {
     });
   };
 
+  const user = isAuthenticated();
+
   return (
     <>
-      <ThemeContext.Consumer>
-        {({ changeTheme, theme }) =>
-          theme == "white-content" ? (
-            <Link to="/adminDashboard">
-              <div className="logo">
-                <img
-                  src={lightLogo}
-                  style={{ width: "100%", height: "100%" }}
-                ></img>
-              </div>
-            </Link>
-          ) : (
-            <Link to="/adminDashboard">
-              <div className="logo">
-                <img
-                  src={darkLogo}
-                  style={{ width: "100%", height: "100%" }}
-                ></img>
-              </div>{" "}
-            </Link>
-          )
-        }
-      </ThemeContext.Consumer>
+     <ThemeContext.Consumer>
+    {({ changeTheme, theme }) =>
+        theme == "white-content" ?
+        <Link  to={`/gdodDashboard/${user.user.gdod}`}>
+         <div className="logo">
+        <img
+          src={lightLogo}
+          style={{ width: "100%", height: "100%" }}
+        ></img>
+      </div></Link>:
+      <Link  to={`/gdodDashboard/${user.user.gdod}`}>
+      <div className="logo">
+      <img
+        src={darkLogo}
+        style={{ width: "100%", height: "100%" }}
+      ></img>
+    </div> </Link>}
+    </ThemeContext.Consumer>
       <Nav style={{ textAlign: "right" }}>
         <li>
           <NavLink
-            to="/adminDashboard"
+            to={`/gdodDashboard/${user.user.gdod}`}
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -123,7 +118,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/unitId"
+            to="/UnitIdGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -155,7 +150,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/safetyOfficersQualification"
+            to="/safetyOfficersQualificationGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -187,7 +182,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/certificationsManagements"
+            to="/certificationManagementGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -219,7 +214,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/occupationalSupervision"
+            to="/occupationalSupervisionGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -249,10 +244,9 @@ function SidebarAdmin() {
             </Row>
           </NavLink>
         </li>
-
         <li>
           <NavLink
-            to="/trainingProgram"
+            to="/trainingProgramGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -284,7 +278,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/equipmentAndMaterialsPeriodicInspections"
+            to="/equipmentAndMaterialsPeriodicInspectionsGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -316,7 +310,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/environmentalMonitoring"
+            to="/environmentalMonitoringGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -348,7 +342,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/machinesAndEquipmentPeriodicInspections"
+            to="/machinesAndEquipmentPeriodicInspectionsGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -380,7 +374,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/riskManagementMonitoring"
+            to="/riskManagementMonitoringGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -412,7 +406,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/monthlySafetyCommitteesMonitoring"
+            to="/monthlySafetyCommitteesMonitoringGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -444,7 +438,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/hazardsMonitoring"
+            to="/hazardsMonitoringGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -476,7 +470,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/homsManagementMonitoring"
+            to="/homsManagementMonitoringGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -508,7 +502,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/personalProtectiveEquipmentMonitoring"
+            to="/personalProtectiveEquipmentMonitoringGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -540,7 +534,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/groundingTests"
+            to="/groundingTestsGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -572,7 +566,7 @@ function SidebarAdmin() {
         </li>
         <li>
           <NavLink
-            to="/reviewsDocumentation"
+            to="/reviewsDocumentationGdod"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -602,70 +596,6 @@ function SidebarAdmin() {
             </Row>
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/forum"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
-              >
-                <img src={forum} style={{ height: "20px" }}></img>
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
-                  style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                  }}
-                >
-                  פורום
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/manageusers"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
-              >
-                <img src={editusers} style={{ height: "20px" }}></img>
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
-                  style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                  }}
-                >
-                  עריכת משתמשים
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-        </li>
       </Nav>
       <div
         style={{
@@ -675,11 +605,10 @@ function SidebarAdmin() {
           width: "100%",
         }}
       >
-        <img src={teamLogo} style={{ width: "50%", marginTop: "5rem" }}></img>
         <Button
           onClick={clickSubmit}
-          className="btn-defailt"
-          style={{ width: "80%", bottom: "0"}}
+          className="btn-danger"
+          style={{ width: "80%" }}
         >
           התנתק
         </Button>
@@ -688,4 +617,4 @@ function SidebarAdmin() {
   );
 }
 
-export default SidebarAdmin;
+export default SidebarGdod;

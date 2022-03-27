@@ -81,10 +81,15 @@ const PostCard = () => {
               <Col xs={12} sm={8} md={4}>
                 <h4 style={{ textAlign: "left", padding: "1rem 0 0 3rem" }}>
                   {question.createdAt
+                    .slice(11, 16)
+                    } {" "}
+                    {question.createdAt
                     .slice(0, 10)
                     .split("-")
                     .reverse()
                     .join(".")}
+                   
+                  
                 </h4>
               </Col>
             </Row>

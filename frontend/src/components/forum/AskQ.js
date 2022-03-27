@@ -40,7 +40,7 @@ const AskQ = (props) => {
   const user = isAuthenticated();
 
   const [data, setData] = useState({
-    user: "",
+    user: user.user._id,
     text: "",
     createdAt: "",
     answer: "",
@@ -65,21 +65,24 @@ const AskQ = (props) => {
 
   const postData = () => {
     var today = new Date();
-    var dd = String(today.getDate()).padStart(2, "0");
-    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    var yyyy = today.getFullYear();
-    today = dd + "." + mm + "." + yyyy;
+    var invdate = new Date(today.toLocaleString('en-US', {
+      timeZone: 'Asia/Jerusalem'}))
+    // var dd = String(today.getDate()).padStart(2, "0");
+    // var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    // var yyyy = today.getFullYear();
+    // today = dd + "." + mm + "." + yyyy;
     setData({ ...data, loading: true, successmsg: false, error: false });
     const question = {
-      user: user.name + user.lastname,
+      user: user.user._id,
       text: data.text,
-      createdAt: today,
-      answer: "435",
+      createdAt: invdate,
+      // answer: "435",
     };
     Axios.post(`http://localhost:8000/api/question`, question)
       .then((res) => {
         setData({ ...data, loading: false, error: false, successmsg: true });
         toast.success(`השאלה פורסמה בהצלחה`);
+        window.location.reload();
         console.log(res.data);
       })
       .catch((error) => {

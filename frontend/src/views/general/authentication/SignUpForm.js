@@ -35,25 +35,58 @@ export default function SignUpForm() {
     redirectToReferrer: false,
   });
 
-  const [units, setUnits] = useState([]);
+  // const [units, setUnits] = useState([]);
   const [gdods, setGdods] = useState([]);
+  const [hativas, setHativas] = useState([]);
+  const [ogdas, setOgdas] = useState([]);
+  const [pikods, setPikods] = useState([]);
 
-  const loadUnits = () => {
-    axios
-      .get("http://localhost:8000/api/unit")
-      .then((response) => {
-        setUnits(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const loadUnits = () => {
+  //   axios
+  //     .get("http://localhost:8000/api/unit")
+  //     .then((response) => {
+  //       setUnits(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
   
   const loadGdods = () => {
     axios
       .get("http://localhost:8000/api/gdod")
       .then((response) => {
         setGdods(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const loadHativas = () => {
+    axios
+      .get("http://localhost:8000/api/hativa")
+      .then((response) => {
+        setHativas(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const loadOgdas = () => {
+    axios
+      .get("http://localhost:8000/api/ogda")
+      .then((response) => {
+        setOgdas(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const loadPikods = () => {
+    axios
+      .get("http://localhost:8000/api/pikod")
+      .then((response) => {
+        setPikods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -141,6 +174,9 @@ export default function SignUpForm() {
       // unitid: data.unitid,
       role: data.role,
       gdod: data.gdod,
+      hativa: data.hativa,
+      ogda: data.ogda,
+      pikod: data.pikod,
     };
     axios
       .post(`http://localhost:8000/api/signup`, user)
@@ -193,8 +229,11 @@ export default function SignUpForm() {
   );
 
   useEffect(() => {
-    loadUnits();
+    // loadUnits();
     loadGdods();
+    loadHativas();
+    loadOgdas();
+    loadPikods();
   }, []);
 
   useEffect(() => {
@@ -244,6 +283,35 @@ export default function SignUpForm() {
                       onChange={handleChange}
                     />
                   </FormGroup>
+{/* 
+                  <FormGroup className="mb-3" dir="rtl">
+                    <Input
+                      placeholder="גדוד"
+                      name="gdod"
+                      type="select"
+                      value={data.gdod}
+                      onChange={handleChange}
+                    >
+                    <option value={""}>גדוד</option>
+                            {gdods.map((gdod, index) => (
+                              <option value={gdod._id}>{gdod.name}</option>
+                            ))}
+                    </Input> 
+                  </FormGroup>
+                  <FormGroup className="mb-3" dir="rtl">
+                    <Input
+                      placeholder="גדוד"
+                      name="gdod"
+                      type="select"
+                      value={data.gdod}
+                      onChange={handleChange}
+                    >
+                    <option value={""}>גדוד</option>
+                            {gdods.map((gdod, index) => (
+                              <option value={gdod._id}>{gdod.name}</option>
+                            ))}
+                    </Input> 
+                  </FormGroup>
 
                   <FormGroup className="mb-3" dir="rtl">
                     <Input
@@ -259,6 +327,21 @@ export default function SignUpForm() {
                             ))}
                     </Input> 
                   </FormGroup>
+
+                  <FormGroup className="mb-3" dir="rtl">
+                    <Input
+                      placeholder="חטיבה"
+                      name="gdod"
+                      type="select"
+                      value={data.gdod}
+                      onChange={handleChange}
+                    >
+                    <option value={""}>גדוד</option>
+                            {gdods.map((gdod, index) => (
+                              <option value={gdod._id}>{gdod.name}</option>
+                            ))}
+                    </Input> 
+                  </FormGroup> */}
 
                   <FormGroup dir="rtl">
                     <Input
@@ -277,28 +360,89 @@ export default function SignUpForm() {
                     .
                   </FormGroup>
 
-                  {/* {data.role === "0" ? (
+                  {data.role === "0" ? (
                     <div>מנהל מערכת</div>
                   ) : data.role === "1" ? (
                     <>
                       <div style={{ textAlign: "right", paddingTop: "10px" }}>
-                        יחידה
+                        גדוד
                       </div>
-                      <FormGroup dir="rtl">
-                        <Input
-                          type="select"
-                          name="unitid"
-                          value={data.unitid}
-                          onChange={handleChange}
-                        >
-                          <option value={""}>יחידה</option>
-                          {units.map((unit, index) => (
-                            <option value={unit._id}>{unit.name}</option>
-                          ))}
-                        </Input>
-                      </FormGroup>
+                      <FormGroup className="mb-3" dir="rtl">
+                    <Input
+                      placeholder="גדוד"
+                      name="gdod"
+                      type="select"
+                      value={data.gdod}
+                      onChange={handleChange}
+                    >
+                    <option value={""}>גדוד</option>
+                            {gdods.map((gdod, index) => (
+                              <option value={gdod._id}>{gdod.name}</option>
+                            ))}
+                    </Input> 
+                  </FormGroup>
                     </>
-                  ) : null} */}
+                  ) : data.role === "2" ? (
+<>
+                      <div style={{ textAlign: "right", paddingTop: "10px" }}>
+                        חטיבה
+                      </div>
+                      <FormGroup className="mb-3" dir="rtl">
+                    <Input
+                      placeholder="חטיבה"
+                      name="hativa"
+                      type="select"
+                      value={data.hativa}
+                      onChange={handleChange}
+                    >
+                    <option value={""}>חטיבה</option>
+                            {hativas.map((hativa, index) => (
+                              <option value={hativa._id}>{hativa.name}</option>
+                            ))}
+                    </Input> 
+                  </FormGroup>
+                    </>
+                  ) : data.role === "3" ? (
+<>
+                      <div style={{ textAlign: "right", paddingTop: "10px" }}>
+                        אוגדה
+                      </div>
+                      <FormGroup className="mb-3" dir="rtl">
+                    <Input
+                      placeholder="אוגדה"
+                      name="ogda"
+                      type="select"
+                      value={data.ogda}
+                      onChange={handleChange}
+                    >
+                    <option value={""}>אוגדה</option>
+                            {ogdas.map((ogda, index) => (
+                              <option value={ogda._id}>{ogda.name}</option>
+                            ))}
+                    </Input> 
+                  </FormGroup>
+                    </>
+                  ) : data.role === "4" ? (
+<>
+                      <div style={{ textAlign: "right", paddingTop: "10px" }}>
+                        פיקוד
+                      </div>
+                      <FormGroup className="mb-3" dir="rtl">
+                    <Input
+                      placeholder="פיקוד"
+                      name="pikod"
+                      type="select"
+                      value={data.pikod}
+                      onChange={handleChange}
+                    >
+                    <option value={""}>פיקוד</option>
+                            {pikods.map((pikod, index) => (
+                              <option value={pikod._id}>{pikod.name}</option>
+                            ))}
+                    </Input> 
+                  </FormGroup>
+                    </>
+                  ) :null}
                   <div className="text-center">
                     <button onClick={clickSubmit} className="btn btn-primary">
                       הרשם

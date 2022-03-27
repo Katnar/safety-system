@@ -8,11 +8,14 @@ import CardIcon from "components/Card/CardIcon.js";
 import CardFooter from "components/Card/CardFooter.js";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { isAuthenticated } from "auth";
 
 // const useStyles = makeStyles(dashboardStyle);
 // const classes = useStyles();
+const user = isAuthenticated();
 
-const CardTableCalc = (props) => {
+
+const CardTableCalcGdod = (props) => {
   const [validData, setValidData] = useState("");
   const [expiredData, setExpiredData] = useState("");
   const [isExpiredData, setIsExpiredData] = useState("");
@@ -20,7 +23,7 @@ const CardTableCalc = (props) => {
 
   const DataLoad = () => {
     const validity = props.name[3];
-    Axios.get(`http://localhost:8000/api/${props.name[4]}`).then((response) => {
+    Axios.get(`http://localhost:8000/api/${props.name[4]}/bygdod/${user.user.gdod}`).then((response) => {
       // console.log(response.data);
       // console.log(response.data[0].certificationValidity);
       var valid = 0;
@@ -94,13 +97,13 @@ const CardTableCalc = (props) => {
   return (
     <>
       <GridItem xs={12} sm={6} md={3}>
-        <Link to={props.name[1]}>
+        <Link to={`/${props.name[1]}`}>
           <Card
             style={{
               color: "#000",
               height: "13rem",
               borderRadius: "15px",
-              backgroundColor: "#B5CFD8",
+              backgroundColor: "#a2d2ff",
               boxShadow: "0 0 1rem 0",
             }}
           >
@@ -136,7 +139,7 @@ const CardTableCalc = (props) => {
               </CardFooter>
             ) : (
               <CardFooter stats>
-                <div style={{ color: "black", fontSize: "22px" }}>
+                <div style={{ color: "black" }}>
                   {/* <Check /> */}
                   לא נדרשת פעולה מיידית
                 </div>
@@ -168,4 +171,4 @@ const CardTableCalc = (props) => {
   );
 };
 
-export default CardTableCalc;
+export default CardTableCalcGdod;

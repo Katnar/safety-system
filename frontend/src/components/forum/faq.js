@@ -49,11 +49,11 @@ const data = {
 };
 
 const styles = {
-  bgColor: "#e2eafc",
+  bgColor: "#E8ECF1",
   titleTextColor: "black",
   rowTitleColor: "black",
-  rowContentColor: "#bde0fe",
-  arrowColor: "red",
+  rowContentColor: "#E8ECF1",
+  arrowColor: "gray",
   direction: "rtl",
   borderRadius: "15px",
 };

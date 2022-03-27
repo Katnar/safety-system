@@ -13,6 +13,9 @@ import LoggedinRoute from "auth/LoggedinRoute";
 import UnloggedinRoute from "auth/UnloggedinRoute";
 import AdminRoute from "auth/AdminRoute.js";
 import GdodRoute from "auth/GdodRoute";
+import HativaRoute from "auth/HativaRoute";
+// import OgdaRoute from "auth/OgdaRoute";
+// import PikodRoute from "auth/PikodRoute";
 import CandidateRoute from "auth/CandidateRoute";
 import UnitRoute from "auth/UnitRoute";
 
@@ -36,6 +39,9 @@ import CandidateDashboard from "views/general/candidatepages/candidatedashboard/
 // import UnitPreferenceForm from "views/general/unitpages/unitpreferenceform/UnitPreferenceForm";
 import Home from "views/Home/adminDashboard";
 import gdodHome from "views/Home/gdodDashboard";
+import hativaHome from "views/Home/hativaDashboard";
+import ogdaHome from "views/Home/ogdaDashboard";
+import pikodHome from "views/Home/pikodDashboard";
 
 import Forum from "views/general/adminpages/forum"
 // import GdodHome from "views/Home/Home";
@@ -140,6 +146,10 @@ const routesgeneral = (
 
     <AdminRoute path="/adminDashboard" exact component={Home} />
     <GdodRoute path="/gdodDashboard/:gdod" exact component={gdodHome} />
+    <HativaRoute path="/hativaDashboard/:hativa" exact component={hativaHome} />
+    <LoggedinRoute path="/ogdaDashboard/:ogda" exact component={ogdaHome} />
+    <LoggedinRoute path="/pikodDashboard/:pikod" exact component={pikodHome} />
+    {/* <PikodRoute path="/pikodDashboard/:pikod" exact component={pikodHome} /> */}
 
     <AdminRoute path="/Forum" exact component={Forum} />
     {/* <AdminRoute path="/mahzorimpage" exact component={MahzorimPage} />
@@ -307,73 +317,73 @@ const routesgeneral = (
 
     {/*///////////////////////////////////////////Gdod Routes/////////////////////////////////////////////////*/}
 
-    <GdodRoute path="/UnitIdGdod" exact component={unitIdGdod} />
-    <GdodRoute
+    <LoggedinRoute path="/UnitIdGdod" exact component={unitIdGdod} />
+    <LoggedinRoute
       path="/safetyOfficersQualificationGdod"
       exact
       component={safetyOfficersQualificationGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/certificationManagementGdod"
       exact
       component={certificationManagementGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/occupationalSupervisionGdod"
       exact
       component={occupationalSupervisionGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/trainingProgramGdod"
       exact
       component={trainingProgramGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/equipmentAndMaterialsPeriodicInspectionsGdod"
       exact
       component={equipmentAndMaterialsPeriodicInspectionsGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/environmentalMonitoringGdod"
       exact
       component={environmentalMonitoringGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/machinesAndEquipmentPeriodicInspectionsGdod"
       exact
       component={machinesAndEquipmentPeriodicInspectionsGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/riskManagementMonitoringGdod"
       exact
       component={riskManagementMonitoringGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/monthlySafetyCommitteesMonitoringGdod"
       exact
       component={monthlySafetyCommitteesMonitoringGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/hazardsMonitoringGdod"
       exact
       component={hazardsMonitoringGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/homsManagementMonitoringGdod"
       exact
       component={homsManagementMonitoringGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/personalProtectiveEquipmentMonitoringGdod"
       exact
       component={personalProtectiveEquipmentMonitoringGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/groundingTestsGdod"
       exact
       component={groundingTestsGdod}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/reviewsDocumentationGdod"
       exact
       component={reviewsDocumentationGdod}
@@ -381,18 +391,18 @@ const routesgeneral = (
 
     {/*///////////////////////////////////////////Gdod Forms/////////////////////////////////////////////////*/}
 
-    <GdodRoute path="/UnitIdGdodForm/:id" exact component={UnitIdGdodForm} />
-    <GdodRoute
+    <LoggedinRoute path="/UnitIdGdodForm/:id" exact component={UnitIdGdodForm} />
+    <LoggedinRoute
       path="/safetyOfficersQualificationGdodForm/:id"
       exact
       component={safetyOfficersQualificationGdodForm}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/certificationManagementGdodForm/:id"
       exact
       component={certificationsManagementsGdodForm}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/occupationalSupervisionGdodForm/:id"
       exact
       component={occupationalSupervisionGdodForm}
@@ -402,52 +412,52 @@ const routesgeneral = (
       exact
       component={trainingProgramGdodForm}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/equipmentAndMaterialsPeriodicInspectionsGdodForm/:id"
       exact
       component={equipmentAndMaterialsPeriodicInspectionsGdodForm}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/environmentalMonitoringGdodForm/:id"
       exact
       component={environmentalMonitoringGdodForm}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/machinesAndEquipmentPeriodicInspectionsGdodForm/:id"
       exact
       component={machinesAndEquipmentPeriodicInspectionsGdodForm}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/riskManagementMonitoringGdodForm/:id"
       exact
       component={riskManagementMonitoringGdodForm}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/monthlySafetyCommitteesMonitoringGdodForm/:id"
       exact
       component={monthlySafetyCommitteesMonitoringGdodForm}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/hazardsMonitoringGdodForm/:id"
       exact
       component={hazardsMonitoringGdodForm}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/homsManagementMonitoringGdodForm/:id"
       exact
       component={homsManagementMonitoringGdodForm}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/personalProtectiveEquipmentMonitoringGdodForm/:id"
       exact
       component={personalProtectiveEquipmentMonitoringGdodForm}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/groundingTestsGdodForm/:id"
       exact
       component={groundingTestsGdodForm}
     />
-    <GdodRoute
+    <LoggedinRoute
       path="/reviewsDocumentationGdodForm/:id"
       exact
       component={reviewsDocumentationGdodForm}
