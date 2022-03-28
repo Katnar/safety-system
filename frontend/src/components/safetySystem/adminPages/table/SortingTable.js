@@ -189,7 +189,7 @@ const SortingTable = (props) => {
                     >
                       {" "}
                       <Link to={`/${props.tableName}Form/${row.original._id}`}>
-                        <button className="btn btn-success">ערוך</button>
+                        <button className="btn btn-edit">ערוך</button>
                       </Link>
                     </div>
                   </td>

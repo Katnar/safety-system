@@ -597,7 +597,7 @@ function SidebarGdod() {
           </NavLink>
         </li>
       </Nav>
-      <div
+      {/* <div
         style={{
           justifyContent: "center",
           textAlign: "center",
@@ -612,7 +612,7 @@ function SidebarGdod() {
         >
           התנתק
         </Button>
-      </div>
+      </div> */}
     </>
   );
 }

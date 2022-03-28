@@ -102,13 +102,14 @@ const PostCard = () => {
               <Col xs={12} sm={8} md={4}>
                 <Button
                   type="primary"
-                  className="btn btn-success"
+                  className="btn"
                   style={{
                     width: "100%",
                     height: "3rem",
                     width: "8rem",
                     marginLeft: "3rem",
                     marginBottom: "1rem",
+                    background: "#04ab64"
                   }}
                 >
                   <Row>

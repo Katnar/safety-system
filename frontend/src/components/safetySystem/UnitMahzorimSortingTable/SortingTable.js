@@ -106,8 +106,8 @@ const SortingTable = ({ match }) => {
                     <td style={{ textAlign: "center" }}>
                       <Link to={`/jobsbymahzorandunit/${row.original._id}/${match.params.unitid}`}>
                         <button
-                          className="btn btn-success"
-                          style={{ padding: "0.5rem" }}
+                          className="btn"
+                          style={{ padding: "0.5rem", background:"#04ab64"}}
                         >
                          תפקידים ביחידה
                         </button>

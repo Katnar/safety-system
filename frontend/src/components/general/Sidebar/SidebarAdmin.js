@@ -667,7 +667,7 @@ function SidebarAdmin() {
           </NavLink>
         </li>
       </Nav>
-      <div
+      {/* <div
         style={{
           justifyContent: "center",
           textAlign: "center",
@@ -683,7 +683,7 @@ function SidebarAdmin() {
         >
           התנתק
         </Button>
-      </div>
+      </div> */}
     </>
   );
 }

@@ -106,8 +106,8 @@ const SortingTable = ({ match }) => {
                     <td style={{ textAlign: "center" }}>
                       <Link to={`/unitpreferenceform/${row.original.mahzor._id}/${match.params.unitid}/${row.original._id}`}>
                         <button
-                          className="btn btn-success"
-                          style={{ padding: "0.5rem" }}
+                          className="btn"
+                          style={{ padding: "0.5rem", background:"#04ab64"}}
                         >
                           ערוך העדפות מתמודדים
                         </button>

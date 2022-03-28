@@ -20,7 +20,8 @@
   --secondary: #f4f5f7;
   --success: #00f2c3;
   --info: #1d8cf8;
-  --lior: #7393A7;
+  --lior: #04ab64;
+  --edit: #04dc7c;
   --warning: #ff8d72;
   --danger: #fd5d93;
   --light: #adb5bd;
@@ -42,8 +43,14 @@
 *::after {
   box-sizing: border-box; }
 
+  @font-face {
+    font-family: 'Rubic';
+    src: url('../fonts/rubik-v19-latin_hebrew/rubik-v19-latin_hebrew-regular.woff2') format('woff2'),
+    url('../fonts/rubik-v19-latin_hebrew/rubik-v19-latin_hebrew-regular.woff') format('woff');
+  }
+
 html {
-  font-family: sans-serif;
+  font-family: 'Rubic';
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(34, 42, 66, 0); }
@@ -55,7 +62,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   }
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Rubic";
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
@@ -1933,6 +1940,7 @@ fieldset:disabled a.btn {
     .btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled).active:focus,
     .show > .btn-success.dropdown-toggle:focus {
       box-shadow: 0 0 0 0 rgba(38, 244, 204, 0.5); }
+      
 
 .btn-info {
   color: #ffffff;
@@ -1990,30 +1998,57 @@ fieldset:disabled a.btn {
 
 .btn-danger {
   color: #ffffff;
-  background-color: #fd5d93;
-  border-color: #fd5d93;
+  background-color: #ffb699;
+  border-color: #ffb699;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); }
   .btn-danger:hover {
     color: #ffffff;
-    background-color: #fd377a;
-    border-color: #fc2b71; }
+    background-color: #ffc7b0;
+    border-color: #ffc7b0; }
   .btn-danger:focus, .btn-danger.focus {
     color: #ffffff;
-    background-color: #fd377a;
-    border-color: #fc2b71;
+    background-color: #ffb699;
+    border-color: #ffb699;
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 0 rgba(253, 117, 163, 0.5); }
   .btn-danger.disabled, .btn-danger:disabled {
     color: #ffffff;
-    background-color: #fd5d93;
-    border-color: #fd5d93; }
+    background-color: #ffb699;
+    border-color: #ffb699; }
   .btn-danger:not(:disabled):not(.disabled):active, .btn-danger:not(:disabled):not(.disabled).active,
   .show > .btn-danger.dropdown-toggle {
     color: #ffffff;
-    background-color: #fc2b71;
-    border-color: #fc1e69; }
+    background-color: #ffb699;
+    border-color: #ffb699; }
     .btn-danger:not(:disabled):not(.disabled):active:focus, .btn-danger:not(:disabled):not(.disabled).active:focus,
     .show > .btn-danger.dropdown-toggle:focus {
       box-shadow: 0 0 0 0 rgba(253, 117, 163, 0.5); }
+
+      .btn-edit {
+        color: #ffffff;
+        background-color: #04ab64;
+        border-color: #04ab64;
+        box-shadow: 0 4px 6px rgba(50, 93, 59, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); }
+        .btn-edit:hover {
+          color: #ffffff;
+          background-color: #04dc7c;
+          border-color: #04dc7c; }
+        .btn-edit:focus, .btn-edit.focus {
+          color: #ffffff;
+          background-color: #04ab64;
+          border-color: #04ab64;
+          box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 0 rgba(128, 253, 117, 0.5); }
+        .btn-edit.disabled, .btn-edit:disabled {
+          color: #ffffff;
+          background-color: #04dc7c;
+          border-color: #04dc7c; }
+        .btn-edit:not(:disabled):not(.disabled):active, .btn-edit:not(:disabled):not(.disabled).active,
+        .show > .btn-edit.dropdown-toggle {
+          color: #ffffff;
+          background-color: #04ab64;
+          border-color: #04ab64; }
+          .btn-edit:not(:disabled):not(.disabled):active:focus, .btn-edit:not(:disabled):not(.disabled).active:focus,
+          .show > .btn-danger.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0 rgba(133, 253, 117, 0.5); }
 
 .btn-light {
   color: #ffffff;
@@ -9068,14 +9103,14 @@ a.text-darker:hover, a.text-darker:focus {
     color: #ffffff; }
 
 .btn-danger {
-  background: #fd5d93;
-  background-image: -webkit-linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93);
-  background-image: -o-linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93);
-  background-image: -moz-linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93);
-  background-image: linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93);
+  background: #ff9166;
+  background-image: -webkit-linear-gradient(to bottom left, #ff9166, #ff9166, #ff9166);
+  background-image: -o-linear-gradient(to bottom left, #ff9166, #ff9166, #ff9166);
+  background-image: -moz-linear-gradient(to bottom left, #ff9166, #ff9166, #ff9166);
+  background-image: linear-gradient(to bottom left, #ff9166, #ff9166, #ff9166);
   background-size: 210% 210%;
   background-position: top right;
-  background-color: #fd5d93;
+  background-color: #ff9166;
   transition: all 0.15s ease;
   box-shadow: none;
   color: #ffffff; }
@@ -9083,11 +9118,11 @@ a.text-darker:hover, a.text-darker:focus {
     background-position: bottom left;
     transition: 0.3s ease-in-out; }
   .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .btn-danger:active:focus, .btn-danger:active:hover, .btn-danger.active:focus, .btn-danger.active:hover {
-    background-color: #ec250d !important;
-    background-image: linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93) !important;
-    background-image: -webkit-linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93) !important;
-    background-image: -o-linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93) !important;
-    background-image: -moz-linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93) !important;
+    background-color: #ffb699 !important;
+    background-image: linear-gradient(to bottom left, #ffb699, #ffb699, #ffb699) !important;
+    background-image: -webkit-linear-gradient(to bottom left, #ffb699, #ffb699, #ffb699) !important;
+    background-image: -o-linear-gradient(to bottom left, #ffb699, #ffb699, #ffb699) !important;
+    background-image: -moz-linear-gradient(to bottom left, #ffb699, #ffb699, #ffb699) !important;
     color: #ffffff;
     box-shadow: none; }
   .btn-danger:active {
@@ -9136,6 +9171,77 @@ a.text-darker:hover, a.text-darker:focus {
       color: #ffffff !important;
       text-decoration: none;
       box-shadow: none; }
+
+
+      .btn-edit {
+        background: #fd5d93;
+        background-image: -webkit-linear-gradient(to bottom left, #04ab64, #04ab64, #04ab64);
+        background-image: -o-linear-gradient(to bottom left, #04ab64, #04ab64, #04ab64);
+        background-image: -moz-linear-gradient(to bottom left, #04ab64, #04ab64, #04ab64);
+        background-image: linear-gradient(to bottom left, #04ab64, #04ab64, #04ab64);
+        background-size: 210% 210%;
+        background-position: top right;
+        background-color: #04ab64;
+        transition: all 0.15s ease;
+        box-shadow: none;
+        color: #ffffff; }
+        .btn-edit.animation-on-hover:hover {
+          background-position: bottom left;
+          transition: 0.3s ease-in-out; }
+        .btn-edit:hover, .btn-edit:focus, .btn-edit:active, .btn-edit.active, .btn-edit:active:focus, .btn-edit:active:hover, .btn-edit.active:focus, .btn-edit.active:hover {
+          background-color: #05c773 !important;
+          background-image: linear-gradient(to bottom left, #05c773, #05c773, #05c773) !important;
+          background-image: -webkit-linear-gradient(to bottom left, #05c773, #05c773, #05c773) !important;
+          background-image: -o-linear-gradient(to bottom left, #05c773, #05c773, #05c773) !important;
+          background-image: -moz-linear-gradient(to bottom left, #05c773, #05c773, #05c773) !important;
+          color: #ffffff;
+          box-shadow: none; }
+        .btn-edit:active {
+          box-shadow: none !important;
+          transform: translateY(1px) !important;
+          transition: all .15s ease; }
+        .btn-edit:not([data-action]):hover {
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+          transform: translateY(-1px);
+          -webkit-transform: translateY(-1px); }
+        .btn-edit.disabled, .btn-edit.disabled:hover, .btn-edit.disabled:focus, .btn-edit.disabled.focus, .btn-edit.disabled:active, .btn-edit.disabled.active, .btn-edit:disabled, .btn-edit:disabled:hover, .btn-edit:disabled:focus, .btn-edit:disabled.focus, .btn-edit:disabled:active, .btn-edit:disabled.active, .btn-edit[disabled], .btn-edit[disabled]:hover, .btn-edit[disabled]:focus, .btn-edit[disabled].focus, .btn-edit[disabled]:active, .btn-edit[disabled].active,
+        fieldset[disabled] .btn-edit,
+        fieldset[disabled] .btn-edit:hover,
+        fieldset[disabled] .btn-edit:focus,
+        fieldset[disabled] .btn-edit.focus,
+        fieldset[disabled] .btn-edit:active,
+        fieldset[disabled] .btn-edit.active {
+          background-color: #fd5d93;
+          border-color: #fd5d93; }
+        .btn-edit.btn-simple {
+          color: #fd5d93;
+          border-color: #fd5d93;
+          background: transparent; }
+          .btn-edit.btn-simple:hover, .btn-edit.btn-simple:focus, .btn-edit.btn-simple:active, .btn-edit.btn-simple:not(:disabled):not(.disabled):active {
+            color: #fd5d93;
+            border-color: #fd5d93;
+            background-color: transparent !important;
+            background-image: none !important;
+            box-shadow: none; }
+          .btn-edit.btn-simple.active {
+            border-color: #fd5d93 !important; }
+            .btn-edit.btn-simple.active:hover, .btn-edit.btn-simple.active:focus, .btn-edit.btn-simple.active:active, .btn-edit.btn-simple.active:not(:disabled):not(.disabled):active {
+              color: #ffffff;
+              border-color: #fd5d93;
+              background-image: linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93) !important;
+              background-image: -webkit-linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93) !important;
+              background-image: -o-linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93) !important;
+              background-image: -moz-linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93) !important;
+              background-color: #ec250d !important;
+              box-shadow: none; }
+        .btn-edit.btn-link {
+          color: #fd5d93; }
+          .btn-edit.btn-link:hover, .btn-edit.btn-link:focus, .btn-edit.btn-link:active {
+            background-color: transparent !important;
+            background-image: none !important;
+            color: #ffffff !important;
+            text-decoration: none;
+            box-shadow: none; }
 
 .btn-neutral {
   background: #ffffff;

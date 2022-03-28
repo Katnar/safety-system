@@ -186,7 +186,7 @@ const SortingTable = (props) => {
                       <Link
                         to={`/certificationManagementForm/${row.original._id}`}
                       >
-                        <button className="btn btn-success">ערוך</button>
+                        <button className="btn btn-edit">ערוך</button>
                       </Link>
                     </div>
                   </td>
@@ -202,6 +202,7 @@ const SortingTable = (props) => {
                       {" "}
                       <button
                         className="btn btn-danger"
+          
                         onClick={() => Delete(row.original._id)}
                       >
                         מחק

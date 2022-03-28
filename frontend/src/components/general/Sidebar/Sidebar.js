@@ -50,8 +50,15 @@ import SidebarHativa from "components/general/Sidebar/SidebarHativa";
 import SidebarOgda from "components/general/Sidebar/SidebarOgda";
 import SidebarPikod from "components/general/Sidebar/SidebarPikod";
 import SidebarCandidate from "../Sidebar/Sidebarcandidate";
+import teamLogo from "assets/img/team100.png"
 
 function Sidebar() {
+  const clickSubmit = (event) => {
+    event.preventDefault();
+    signout().then((response) => {
+      history.push(`/signin`);
+    });
+    }
   const [color, setcolor] = useState("transparent");
   const { user } = isAuthenticated();
 
@@ -87,6 +94,25 @@ function Sidebar() {
           ) : user.role === "4" ? (
             <SidebarPikod />
           ) : null}
+          <div
+            style={{
+              justifyContent: "center",
+              textAlign: "center",
+              position: "absolute",
+              bottom: 0,
+              width: "100%",
+              marginBottom: "15px"
+            }}
+          >
+            <img src={teamLogo} style={{ width: "50%"}}></img>
+            <Button
+              onClick={clickSubmit}
+              className="btn-defailt"
+              style={{ width: "80%"}}
+            >
+              התנתק
+            </Button>
+          </div>
         </div>
       </div>
     </>
