@@ -6,63 +6,58 @@ import {
   useFilters,
   usePagination,
 } from "react-table";
-import Button from "reactstrap/lib/Button";
 import { withRouter, Redirect, Link } from "react-router-dom";
 import { COLUMNS } from "./coulmns";
 import { GlobalFilter } from "./GlobalFilter";
 import axios from "axios";
+import Button from "reactstrap/lib/Button";
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
-import {FaFileDownload} from 'react-icons/fa';
+import { FaFileDownload } from 'react-icons/fa';
+import { isAuthenticated } from "auth";
 
 const SortingTable = (props) => {
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([]);
 
+  const user = props.userData.user;
+
   function init() {
-    getUnitDetails();
+    console.log(user.role);
+    getCertificationsDetails();
   }
 
-  const getUnitDetails = async () => {
+  const getCertificationsDetails = async () => {
     try {
       await axios
-        .get(`http://localhost:8000/api/unitId`)
+        .get(`http://localhost:8000/api/certificationsManagement`)
         .then((response) => {
+          // console.log(response.data);
+          // console.log("asdasd");
           setData(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
-    } catch {}
+    } catch { }
   };
 
-  const UnitDelete = (UnitIdId) => {
+  const Delete = (Id) => {
     axios
-      .delete(`http://localhost:8000/api/unitId/${UnitIdId}`)
+      .delete(`http://localhost:8000/api/certificationsManagement/${Id}`)
       .then((response) => {
-        loadUnits();
+        load();
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const loadUnits = () => {
+  const load = () => {
     axios
-      .get("http://localhost:8000/api/unitId")
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const sendMail = () => {
-    axios
-      .put("http://localhost:8000/api/sendMail")
+      .get("http://localhost:8000/api/certificationsManagement")
       .then((response) => {
         setData(response.data);
       })
@@ -134,8 +129,9 @@ const SortingTable = (props) => {
                   </th>
                 ))}
                 <th>ערוך</th>
-                <th>מחק</th>
-              </tr>
+                {user.role==='0' &&
+                  <th>מחק</th>
+                }</tr>
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
@@ -144,27 +140,38 @@ const SortingTable = (props) => {
               return (
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
-                    if (cell.column.id == "name") {
+                    if (cell.column.id == "personalNumber") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "location") {
+                    if (cell.column.id == "id") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "unitStructure") {
+                    if (cell.column.id == "fullName") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "unitMeans") {
+                    if (cell.column.id == "rank") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "mainOccupation") {
+                    if (cell.column.id == "profession") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "unitStructureTree") {
-                        return <td><a href={"http://localhost:8000/api/downloadFile?collec=unitId&id="+row.original._id} target="_blank"><FaFileDownload/></a></td>;
+                    if (cell.column.id == "certification") {
+                      return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "teneStructureTree") {
-                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=unitId&id="+"2_"+row.original._id} target="_blank"><FaFileDownload/></a></td>;
-                     }
+                    if (cell.column.id == "certificationValidity") {
+                      return (
+                        <td>
+                          {cell.value
+                            .slice(0, 10)
+                            .split("-")
+                            .reverse()
+                            .join("-")}
+                        </td>
+                      );
+                    }
+                    if (cell.column.id == "_id") {
+                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=certificationsManagement&id=" + cell.value.toString()} target="_blank"><FaFileDownload /></a></td>;
+                    }
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
@@ -178,29 +185,33 @@ const SortingTable = (props) => {
                       }}
                     >
                       {" "}
-                      <Link to={`/UnitIdForm/${row.original._id}`}>
-                        <button className="btn btn-edit">ערוך</button>
+                      <Link
+                        to={`/certificationManagementForm/${row.original._id}`}
+                      >
+                        <button className="btn btn-success">ערוך</button>
                       </Link>
                     </div>
                   </td>
-                  <td role="cell">
-                    {" "}
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
+                  {user.role === '0' &&
+                    <td role="cell">
                       {" "}
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => UnitDelete(row.original._id)}
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
                       >
-                        מחק
-                      </button>
-                    </div>
-                  </td>
+                        {" "}
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => Delete(row.original._id)}
+                        >
+                          מחק
+                        </button>
+                      </div>
+                    </td>
+                  }
                 </tr>
               );
             })}
@@ -250,8 +261,3 @@ const SortingTable = (props) => {
   );
 };
 export default withRouter(SortingTable);
-
-
-
-//header: #8cb2c0
-//edit-btn, add-data: ##04ab64
