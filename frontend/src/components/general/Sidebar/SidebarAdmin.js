@@ -32,6 +32,7 @@ import forum from "assets/img/conversation.png";
 import { signout } from "auth/index";
 import history from "../../../history";
 import teamLogo from "assets/img/team100.png"
+import dropdown from "assets/img/dropdown.png"
 
 import {
   Button,
@@ -147,14 +148,16 @@ function SidebarAdmin() {
             style={{
               display: "block",
               cursor: "pointer",
+              textAlign: "right",
+              paddingRight: "22px"
               // marginRight: "-10px",
               // paddingRight: "8px",
             }}
             onClick={toggleNavbar1}
           >
-            <Row style={{ direction: "rtl" }}>
+            <Row style={{ direction: "rtl", textAlign: "right", paddingRight: "0px" }}>
               <Col xs={12} md={3}>
-              <img src={table} style={{ height: "20px", paddingRight: "0px", margin: "0px" }}></img>
+              <img src={dropdown} style={{ height: "20px", paddingRight: "0px", margin: "0px" }}></img>
               </Col>
               <Col xs={12} md={9} style={{
                 margin: "0px",
@@ -171,7 +174,7 @@ function SidebarAdmin() {
             <Collapse isOpen={!collapsed1} navbar>
             <NavLink
             to="/riskManagementMonitoring"
-            style={{ margin: "0px" }}
+            style={{ margin: "0px", textAlign: "right"}}
             activeClassName="sidebar_active_link"
           >
                 <Row style={{ direction: "rtl" }}>
@@ -358,6 +361,7 @@ function SidebarAdmin() {
             style={{
               display: "block",
               cursor: "pointer",
+              paddingRight: "22px"
               // marginRight: "-10px",
               // paddingRight: "8px",
             }}
@@ -365,7 +369,7 @@ function SidebarAdmin() {
           >
             <Row style={{ direction: "rtl" }}>
               <Col xs={12} md={3}>
-              <img src={table} style={{ height: "20px", paddingRight: "0px", margin: "0px" }}></img>
+              <img src={dropdown} style={{ height: "20px", textAlign: "right", paddingRight: "0px", margin: "0px" }}></img>
               </Col>
               <Col xs={12} md={9} style={{
                 margin: "0px",
@@ -480,6 +484,7 @@ function SidebarAdmin() {
             style={{
               display: "block",
               cursor: "pointer",
+              paddingRight: "22px"
               // marginRight: "-10px",
               // paddingRight: "8px",
             }}
@@ -487,7 +492,7 @@ function SidebarAdmin() {
           >
             <Row style={{ direction: "rtl" }}>
               <Col xs={12} md={3}>
-              <img src={table} style={{ height: "20px", paddingRight: "0px", margin: "0px" }}></img>
+              <img src={dropdown} style={{ height: "20px", paddingRight: "0px", margin: "0px" }}></img>
               </Col>
               <Col xs={12} md={9} style={{
                 margin: "0px",
