@@ -68,6 +68,9 @@ app.use("/api", mail);
 // const mahzorRoutes = require("./routes/general/mahzor");
 const unitRoutes = require("./routes/general/unit");
 const gdodRoutes = require("./routes/general/gdod");
+const hativaRoutes = require("./routes/general/hativa");
+const ogdaRoutes = require("./routes/general/ogda");
+const pikodRoutes = require("./routes/general/pikod");
 // const unitpreferenceRoutes = require("./routes/general/unitpreference");
 
 // app.use("/api", affiliationRoutes);
@@ -82,6 +85,9 @@ const gdodRoutes = require("./routes/general/gdod");
 // app.use("/api", mahzorRoutes);
 app.use("/api", unitRoutes);
 app.use("/api", gdodRoutes);
+app.use("/api", hativaRoutes);
+app.use("/api", ogdaRoutes);
+app.use("/api", pikodRoutes);
 // app.use("/api", unitpreferenceRoutes);
 
 const safetyOfficersQualificationRoutes = require("./routes/general/safetyOfficersQualification");
@@ -99,6 +105,8 @@ const homsManagementMonitoringRoutes = require("./routes/general/homsManagementM
 const personalProtectiveEquipmentMonitoringRoutes = require("./routes/general/personalProtectiveEquipmentMonitoring");
 const groundingTestsRoutes = require("./routes/general/groundingTests");
 const reviewsDocumentationRoutes = require("./routes/general/reviewsDocumentation");
+const questionRoutes = require("./routes/forum/question");
+const answerRoutes = require("./routes/forum/answer");
 
 app.use("/api", safetyOfficersQualificationRoutes);
 app.use("/api", unitIdRoutes);
@@ -115,6 +123,8 @@ app.use("/api", homsManagementMonitoringRoutes);
 app.use("/api", personalProtectiveEquipmentMonitoringRoutes);
 app.use("/api", groundingTestsRoutes);
 app.use("/api", reviewsDocumentationRoutes);
+app.use("/api", questionRoutes);
+app.use("/api", answerRoutes);
 
 if (process.env.NODE_ENV === "production") {
   //set static folder

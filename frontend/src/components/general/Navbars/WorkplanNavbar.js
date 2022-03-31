@@ -54,12 +54,12 @@ function WorkplanNavbar(props) {
                 <UserProfileCircle fname={user.name} lname={user.lastname} bgcolor={color}/>
                   {/* <img src={Logoeged} height='50px'></img> */}
                 </Col>
-                <Col xs={12} md={4}>
-
-                </Col>
+                
                 <Col xs={12} md={4} style={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {/* <ToggleDarkModeButton /> */}
-                  {/* <p style={{ fontWeight: 'bold', paddingLeft: '30px' }}> שלום, {user.name + ' ' + user.lastname}</p> */}
+                </Col><Col xs={12} md={4}>
+                  <p style={{ fontWeight: 'bold', textAlign: "right", alignContent: "right",alignItems:"right", fontSize: "26px" }}> שלום, {user.name + ' ' + user.lastname}</p>
+
                 </Col>
               </Row>
             </Navbar>

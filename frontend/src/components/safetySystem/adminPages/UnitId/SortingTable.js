@@ -178,7 +178,7 @@ const SortingTable = (props) => {
                     >
                       {" "}
                       <Link to={`/UnitIdForm/${row.original._id}`}>
-                        <button className="btn btn-success">ערוך</button>
+                        <button className="btn btn-edit">ערוך</button>
                       </Link>
                     </div>
                   </td>
@@ -249,3 +249,8 @@ const SortingTable = (props) => {
   );
 };
 export default withRouter(SortingTable);
+
+
+
+//header: #8cb2c0
+//edit-btn, add-data: ##04ab64

@@ -204,7 +204,7 @@ const SortingTable = ({ match }) => {
                       <Link
                         to={`/occupationalSupervisionForm/${row.original._id}`}
                       >
-                        <button className="btn btn-success">ערוך</button>
+                        <button className="btn btn-edit">ערוך</button>
                       </Link>
                     </div>
                   </td>

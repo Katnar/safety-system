@@ -76,6 +76,12 @@ function Signin() {
         if (user.role === "2") {
           history.push(`/candidatedashboard/${user._id}`);
         }
+        if (user.role === "3") {
+          history.push(`/ogdadashboard/${user._id}`);
+        }
+        if (user.role === "4") {
+          history.push(`/pikoddashboard/${user._id}`);
+        }
       } else {
         toast.success("משתמש לא מאושר מערכת");
         setValues({ ...values, redirectToReferrer: false });

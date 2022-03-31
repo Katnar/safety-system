@@ -40,13 +40,46 @@ const EditUserForm = ({ match }) => {
     redirectToReferrer: false,
   });
 
-  const [units, setUnits] = useState([]);
+  const [gdods, setGdods] = useState([]);
+  const [hativas, setHativas] = useState([]);
+  const [ogdas, setOgdas] = useState([]);
+  const [pikods, setPikods] = useState([]);
 
-  const loadUnits = () => {
+  const loadGdods = () => {
     axios
-      .get("http://localhost:8000/api/unit")
+      .get("http://localhost:8000/api/gdod")
       .then((response) => {
-        setUnits(response.data);
+        setGdods(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const loadHativas = () => {
+    axios
+      .get("http://localhost:8000/api/hativa")
+      .then((response) => {
+        setHativas(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const loadOgdas = () => {
+    axios
+      .get("http://localhost:8000/api/ogda")
+      .then((response) => {
+        setOgdas(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const loadPikods = () => {
+    axios
+      .get("http://localhost:8000/api/pikod")
+      .then((response) => {
+        setPikods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -154,7 +187,11 @@ const EditUserForm = ({ match }) => {
 
   useEffect(() => {
     init();
-    loadUnits();
+    // loadUnits();
+    loadGdods();
+    loadHativas();
+    loadOgdas();
+    loadPikods();
   }, [])
 
   useEffect(() => {
@@ -200,8 +237,10 @@ const EditUserForm = ({ match }) => {
                       <Input type="select" name="role" value={data.role} onChange={handleChange}>
                         <option value="">הרשאה</option>
                         <option value="0">מנהל מערכת</option>
-                        <option value="1">הרשאת יחידה</option>
-                        <option value="2">הרשאת מתמודד</option>
+                        <option value="1">הרשאת גדוד</option>
+                        <option value="2">הרשאת חטיבה</option>
+                        <option value="3">הרשאת אוגדה</option>
+                        <option value="4">הרשאת פיקוד</option>
                       </Input>
                     </FormGroup>
 
@@ -210,18 +249,75 @@ const EditUserForm = ({ match }) => {
                     ) : data.role === "1" ? (
                       <>
                         <div style={{ textAlign: "right", paddingTop: "10px" }}>
-                          יחידה
+                          גדוד
                       </div>
                         <FormGroup dir="rtl">
                           <Input
                             type="select"
-                            name="unitid"
-                            value={data.unitid}
+                            name="gdod"
+                            value={data.gdod}
                             onChange={handleChange}
                           >
                             <option value={""}>יחידה</option>
-                            {units.map((unit, index) => (
-                              <option value={unit._id}>{unit.name}</option>
+                            {gdods.map((gdod, index) => (
+                              <option value={gdod._id}>{gdod.name}</option>
+                            ))}
+                          </Input>
+                        </FormGroup>
+                      </>
+                    ) : data.role === "2" ? (
+                      <>
+                        <div style={{ textAlign: "right", paddingTop: "10px" }}>
+                          חטיבה
+                      </div>
+                        <FormGroup dir="rtl">
+                          <Input
+                            type="select"
+                            name="hativa"
+                            value={data.hativa}
+                            onChange={handleChange}
+                          >
+                            <option value={""}>חטיבה</option>
+                            {hativas.map((hativa, index) => (
+                              <option value={hativa._id}>{hativa.name}</option>
+                            ))}
+                          </Input>
+                        </FormGroup>
+                      </>
+                    ) : data.role === "3" ? (
+                      <>
+                        <div style={{ textAlign: "right", paddingTop: "10px" }}>
+                          אוגדה
+                      </div>
+                        <FormGroup dir="rtl">
+                          <Input
+                            type="select"
+                            name="ogda"
+                            value={data.ogda}
+                            onChange={handleChange}
+                          >
+                            <option value={""}>אוגדה</option>
+                            {ogdas.map((ogda, index) => (
+                              <option value={ogda._id}>{ogda.name}</option>
+                            ))}
+                          </Input>
+                        </FormGroup>
+                      </>
+                    ) : data.role === "4" ? (
+                      <>
+                        <div style={{ textAlign: "right", paddingTop: "10px" }}>
+                          פיקוד
+                      </div>
+                        <FormGroup dir="rtl">
+                          <Input
+                            type="select"
+                            name="pikod"
+                            value={data.pikod}
+                            onChange={handleChange}
+                          >
+                            <option value={""}>פיקוד</option>
+                            {pikods.map((pikod, index) => (
+                              <option value={pikod._id}>{pikod.name}</option>
                             ))}
                           </Input>
                         </FormGroup>
