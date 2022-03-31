@@ -95,7 +95,16 @@ const UnitIdDataComponent = ({ match }) => {
     const collec = "unitId";
     formData.append("file", singleFile);
     await singleFileUpload(formData, collec, id);
-    console.log(singleFile);
+    console.log("First File:"+singleFile);
+  };
+
+  
+  const UploadFile2 = async (id) => {
+    const formData = new FormData();
+    const collec = "unitId";
+    formData.append("file", singleFile2);
+    await singleFileUpload(formData, collec, "2_"+id);
+    console.log("Second File:"+singleFile2);
   };
 
   async function SubmitData() {
@@ -116,6 +125,7 @@ const UnitIdDataComponent = ({ match }) => {
     }
 
     await UploadFile(tempUnitData._id);
+    await UploadFile2(tempUnitData._id);
 
 
     // console.log("post")
@@ -139,6 +149,11 @@ const UnitIdDataComponent = ({ match }) => {
   const [singleFile, setSingleFile] = useState("");
   const SingleFileChange = (e) => {
     setSingleFile(e.target.files[0]);
+  };
+  
+  const [singleFile2, setSingleFile2] = useState("");
+  const SingleFileChange2 = (e) => {
+    setSingleFile2(e.target.files[0]);
   };
 
   return (
@@ -246,7 +261,7 @@ const UnitIdDataComponent = ({ match }) => {
                   type="file"
                   name="teneStructureTree"
                   value={unit.teneStructureTree}
-                  onChange={(e) => SingleFileChange(e)}
+                  onChange={(e) => SingleFileChange2(e)}
                 ></Input>
               {/* </FormGroup> */}
             </Col>
