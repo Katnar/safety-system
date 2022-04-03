@@ -11,6 +11,7 @@ import { withRouter, Redirect, Link } from "react-router-dom";
 import { COLUMNS } from "./coulmns";
 import { GlobalFilter } from "./GlobalFilter";
 import axios from "axios";
+import {FaFileDownload} from 'react-icons/fa';
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
@@ -295,11 +296,11 @@ const SortingTable = (props) => {
                       return <td>{cell.value}</td>;
                     }
                     if (cell.column.id == "unitStructureTree") {
-                      return <td>{cell.value}</td>;
-                    }
-                    if (cell.column.id == "teneStructureTree") {
-                      return <td>{cell.value}</td>;
-                    }
+                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=unitId&id="+row.original._id} target="_blank"><FaFileDownload/></a></td>;
+                  }
+                  if (cell.column.id == "teneStructureTree") {
+                    return <td><a href={"http://localhost:8000/api/downloadFile?collec=unitId&id="+"2_"+row.original._id} target="_blank"><FaFileDownload/></a></td>;
+                   }
                     console.log(row.original.userData._id);
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}

@@ -57,7 +57,7 @@ export const COLUMNS = [
   },
   {
     Header: "צירוף מסמכים סרוקים",
-    accessor: "documentUpload",
+    accessor: "_id",
     Filter: ColumnFilter,
   },
 ];

@@ -22,7 +22,7 @@ export const COLUMNS = [
   },
   {
     Header: "מסמכים סרוקים",
-    accessor: "documentUpload",
+    accessor: "_id",
     Filter: ColumnFilter,
   },
 ];
