@@ -32,7 +32,7 @@ import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 import SettingModal from "../../../../components/general/modal/SettingModal";
 
-const CertificationManagementDataComponent = ({ match }) => {
+const FormView = ({ match }) => {
   //mahzor
   const [data, setData] = useState({});
   const [gdods, setGdods] = useState([]);
@@ -304,4 +304,4 @@ const CertificationManagementDataComponent = ({ match }) => {
     </Card>
   );
 };
-export default withRouter(CertificationManagementDataComponent);
+export default withRouter(FormView);
