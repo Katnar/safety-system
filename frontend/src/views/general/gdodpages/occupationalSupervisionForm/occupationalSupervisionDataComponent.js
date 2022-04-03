@@ -36,7 +36,7 @@ import { isAuthenticated } from "auth";
 const OccupationalSupervisionDataComponent = ({ match }) => {
   const user = isAuthenticated();
 
-  const [data, setData] = useState({ ...data, gdod: user.user.gdod });
+  const [data, setData] = useState([]);
 
   function handleChange(evt) {
     const value = evt.target.value;
@@ -81,16 +81,18 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
   async function SubmitData() {
     // console.log("post")
     let tempOccupationalSupervisionData;
+    let gd = {...data};
+    gd.gdod = user.user.gdod;
     if (match.params.id == "0") {
       //new mahzor
       let result = await axios.post(
         "http://localhost:8000/api/occupationalSupervision",
-        data
+        gd
       );
       tempOccupationalSupervisionData = result.data;
     } else {
       // update mahzor
-      let tempWithDeleteId = data;
+      let tempWithDeleteId = gd;
       delete tempWithDeleteId._id;
       let result = await axios.put(
         `http://localhost:8000/api/occupationalSupervision/${match.params.id}`,

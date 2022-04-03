@@ -37,7 +37,7 @@ const UnitIdDataComponent = ({ match }) => {
 
   const user = isAuthenticated();
   //mahzor
-  const [unit, setUnit] = useState({ ...unit, gdod: user.user.gdod });
+  const [unit, setUnit] = useState([]);
   //mahzor
 
   function handleChange(evt) {
@@ -80,13 +80,15 @@ const UnitIdDataComponent = ({ match }) => {
 
   async function SubmitData() {
     let tempUnitData;
+    let gd = {...unit};
+    gd.gdod = user.user.gdod;
     if (match.params.id == "0") {
       //new mahzor
-      let result = await axios.post("http://localhost:8000/api/unitId", unit);
+      let result = await axios.post("http://localhost:8000/api/unitId", gd);
       tempUnitData = result.data;
     } else {
       // update mahzor
-      let tempUnitWithDeleteId = unit;
+      let tempUnitWithDeleteId = gd;
       delete tempUnitWithDeleteId._id;
       let result = await axios.put(
         `http://localhost:8000/api/unitId/${match.params.id}`,

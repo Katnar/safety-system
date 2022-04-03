@@ -28,7 +28,7 @@ function GroundingTests() {
       <Card>
         <CardBody>
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
-            טבלת בדיקת הארכות חשמל ומבנים
+            טבלת בדיקת הארקות חשמל ומבנים
           </h3>
           <GroundingTestsTable />
           <Link to={`/groundingTestsForm/0`}>

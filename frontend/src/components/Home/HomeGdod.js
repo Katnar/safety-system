@@ -65,7 +65,7 @@ export default function Home() {
           <CardTableCalcGdod
             name={[
               "ניהול הסמכות",
-              "certificationsManagementsGdod",
+              "certificationManagementGdod",
               "שים לב! חלק מההסמכות הן פגות תוקף",
               "certificationValidity",
               "certificationsManagement",

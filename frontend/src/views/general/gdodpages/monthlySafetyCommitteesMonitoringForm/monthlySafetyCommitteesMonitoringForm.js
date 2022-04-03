@@ -37,7 +37,7 @@ import { isAuthenticated } from "auth";
 const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
   const user = isAuthenticated();
   //mahzor
-  const [state, setState] = useState({});
+  const [state, setState] = useState([]);
   //mahzor
 
   function handleChange(evt) {
@@ -91,16 +91,18 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
 
   async function SubmitData() {
     let tempData;
+    let gd = {...state};
+    gd.gdod = user.user.gdod;
     if (match.params.id == "0") {
       //new mahzor
       let result = await axios.post(
         "http://localhost:8000/api/monthlySafetyCommitteesMonitoring",
-        state
+        gd
       );
       tempData = result.data;
     } else {
       // update mahzor
-      let tempWithDeleteId = state;
+      let tempWithDeleteId = gd;
       delete tempWithDeleteId._id;
       let result = await axios.put(
         `http://localhost:8000/api/monthlySafetyCommitteesMonitoring/${match.params.id}`,

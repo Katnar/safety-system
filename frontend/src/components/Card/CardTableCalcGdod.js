@@ -101,9 +101,9 @@ const CardTableCalcGdod = (props) => {
           <Card
             style={{
               color: "#000",
-              height: "13rem",
+              height: "15rem",
               borderRadius: "15px",
-              backgroundColor: "#a2d2ff",
+              backgroundColor: "#B5CFD8",
               boxShadow: "0 0 1rem 0",
             }}
           >
@@ -113,12 +113,12 @@ const CardTableCalcGdod = (props) => {
               </CardIcon>
               <br />
               <h3
-                style={{ color: "black", fontSize: "16px" }}
+                style={{ color: "black", fontSize: "26px", fontWeight: "bold" }}
                 // className={classes.cardCategory}
               >
                 {props.name[0]}
               </h3>
-              <h3 style={{ color: "black" }}>
+              <h3 style={{ color: "black", fontSize: "20px" }}>
                 {validData}/{validData + expiredData} <small> בתוקף</small>
               </h3>
             </CardHeader>
@@ -131,7 +131,7 @@ const CardTableCalcGdod = (props) => {
                   <a
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
-                    style={{ color: "red" }}
+                    style={{ color: "red", fontSize: "22px" }}
                   >
                     {props.name[2]}
                   </a>
@@ -139,7 +139,7 @@ const CardTableCalcGdod = (props) => {
               </CardFooter>
             ) : (
               <CardFooter stats>
-                <div style={{ color: "black" }}>
+                <div style={{ color: "black", fontSize: "22px" }}>
                   {/* <Check /> */}
                   לא נדרשת פעולה מיידית
                 </div>
@@ -155,7 +155,7 @@ const CardTableCalcGdod = (props) => {
                   <a
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
-                    style={{ color: "crimson " }}
+                    style={{ color: "crimson ", fontSize: "22px" }}
                   >
                     הסמכות מסוימות יפוגו בשבועיים הקרובים
                   </a>

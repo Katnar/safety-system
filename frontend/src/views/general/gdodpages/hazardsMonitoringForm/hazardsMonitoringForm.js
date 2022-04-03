@@ -40,7 +40,7 @@ const HazardsMonitoringForm = ({ match }) => {
 
   function handleChange(evt) {
     const value = evt.target.value;
-    setState({ ...state, [evt.target.name]: value });
+    setState([]);
   }
 
   const loadDatas = () => {
@@ -78,16 +78,18 @@ const HazardsMonitoringForm = ({ match }) => {
 
   async function SubmitData() {
     let tempData;
+    let gd = {...state};
+    gd.gdod = user.user.gdod;
     if (match.params.id == "0") {
       //new mahzor
       let result = await axios.post(
         "http://localhost:8000/api/hazardsMonitoring",
-        state
+        gd
       );
       tempData = result.data;
     } else {
       // update mahzor
-      let tempWithDeleteId = state;
+      let tempWithDeleteId = gd;
       delete tempWithDeleteId._id;
       let result = await axios.put(
         `http://localhost:8000/api/hazardsMonitoring/${match.params.id}`,

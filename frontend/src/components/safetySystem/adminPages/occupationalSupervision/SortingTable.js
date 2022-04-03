@@ -11,6 +11,7 @@ import { withRouter, Redirect, Link } from "react-router-dom";
 import { COLUMNS } from "./coulmns";
 import { GlobalFilter } from "./GlobalFilter";
 import axios from "axios";
+import {FaFileDownload} from 'react-icons/fa';
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
@@ -185,8 +186,8 @@ const SortingTable = ({ match }) => {
                     if (cell.column.id == "fit") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "documentUpload") {
-                      return <td>{cell.value}</td>;
+                    if (cell.column.id == "_id") {
+                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=occupationalSupervision&id="+cell.value.toString()} target="_blank"><FaFileDownload/></a></td>;
                     }
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}

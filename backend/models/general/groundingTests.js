@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
-//בדיקת הארכות חשמל ומבנים
+//בדיקת הארקות חשמל ומבנים
 const groundingTestsSchema = new mongoose.Schema({
   buildingName: { type: String },
   testDate: { type: Date },

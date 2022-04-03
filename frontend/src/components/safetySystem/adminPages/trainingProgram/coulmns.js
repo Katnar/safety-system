@@ -12,7 +12,7 @@ export const COLUMNS = [
   },
   {
     Header: "צירוף מצגת רלוונטית",
-    accessor: "presentationUpload",
+    accessor: "_id",
     Filter: ColumnFilter,
   },
   {

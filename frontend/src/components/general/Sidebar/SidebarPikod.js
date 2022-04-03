@@ -558,7 +558,7 @@ function SidebarGdod() {
                     paddingBottom: "6px",
                   }}
                 >
-                  בדיקת הארכות חשמל ומבנים
+                  בדיקת הארקות חשמל ומבנים
                 </h4>
               </Col>
             </Row>

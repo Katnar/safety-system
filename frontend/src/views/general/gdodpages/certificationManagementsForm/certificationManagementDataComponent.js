@@ -36,7 +36,7 @@ const CertificationManagementDataComponent = ({ match }) => {
 
   const user = isAuthenticated();
   //mahzor
-  const [data, setData] = useState({ ...data, gdod: user.user.gdod });
+  const [data, setData] = useState([]);
   //mahzor
 
   function handleChange(evt) {
@@ -80,17 +80,19 @@ const CertificationManagementDataComponent = ({ match }) => {
   }
 
   async function SubmitData() {
+    let gd = {...data};
+    gd.gdod = user.user.gdod;
     let tempData;
     if (match.params.id == "0") {
       //new mahzor
       let result = await axios.post(
         "http://localhost:8000/api/certificationsManagement",
-        data
+        gd
       );
       tempData = result.data;
     } else {
       // update mahzor
-      let tempWithDeleteId = data;
+      let tempWithDeleteId = gd;
       delete tempWithDeleteId._id;
       let result = await axios.put(
         `http://localhost:8000/api/certificationsManagement/${match.params.id}`,

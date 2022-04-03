@@ -6,42 +6,32 @@ const data = {
   title: <h1 style={{ padding: "1rem 3rem 0 0" }}>שאלות נפוצות</h1>,
   rows: [
     {
-      title: "כמה צעיר גיא?",
+      title: 'מהי מערכת טנ"ה 9?',
       content: (
         <p
           style={{ direction: "rtl", textAlign: "right", paddingRight: "5rem" }}
         >
-          גיא צעיר מאוד מאוד מאוד, והוא משתחרר רק בעוד מיליון שנה בערך!
+          מערכת טנ"ה 9 הינה מערכת שנועדה לנהל את תיקבטיחות הטנ"א ביחידה.
         </p>
       ),
     },
     {
-      title: "מה הצוות הכי טוב בצהל?",
+      title: "לכמה זמן כל הסמכה תקפה?",
       content: (
         <p
           style={{ direction: "rtl", textAlign: "right", paddingRight: "5rem" }}
         >
-          צוות 100 הוכתר כצוות החזק ביותר בגלקסיה!
+          לכל הסמכה תוקף שונה, אך המערכת תתריע במייל ובשולחן העבודה על הסמכות פגות תוקף ועל הסמכות שיפוגו בשבועיים הקרובים.
         </p>
       ),
     },
     {
-      title: "איך יוצרים קשר?",
+      title: "איך ניתן ליצור קשר?",
       content: (
         <p
           style={{ direction: "rtl", textAlign: "right", paddingRight: "5rem" }}
         >
-          ניתן ליצור קשר על במייל admatai@idf.il
-        </p>
-      ),
-    },
-    {
-      title: "Which bear is the best bear?",
-      content: (
-        <p
-          style={{ direction: "rtl", textAlign: "right", paddingRight: "5rem" }}
-        >
-          Black bear!
+          ניתן ליצור קשר במייל "חדשנות טנ"א" (+ctrl k).
         </p>
       ),
     },
