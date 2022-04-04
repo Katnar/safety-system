@@ -26,7 +26,7 @@ import history from "history.js";
 import { produce } from "immer";
 import { generate } from "shortid";
 import { toast } from "react-toastify";
-
+import { singleFileUpload } from "../../../../data/api";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 import SettingModal from "../../../../components/general/modal/SettingModal";
@@ -76,6 +76,14 @@ const TrainingProgramForm = ({ match }) => {
     return flag;
   }
 
+  const UploadFile = async (id) => {
+    const formData = new FormData();
+    const collec = "trainingProgram";
+    formData.append("file", singleFile);
+    await singleFileUpload(formData, collec, id);
+    console.log(singleFile);
+  };
+
   async function SubmitData() {
     let tempData;
     let gd = {...state};
@@ -98,6 +106,8 @@ const TrainingProgramForm = ({ match }) => {
       tempData = result.data;
     }
 
+    if(singleFile!=="")
+    await UploadFile(tempData._id);
     // let result = await axios.post(
     //   "http://localhost:8000/api/trainingProgram",
     //   state
@@ -114,6 +124,11 @@ const TrainingProgramForm = ({ match }) => {
   useEffect(() => {
     init();
   }, []);
+
+  const [singleFile, setSingleFile] = useState("");
+  const SingleFileChange = (e) => {
+    setSingleFile(e.target.files[0]);
+  };
 
   return (
     <Card>
@@ -159,14 +174,12 @@ const TrainingProgramForm = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מצגת רלוונטית
               </div>
-              <FormGroup dir="rtl">
-                <Input
-                  type="text"
-                  name="presentationUpload"
-                  value={state.presentationUpload}
-                  onChange={handleChange}
-                ></Input>
-              </FormGroup>
+              <Input
+                type="file"
+                name="presentationUpload"
+                value={state.documentUpload}
+                onChange={(e) => SingleFileChange(e)}
+              ></Input>
             </Col>
           </Row>
           <Row>

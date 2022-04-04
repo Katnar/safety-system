@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
-
+import { singleFileUpload } from "../../../../data/api";
 // reactstrap components
 import {
   Button,
@@ -78,6 +78,14 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
     return flag;
   }
 
+  const UploadFile = async (id) => {
+    const formData = new FormData();
+    const collec = "occupationalSupervision";
+    formData.append("file", singleFile);
+    await singleFileUpload(formData, collec, id);
+    console.log(singleFile);
+  };
+
   async function SubmitData() {
     // console.log("post")
     let tempOccupationalSupervisionData;
@@ -100,6 +108,8 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
       );
       tempOccupationalSupervisionData = result.data;
     }
+    if(singleFile!=="")
+    await UploadFile(tempOccupationalSupervisionData._id);
   }
 
   function init() {
@@ -111,6 +121,11 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
   useEffect(() => {
     init();
   }, []);
+
+  const [singleFile, setSingleFile] = useState("");
+  const SingleFileChange = (e) => {
+    setSingleFile(e.target.files[0]);
+  };
 
   return (
     <Card>
@@ -287,16 +302,14 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                צירוף מסמכים סרוקים
+                צירוף מסמך
               </div>
-              <FormGroup dir="rtl">
-                <Input
-                  type="text"
-                  name="documentUpload"
-                  value={data.documentUpload}
-                  onChange={handleChange}
-                ></Input>
-              </FormGroup>
+              <Input
+                type="file"
+                name="documentUpload"
+                value={data.documentUpload}
+                onChange={(e) => SingleFileChange(e)}
+              ></Input>
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>

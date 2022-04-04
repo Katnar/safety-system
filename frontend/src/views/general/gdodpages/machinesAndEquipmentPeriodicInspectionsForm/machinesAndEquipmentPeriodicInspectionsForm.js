@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
+import { singleFileUpload } from "../../../../data/api";
 // reactstrap components
 import {
   Button,
@@ -78,6 +79,14 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
     return flag;
   }
 
+  const UploadFile = async (id) => {
+    const formData = new FormData();
+    const collec = "machinesAndEquipmentPeriodicInspections";
+    formData.append("file", singleFile);
+    await singleFileUpload(formData, collec, id);
+    console.log(singleFile);
+  };
+
   async function SubmitData() {
     let tempData;
     let gd = {...state};
@@ -100,6 +109,9 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
       tempData = result.data;
     }
 
+    if(singleFile!=="")
+    await UploadFile(tempData._id);
+
     // let result = await axios.post(
     //   "http://localhost:8000/api/machinesAndEquipmentPeriodicInspections",
     //   state
@@ -116,6 +128,11 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
   useEffect(() => {
     init();
   }, []);
+
+  const [singleFile, setSingleFile] = useState("");
+  const SingleFileChange = (e) => {
+    setSingleFile(e.target.files[0]);
+  };
 
   return (
     <Card>
@@ -269,16 +286,14 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                צירוף מסמכים
+                צירוף מסמך
               </div>
-              <FormGroup dir="rtl">
-                <Input
-                  type="text"
-                  name="documentUpload"
-                  value={state.documentUpload}
-                  onChange={handleChange}
-                ></Input>
-              </FormGroup>
+              <Input
+                type="file"
+                name="documentUpload"
+                value={state.documentUpload}
+                onChange={(e) => SingleFileChange(e)}
+              ></Input>
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>

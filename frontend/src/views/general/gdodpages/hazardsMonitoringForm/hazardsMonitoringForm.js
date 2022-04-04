@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
+import { singleFileUpload } from "../../../../data/api";
 // reactstrap components
 import {
   Button,
@@ -35,7 +36,7 @@ import { isAuthenticated } from "auth";
 const HazardsMonitoringForm = ({ match }) => {
   const user = isAuthenticated();
   //mahzor
-  const [state, setState] = useState({ ...state, gdod: user.user.gdod });
+  const [state, setState] = useState([]);
   //mahzor
 
   function handleChange(evt) {
@@ -76,6 +77,7 @@ const HazardsMonitoringForm = ({ match }) => {
     return flag;
   }
 
+
   async function SubmitData() {
     let tempData;
     let gd = {...state};
@@ -97,6 +99,7 @@ const HazardsMonitoringForm = ({ match }) => {
       );
       tempData = result.data;
     }
+
 
     // let result = await axios.post(
     //   "http://localhost:8000/api/hazardsMonitoring",
