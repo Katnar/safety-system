@@ -18,9 +18,12 @@ import ProfilePicture from "../general/Navbars/UserProfileCircle/ProfilePicture"
 import { format } from "date-fns";
 import { isAuthenticated } from "auth";
 import replay from "assets/img/replay.png";
+import { Icon } from '@iconify/react';
+import commentDetail from '@iconify/icons-bx/comment-detail';
 
 const PostCard = () => {
   const [questions, setQuestions] = useState([]);
+  const [counter, setCounter] = useState([]);
 
   const [colorhr, setcolorhr] = useState("transparent");
   const [color, setcolor] = useState("transparent");
@@ -28,19 +31,35 @@ const PostCard = () => {
   // console.log(date)
 
   const getQuestions = async () => {
-    try {
       await axios
         .get(`http://localhost:8000/api/smartQuestions`)
         .then(async (response) => {
-          let tempdatas = await response.data;
+          let tempdatas = await [...response.data].reverse();
+          let tempAnswers;
+          for(let i = 0; i < tempdatas.length; i++) {
+            let answerCounter = 0;
+            // console.log(tempdatas[i])
+            await axios
+            .get(`http://localhost:8000/api/answer`)
+            .then(async (response) => {
+             tempAnswers = await [...response.data];
+             for(let j = 0; j < tempAnswers.length; j++) {
+               if(tempAnswers[j].question == tempdatas[i]._id) {
+                 answerCounter++;
+                 console.log(answerCounter)
+               }
+             }
+             tempdatas[i].counter = answerCounter;
+            }
+            )
+          };
           setQuestions(tempdatas);
           console.log(tempdatas[0].text);
         })
         .catch((error) => {
           console.log(error);
         });
-    } catch {}
-  };
+      }
 
   useEffect(() => {
     getQuestions();
@@ -55,6 +74,7 @@ const PostCard = () => {
               borderRadius: "15px",
               boxShadow: "0 0 1rem 0",
               color: "lightBlue",
+              background: "#dee9ed"
             }}
           >
             <Row>
@@ -101,29 +121,34 @@ const PostCard = () => {
               <Col xs={12} sm={8} md={4}></Col>
               <Col xs={12} sm={8} md={4}>
                 <Button
-                  type="primary"
-                  className="btn"
+                  
+                  className="btn btn-info"
                   style={{
                     width: "100%",
                     height: "3rem",
                     width: "8rem",
                     marginLeft: "3rem",
                     marginBottom: "1rem",
-                    background: "#04ab64"
+                    // background: "#04ab64"
                   }}
                 >
                   <Row>
-                    <img
+                    {/* <img
                       src={replay}
                       style={{
                         width: "20px",
                         height: "20px",
                         textAlign: "left",
+                        color: "#fff"
                       }}
-                    ></img>
-                    <h4 style={{ paddingRight: "1rem", textAlign: "left" }}>
-                      השב
-                    </h4>
+                    ></img> */}
+                    <div>
+                    <Icon icon={commentDetail} style={{fontSize: "1rem"}}/> {question.counter} תשובות
+                    </div>
+                   
+                    {/* <h4 style={{ paddingRight: "1rem", textAlign: "left", color: "#fff" }}>
+                      תשובות
+                    </h4> */}
                   </Row>
                 </Button>
               </Col>

@@ -100,6 +100,7 @@ const AskQ = (props) => {
       style={{
         borderRadius: "15px",
         boxShadow: "0 0 1rem 0",
+        background: "#B5CFD8"
       }}
     >
       <CardHeader style={{ direction: "rtl" }}>

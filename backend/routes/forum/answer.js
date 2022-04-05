@@ -7,11 +7,14 @@ const {
   update,
   remove,
   findById,
+  findByQuestionId,
 } = require("../../controllers/forum/answer");
 
 // find spec
 router.get("/answer/:id", findById);
 //find all
+router.get("/answer/:id", findByQuestionId);
+
 router.get("/answer", find);
 //add
 router.post("/answer", create); /**/

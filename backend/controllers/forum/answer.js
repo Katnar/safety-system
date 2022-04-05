@@ -10,6 +10,16 @@ exports.findById = async (req, res) => {
   res.send(answer);
 };
 
+exports.findByQuestionId = async (req, res) => {
+  const answer =
+    await Answer.findOne().where({ question: req.params.id });
+
+  if (!answer) {
+    res.status(500).json({ success: false });
+  }
+  res.send(answer);
+};
+
 exports.find = (req, res) => {
   Answer.find()
     .then((answer) => res.json(answer))
