@@ -11,42 +11,27 @@ import { withRouter, Redirect, Link } from "react-router-dom";
 import { COLUMNS } from "./coulmns";
 import { GlobalFilter } from "./GlobalFilter";
 import axios from "axios";
-import {FaFileDownload} from 'react-icons/fa';
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
-import { ContactSupportOutlined } from "@material-ui/icons";
-import { isAuthenticated } from "auth";
 
 const SortingTable = (props) => {
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([]);
 
-  async function init() {
-    if (props.userData.user != undefined) {
-      if (props.userData.user.role == "1") {
-        getUnitDetailsByGdod();
-      }
-      if (props.userData.user.role == "2") {
-        getUnitDetailsByHativa();
-      }
-      if (props.userData.user.role == "3") {
-        getUnitDetailsByOgda();
-      }
-      if (props.userData.user.role == "4") {
-        getUnitDetailsByPikod();
-      }
-    }
+  function init() {
+    getDetails();
   }
 
-  const getUnitDetailsByGdod = async () => {
+  const getDetails = async () => {
     try {
       await axios
-        .get(`http://localhost:8000/api/unitId`)
+        .get(`http://localhost:8000/api/homsManagementMonitoring`)
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
+            console.log(props);
             if (response.data[i].gdod == props.userData.user.gdod) {
               tempData.push(response.data[i]);
             }
@@ -56,156 +41,41 @@ const SortingTable = (props) => {
         .catch((error) => {
           console.log(error);
         });
-    } catch { }
+    } catch {}
   };
 
-  const getUnitDetailsByHativa = async () => {
-    let tempgdodbyhativa;
-    await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: props.userData.user.hativa })
+  const Delete = (Id) => {
+    axios
+      .delete(`http://localhost:8000/api/homsManagementMonitoring/${Id}`)
       .then((response) => {
-        tempgdodbyhativa = response.data;
-        console.log(tempgdodbyhativa)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    await axios.get(`http://localhost:8000/api/unitId`)
-      .then((response) => {
-        console.log(response.data)
-        let tempData = [];
-        for (let i = 0; i < response.data.length; i++) {
-          for (let j = 0; j < tempgdodbyhativa.length; j++) {
-            if (response.data[i].gdod == tempgdodbyhativa[j]._id) {
-              tempData.push(response.data[i]);
-            }
-          }
-        }
-        setData(tempData);
+        loadData();
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-
-  const getUnitDetailsByOgda = async () => {
-    let tempgdodsbyogda = [];
-    await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: props.userData.user.ogda })
-      .then(async (response1) => {
-        for (let i = 0; i < response1.data.length; i++) {
-          await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
-            .then((response2) => {
-              for (let j = 0; j < response2.data.length; j++) {
-                tempgdodsbyogda.push(response2.data[j])
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    await axios.get(`http://localhost:8000/api/unitId`)
+  const loadData = () => {
+    axios
+      .get("http://localhost:8000/api/homsManagementMonitoring")
       .then((response) => {
-        // console.log(response.data)
-        let tempData = [];
-        for (let i = 0; i < response.data.length; i++) {
-          for (let j = 0; j < tempgdodsbyogda.length; j++) {
-            if (response.data[i].gdod == tempgdodsbyogda[j]._id) {
-              tempData.push(response.data[i]);
-            }
-          }
-        }
-        setData(tempData);
+        setData(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const getUnitDetailsByPikod = async () => {
-    let tempgdodsbypikod = [];
-
-    await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: props.userData.user.pikod })
-      .then(async (response1) => {
-        for (let i = 0; i < response1.data.length; i++) {
-          await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
-            .then(async (response2) => {
-              for (let j = 0; j < response2.data.length; j++) {
-                await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response2.data[j]._id })
-                  .then(async (response3) => {
-                    for (let k = 0; k < response3.data.length; k++) {
-                      tempgdodsbypikod.push(response3.data[k])
-                    }
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  })
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-      await axios.get(`http://localhost:8000/api/unitId`)
+  const sendMail = () => {
+    axios
+      .put("http://localhost:8000/api/sendMail")
       .then((response) => {
-        // console.log(response.data)
-        let tempData = [];
-        for (let i = 0; i < response.data.length; i++) {
-          for (let j = 0; j < tempgdodsbypikod.length; j++) {
-            if (response.data[i].gdod == tempgdodsbypikod[j]._id) {
-              tempData.push(response.data[i]);
-            }
-          }
-        }
-        setData(tempData);
+        setData(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
-  // const UnitDelete = (UnitIdId) => {
-  //   axios
-  //     .delete(`http://localhost:8000/api/unitId/${UnitIdId}`)
-  //     .then((response) => {
-  //       loadUnits();
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  // const loadUnits = () => {
-  //   axios
-  //     .get("http://localhost:8000/api/unitId")
-  //     .then((response) => {
-  //       setData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  // const sendMail = () => {
-  //   axios
-  //     .put("http://localhost:8000/api/sendMail")
-  //     .then((response) => {
-  //       setData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
 
   useEffect(() => {
     init();
@@ -280,28 +150,18 @@ const SortingTable = (props) => {
               return (
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
-                    if (cell.column.id == "name") {
+                    if (cell.column.id == "materialName") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "location") {
+                    if (cell.column.id == "sheetId") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "unitStructure") {
+                    if (cell.column.id == "materialDepartments") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "unitMeans") {
+                    if (cell.column.id == "comments") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "mainOccupation") {
-                      return <td>{cell.value}</td>;
-                    }
-                    if (cell.column.id == "unitStructureTree") {
-                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=unitId&id="+row.original._id} target="_blank"><FaFileDownload/></a></td>;
-                  }
-                  if (cell.column.id == "teneStructureTree") {
-                    return <td><a href={"http://localhost:8000/api/downloadFile?collec=unitId&id="+"2_"+row.original._id} target="_blank"><FaFileDownload/></a></td>;
-                   }
-                    console.log(row.original.userData._id);
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
@@ -315,7 +175,9 @@ const SortingTable = (props) => {
                       }}
                     >
                       {" "}
-                      <Link to={`/UnitIdGdodForm/${row.original._id}`}>
+                      <Link
+                        to={`/homsManagementMonitoringGdodForm/${row.original._id}`}
+                      >
                         <button className="btn btn-edit">ערוך</button>
                       </Link>
                     </div>
@@ -332,7 +194,7 @@ const SortingTable = (props) => {
                       {" "}
                       <button
                         className="btn btn-danger"
-                        onClick={() => UnitDelete(row.original._id)}
+                        onClick={() => Delete(row.original._id)}
                       >
                         מחק
                       </button>

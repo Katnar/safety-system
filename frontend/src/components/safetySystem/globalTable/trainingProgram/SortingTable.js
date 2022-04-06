@@ -15,10 +15,10 @@ import {FaFileDownload} from 'react-icons/fa';
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
-import { ContactSupportOutlined } from "@material-ui/icons";
 import { isAuthenticated } from "auth";
 
 const SortingTable = (props) => {
+  const user = isAuthenticated();
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([]);
@@ -38,12 +38,13 @@ const SortingTable = (props) => {
         getUnitDetailsByPikod();
       }
     }
+    getDetails();
   }
 
   const getUnitDetailsByGdod = async () => {
     try {
       await axios
-        .get(`http://localhost:8000/api/unitId`)
+        .get(`http://localhost:8000/api/trainingProgram`)
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
@@ -70,7 +71,7 @@ const SortingTable = (props) => {
         console.log(error);
       });
 
-    await axios.get(`http://localhost:8000/api/unitId`)
+    await axios.get(`http://localhost:8000/api/trainingProgram`)
       .then((response) => {
         console.log(response.data)
         let tempData = [];
@@ -109,7 +110,7 @@ const SortingTable = (props) => {
         console.log(error);
       });
 
-    await axios.get(`http://localhost:8000/api/unitId`)
+    await axios.get(`http://localhost:8000/api/trainingProgram`)
       .then((response) => {
         // console.log(response.data)
         let tempData = [];
@@ -156,7 +157,7 @@ const SortingTable = (props) => {
         console.log(error);
       });
 
-      await axios.get(`http://localhost:8000/api/unitId`)
+      await axios.get(`http://localhost:8000/api/trainingProgram`)
       .then((response) => {
         // console.log(response.data)
         let tempData = [];
@@ -174,38 +175,61 @@ const SortingTable = (props) => {
       });
   };
 
-  // const UnitDelete = (UnitIdId) => {
-  //   axios
-  //     .delete(`http://localhost:8000/api/unitId/${UnitIdId}`)
-  //     .then((response) => {
-  //       loadUnits();
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
 
-  // const loadUnits = () => {
-  //   axios
-  //     .get("http://localhost:8000/api/unitId")
-  //     .then((response) => {
-  //       setData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const getDetails = async () => {
+    try {
+      await axios
+        .get(`http://localhost:8000/api/trainingProgram`)
+        .then((response) => {
+          let tempData = [];
+          for (let i = 0; i < response.data.length; i++) {
+            // console.log(props)
+            console.log(response.data[i].gdod);
+            console.log(props.userData.user.gdod);
+            if (response.data[i].gdod == props.userData.user.gdod) {
+              tempData.push(response.data[i]);
+            }
+          }
+          setData(tempData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch {}
+  };
 
-  // const sendMail = () => {
-  //   axios
-  //     .put("http://localhost:8000/api/sendMail")
-  //     .then((response) => {
-  //       setData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const Delete = (Id) => {
+    axios
+      .delete(`http://localhost:8000/api/trainingProgram/${Id}`)
+      .then((response) => {
+        loadData();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loadData = () => {
+    axios
+      .get("http://localhost:8000/api/trainingProgram")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const sendMail = () => {
+    axios
+      .put("http://localhost:8000/api/sendMail")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     init();
@@ -280,28 +304,36 @@ const SortingTable = (props) => {
               return (
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
-                    if (cell.column.id == "name") {
+                    if (cell.column.id == "trainingDate") {
+                      return (
+                        <td>
+                          {cell.value
+                            .slice(0, 10)
+                            .split("-")
+                            .reverse()
+                            .join("-")}
+                        </td>
+                      );
+                    }
+                    if (cell.column.id == "trainingSubject") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "location") {
+                    if (cell.column.id == "_id") {
+                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=trainingProgram&id="+cell.value.toString()} target="_blank"><FaFileDownload/></a></td>;
+                    }
+                    if (cell.column.id == "requireTest") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "unitStructure") {
+                    if (cell.column.id == "requiredWorkersList") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "unitMeans") {
+                    if (cell.column.id == "trainingStatus") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "mainOccupation") {
+                    if (cell.column.id == "requiredWorkersStatus") {
                       return <td>{cell.value}</td>;
                     }
-                    if (cell.column.id == "unitStructureTree") {
-                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=unitId&id="+row.original._id} target="_blank"><FaFileDownload/></a></td>;
-                  }
-                  if (cell.column.id == "teneStructureTree") {
-                    return <td><a href={"http://localhost:8000/api/downloadFile?collec=unitId&id="+"2_"+row.original._id} target="_blank"><FaFileDownload/></a></td>;
-                   }
-                    console.log(row.original.userData._id);
+
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                   {/* {console.log(row)} */}
@@ -315,7 +347,7 @@ const SortingTable = (props) => {
                       }}
                     >
                       {" "}
-                      <Link to={`/UnitIdGdodForm/${row.original._id}`}>
+                      <Link to={`/trainingProgramGdodForm/${row.original._id}`}>
                         <button className="btn btn-edit">ערוך</button>
                       </Link>
                     </div>
@@ -332,7 +364,7 @@ const SortingTable = (props) => {
                       {" "}
                       <button
                         className="btn btn-danger"
-                        onClick={() => UnitDelete(row.original._id)}
+                        onClick={() => Delete(row.original._id)}
                       >
                         מחק
                       </button>
