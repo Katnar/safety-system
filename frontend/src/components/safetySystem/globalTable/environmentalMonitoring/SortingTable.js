@@ -21,9 +21,157 @@ const SortingTable = (props) => {
 
   const [data, setData] = useState([]);
 
-  function init() {
+  async function init() {
+    if (props.userData.user != undefined) {
+      if (props.userData.user.role == "1") {
+        getUnitDetailsByGdod();
+      }
+      if (props.userData.user.role == "2") {
+        getUnitDetailsByHativa();
+      }
+      if (props.userData.user.role == "3") {
+        getUnitDetailsByOgda();
+      }
+      if (props.userData.user.role == "4") {
+        getUnitDetailsByPikod();
+      }
+    }
     getDetails();
   }
+
+  const getUnitDetailsByGdod = async () => {
+    try {
+      await axios
+        .get(`http://localhost:8000/api/environmentalMonitoring`)
+        .then((response) => {
+          let tempData = [];
+          for (let i = 0; i < response.data.length; i++) {
+            if (response.data[i].gdod == props.userData.user.gdod) {
+              tempData.push(response.data[i]);
+            }
+          }
+          setData(tempData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch { }
+  };
+
+  const getUnitDetailsByHativa = async () => {
+    let tempgdodbyhativa;
+    await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: props.userData.user.hativa })
+      .then((response) => {
+        tempgdodbyhativa = response.data;
+        console.log(tempgdodbyhativa)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    await axios.get(`http://localhost:8000/api/environmentalMonitoring`)
+      .then((response) => {
+        console.log(response.data)
+        let tempData = [];
+        for (let i = 0; i < response.data.length; i++) {
+          for (let j = 0; j < tempgdodbyhativa.length; j++) {
+            if (response.data[i].gdod == tempgdodbyhativa[j]._id) {
+              tempData.push(response.data[i]);
+            }
+          }
+        }
+        setData(tempData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+  const getUnitDetailsByOgda = async () => {
+    let tempgdodsbyogda = [];
+    await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: props.userData.user.ogda })
+      .then(async (response1) => {
+        for (let i = 0; i < response1.data.length; i++) {
+          await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
+            .then((response2) => {
+              for (let j = 0; j < response2.data.length; j++) {
+                tempgdodsbyogda.push(response2.data[j])
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    await axios.get(`http://localhost:8000/api/environmentalMonitoring`)
+      .then((response) => {
+        // console.log(response.data)
+        let tempData = [];
+        for (let i = 0; i < response.data.length; i++) {
+          for (let j = 0; j < tempgdodsbyogda.length; j++) {
+            if (response.data[i].gdod == tempgdodsbyogda[j]._id) {
+              tempData.push(response.data[i]);
+            }
+          }
+        }
+        setData(tempData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getUnitDetailsByPikod = async () => {
+    let tempgdodsbypikod = [];
+
+    await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: props.userData.user.pikod })
+      .then(async (response1) => {
+        for (let i = 0; i < response1.data.length; i++) {
+          await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
+            .then(async (response2) => {
+              for (let j = 0; j < response2.data.length; j++) {
+                await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response2.data[j]._id })
+                  .then(async (response3) => {
+                    for (let k = 0; k < response3.data.length; k++) {
+                      tempgdodsbypikod.push(response3.data[k])
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  })
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+      await axios.get(`http://localhost:8000/api/environmentalMonitoring`)
+      .then((response) => {
+        // console.log(response.data)
+        let tempData = [];
+        for (let i = 0; i < response.data.length; i++) {
+          for (let j = 0; j < tempgdodsbypikod.length; j++) {
+            if (response.data[i].gdod == tempgdodsbypikod[j]._id) {
+              tempData.push(response.data[i]);
+            }
+          }
+        }
+        setData(tempData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const getDetails = async () => {
     try {
