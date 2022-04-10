@@ -14,8 +14,10 @@ import axios from "axios";
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
+import { isAuthenticated } from "auth";
 
 const SortingTable = (props) => {
+  const user = isAuthenticated();
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([]);

@@ -117,6 +117,22 @@ import reviewsDocumentationGdodForm from "views/general/gdodpages/reviewsDocumen
 import tableView from "views/general/modular/tables/tableView";
 import FormView from "views/general/modular/forms/formView";
 
+import GlobalUnitIdView from "views/general/globalPages/unitId/unitId";
+import GlobalSafetyOfficersQualificationView from "views/general/globalPages/safetyOfficersQualification/safetyOfficersQualification";
+import GlobalCertificationsManagementsView from "views/general/globalPages/certificationsManagements/certificationsManagements";
+import GlobalOccupationalSupervisionView from "views/general/globalPages/occupationalSupervision/occupationalSupervision";
+import GlobalTrainingProgramView from "views/general/globalPages/trainingProgram/trainingProgram";
+import GlobalEquipmentAndMaterialsPeriodicInspectionsView from "views/general/globalPages/equipmentAndMaterialsPeriodicInspections/equipmentAndMaterialsPeriodicInspections";
+import GlobalEnvironmentalMonitoringView from "views/general/globalPages/environmentalMonitoring/environmentalMonitoring";
+import GlobalMachinesAndEquipmentPeriodicInspectionsView from "views/general/globalPages/machinesAndEquipmentPeriodicInspections/machinesAndEquipmentPeriodicInspections";
+import GlobalRiskManagementMonitoringView from "views/general/globalPages/riskManagementMonitoring/riskManagementMonitoring";
+import GlobalMonthlySafetyCommitteesMonitoringView from "views/general/globalPages/monthlySafetyCommitteesMonitoring/monthlySafetyCommitteesMonitoring";
+import GlobalHazardsMonitoringView from "views/general/globalPages/hazardsMonitoring/hazardsMonitoring";
+import GlobalHomsManagementMonitoringView from "views/general/globalPages/homsManagementMonitoring/homsManagementMonitoring";
+import GlobalPersonalProtectiveEquipmentMonitoringView from "views/general/globalPages/personalProtectiveEquipmentMonitoring/personalProtectiveEquipmentMonitoring";
+import GlobalGroundingTestsView from "views/general/globalPages/groundingTests/groundingTests";
+import GlobalReviewsDocumentationView from "views/general/globalPages/reviewsDocumentation/reviewsDocumentation";
+
 const routesgeneral = (
   <>
     {/*///////////////////////////////////////////UnLoggedIn Routes/////////////////////////////////////////////////*/}
@@ -163,6 +179,82 @@ const routesgeneral = (
       exact
       component={DisplayMahzor}
     /> */}
+
+    <LoggedinRoute 
+      path="/GlobalUnitIdView"
+      exact
+      component={GlobalUnitIdView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalSafetyOfficersQualificationView"
+      exact
+      component={GlobalSafetyOfficersQualificationView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalCertificationsManagementsView"
+      exact
+      component={GlobalCertificationsManagementsView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalOccupationalSupervisionView"
+      exact
+      component={GlobalOccupationalSupervisionView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalTrainingProgramView"
+      exact
+      component={GlobalTrainingProgramView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalEquipmentAndMaterialsPeriodicInspectionsView"
+      exact
+      component={GlobalEquipmentAndMaterialsPeriodicInspectionsView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalEnvironmentalMonitoringView"
+      exact
+      component={GlobalEnvironmentalMonitoringView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalMachinesAndEquipmentPeriodicInspectionsView"
+      exact
+      component={GlobalMachinesAndEquipmentPeriodicInspectionsView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalRiskManagementMonitoringView"
+      exact
+      component={GlobalRiskManagementMonitoringView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalMonthlySafetyCommitteesMonitoringView"
+      exact
+      component={GlobalMonthlySafetyCommitteesMonitoringView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalHazardsMonitoringView"
+      exact
+      component={GlobalHazardsMonitoringView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalHomsManagementMonitoringView"
+      exact
+      component={GlobalHomsManagementMonitoringView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalPersonalProtectiveEquipmentMonitoringView"
+      exact
+      component={GlobalPersonalProtectiveEquipmentMonitoringView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalGroundingTestsView"
+      exact
+      component={GlobalGroundingTestsView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalReviewsDocumentationView"
+      exact
+      component={GlobalReviewsDocumentationView} 
+    />
 
     {/*///////////////////////////////////////////Admin Views/////////////////////////////////////////////////*/}
 

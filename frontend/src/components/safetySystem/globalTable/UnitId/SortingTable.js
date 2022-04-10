@@ -19,6 +19,7 @@ import { ContactSupportOutlined } from "@material-ui/icons";
 import { isAuthenticated } from "auth";
 
 const SortingTable = (props) => {
+  const user = isAuthenticated();
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([]);
