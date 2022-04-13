@@ -22,6 +22,39 @@ exports.findByGdod = async (req, res) => {
   res.send(environmentalMonitoring);
 };
 
+exports.findByHativa = async (req, res) => {
+  const environmentalMonitoring = await EnvironmentalMonitoring.find().where({
+    hativa: req.params.hativa,
+  });
+
+  if (!environmentalMonitoring) {
+    res.status(500).json({ success: false });
+  }
+  res.send(environmentalMonitoring);
+};
+
+exports.findByOgda = async (req, res) => {
+  const environmentalMonitoring = await EnvironmentalMonitoring.find().where({
+    ogda: req.params.ogda,
+  });
+
+  if (!environmentalMonitoring) {
+    res.status(500).json({ success: false });
+  }
+  res.send(environmentalMonitoring);
+};
+
+exports.findByPikod = async (req, res) => {
+  const environmentalMonitoring = await EnvironmentalMonitoring.find().where({
+    pikod: req.params.pikod,
+  });
+
+  if (!environmentalMonitoring) {
+    res.status(500).json({ success: false });
+  }
+  res.send(environmentalMonitoring);
+};
+
 exports.find = (req, res) => {
   EnvironmentalMonitoring.find()
     .then((environmentalMonitoring) => res.json(environmentalMonitoring))

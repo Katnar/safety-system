@@ -8,12 +8,21 @@ const {
   remove,
   findById,
   findByGdod,
+  findByHativa,
+  findByOgda,
+  findByPikod,
 } = require("../../controllers/general/equipmentAndMaterialsPeriodicInspections");
 
 // find spec
 router.get("/equipmentAndMaterialsPeriodicInspections/:id", findById);
 
 router.get("/equipmentAndMaterialsPeriodicInspections/bygdod/:gdod", findByGdod);
+
+router.get("/equipmentAndMaterialsPeriodicInspections/byhativa/:hativa", findByHativa);
+
+router.get("/equipmentAndMaterialsPeriodicInspections/byogda/:ogda", findByOgda);
+
+router.get("/equipmentAndMaterialsPeriodicInspections/bypikod/:pikod", findByPikod);
 //find all
 router.get("/equipmentAndMaterialsPeriodicInspections", find);
 //add

@@ -22,6 +22,39 @@ exports.findByGdod = async (req, res) => {
   res.send(occupationalSupervision);
 };
 
+exports.findByHativa = async (req, res) => {
+  const occupationalSupervision = await OccupationalSupervision.find().where({
+    hativa: req.params.hativa,
+  });
+
+  if (!occupationalSupervision) {
+    res.status(500).json({ success: false });
+  }
+  res.send(occupationalSupervision);
+};
+
+exports.findByOgda = async (req, res) => {
+  const occupationalSupervision = await OccupationalSupervision.find().where({
+    ogda: req.params.ogda,
+  });
+
+  if (!occupationalSupervision) {
+    res.status(500).json({ success: false });
+  }
+  res.send(occupationalSupervision);
+};
+
+exports.findByPikod = async (req, res) => {
+  const occupationalSupervision = await OccupationalSupervision.find().where({
+    pikod: req.params.pikod,
+  });
+
+  if (!occupationalSupervision) {
+    res.status(500).json({ success: false });
+  }
+  res.send(occupationalSupervision);
+};
+
 exports.find = (req, res) => {
   OccupationalSupervision.find()
     .then((occupationalSupervision) => res.json(occupationalSupervision))

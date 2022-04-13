@@ -8,12 +8,21 @@ const {
   remove,
   findById,
   findByGdod,
+  findByHativa,
+  findByOgda,
+  findByPikod,
 } = require("../../controllers/general/environmentalMonitoring");
 
 // find spec
 router.get("/environmentalMonitoring/:id", findById);
 
 router.get("/environmentalMonitoring/bygdod/:gdod", findByGdod);
+
+router.get("/environmentalMonitoring/byhativa/:hativa", findByHativa);
+
+router.get("/environmentalMonitoring/byogda/:ogda", findByOgda);
+
+router.get("/environmentalMonitoring/bypikod/:pikod", findByPikod);
 //find all
 router.get("/environmentalMonitoring", find);
 //add

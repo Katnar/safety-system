@@ -23,6 +23,39 @@ exports.findByGdod = async (req, res) => {
   res.send(equipmentAndMaterialsPeriodicInspections);
 };
 
+exports.findByHativa = async (req, res) => {
+  const equipmentAndMaterialsPeriodicInspections = await EquipmentAndMaterialsPeriodicInspections.find().where({
+    hativa: req.params.hativa,
+  });
+
+  if (!equipmentAndMaterialsPeriodicInspections) {
+    res.status(500).json({ success: false });
+  }
+  res.send(equipmentAndMaterialsPeriodicInspections);
+};
+
+exports.findByOgda = async (req, res) => {
+  const equipmentAndMaterialsPeriodicInspections = await EquipmentAndMaterialsPeriodicInspections.find().where({
+    ogda: req.params.ogda,
+  });
+
+  if (!equipmentAndMaterialsPeriodicInspections) {
+    res.status(500).json({ success: false });
+  }
+  res.send(equipmentAndMaterialsPeriodicInspections);
+};
+
+exports.findByPikod = async (req, res) => {
+  const equipmentAndMaterialsPeriodicInspections = await EquipmentAndMaterialsPeriodicInspections.find().where({
+    pikod: req.params.pikod,
+  });
+
+  if (!equipmentAndMaterialsPeriodicInspections) {
+    res.status(500).json({ success: false });
+  }
+  res.send(equipmentAndMaterialsPeriodicInspections);
+};
+
 exports.find = (req, res) => {
   EquipmentAndMaterialsPeriodicInspections.find()
     .then((equipmentAndMaterialsPeriodicInspections) =>

@@ -21,6 +21,39 @@ exports.findByGdod = async (req, res) => {
   res.send(certificationsManagement);
 };
 
+exports.findByHativa = async (req, res) => {
+  const certificationsManagement = await CertificationsManagement.find().where({
+    hativa: req.params.hativa,
+  });
+
+  if (!certificationsManagement) {
+    res.status(500).json({ success: false });
+  }
+  res.send(certificationsManagement);
+};
+
+exports.findByOgda = async (req, res) => {
+  const certificationsManagement = await CertificationsManagement.find().where({
+    ogda: req.params.ogda,
+  });
+
+  if (!certificationsManagement) {
+    res.status(500).json({ success: false });
+  }
+  res.send(certificationsManagement);
+};
+
+exports.findByPikod = async (req, res) => {
+  const certificationsManagement = await CertificationsManagement.find().where({
+    pikod: req.params.pikod,
+  });
+
+  if (!certificationsManagement) {
+    res.status(500).json({ success: false });
+  }
+  res.send(certificationsManagement);
+};
+
 exports.find = (req, res) => {
   CertificationsManagement.find()
     .then((certificationsManagement) => res.json(certificationsManagement))
