@@ -38,8 +38,9 @@ import CandidateDashboard from "views/general/candidatepages/candidatedashboard/
 // import Unitmahzorimpage from "views/general/unitpages/unitmahzorimpage/Unitmahzorimpage";
 // import UnitPreferenceForm from "views/general/unitpages/unitpreferenceform/UnitPreferenceForm";
 import Home from "views/Home/adminDashboard";
+import globalHome from "views/Home/globalDashboard";
 import gdodHome from "views/Home/gdodDashboard";
-import hativaHome from "views/Home/hativaDashboard";
+// import hativaHome from "views/Home/hativaDashboard";
 import ogdaHome from "views/Home/ogdaDashboard";
 import pikodHome from "views/Home/pikodDashboard";
 
@@ -166,8 +167,9 @@ const routesgeneral = (
     
 
     <AdminRoute path="/adminDashboard" exact component={Home} />
+    <LoggedinRoute path="/globalDashboard/:unit" exact component={globalHome}/>
     <GdodRoute path="/gdodDashboard/:gdod" exact component={gdodHome} />
-    <HativaRoute path="/hativaDashboard/:hativa" exact component={hativaHome} />
+    {/* <HativaRoute path="/hativaDashboard/:hativa" exact component={hativaHome} /> */}
     <LoggedinRoute path="/ogdaDashboard/:ogda" exact component={ogdaHome} />
     <LoggedinRoute path="/pikodDashboard/:pikod" exact component={pikodHome} />
     {/* <PikodRoute path="/pikodDashboard/:pikod" exact component={pikodHome} /> */}
