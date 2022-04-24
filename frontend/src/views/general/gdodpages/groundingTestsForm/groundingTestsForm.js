@@ -121,10 +121,12 @@ const GroundingTestsForm = ({ match }) => {
     if (match.params.id != "0") {
       loadDatas();
     }
+    
   }
 
   useEffect(() => {
     init();
+    console.log(user.user.gdod);
   }, []);
 
   const [singleFile, setSingleFile] = useState("");
@@ -187,7 +189,7 @@ const GroundingTestsForm = ({ match }) => {
             </Col>
           </Row>
           <Row>
-          <Col xs={12} md={4}>
+            <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מסמך
               </div>

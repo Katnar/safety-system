@@ -37,6 +37,7 @@ const ReviewsDocumentationForm = ({ match }) => {
   const user = isAuthenticated();
   //mahzor
   const [state, setState] = useState([]);
+  const [gdods, setGdods] = useState([]);
   //mahzor
 
   function handleChange(evt) {
@@ -50,6 +51,17 @@ const ReviewsDocumentationForm = ({ match }) => {
       .then((response) => {
         let tempdatas = response.data;
         setState(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -121,6 +133,7 @@ const ReviewsDocumentationForm = ({ match }) => {
     if (match.params.id != "0") {
       loadDatas();
     }
+    loadGdods();
   }
 
   useEffect(() => {
@@ -184,6 +197,28 @@ const ReviewsDocumentationForm = ({ match }) => {
               ></Input>
             </Col>
           </Row>
+          <Row>
+          <Col xs={12} md={4}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                גדוד
+              </div>
+              <FormGroup className="mb-3" dir="rtl">
+                <Input
+                  placeholder="גדוד"
+                  name="gdod"
+                  type="select"
+                  value={user.user.gdod}
+                  onChange={handleChange}
+                  disabled="disabled"
+                >
+                  <option value={""}>גדוד</option>
+                  {gdods.map((gdod, index) => (
+                    <option value={gdod._id}>{gdod.name}</option>
+                  ))}
+                </Input>
+              </FormGroup>
+            </Col>
+          </Row>
           <hr style={{ borderTop: "1px solid darkGray" }} />
           <Row>
             <Col xs={12} md={4}></Col>
@@ -196,20 +231,6 @@ const ReviewsDocumentationForm = ({ match }) => {
               >
                 הוסף נתונים
               </Button>
-            </Col>
-            <Col xs={12} md={4}>
-              <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                גדוד
-              </div>
-              <FormGroup dir="rtl">
-                <Input
-                  type="text"
-                  name="gdod"
-                  value={user.user.gdod}
-                  onChange={handleChange}
-                  disabled="disabled"
-                ></Input>
-              </FormGroup>
             </Col>
             <Col xs={12} md={4}></Col>
           </Row>

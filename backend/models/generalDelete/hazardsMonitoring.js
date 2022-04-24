@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //מעקב סקר מפגעים
-const hazardsMonitoringSchema = new mongoose.Schema({
+const hazardsMonitoringDeleteSchema = new mongoose.Schema({
   personalNumber: { type: String },
   rank: { type: String },
   fullName: { type: String },
@@ -23,9 +23,9 @@ const hazardsMonitoringSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const hazardsMonitoring = mongoose.model(
-  "hazardsMonitoring",
-  hazardsMonitoringSchema
+const hazardsMonitoringDelete = mongoose.model(
+  "hazardsMonitoringDelete",
+  hazardsMonitoringDeleteSchema
 );
 
-module.exports = hazardsMonitoring;
+module.exports = hazardsMonitoringDelete;

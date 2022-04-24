@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //מעקב ציוד מגן אישי
-const personalProtectiveEquipmentMonitoringSchema = new mongoose.Schema({
+const personalProtectiveEquipmentMonitoringDeleteSchema = new mongoose.Schema({
   msd: { type: Number },
   equipmentName: { type: String },
   mkt: { type: String },
@@ -16,9 +16,9 @@ const personalProtectiveEquipmentMonitoringSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const personalProtectiveEquipmentMonitoring = mongoose.model(
-  "personalProtectiveEquipmentMonitoring",
-  personalProtectiveEquipmentMonitoringSchema
+const personalProtectiveEquipmentMonitoringDelete = mongoose.model(
+  "personalProtectiveEquipmentMonitoringDelete",
+  personalProtectiveEquipmentMonitoringDeleteSchema
 );
 
-module.exports = personalProtectiveEquipmentMonitoring;
+module.exports = personalProtectiveEquipmentMonitoringDelete;

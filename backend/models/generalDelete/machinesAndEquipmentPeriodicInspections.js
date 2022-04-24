@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //בדיקות תקופתיות למכונות וציוד
-const machinesAndEquipmentPeriodicInspectionsSchema = new mongoose.Schema({
+const machinesAndEquipmentPeriodicInspectionsDeleteSchema = new mongoose.Schema({
   equipmentType: { type: String },
   meanName: { type: String },
   mstb: { type: Number },
@@ -19,9 +19,9 @@ const machinesAndEquipmentPeriodicInspectionsSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const machinesAndEquipmentPeriodicInspections = mongoose.model(
-  "machinesAndEquipmentPeriodicInspections",
-  machinesAndEquipmentPeriodicInspectionsSchema
+const machinesAndEquipmentPeriodicInspectionsDelete = mongoose.model(
+  "machinesAndEquipmentPeriodicInspectionsDelete",
+  machinesAndEquipmentPeriodicInspectionsDeleteSchema
 );
 
-module.exports = machinesAndEquipmentPeriodicInspections;
+module.exports = machinesAndEquipmentPeriodicInspectionsDelete;

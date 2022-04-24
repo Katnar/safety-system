@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //תכנית הדרכות
-const trainingProgramSchema = new mongoose.Schema({
+const trainingProgramDeleteSchema = new mongoose.Schema({
   trainingDate: { type: Date },
   trainingSubject: { type: String },
   presentationUpload: { type: String },
@@ -15,9 +15,9 @@ const trainingProgramSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const trainingProgram = mongoose.model(
-  "trainingProgram",
-  trainingProgramSchema
+const trainingProgramDelete = mongoose.model(
+  "trainingProgramDelete",
+  trainingProgramDeleteSchema
 );
 
-module.exports = trainingProgram;
+module.exports = trainingProgramDelete;

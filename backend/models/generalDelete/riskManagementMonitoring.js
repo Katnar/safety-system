@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //מעקב ניהול סיכונים
-const riskManagementMonitoringSchema = new mongoose.Schema({
+const riskManagementMonitoringDeleteSchema = new mongoose.Schema({
   processStage: { type: String },
   riskFactor: { type: String },
   factorMfive: { type: String },
@@ -17,9 +17,9 @@ const riskManagementMonitoringSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const riskManagementMonitoring = mongoose.model(
-  "riskManagementMonitoring",
-  riskManagementMonitoringSchema
+const riskManagementMonitoringDelete = mongoose.model(
+  "riskManagementMonitoringDelete",
+  riskManagementMonitoringDeleteSchema
 );
 
-module.exports = riskManagementMonitoring;
+module.exports = riskManagementMonitoringDelete;

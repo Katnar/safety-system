@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //מעקב ניהול חומ"ס
-const homsManagementMonitoringSchema = new mongoose.Schema({
+const homsManagementMonitoringDeleteSchema = new mongoose.Schema({
   materialName: { type: String },
   sheetId: { type: Number },
   materialDepartments: { type: String },
@@ -12,9 +12,9 @@ const homsManagementMonitoringSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const homsManagementMonitoring = mongoose.model(
-  "homsManagementMonitoring",
-  homsManagementMonitoringSchema
+const homsManagementMonitoringDelete = mongoose.model(
+  "homsManagementMonitoringDelete",
+  homsManagementMonitoringDeleteSchema
 );
 
-module.exports = homsManagementMonitoring;
+module.exports = homsManagementMonitoringDelete;

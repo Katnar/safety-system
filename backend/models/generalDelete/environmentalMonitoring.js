@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //ניטורים סביבתיים
-const environmentalMonitoringSchema = new mongoose.Schema({
+const environmentalMonitoringDeleteSchema = new mongoose.Schema({
   harmfulCauses: { type: String },
   locationInUnit: { type: String },
   lastMonitoringDate: { type: Date },
@@ -15,9 +15,9 @@ const environmentalMonitoringSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const environmentalMonitoring = mongoose.model(
-  "environmentalMonitoring",
-  environmentalMonitoringSchema
+const environmentalMonitoringDelete = mongoose.model(
+  "environmentalMonitoringDelete",
+  environmentalMonitoringDeleteSchema
 );
 
-module.exports = environmentalMonitoring;
+module.exports = environmentalMonitoringDelete;

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //תיעוד ביקורות
-const reviewsDocumentationSchema = new mongoose.Schema({
+const reviewsDocumentationDeleteSchema = new mongoose.Schema({
   date: { type: Date },
   location: { type: String },
   documentUpload: { type: String },
@@ -11,9 +11,9 @@ const reviewsDocumentationSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const reviewsDocumentation = mongoose.model(
-  "reviewsDocumentation",
-  reviewsDocumentationSchema
+const reviewsDocumentationDelete = mongoose.model(
+  "reviewsDocumentationDelete",
+  reviewsDocumentationDeleteSchema
 );
 
-module.exports = reviewsDocumentation;
+module.exports = reviewsDocumentationDelete;

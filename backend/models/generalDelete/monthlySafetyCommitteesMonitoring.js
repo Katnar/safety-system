@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //מעקב וועדות בטיחות חודשיות
-const monthlySafetyCommitteesMonitoringSchema = new mongoose.Schema({
+const monthlySafetyCommitteesMonitoringDeleteSchema = new mongoose.Schema({
   unit: { type: String },
   date: { type: Date },
   committeeExecuter: { type: String },
@@ -12,9 +12,9 @@ const monthlySafetyCommitteesMonitoringSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const monthlySafetyCommitteesMonitoring = mongoose.model(
-  "monthlySafetyCommitteesMonitoring",
-  monthlySafetyCommitteesMonitoringSchema
+const monthlySafetyCommitteesMonitoringDelete = mongoose.model(
+  "monthlySafetyCommitteesMonitoringDelete",
+  monthlySafetyCommitteesMonitoringDeleteSchema
 );
 
-module.exports = monthlySafetyCommitteesMonitoring;
+module.exports = monthlySafetyCommitteesMonitoringDelete;

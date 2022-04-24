@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //פיקוח תעסוקתי
-const occupationalSupervisionSchema = new mongoose.Schema({
+const occupationalSupervisionDeleteSchema = new mongoose.Schema({
   personalNumber: { type: String },
   id: { type: Number },
   fullName: { type: String },
@@ -20,9 +20,9 @@ const occupationalSupervisionSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const occupationalSupervision = mongoose.model(
-  "occupationalSupervision",
-  occupationalSupervisionSchema
+const occupationalSupervisionDelete = mongoose.model(
+  "occupationalSupervisionDelete",
+  occupationalSupervisionDeleteSchema
 );
 
-module.exports = occupationalSupervision;
+module.exports = occupationalSupervisionDelete;

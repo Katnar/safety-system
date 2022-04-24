@@ -56,7 +56,7 @@ function UserProfileDropdownMenu(props) {
             </ThemeContext.Consumer>
             <Dropdown isOpen={props.dropDownIsOpen}>
                 <ul className="dropdown-menu show" style={{ background: props.bgcolor, paddingRight: '10px' }}>
-                    <li style={{ textAlign: 'right', paddingBottom: '10px' }}>
+                    {/* <li style={{ textAlign: 'right', paddingBottom: '10px' }}>
                         <NavLink to="/dashboard" style={{ margin: '0px' }}>
                             <Row style={{ direction: "rtl" }}>
                                 <Col xs={12} md={3} style={{ paddingLeft: "0px", textAlign: 'center' }}>
@@ -69,7 +69,7 @@ function UserProfileDropdownMenu(props) {
                                 </Col>
                             </Row>
                         </NavLink>
-                    </li>
+                    </li> */}
                     <li onClick ={logout} style={{ textAlign: 'right', paddingBottom: '10px' }}>
                            <a href = "#"> <Row style={{ direction: "rtl" }}>
                                 <Col xs={12} md={3} style={{ paddingLeft: "0px", textAlign: 'center' }}>

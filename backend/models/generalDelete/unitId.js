@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
-const unitIdSchema = new mongoose.Schema({
+const unitIdDeleteSchema = new mongoose.Schema({
   name: { type: String },
   location: { type: String },
   unitStructure: { type: String },
@@ -14,6 +14,6 @@ const unitIdSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const UnitId = mongoose.model("UnitId", unitIdSchema);
+const UnitIdDelete = mongoose.model("UnitIdDelete", unitIdDeleteSchema);
 
-module.exports = UnitId;
+module.exports = UnitIdDelete;

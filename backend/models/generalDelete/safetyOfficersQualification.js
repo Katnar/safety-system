@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //כשירות ממונים על הבטיחות
-const safetyOfficersQualificationSchema = new mongoose.Schema({
+const safetyOfficersQualificationDeleteSchema = new mongoose.Schema({
   personalNumber: { type: String },
   id: { type: Number },
   fullName: { type: String },
@@ -13,9 +13,9 @@ const safetyOfficersQualificationSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const safetyOfficersQualification = mongoose.model(
-  "safetyOfficersQualification",
-  safetyOfficersQualificationSchema
+const safetyOfficersQualificationDelete = mongoose.model(
+  "safetyOfficersQualificationDelete",
+  safetyOfficersQualificationDeleteSchema
 );
 
-module.exports = safetyOfficersQualification;
+module.exports = safetyOfficersQualificationDelete;

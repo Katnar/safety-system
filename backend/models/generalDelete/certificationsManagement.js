@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //ניהול הסמכות
-const certificationsManagementSchema = new mongoose.Schema({
+const certificationsManagementDeleteSchema = new mongoose.Schema({
   personalNumber: { type: String },
   id: { type: Number },
   fullName: { type: String },
@@ -16,9 +16,9 @@ const certificationsManagementSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const certificationsManagement = mongoose.model(
-  "certificationsManagement",
-  certificationsManagementSchema
+const certificationsManagementDelete = mongoose.model(
+  "certificationsManagementDelete",
+  certificationsManagementDeleteSchema
 );
 
-module.exports = certificationsManagement;
+module.exports = certificationsManagementDelete;

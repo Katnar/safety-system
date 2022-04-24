@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 //בדיקת הארקות חשמל ומבנים
-const groundingTestsSchema = new mongoose.Schema({
+const groundingTestsDeleteSchema = new mongoose.Schema({
   buildingName: { type: String },
   testDate: { type: Date },
   nextTestDate: { type: Date },
@@ -13,6 +13,6 @@ const groundingTestsSchema = new mongoose.Schema({
   changedAt: { type: Date },
 });
 
-const groundingTests = mongoose.model("groundingTests", groundingTestsSchema);
+const groundingTestsDelete = mongoose.model("groundingTestsDelete", groundingTestsDeleteSchema);
 
-module.exports = groundingTests;
+module.exports = groundingTestsDelete;
