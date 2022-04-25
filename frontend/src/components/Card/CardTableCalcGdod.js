@@ -105,6 +105,7 @@ const CardTableCalcGdod = (props) => {
               borderRadius: "15px",
               backgroundColor: "#B5CFD8",
               boxShadow: "0 0 1rem 0",
+              overflow: "auto",
             }}
           >
             <CardHeader color="info" stats icon>
