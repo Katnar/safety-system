@@ -37,6 +37,7 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
   const user = isAuthenticated();
   //mahzor
   const [state, setState] = useState([]);
+  const [gdods, setGdods] = useState([]);
   //mahzor
 
   function handleChange(evt) {
@@ -58,6 +59,16 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
         });
     };
 
+    const loadGdods = () => {
+      axios
+        .get("http://localhost:8000/api/gdod")
+        .then((response) => {
+          setGdods(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
 
   const clickSubmit = (event) => {
     if (CheckFormData()) {
@@ -113,6 +124,7 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
     if(match.params.id != "0") {
       loadDatas();
     }
+    loadGdods();
   }
 
   useEffect(() => {
@@ -204,14 +216,20 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 גדוד
               </div>
-              <FormGroup dir="rtl">
+              <FormGroup className="mb-3" dir="rtl">
                 <Input
-                  type="text"
+                  placeholder="גדוד"
                   name="gdod"
+                  type="select"
                   value={user.user.gdod}
                   onChange={handleChange}
-                  disabled = "disabled"
-                ></Input>
+                  disabled="disabled"
+                >
+                  <option value={""}>גדוד</option>
+                  {gdods.map((gdod, index) => (
+                    <option value={gdod._id}>{gdod.name}</option>
+                  ))}
+                </Input>
               </FormGroup>
             </Col>
             </Row>

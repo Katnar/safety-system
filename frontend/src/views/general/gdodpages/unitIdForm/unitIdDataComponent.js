@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import SimpleReactValidator from "simple-react-validator";
+import { singleFileUpload } from "../../../../data/api";
 // reactstrap components
 import {
   Button,
@@ -38,6 +39,7 @@ const UnitIdDataComponent = ({ match }) => {
   const user = isAuthenticated();
   //mahzor
   const [unit, setUnit] = useState([]);
+  const [gdods, setGdods] = useState([]);
   //mahzor
 
   function handleChange(evt) {
@@ -57,6 +59,17 @@ const UnitIdDataComponent = ({ match }) => {
       });
   };
 
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const clickSubmit = (event) => {
     if (CheckFormData()) {
       SubmitData();
@@ -65,6 +78,23 @@ const UnitIdDataComponent = ({ match }) => {
     } else {
       toast.error("שגיאה בטופס");
     }
+  };
+
+  const UploadFile = async (id) => {
+    const formData = new FormData();
+    const collec = "unitId";
+    formData.append("file", singleFile);
+    await singleFileUpload(formData, collec, id);
+    console.log("First File:"+singleFile);
+  };
+
+  
+  const UploadFile2 = async (id) => {
+    const formData = new FormData();
+    const collec = "unitId";
+    formData.append("file", singleFile2);
+    await singleFileUpload(formData, collec, "2_"+id);
+    console.log("Second File:"+singleFile2);
   };
 
   function CheckFormData() {
@@ -97,6 +127,9 @@ const UnitIdDataComponent = ({ match }) => {
       tempUnitData = result.data;
     }
 
+    await UploadFile(tempUnitData._id);
+    await UploadFile2(tempUnitData._id);
+
     // console.log("post")
     // let result = await axios.post("http://localhost:8000/api/unitId", unit);
     // tempUnitData = result.data;
@@ -107,12 +140,24 @@ const UnitIdDataComponent = ({ match }) => {
     if (match.params.id != "0") {
       loadunits();
     }
+    loadGdods();
   }
 
   useEffect(() => {
     init();
     console.log(user.user.gdod);
   }, []);
+
+  const [singleFile, setSingleFile] = useState("");
+  const SingleFileChange = (e) => {
+    setSingleFile(e.target.files[0]);
+  };
+  
+  const [singleFile2, setSingleFile2] = useState("");
+  const SingleFileChange2 = (e) => {
+    setSingleFile2(e.target.files[0]);
+  };
+
 
   return (
     <Card>
@@ -198,14 +243,12 @@ const UnitIdDataComponent = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 עץ מבנה יחידה
               </div>
-              <FormGroup dir="rtl">
-                <Input
-                  type="text"
+              <Input
+                  type="file"
                   name="unitStructureTree"
                   value={unit.unitStructureTree}
-                  onChange={handleChange}
+                  onChange={(e) => SingleFileChange(e)}
                 ></Input>
-              </FormGroup>
             </Col>
           </Row>
           <Row>
@@ -213,27 +256,31 @@ const UnitIdDataComponent = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 עץ מבנה מחלקת טנ"א
               </div>
-              <FormGroup dir="rtl">
-                <Input
-                  type="text"
+              <Input
+                  type="file"
                   name="teneStructureTree"
                   value={unit.teneStructureTree}
-                  onChange={handleChange}
+                  onChange={(e) => SingleFileChange2(e)}
                 ></Input>
-              </FormGroup>
             </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 גדוד
               </div>
-              <FormGroup dir="rtl">
+              <FormGroup className="mb-3" dir="rtl">
                 <Input
-                  type="text"
+                  placeholder="גדוד"
                   name="gdod"
+                  type="select"
                   value={user.user.gdod}
                   onChange={handleChange}
-                  disabled = "disabled"
-                ></Input>
+                  disabled="disabled"
+                >
+                  <option value={""}>גדוד</option>
+                  {gdods.map((gdod, index) => (
+                    <option value={gdod._id}>{gdod.name}</option>
+                  ))}
+                </Input>
               </FormGroup>
             </Col>
             </Row>

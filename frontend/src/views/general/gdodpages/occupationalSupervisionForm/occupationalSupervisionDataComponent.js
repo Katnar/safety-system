@@ -37,6 +37,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
   const user = isAuthenticated();
 
   const [data, setData] = useState([]);
+  const [gdods, setGdods] = useState([]);
 
   function handleChange(evt) {
     const value = evt.target.value;
@@ -61,6 +62,17 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
       .then((response) => {
         let tempdatas = response.data;
         setData(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -116,6 +128,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
     if (match.params.id != "0") {
       loadDatas();
     }
+    loadGdods();
   }
 
   useEffect(() => {
@@ -315,14 +328,20 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 גדוד
               </div>
-              <FormGroup dir="rtl">
+              <FormGroup className="mb-3" dir="rtl">
                 <Input
-                  type="text"
+                  placeholder="גדוד"
                   name="gdod"
+                  type="select"
                   value={user.user.gdod}
                   onChange={handleChange}
                   disabled="disabled"
-                ></Input>
+                >
+                  <option value={""}>גדוד</option>
+                  {gdods.map((gdod, index) => (
+                    <option value={gdod._id}>{gdod.name}</option>
+                  ))}
+                </Input>
               </FormGroup>
             </Col>
           </Row>

@@ -35,7 +35,8 @@ import { isAuthenticated } from "auth";
 const TrainingProgramForm = ({ match }) => {
   const user = isAuthenticated();
   //mahzor
-  const [state, setState] = useState([]);
+  const [state, setState] = useState([]); 
+  const [gdods, setGdods] = useState([]);
   //mahzor
 
   function handleChange(evt) {
@@ -49,6 +50,17 @@ const TrainingProgramForm = ({ match }) => {
       .then((response) => {
         let tempdatas = response.data;
         setState(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -119,6 +131,7 @@ const TrainingProgramForm = ({ match }) => {
     if (match.params.id != "0") {
       loadDatas();
     }
+    loadGdods();
   }
 
   useEffect(() => {
@@ -254,14 +267,20 @@ const TrainingProgramForm = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 גדוד
               </div>
-              <FormGroup dir="rtl">
+              <FormGroup className="mb-3" dir="rtl">
                 <Input
-                  type="text"
+                  placeholder="גדוד"
                   name="gdod"
+                  type="select"
                   value={user.user.gdod}
                   onChange={handleChange}
-                  disabled={true}
-                ></Input>
+                  disabled="disabled"
+                >
+                  <option value={""}>גדוד</option>
+                  {gdods.map((gdod, index) => (
+                    <option value={gdod._id}>{gdod.name}</option>
+                  ))}
+                </Input>
               </FormGroup>
             </Col>
           </Row>

@@ -38,6 +38,7 @@ const CertificationManagementDataComponent = ({ match }) => {
   const user = isAuthenticated();
   //mahzor
   const [data, setData] = useState([]);
+  const [gdods, setGdods] = useState([]);
   //mahzor
 
   function handleChange(evt) {
@@ -53,6 +54,17 @@ const CertificationManagementDataComponent = ({ match }) => {
       .then((response) => {
         let tempdatas = response.data;
         setData(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -125,6 +137,7 @@ const CertificationManagementDataComponent = ({ match }) => {
     if (match.params.id != "0") {
       loadDatas();
     }
+    loadGdods();
   }
 
   useEffect(() => {
@@ -270,14 +283,20 @@ const CertificationManagementDataComponent = ({ match }) => {
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 גדוד
               </div>
-              <FormGroup dir="rtl">
+              <FormGroup className="mb-3" dir="rtl">
                 <Input
-                  type="text"
+                  placeholder="גדוד"
                   name="gdod"
+                  type="select"
                   value={user.user.gdod}
                   onChange={handleChange}
-                  disabled = "disabled"
-                ></Input>
+                  disabled="disabled"
+                >
+                  <option value={""}>גדוד</option>
+                  {gdods.map((gdod, index) => (
+                    <option value={gdod._id}>{gdod.name}</option>
+                  ))}
+                </Input>
               </FormGroup>
             </Col>
             </Row>
