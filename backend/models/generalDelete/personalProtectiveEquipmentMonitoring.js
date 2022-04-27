@@ -13,7 +13,7 @@ const personalProtectiveEquipmentMonitoringDeleteSchema = new mongoose.Schema({
   comments: { type: String },
   gdod: { type: String },
   createdAt: { type: Date },
-  changedAt: { type: Date },
+  deletedAt: { type: Date },
 });
 
 const personalProtectiveEquipmentMonitoringDelete = mongoose.model(

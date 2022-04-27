@@ -10,7 +10,7 @@ const groundingTestsSchema = new mongoose.Schema({
   documentUpload: { type: String },
   gdod: { type: String },
   createdAt: { type: Date },
-  changedAt: { type: Date },
+  deletedAt: { type: Date },
 });
 
 const groundingTests = mongoose.model("groundingTests", groundingTestsSchema);

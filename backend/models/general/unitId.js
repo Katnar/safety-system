@@ -11,7 +11,7 @@ const unitIdSchema = new mongoose.Schema({
   teneStructureTree: { type: String },
   gdod: {type: String},
   createdAt: { type: Date },
-  changedAt: { type: Date },
+  deletedAt: { type: Date },
 });
 
 const UnitId = mongoose.model("UnitId", unitIdSchema);

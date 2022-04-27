@@ -8,7 +8,7 @@ const reviewsDocumentationDeleteSchema = new mongoose.Schema({
   documentUpload: { type: String },
   gdod: { type: String },
   createdAt: { type: Date },
-  changedAt: { type: Date },
+  deletedAt: { type: Date },
 });
 
 const reviewsDocumentationDelete = mongoose.model(

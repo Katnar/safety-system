@@ -14,7 +14,7 @@ const riskManagementMonitoringDeleteSchema = new mongoose.Schema({
   status: { type: String },
   gdod: { type: String },
   createdAt: { type: Date },
-  changedAt: { type: Date },
+  deletedAt: { type: Date },
 });
 
 const riskManagementMonitoringDelete = mongoose.model(

@@ -10,7 +10,7 @@ const safetyOfficersQualificationDeleteSchema = new mongoose.Schema({
   numberOfSeminarDays: { type: Number },
   gdod: { type: String },
   createdAt: { type: Date },
-  changedAt: { type: Date },
+  deletedAt: { type: Date },
 });
 
 const safetyOfficersQualificationDelete = mongoose.model(
