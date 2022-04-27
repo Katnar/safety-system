@@ -7,20 +7,20 @@ const {
   update,
   remove,
   findById,
-} = require("../../controllers/general/safetyOfficersQualification");
+} = require("../../controllers/generalDelete/safetyOfficersQualification");
 
 // find spec
-router.get("/safetyOfficersQualification/:id", findById);
+router.get("/safetyOfficersQualificationDelete/:id", findById);
 //find all
-router.get("/safetyOfficersQualification", find);
+router.get("/safetyOfficersQualificationDelete", find);
 //add
-router.post("/safetyOfficersQualification", create); /**/
+router.post("/safetyOfficersQualificationDelete", create); /**/
 //update
 router.put(
-  "/safetyOfficersQualification/:id",
+  "/safetyOfficersQualificationDelete/:id",
   update
 );
 //delete
-router.delete("/safetyOfficersQualification/:id", remove);
+router.delete("/safetyOfficersQualificationDelete/:id", remove);
 
 module.exports = router;

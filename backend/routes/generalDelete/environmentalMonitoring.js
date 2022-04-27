@@ -11,25 +11,25 @@ const {
   findByHativa,
   findByOgda,
   findByPikod,
-} = require("../../controllers/general/environmentalMonitoring");
+} = require("../../controllers/generalDelete/environmentalMonitoring");
 
 // find spec
-router.get("/environmentalMonitoring/:id", findById);
+router.get("/environmentalMonitoringDelete/:id", findById);
 
-router.get("/environmentalMonitoring/bygdod/:gdod", findByGdod);
+router.get("/environmentalMonitoringDelete/bygdod/:gdod", findByGdod);
 
-router.get("/environmentalMonitoring/byhativa/:hativa", findByHativa);
+router.get("/environmentalMonitoringDelete/byhativa/:hativa", findByHativa);
 
-router.get("/environmentalMonitoring/byogda/:ogda", findByOgda);
+router.get("/environmentalMonitoringDelete/byogda/:ogda", findByOgda);
 
-router.get("/environmentalMonitoring/bypikod/:pikod", findByPikod);
+router.get("/environmentalMonitoringDelete/bypikod/:pikod", findByPikod);
 //find all
-router.get("/environmentalMonitoring", find);
+router.get("/environmentalMonitoringDelete", find);
 //add
-router.post("/environmentalMonitoring", create); /**/
+router.post("/environmentalMonitoringDelete", create); /**/
 //update
-router.put("/environmentalMonitoring/:id", update);
+router.put("/environmentalMonitoringDelete/:id", update);
 //delete
-router.delete("/environmentalMonitoring/:id", remove);
+router.delete("/environmentalMonitoringDelete/:id", remove);
 
 module.exports = router;

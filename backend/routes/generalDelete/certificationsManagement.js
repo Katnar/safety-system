@@ -11,25 +11,25 @@ const {
   findByHativa,
   findByOgda,
   findByPikod,
-} = require("../../controllers/general/certificationsManagement");
+} = require("../../controllers/generalDelete/certificationsManagement");
 
 // find spec
-router.get("/certificationsManagement/:id", findById);
+router.get("/certificationsManagementDelete/:id", findById);
 //find all
-router.get("/certificationsManagement/bygdod/:gdod", findByGdod);
+router.get("/certificationsManagementDelete/bygdod/:gdod", findByGdod);
 
-router.get("/certificationsManagement/byhativa/:hativa", findByHativa);
+router.get("/certificationsManagementDelete/byhativa/:hativa", findByHativa);
 
-router.get("/certificationsManagement/byogda/:ogda", findByOgda);
+router.get("/certificationsManagementDelete/byogda/:ogda", findByOgda);
 
-router.get("/certificationsManagement/bypikod/:pikod", findByPikod);
+router.get("/certificationsManagementDelete/bypikod/:pikod", findByPikod);
 
-router.get("/certificationsManagement", find);
+router.get("/certificationsManagementDelete", find);
 //add
-router.post("/certificationsManagement", create); /**/
+router.post("/certificationsManagementDelete", create); /**/
 //update
-router.put("/certificationsManagement/:id", update);
+router.put("/certificationsManagementDelete/:id", update);
 //delete
-router.delete("/certificationsManagement/:id", remove);
+router.delete("/certificationsManagementDelete/:id", remove);
 
 module.exports = router;

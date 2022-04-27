@@ -7,17 +7,17 @@ const {
   update,
   remove,
   findById,
-} = require("../../controllers/general/monthlySafetyCommitteesMonitoring");
+} = require("../../controllers/generalDelete/monthlySafetyCommitteesMonitoring");
 
 // find spec
-router.get("/monthlySafetyCommitteesMonitoring/:id", findById);
+router.get("/monthlySafetyCommitteesMonitoringDelete/:id", findById);
 //find all
-router.get("/monthlySafetyCommitteesMonitoring", find);
+router.get("/monthlySafetyCommitteesMonitoringDelete", find);
 //add
-router.post("/monthlySafetyCommitteesMonitoring", create); /**/
+router.post("/monthlySafetyCommitteesMonitoringDelete", create); /**/
 //update
-router.put("/monthlySafetyCommitteesMonitoring/:id", update);
+router.put("/monthlySafetyCommitteesMonitoringDelete/:id", update);
 //delete
-router.delete("/monthlySafetyCommitteesMonitoring/:id", remove);
+router.delete("/monthlySafetyCommitteesMonitoringDelete/:id", remove);
 
 module.exports = router;

@@ -7,17 +7,17 @@ const {
   update,
   remove,
   findById,
-} = require("../../controllers/general/reviewsDocumentation");
+} = require("../../controllers/generalDelete/reviewsDocumentation");
 
 // find spec
-router.get("/reviewsDocumentation/:id", findById);
+router.get("/reviewsDocumentationDelete/:id", findById);
 //find all
-router.get("/reviewsDocumentation", find);
+router.get("/reviewsDocumentationDelete", find);
 //add
-router.post("/reviewsDocumentation", create); /**/
+router.post("/reviewsDocumentationDelete", create); /**/
 //update
-router.put("/reviewsDocumentation/:id", update);
+router.put("/reviewsDocumentationDelete/:id", update);
 //delete
-router.delete("/reviewsDocumentation/:id", remove);
+router.delete("/reviewsDocumentationDelete/:id", remove);
 
 module.exports = router;

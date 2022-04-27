@@ -7,17 +7,17 @@ const {
   update,
   remove,
   findById,
-} = require("../../controllers/general/riskManagementMonitoring");
+} = require("../../controllers/generalDelete/riskManagementMonitoring");
 
 // find spec
-router.get("/riskManagementMonitoring/:id", findById);
+router.get("/riskManagementMonitoringDelete/:id", findById);
 //find all
-router.get("/riskManagementMonitoring", find);
+router.get("/riskManagementMonitoringDelete", find);
 //add
-router.post("/riskManagementMonitoring", create); /**/
+router.post("/riskManagementMonitoringDelete", create); /**/
 //update
-router.put("/riskManagementMonitoring/:id", update);
+router.put("/riskManagementMonitoringDelete/:id", update);
 //delete
-router.delete("/riskManagementMonitoring/:id", remove);
+router.delete("/riskManagementMonitoringDelete/:id", remove);
 
 module.exports = router;

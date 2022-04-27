@@ -11,25 +11,25 @@ const {
   findByHativa,
   findByOgda,
   findByPikod,
-} = require("../../controllers/general/occupationalSupervision");
+} = require("../../controllers/generalDelete/occupationalSupervision");
 
 // find spec
-router.get("/occupationalSupervision/:id", findById);
+router.get("/occupationalSupervisionDelete/:id", findById);
 
-router.get("/occupationalSupervision/bygdod/:gdod", findByGdod);
+router.get("/occupationalSupervisionDelete/bygdod/:gdod", findByGdod);
 
-router.get("/occupationalSupervision/byhativa/:hativa", findByHativa);
+router.get("/occupationalSupervisionDelete/byhativa/:hativa", findByHativa);
 
-router.get("/occupationalSupervision/byogda/:ogda", findByOgda);
+router.get("/occupationalSupervisionDelete/byogda/:ogda", findByOgda);
 
-router.get("/occupationalSupervision/bypikod/:pikod", findByPikod);
+router.get("/occupationalSupervisionDelete/bypikod/:pikod", findByPikod);
 //find all
-router.get("/occupationalSupervision", find);
+router.get("/occupationalSupervisionDelete", find);
 //add
-router.post("/occupationalSupervision", create); /**/
+router.post("/occupationalSupervisionDelete", create); /**/
 //update
-router.put("/occupationalSupervision/:id", update);
+router.put("/occupationalSupervisionDelete/:id", update);
 //delete
-router.delete("/occupationalSupervision/:id", remove);
+router.delete("/occupationalSupervisionDelete/:id", remove);
 
 module.exports = router;

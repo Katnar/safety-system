@@ -7,17 +7,17 @@ const {
   update,
   remove,
   findById,
-} = require("../../controllers/general/unitId");
+} = require("../../controllers/generalDelete/unitId");
 
 // find spec
-router.get("/unitId/:id", findById);
+router.get("/unitIdDelete/:id", findById);
 //find all
-router.get("/unitId", find);
+router.get("/unitIdDelete", find);
 //add
-router.post("/unitId", create); /**/
+router.post("/unitIdDelete", create); /**/
 //update
-router.put("/unitId/:id", update);
+router.put("/unitIdDelete/:id", update);
 //delete
-router.delete("/unitId/:id", remove);
+router.delete("/unitIdDelete/:id", remove);
 
 module.exports = router;

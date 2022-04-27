@@ -7,17 +7,17 @@ const {
   update,
   remove,
   findById,
-} = require("../../controllers/general/personalProtectiveEquipmentMonitoring");
+} = require("../../controllers/generalDelete/personalProtectiveEquipmentMonitoring");
 
 // find spec
-router.get("/personalProtectiveEquipmentMonitoring/:id", findById);
+router.get("/personalProtectiveEquipmentMonitoringDelete/:id", findById);
 //find all
-router.get("/personalProtectiveEquipmentMonitoring", find);
+router.get("/personalProtectiveEquipmentMonitoringDelete", find);
 //add
-router.post("/personalProtectiveEquipmentMonitoring", create); /**/
+router.post("/personalProtectiveEquipmentMonitoringDelete", create); /**/
 //update
-router.put("/personalProtectiveEquipmentMonitoring/:id", update);
+router.put("/personalProtectiveEquipmentMonitoringDelete/:id", update);
 //delete
-router.delete("/personalProtectiveEquipmentMonitoring/:id", remove);
+router.delete("/personalProtectiveEquipmentMonitoringDelete/:id", remove);
 
 module.exports = router;

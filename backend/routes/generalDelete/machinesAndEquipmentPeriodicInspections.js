@@ -7,17 +7,17 @@ const {
   update,
   remove,
   findById,
-} = require("../../controllers/general/machinesAndEquipmentPeriodicInspections");
+} = require("../../controllers/generalDelete/machinesAndEquipmentPeriodicInspections");
 
 // find spec
-router.get("/machinesAndEquipmentPeriodicInspections/:id", findById);
+router.get("/machinesAndEquipmentPeriodicInspectionsDelete/:id", findById);
 //find all
-router.get("/machinesAndEquipmentPeriodicInspections", find);
+router.get("/machinesAndEquipmentPeriodicInspectionsDelete", find);
 //add
-router.post("/machinesAndEquipmentPeriodicInspections", create); /**/
+router.post("/machinesAndEquipmentPeriodicInspectionsDelete", create); /**/
 //update
-router.put("/machinesAndEquipmentPeriodicInspections/:id", update);
+router.put("/machinesAndEquipmentPeriodicInspectionsDelete/:id", update);
 //delete
-router.delete("/machinesAndEquipmentPeriodicInspections/:id", remove);
+router.delete("/machinesAndEquipmentPeriodicInspectionsDelete/:id", remove);
 
 module.exports = router;

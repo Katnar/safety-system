@@ -11,25 +11,25 @@ const {
   findByHativa,
   findByOgda,
   findByPikod,
-} = require("../../controllers/general/equipmentAndMaterialsPeriodicInspections");
+} = require("../../controllers/generalDelete/equipmentAndMaterialsPeriodicInspections");
 
 // find spec
-router.get("/equipmentAndMaterialsPeriodicInspections/:id", findById);
+router.get("/equipmentAndMaterialsPeriodicInspectionsDelete/:id", findById);
 
-router.get("/equipmentAndMaterialsPeriodicInspections/bygdod/:gdod", findByGdod);
+router.get("/equipmentAndMaterialsPeriodicInspectionsDelete/bygdod/:gdod", findByGdod);
 
-router.get("/equipmentAndMaterialsPeriodicInspections/byhativa/:hativa", findByHativa);
+router.get("/equipmentAndMaterialsPeriodicInspectionsDelete/byhativa/:hativa", findByHativa);
 
-router.get("/equipmentAndMaterialsPeriodicInspections/byogda/:ogda", findByOgda);
+router.get("/equipmentAndMaterialsPeriodicInspectionsDelete/byogda/:ogda", findByOgda);
 
-router.get("/equipmentAndMaterialsPeriodicInspections/bypikod/:pikod", findByPikod);
+router.get("/equipmentAndMaterialsPeriodicInspectionsDelete/bypikod/:pikod", findByPikod);
 //find all
-router.get("/equipmentAndMaterialsPeriodicInspections", find);
+router.get("/equipmentAndMaterialsPeriodicInspectionsDelete", find);
 //add
-router.post("/equipmentAndMaterialsPeriodicInspections", create); /**/
+router.post("/equipmentAndMaterialsPeriodicInspectionsDelete", create); /**/
 //update
-router.put("/equipmentAndMaterialsPeriodicInspections/:id", update);
+router.put("/equipmentAndMaterialsPeriodicInspectionsDelete/:id", update);
 //delete
-router.delete("/equipmentAndMaterialsPeriodicInspections/:id", remove);
+router.delete("/equipmentAndMaterialsPeriodicInspectionsDelete/:id", remove);
 
 module.exports = router;
