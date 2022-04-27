@@ -71,16 +71,16 @@ function Signin() {
           history.push(`/adminDashboard`);
         }
         if (user.role === "1") {
-          history.push(`/gdodDashboard/${user.gdod}`);
+          history.push(`/globalDashboard/${user.gdod}`);
         }
         if (user.role === "2") {
-          history.push(`/candidatedashboard/${user._id}`);
+          history.push(`/globalDashboard/${user.hativa}`);
         }
         if (user.role === "3") {
-          history.push(`/ogdadashboard/${user._id}`);
+          history.push(`/globalDashboard/${user.ogda}`);
         }
         if (user.role === "4") {
-          history.push(`/pikoddashboard/${user._id}`);
+          history.push(`/globalDashboard/${user.pikod}`);
         }
       } else {
         toast.success("משתמש לא מאושר מערכת");

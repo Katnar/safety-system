@@ -58,7 +58,7 @@ import { isAuthenticated } from "auth/index";
 
 
 
-function SidebarGdod() {
+function SidebarGlobal() {
 
        const [collapsed1, setCollapsed1] = useState(true);
   const [collapsed2, setCollapsed2] = useState(true);
@@ -77,16 +77,31 @@ function SidebarGdod() {
     signout().then((response) => {
       history.push(`/signin`);
     });
-  };
-
+  }; 
+  
   const user = isAuthenticated();
+
+    let userUnit;
+    if(user.user.role == 1) {
+        userUnit = user.user.gdod;
+    } if(user.user.role == 2) {
+        userUnit = user.user.hativa;
+    } if(user.user.role == 3) {
+        userUnit = user.user.ogda;
+    } if(user.user.role == 4) {
+        userUnit = user.user.pikod;
+    }
+    console.log(userUnit)
+
+
+
 
   return (
     <>
       <ThemeContext.Consumer>
         {({ changeTheme, theme }) =>
           theme == "white-content" ? (
-            <Link  to={`/globalDashboard/${user.user.gdod}`}>
+            <Link  to={`/globalDashboard/${userUnit}`}>
               <div className="logo">
                 <img
                   src={lightLogo}
@@ -95,7 +110,7 @@ function SidebarGdod() {
               </div>
             </Link>
           ) : (
-            <Link  to={`/globalDashboard/${user.user.gdod}`}>
+            <Link  to={`/globalDashboard/${userUnit}`}>
               <div className="logo">
                 <img
                   src={darkLogo}
@@ -110,7 +125,7 @@ function SidebarGdod() {
         
         <li>
           <NavLink
-            to={`/globalDashboard/${user.user.gdod}`}
+            to={`/globalDashboard/${userUnit}`}
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -818,4 +833,4 @@ function SidebarGdod() {
   );
 }
 
-export default SidebarGdod;
+export default SidebarGlobal;

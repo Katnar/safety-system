@@ -45,6 +45,7 @@ import {
 import { signin, authenticate, isAuthenticated } from "auth/index";
 
 import SidebarAdmin from "components/general/Sidebar/SidebarAdmin";
+import SidebarGlobal from "components/general/Sidebar/SidebarGlobal";
 import SidebarGdod from "components/general/Sidebar/SidebarGdod";
 import SidebarHativa from "components/general/Sidebar/SidebarHativa";
 import SidebarOgda from "components/general/Sidebar/SidebarOgda";
@@ -86,13 +87,13 @@ function Sidebar() {
           {user.role === "0" ? (
             <SidebarAdmin />
           ) : user.role === "1" ? (
-            <SidebarGdod />
+            <SidebarGlobal />
           ) : user.role === "2" ? (
-            <SidebarHativa />
+            <SidebarGlobal />
           ) : user.role === "3" ? (
-            <SidebarOgda /> 
+            <SidebarGlobal /> 
           ) : user.role === "4" ? (
-            <SidebarPikod />
+            <SidebarGlobal />
           ) : null}
           <div
             style={{
