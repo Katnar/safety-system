@@ -12,8 +12,7 @@ const trainingProgramSchema = new mongoose.Schema({
   requiredWorkersStatus: { type: [String] },
   gdod: {type: String},
   createdAt: { type: Date },
-  deletedAt: { type: Date },
-});
+}, {timestamps: true});
 
 const trainingProgram = mongoose.model(
   "trainingProgram",

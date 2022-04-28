@@ -11,7 +11,6 @@ const trainingProgramDeleteSchema = new mongoose.Schema({
   trainingStatus: { type: String },
   requiredWorkersStatus: { type: [String] },
   gdod: {type: String},
-  createdAt: { type: Date },
   deletedAt: { type: Date },
 }, {timestamps: true});
 

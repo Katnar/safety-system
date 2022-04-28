@@ -40,7 +40,7 @@ const SortingTable = (props) => {
 
   const Delete = (data) => {
     const tempData = data;
-    tempData.updatedAt = new Date();
+    tempData.deletedAt = new Date();
     axios.post("http://localhost:8000/api/trainingProgramDelete", tempData).then((response) => {
       axios.delete(`http://localhost:8000/api/trainingProgram/${data._id}`).then((response) => {
         loadData();
@@ -193,7 +193,7 @@ const SortingTable = (props) => {
                       }}
                     >
                       {" "}
-                      <Link to={`/trainingProgramGdodForm/${row.original._id}`}>
+                      <Link to={`/trainingProgramForm/${row.original._id}`}>
                         <button className="btn btn-edit">ערוך</button>
                       </Link>
                     </div>
