@@ -13,7 +13,7 @@ const trainingProgramDeleteSchema = new mongoose.Schema({
   gdod: {type: String},
   createdAt: { type: Date },
   deletedAt: { type: Date },
-});
+}, {timestamps: true});
 
 const trainingProgramDelete = mongoose.model(
   "trainingProgramDelete",

@@ -91,7 +91,7 @@ async function init() {
           <CardTableCalcGlobal
             name={[
               "ניהול הסמכות",
-              "certificationManagementGdod",
+              "GlobalCertificationsManagementsView",
               "שים לב! חלק מההסמכות הן פגות תוקף",
               "certificationValidity",
               "certificationsManagement",
@@ -101,7 +101,7 @@ async function init() {
           <CardTableCalcGlobal
             name={[
               "פיקוח תעסוקתי",
-              "occupationalSupervisionGdod",
+              "GlobalOccupationalSupervisionView",
               "שים לב! חלק מהפיקוחים פגי תוקף",
               "nextTestDate",
               "occupationalSupervision",
@@ -111,7 +111,7 @@ async function init() {
           <CardTableCalcGlobal
             name={[
               "בדיקות תקופתיות לציוד וחומרים",
-              "equipmentAndMaterialsPeriodicInspectionsGdod",
+              "GlobalEquipmentAndMaterialsPeriodicInspectionsView",
               "שים לב! חלק מהבדיקות הן פגות תוקף",
               "nextTestDate",
               "equipmentAndMaterialsPeriodicInspections",
@@ -121,7 +121,7 @@ async function init() {
           <CardTableCalcGlobal
             name={[
               "ניטורים סביבתיים",
-              "environmentalMonitoringGdod",
+              "GlobalEnvironmentalMonitoringView",
               "שים לב! חלק מהניטורים פגי תוקף",
               "nextMonitoringDate",
               "environmentalMonitoring",
@@ -130,38 +130,38 @@ async function init() {
           />
         </GridContainer>
         <GridContainer>
-          <CardTable name={["תעודת זהות יחידה", "unitIdGdod"]} />
+          <CardTable name={["תעודת זהות יחידה", "GlobalUnitIdView"]} />
           <CardTable
-            name={["כשירות ממונים על הבטיחות", "safetyOfficersQualificationGdod"]}
+            name={["כשירות ממונים על הבטיחות", "GlobalSafetyOfficersQualificationView"]}
           />
-          <CardTable name={["תכנית הדרכות", "trainingProgramGdod"]} />
+          <CardTable name={["תכנית הדרכות", "GlobalTrainingProgramView"]} />
           <CardTable
             name={[
               "בדיקות תקופתיות למכונות וציוד",
-              "machinesAndEquipmentPeriodicInspectionsGdod",
+              "GlobalMachinesAndEquipmentPeriodicInspectionsView",
             ]}
           />
           <CardTable
-            name={["מעקב ניהול סיכונים", "riskManagementMonitoringGdod"]}
+            name={["מעקב ניהול סיכונים", "GlobalRiskManagementMonitoringView"]}
           />
           <CardTable
             name={[
               "מעקב וועדות בטיחות חודשיות",
-              "monthlySafetyCommitteesMonitoringGdod",
+              "GlobalMonthlySafetyCommitteesMonitoringView",
             ]}
           />
         </GridContainer>
         <GridContainer>
-          <CardTable name={["מעקב סקר מפגעים", "hazardsMonitoringGdod"]} />
-          <CardTable name={['מעקב ניהול חומ"ס', "homsManagementMonitoringGdod"]} />
+          <CardTable name={["מעקב סקר מפגעים", "GlobalHazardsMonitoringView"]} />
+          <CardTable name={['מעקב ניהול חומ"ס', "GlobalHomsManagementMonitoringView"]} />
           <CardTable
             name={[
               "מעקב ציוד מגן אישי",
-              "personalProtectiveEquipmentMonitoringGdod",
+              "GlobalPersonalProtectiveEquipmentMonitoringView",
             ]}
           />
-          <CardTable name={["בדיקות הארקות חשמל ומבנים", "groundingTestsGdod"]} />
-          <CardTable name={["תיעוד ביקורות", "reviewsDocumentationGdod"]} />
+          <CardTable name={["בדיקות הארקות חשמל ומבנים", "GlobalGroundingTestsView"]} />
+          <CardTable name={["תיעוד ביקורות", "GlobalReviewsDocumentationView"]} />
         </GridContainer>
         <hr />
         <br />
