@@ -38,15 +38,20 @@ const SortingTable = (props) => {
     } catch {}
   };
 
-  const Delete = (Id) => {
-    axios
-      .delete(`http://localhost:8000/api/environmentalMonitoring/${Id}`)
-      .then((response) => {
+  const Delete = (data) => {
+    const tempData = data;
+    tempData.deletedAt = new Date();
+    axios.post("http://localhost:8000/api/environmentalMonitoringDelete", tempData).then((response) => {
+      axios.delete(`http://localhost:8000/api/environmentalMonitoring/${data._id}`).then((response) => {
         loadData();
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
       });
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   const loadData = () => {
@@ -221,7 +226,7 @@ const SortingTable = (props) => {
                       {" "}
                       <button
                         className="btn btn-danger"
-                        onClick={() => Delete(row.original._id)}
+                        onClick={() => Delete(row.original)}
                       >
                         מחק
                       </button>

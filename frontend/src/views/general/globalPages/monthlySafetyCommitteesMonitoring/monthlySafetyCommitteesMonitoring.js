@@ -33,7 +33,7 @@ function MonthlySafetyCommitteesMonitoring() {
               טבלת מעקב וועדות בטיחות חודשיות
             </h3>
             <MonthlySafetyCommitteesMonitoringTable userData={user} />
-            <Link to={`/monthlySafetyCommitteesMonitoringForm/0`}>
+            <Link to={`/monthlySafetyCommitteesMonitoringGdodForm/0`}>
               <Button>הוסף ועדת בטיחות </Button>
             </Link>
           </CardBody>

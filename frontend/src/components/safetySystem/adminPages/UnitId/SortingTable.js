@@ -38,16 +38,22 @@ const SortingTable = (props) => {
     } catch {}
   };
 
-  const UnitDelete = (UnitIdId) => {
-    axios
-      .delete(`http://localhost:8000/api/unitId/${UnitIdId}`)
-      .then((response) => {
+  const UnitDelete = (data) => {
+    const tempData = data;
+    tempData.deletedAt = new Date();
+    axios.post("http://localhost:8000/api/unitIdDelete", tempData).then((response) => {
+      axios.delete(`http://localhost:8000/api/unitId/${data._id}`).then((response) => {
         loadUnits();
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
       });
+    }).catch((error) => {
+      console.log(error);
+    });
   };
+
 
   const loadUnits = () => {
     axios
@@ -195,7 +201,7 @@ const SortingTable = (props) => {
                       {" "}
                       <button
                         className="btn btn-danger"
-                        onClick={() => UnitDelete(row.original._id)}
+                        onClick={() => UnitDelete(row.original)}
                       >
                         מחק
                       </button>

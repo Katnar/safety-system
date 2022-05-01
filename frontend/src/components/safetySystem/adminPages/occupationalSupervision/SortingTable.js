@@ -38,19 +38,20 @@ const SortingTable = ({ match }) => {
     } catch {}
   };
 
-  const occupationalSupervisionDetailsDelete = (
-    occupationalSupervisionDetailsId
-  ) => {
-    axios
-      .delete(
-        `http://localhost:8000/api/occupationalSupervision/${occupationalSupervisionDetailsId}`
-      )
-      .then((response) => {
+  const occupationalSupervisionDetailsDelete = (data) => {
+    const tempData = data;
+    tempData.deletedAt = new Date();
+    axios.post("http://localhost:8000/api/occupationalSupervisionDelete", tempData).then((response) => {
+      axios.delete(`http://localhost:8000/api/occupationalSupervision/${data._id}`).then((response) => {
         loadOccupationalSupervisionDetails();
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
       });
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   const loadOccupationalSupervisionDetails = () => {
@@ -222,7 +223,7 @@ const SortingTable = ({ match }) => {
                       <button
                         className="btn btn-danger"
                         onClick={() =>
-                          occupationalSupervisionDetailsDelete(row.original._id)
+                          occupationalSupervisionDetailsDelete(row.original)
                         }
                       >
                         מחק

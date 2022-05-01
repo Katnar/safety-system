@@ -37,17 +37,20 @@ const SortingTable = (props) => {
     } catch {}
   };
 
-  const safetyOfficerDelete = (id) => {
-    axios
-      .delete(
-        `http://localhost:8000/api/safetyOfficersQualification/${id}`
-      )
-      .then((response) => {
+  const safetyOfficerDelete = (data) => {
+    const tempData = data;
+    tempData.deletedAt = new Date();
+    axios.post("http://localhost:8000/api/safetyOfficersQualificationDelete", tempData).then((response) => {
+      axios.delete(`http://localhost:8000/api/safetyOfficersQualification/${data._id}`).then((response) => {
         loadSafetyOfficers();
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
       });
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   const loadSafetyOfficers = () => {
@@ -189,7 +192,7 @@ const SortingTable = (props) => {
                       {" "}
                       <button
                         className="btn btn-danger"
-                        onClick={() => safetyOfficerDelete(row.original._id)}
+                        onClick={() => safetyOfficerDelete(row.original)}
                       >
                         מחק
                       </button>
