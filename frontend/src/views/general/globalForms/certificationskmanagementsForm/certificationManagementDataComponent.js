@@ -215,6 +215,26 @@ const CertificationManagementDataComponent = ({ match }) => {
       });
   };
 
+  const getDetails = async () => {
+    try {
+      await axios
+        .get(`http://localhost:8000/api/certificationsManagement`)
+        .then((response) => {
+          let tempData = [];
+          for (let i = 0; i < response.data.length; i++) {
+            console.log(props);
+            if (response.data[i].gdod == props.userData.user.gdod) {
+              tempData.push(response.data[i]);
+            }
+          }
+          setData(tempData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch {}
+  };
+
   const loadGdods = () => {
     axios
       .get("http://localhost:8000/api/gdod")
