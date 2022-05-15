@@ -91,22 +91,22 @@ const CertificationManagementDataComponent = ({ match }) => {
         console.log(error);
       });
 
-    await axios.get(`http://localhost:8000/api/certificationsManagement`)
-      .then((response) => {
-        console.log(response.data)
-        let tempData = [];
-        for (let i = 0; i < response.data.length; i++) {
-          for (let j = 0; j < tempgdodbyhativa.length; j++) {
-            if (response.data[i].gdod == tempgdodbyhativa[j]._id) {
-              tempData.push(response.data[i]);
-            }
-          }
-        }
-        setData(tempData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // await axios.get(`http://localhost:8000/api/certificationsManagement`)
+    //   .then((response) => {
+    //     console.log(response.data)
+    //     let tempData = [];
+    //     for (let i = 0; i < response.data.length; i++) {
+    //       for (let j = 0; j < tempgdodbyhativa.length; j++) {
+    //         if (response.data[i].gdod == tempgdodbyhativa[j]._id) {
+    //           tempData.push(response.data[i]);
+    //         }
+    //       }
+    //     }
+    //     setData(tempData);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
 
@@ -130,22 +130,22 @@ const CertificationManagementDataComponent = ({ match }) => {
         console.log(error);
       });
 
-    await axios.get(`http://localhost:8000/api/certificationsManagement`)
-      .then((response) => {
-        // console.log(response.data)
-        let tempData = [];
-        for (let i = 0; i < response.data.length; i++) {
-          for (let j = 0; j < tempgdodsbyogda.length; j++) {
-            if (response.data[i].gdod == tempgdodsbyogda[j]._id) {
-              tempData.push(response.data[i]);
-            }
-          }
-        }
-        setData(tempData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // await axios.get(`http://localhost:8000/api/certificationsManagement`)
+    //   .then((response) => {
+    //     // console.log(response.data)
+    //     let tempData = [];
+    //     for (let i = 0; i < response.data.length; i++) {
+    //       for (let j = 0; j < tempgdodsbyogda.length; j++) {
+    //         if (response.data[i].gdod == tempgdodsbyogda[j]._id) {
+    //           tempData.push(response.data[i]);
+    //         }
+    //       }
+    //     }
+    //     setData(tempData);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   const getUnitDetailsByPikod = async () => {
@@ -177,24 +177,23 @@ const CertificationManagementDataComponent = ({ match }) => {
         console.log(error);
       });
 
-      await axios.get(`http://localhost:8000/api/certificationsManagement`)
-      .then((response) => {
-        // console.log(response.data)
-        let tempData = [];
-        for (let i = 0; i < response.data.length; i++) {
-          for (let j = 0; j < tempgdodsbypikod.length; j++) {
-            if (response.data[i].gdod == tempgdodsbypikod[j]._id) {
-              tempData.push(response.data[i]);
-            }
-          }
-        }
-        setData(tempData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      // await axios.get(`http://localhost:8000/api/certificationsManagement`)
+      // .then((response) => {
+      //   // console.log(response.data)
+      //   let tempData = [];
+      //   for (let i = 0; i < response.data.length; i++) {
+      //     for (let j = 0; j < tempgdodsbypikod.length; j++) {
+      //       if (response.data[i].gdod == tempgdodsbypikod[j]._id) {
+      //         tempData.push(response.data[i]);
+      //       }
+      //     }
+      //   }
+      //   setData(tempData);
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      // });
   };
-  //mahzor
 
   function handleChange(evt) {
     const value = evt.target.value;
@@ -476,3 +475,4 @@ const CertificationManagementDataComponent = ({ match }) => {
   );
 };
 export default withRouter(CertificationManagementDataComponent);
+ 
