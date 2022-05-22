@@ -28,17 +28,18 @@ import { produce } from "immer";
 import { generate } from "shortid";
 import { toast } from "react-toastify";
 
-import editpic from "assets/img/edit.png";
-import deletepic from "assets/img/delete.png";
-import SettingModal from "../../../../components/general/modal/SettingModal";
+// import editpic from "assets/img/edit.png";
+// import deletepic from "assets/img/delete.png";
+// import SettingModal from "../../../../components/general/modal/SettingModal";
+import { isAuthenticated } from "auth";
 
-const CertificationManagementDataComponent = ({ match }) => {
+const CertificationManagementDataComponent = (props, {match}) => {
   //mahzor
   const [data, setData] = useState({});
   const [gdods, setGdods] = useState([]);
 
   const user = isAuthenticated();
-  const columns = useMemo(() => COLUMNS, []);
+  // const columns = useMemo(() => COLUMNS, []);
 
   async function init() {
     if (match.params.id != "0") {
@@ -46,22 +47,22 @@ const CertificationManagementDataComponent = ({ match }) => {
     }
     if (props.userData.user != undefined) {
       if (props.userData.user.role == "1") {
-        getUnitDetailsByGdod();
+        getGdods();
       }
       if (props.userData.user.role == "2") {
-        getUnitDetailsByHativa();
+        getGdodsByHativa();
       }
       if (props.userData.user.role == "3") {
-        getUnitDetailsByOgda();
+        getGdodsByOgda();
       }
       if (props.userData.user.role == "4") {
-        getUnitDetailsByPikod();
+        getGdodsByPikod();
       }
     }
-    getDetails();
+    // getDetails();
   }
 
-  const getUnitDetailsByGdod = async () => {
+  const getGdods = async () => {
     try {
       await axios
         .get(`http://localhost:8000/api/certificationsManagement`)
@@ -80,12 +81,13 @@ const CertificationManagementDataComponent = ({ match }) => {
     } catch { }
   };
 
-  const getUnitDetailsByHativa = async () => {
+  const getGdodsByHativa = async () => {
     let tempgdodbyhativa;
     await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: props.userData.user.hativa })
       .then((response) => {
         tempgdodbyhativa = response.data;
-        console.log(tempgdodbyhativa)
+        setGdods(tempgdodbyhativa)
+        // console.log(Data)
       })
       .catch((error) => {
         console.log(error);
@@ -110,7 +112,7 @@ const CertificationManagementDataComponent = ({ match }) => {
   };
 
 
-  const getUnitDetailsByOgda = async () => {
+  const getGdodsByOgda = async () => {
     let tempgdodsbyogda = [];
     await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: props.userData.user.ogda })
       .then(async (response1) => {
@@ -118,8 +120,9 @@ const CertificationManagementDataComponent = ({ match }) => {
           await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
             .then((response2) => {
               for (let j = 0; j < response2.data.length; j++) {
-                tempgdodsbyogda.push(response2.data[j])
+                tempgdodsbyogda.push(response2.data[j])               
               }
+              setGdods(tempgdodsbyogda);
             })
             .catch((error) => {
               console.log(error);
@@ -148,7 +151,7 @@ const CertificationManagementDataComponent = ({ match }) => {
     //   });
   };
 
-  const getUnitDetailsByPikod = async () => {
+  const getGdodsByPikod = async () => {
     let tempgdodsbypikod = [];
 
     await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: props.userData.user.pikod })
@@ -162,6 +165,7 @@ const CertificationManagementDataComponent = ({ match }) => {
                     for (let k = 0; k < response3.data.length; k++) {
                       tempgdodsbypikod.push(response3.data[k])
                     }
+                    setGdods(tempgdodsbypikod)
                   })
                   .catch((error) => {
                     console.log(error);
@@ -306,7 +310,7 @@ const CertificationManagementDataComponent = ({ match }) => {
 
   useEffect(() => {
     init();
-    console.log(match.params);
+    // console.log(match.params);
   }, []);
 
   const [singleFile, setSingleFile] = useState("");

@@ -134,6 +134,9 @@ import GlobalPersonalProtectiveEquipmentMonitoringView from "views/general/globa
 import GlobalGroundingTestsView from "views/general/globalPages/groundingTests/groundingTests";
 import GlobalReviewsDocumentationView from "views/general/globalPages/reviewsDocumentation/reviewsDocumentation";
 
+import GlobalCertificationsManagementsForm from "views/general/globalForms/certificationskmanagementsForm/certificationManagementDataComponent";
+
+
 const routesgeneral = (
   <>
     {/*///////////////////////////////////////////UnLoggedIn Routes/////////////////////////////////////////////////*/}
@@ -256,6 +259,11 @@ const routesgeneral = (
       path="/GlobalReviewsDocumentationView"
       exact
       component={GlobalReviewsDocumentationView} 
+    />
+    <LoggedinRoute 
+      path="/GlobalCertificationsManagementsForm/:id"
+      exact
+      component={GlobalCertificationsManagementsForm} 
     />
 
     {/*///////////////////////////////////////////Admin Views/////////////////////////////////////////////////*/}
