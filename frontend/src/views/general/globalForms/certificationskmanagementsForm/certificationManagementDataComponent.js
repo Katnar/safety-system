@@ -42,23 +42,23 @@ const CertificationManagementDataComponent = (props, {match}) => {
   // const columns = useMemo(() => COLUMNS, []);
 
   async function init() {
-    if (match.params.id != "0") {
-      loadDatas();
-    }
-    if (props.userData.user != undefined) {
-      if (props.userData.user.role == "1") {
+    // if (match.params.id != "0") {
+    //   loadDatas();
+    // }
+    // if (user.user != undefined) {
+      if (user.user.role == "1") {
         getGdods();
       }
-      if (props.userData.user.role == "2") {
+      if (user.user.role == "2") {
         getGdodsByHativa();
       }
-      if (props.userData.user.role == "3") {
+      if (user.user.role == "3") {
         getGdodsByOgda();
       }
-      if (props.userData.user.role == "4") {
+      if (user.user.role == "4") {
         getGdodsByPikod();
       }
-    }
+    // }
     // getDetails();
   }
 
@@ -69,7 +69,7 @@ const CertificationManagementDataComponent = (props, {match}) => {
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
-            if (response.data[i].gdod == props.userData.user.gdod) {
+            if (response.data[i].gdod == user.user.gdod) {
               tempData.push(response.data[i]);
             }
           }
@@ -83,10 +83,11 @@ const CertificationManagementDataComponent = (props, {match}) => {
 
   const getGdodsByHativa = async () => {
     let tempgdodbyhativa;
-    await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: props.userData.user.hativa })
+    await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: user.user.hativa })
       .then((response) => {
         tempgdodbyhativa = response.data;
         setGdods(tempgdodbyhativa)
+        console.log("gdods")
         // console.log(Data)
       })
       .catch((error) => {
@@ -114,7 +115,8 @@ const CertificationManagementDataComponent = (props, {match}) => {
 
   const getGdodsByOgda = async () => {
     let tempgdodsbyogda = [];
-    await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: props.userData.user.ogda })
+    console.log(user.user.ogda)
+    await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: user.user.ogda })
       .then(async (response1) => {
         for (let i = 0; i < response1.data.length; i++) {
           await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
@@ -122,7 +124,9 @@ const CertificationManagementDataComponent = (props, {match}) => {
               for (let j = 0; j < response2.data.length; j++) {
                 tempgdodsbyogda.push(response2.data[j])               
               }
+              console.log(tempgdodsbyogda)
               setGdods(tempgdodsbyogda);
+              console.log(gdods)
             })
             .catch((error) => {
               console.log(error);
@@ -154,7 +158,7 @@ const CertificationManagementDataComponent = (props, {match}) => {
   const getGdodsByPikod = async () => {
     let tempgdodsbypikod = [];
 
-    await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: props.userData.user.pikod })
+    await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: user.user.pikod })
       .then(async (response1) => {
         for (let i = 0; i < response1.data.length; i++) {
           await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
@@ -204,50 +208,50 @@ const CertificationManagementDataComponent = (props, {match}) => {
     setData({ ...data, [evt.target.name]: value });
   }
 
-  const loadDatas = () => {
-    axios
-      .get(
-        `http://localhost:8000/api/certificationsManagement/${match.params.id}`
-      )
-      .then((response) => {
-        let tempdatas = response.data;
-        setData(tempdatas);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const loadDatas = () => {
+  //   axios
+  //     .get(
+  //       `http://localhost:8000/api/certificationsManagement/${match.params.id}`
+  //     )
+  //     .then((response) => {
+  //       let tempdatas = response.data;
+  //       setData(tempdatas);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
-  const getDetails = async () => {
-    try {
-      await axios
-        .get(`http://localhost:8000/api/certificationsManagement`)
-        .then((response) => {
-          let tempData = [];
-          for (let i = 0; i < response.data.length; i++) {
-            console.log(props);
-            if (response.data[i].gdod == props.userData.user.gdod) {
-              tempData.push(response.data[i]);
-            }
-          }
-          setData(tempData);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch {}
-  };
+  // const getDetails = async () => {
+  //   try {
+  //     await axios
+  //       .get(`http://localhost:8000/api/certificationsManagement`)
+  //       .then((response) => {
+  //         let tempData = [];
+  //         for (let i = 0; i < response.data.length; i++) {
+  //           console.log(props);
+  //           if (response.data[i].gdod == user.user.gdod) {
+  //             tempData.push(response.data[i]);
+  //           }
+  //         }
+  //         setData(tempData);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   } catch {}
+  // };
 
-  const loadGdods = () => {
-    axios
-      .get("http://localhost:8000/api/gdod")
-      .then((response) => {
-        setGdods(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const loadGdods = () => {
+  //   axios
+  //     .get("http://localhost:8000/api/gdod")
+  //     .then((response) => {
+  //       setGdods(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   const clickSubmit = async (event) => {
     if (CheckFormData()) {
@@ -310,7 +314,7 @@ const CertificationManagementDataComponent = (props, {match}) => {
 
   useEffect(() => {
     init();
-    // console.log(match.params);
+    
   }, []);
 
   const [singleFile, setSingleFile] = useState("");
@@ -327,7 +331,7 @@ const CertificationManagementDataComponent = (props, {match}) => {
         >
           טופס ניהול הסמכות
         </CardTitle>
-        {/*headline*/}
+      
       </CardHeader>
       <CardBody style={{ direction: "rtl" }}>
         <Container>

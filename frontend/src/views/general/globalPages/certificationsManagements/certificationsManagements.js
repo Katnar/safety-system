@@ -33,7 +33,7 @@ function certificationsManagements() {
             טבלת ניהול הסמכות
           </h3>
           <CertificationsManagementTable userData={user}/>
-          <Link to={`/certificationManagementGdodForm/0`}>
+          <Link to={`/GlobalCertificationsManagementsForm/0`} userData={user}>
             <Button>הוסף הסמכה </Button>
           </Link>
         </CardBody>
