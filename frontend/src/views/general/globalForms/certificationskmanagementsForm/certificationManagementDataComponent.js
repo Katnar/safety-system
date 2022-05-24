@@ -33,29 +33,32 @@ import { toast } from "react-toastify";
 // import SettingModal from "../../../../components/general/modal/SettingModal";
 import { isAuthenticated } from "auth";
 
-const CertificationManagementDataComponent = (props, {match}) => {
+const CertificationManagementDataComponent = ({match}) => {
   //mahzor
   const [data, setData] = useState({});
   const [gdods, setGdods] = useState([]);
 
   const user = isAuthenticated();
+
   // const columns = useMemo(() => COLUMNS, []);
 
-  async function init() {
+  async function init() { 
+    let user1 = await isAuthenticated();
+    console.log(user1)
     // if (match.params.id != "0") {
     //   loadDatas();
     // }
     // if (user.user != undefined) {
-      if (user.user.role == "1") {
+      if (user1.user.role == "1") {
         getGdods();
-      }
-      if (user.user.role == "2") {
+      }else
+      if (user1.user.role == "2") {
         getGdodsByHativa();
-      }
-      if (user.user.role == "3") {
+      }else 
+      if (user1.user.role == "3") {
         getGdodsByOgda();
-      }
-      if (user.user.role == "4") {
+      }else 
+      if (user1.user.role == "4") {
         getGdodsByPikod();
       }
     // }
@@ -86,8 +89,8 @@ const CertificationManagementDataComponent = (props, {match}) => {
     await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: user.user.hativa })
       .then((response) => {
         tempgdodbyhativa = response.data;
-        setGdods(tempgdodbyhativa)
-        console.log("gdods")
+        setGdods(tempgdodbyhativa, () => console.log(gdods))
+        console.log(gdods)
         // console.log(Data)
       })
       .catch((error) => {
@@ -124,14 +127,15 @@ const CertificationManagementDataComponent = (props, {match}) => {
               for (let j = 0; j < response2.data.length; j++) {
                 tempgdodsbyogda.push(response2.data[j])               
               }
-              console.log(tempgdodsbyogda)
-              setGdods(tempgdodsbyogda);
-              console.log(gdods)
+
             })
             .catch((error) => {
               console.log(error);
             });
-        }
+          }
+          console.log(tempgdodsbyogda)
+          setGdods(tempgdodsbyogda);
+          console.log(gdods)
       })
       .catch((error) => {
         console.log(error);
@@ -169,7 +173,7 @@ const CertificationManagementDataComponent = (props, {match}) => {
                     for (let k = 0; k < response3.data.length; k++) {
                       tempgdodsbypikod.push(response3.data[k])
                     }
-                    setGdods(tempgdodsbypikod)
+                    
                   })
                   .catch((error) => {
                     console.log(error);
@@ -180,6 +184,7 @@ const CertificationManagementDataComponent = (props, {match}) => {
               console.log(error);
             });
         }
+        setGdods(tempgdodsbypikod)
       })
       .catch((error) => {
         console.log(error);
@@ -445,7 +450,7 @@ const CertificationManagementDataComponent = (props, {match}) => {
                 >
                   <option value={""}>גדוד</option>
                   {gdods.map((gdod, index) => (
-                    <option value={gdod._id}>{gdod.name}</option>
+                    <option value={gdod._id} key={index}>{gdod.name}</option>
                   ))}
                 </Input>
               </FormGroup>
