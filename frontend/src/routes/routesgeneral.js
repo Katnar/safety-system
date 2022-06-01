@@ -135,6 +135,7 @@ import GlobalGroundingTestsView from "views/general/globalPages/groundingTests/g
 import GlobalReviewsDocumentationView from "views/general/globalPages/reviewsDocumentation/reviewsDocumentation";
 
 import GlobalCertificationsManagementsForm from "views/general/globalForms/certificationskmanagementsForm/certificationManagementDataComponent";
+import GlobalEnvironmentalMonitoringForm from "views/general/globalForms/environmentalMonitoringForm/environmentalMonitoringForm";
 
 
 const routesgeneral = (
@@ -260,10 +261,17 @@ const routesgeneral = (
       exact
       component={GlobalReviewsDocumentationView} 
     />
+
+    
     <LoggedinRoute 
       path="/GlobalCertificationsManagementsForm/:id"
       exact
       component={GlobalCertificationsManagementsForm} 
+    />
+    <LoggedinRoute 
+      path="/GlobalEnvironmentalMonitoringForm/:id"
+      exact
+      component={GlobalEnvironmentalMonitoringForm} 
     />
 
     {/*///////////////////////////////////////////Admin Views/////////////////////////////////////////////////*/}

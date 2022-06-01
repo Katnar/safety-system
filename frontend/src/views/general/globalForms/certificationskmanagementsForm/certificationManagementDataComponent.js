@@ -40,15 +40,9 @@ const CertificationManagementDataComponent = ({match}) => {
 
   const user = isAuthenticated();
 
-  // const columns = useMemo(() => COLUMNS, []);
-
   async function init() { 
     let user1 = await isAuthenticated();
     console.log(user1)
-    // if (match.params.id != "0") {
-    //   loadDatas();
-    // }
-    // if (user.user != undefined) {
       if (user1.user.role == "1") {
         getGdods();
       }else
@@ -61,8 +55,6 @@ const CertificationManagementDataComponent = ({match}) => {
       if (user1.user.role == "4") {
         getGdodsByPikod();
       }
-    // }
-    // getDetails();
   }
 
   const getGdods = async () => {
@@ -91,28 +83,10 @@ const CertificationManagementDataComponent = ({match}) => {
         tempgdodbyhativa = response.data;
         setGdods(tempgdodbyhativa, () => console.log(gdods))
         console.log(gdods)
-        // console.log(Data)
       })
       .catch((error) => {
         console.log(error);
       });
-
-    // await axios.get(`http://localhost:8000/api/certificationsManagement`)
-    //   .then((response) => {
-    //     console.log(response.data)
-    //     let tempData = [];
-    //     for (let i = 0; i < response.data.length; i++) {
-    //       for (let j = 0; j < tempgdodbyhativa.length; j++) {
-    //         if (response.data[i].gdod == tempgdodbyhativa[j]._id) {
-    //           tempData.push(response.data[i]);
-    //         }
-    //       }
-    //     }
-    //     setData(tempData);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
 
 
@@ -127,7 +101,6 @@ const CertificationManagementDataComponent = ({match}) => {
               for (let j = 0; j < response2.data.length; j++) {
                 tempgdodsbyogda.push(response2.data[j])               
               }
-
             })
             .catch((error) => {
               console.log(error);
@@ -140,23 +113,6 @@ const CertificationManagementDataComponent = ({match}) => {
       .catch((error) => {
         console.log(error);
       });
-
-    // await axios.get(`http://localhost:8000/api/certificationsManagement`)
-    //   .then((response) => {
-    //     // console.log(response.data)
-    //     let tempData = [];
-    //     for (let i = 0; i < response.data.length; i++) {
-    //       for (let j = 0; j < tempgdodsbyogda.length; j++) {
-    //         if (response.data[i].gdod == tempgdodsbyogda[j]._id) {
-    //           tempData.push(response.data[i]);
-    //         }
-    //       }
-    //     }
-    //     setData(tempData);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
 
   const getGdodsByPikod = async () => {
@@ -173,7 +129,6 @@ const CertificationManagementDataComponent = ({match}) => {
                     for (let k = 0; k < response3.data.length; k++) {
                       tempgdodsbypikod.push(response3.data[k])
                     }
-                    
                   })
                   .catch((error) => {
                     console.log(error);
@@ -189,74 +144,12 @@ const CertificationManagementDataComponent = ({match}) => {
       .catch((error) => {
         console.log(error);
       });
-
-      // await axios.get(`http://localhost:8000/api/certificationsManagement`)
-      // .then((response) => {
-      //   // console.log(response.data)
-      //   let tempData = [];
-      //   for (let i = 0; i < response.data.length; i++) {
-      //     for (let j = 0; j < tempgdodsbypikod.length; j++) {
-      //       if (response.data[i].gdod == tempgdodsbypikod[j]._id) {
-      //         tempData.push(response.data[i]);
-      //       }
-      //     }
-      //   }
-      //   setData(tempData);
-      // })
-      // .catch((error) => {
-      //   console.log(error);
-      // });
   };
 
   function handleChange(evt) {
     const value = evt.target.value;
     setData({ ...data, [evt.target.name]: value });
   }
-
-  // const loadDatas = () => {
-  //   axios
-  //     .get(
-  //       `http://localhost:8000/api/certificationsManagement/${match.params.id}`
-  //     )
-  //     .then((response) => {
-  //       let tempdatas = response.data;
-  //       setData(tempdatas);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  // const getDetails = async () => {
-  //   try {
-  //     await axios
-  //       .get(`http://localhost:8000/api/certificationsManagement`)
-  //       .then((response) => {
-  //         let tempData = [];
-  //         for (let i = 0; i < response.data.length; i++) {
-  //           console.log(props);
-  //           if (response.data[i].gdod == user.user.gdod) {
-  //             tempData.push(response.data[i]);
-  //           }
-  //         }
-  //         setData(tempData);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   } catch {}
-  // };
-
-  // const loadGdods = () => {
-  //   axios
-  //     .get("http://localhost:8000/api/gdod")
-  //     .then((response) => {
-  //       setGdods(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
 
   const clickSubmit = async (event) => {
     if (CheckFormData()) {
@@ -271,11 +164,6 @@ const CertificationManagementDataComponent = ({match}) => {
   function CheckFormData() {
     let flag = true;
     let error = "";
-
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
-    //   flag = false;
-    // }
     return flag;
   }
 
@@ -290,14 +178,12 @@ const CertificationManagementDataComponent = ({match}) => {
   async function SubmitData() {
     let tempData;
     if (match.params.id == "0") {
-      //new mahzor
       let result = await axios.post(
         "http://localhost:8000/api/certificationsManagement",
         data
       );
       tempData = result.data;
     } else {
-      // update mahzor
       let tempWithDeleteId = data;
       delete tempWithDeleteId._id;
       let result = await axios.put(
@@ -308,13 +194,6 @@ const CertificationManagementDataComponent = ({match}) => {
     }
     if(singleFile!=="")
     await UploadFile(tempData._id);
-
-    // console.log("post")
-    // let result = await axios.post(
-    //   "http://localhost:8000/api/certificationsManagement",
-    //   data
-    // );
-    // tempData = result.data;
   }
 
   useEffect(() => {
@@ -335,8 +214,7 @@ const CertificationManagementDataComponent = ({match}) => {
           style={{ direction: "rtl", textAlign: "center", fontWeight: "bold" }}
         >
           טופס ניהול הסמכות
-        </CardTitle>
-      
+        </CardTitle> 
       </CardHeader>
       <CardBody style={{ direction: "rtl" }}>
         <Container>
