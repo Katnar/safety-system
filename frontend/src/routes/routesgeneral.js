@@ -262,14 +262,14 @@ const routesgeneral = (
       component={GlobalReviewsDocumentationView} 
     />
 
-    
+
     <LoggedinRoute 
-      path="/GlobalCertificationsManagementsForm/:id"
+      path="/GlobalCertificationsManagementsForm/:unit/:id"
       exact
       component={GlobalCertificationsManagementsForm} 
     />
     <LoggedinRoute 
-      path="/GlobalEnvironmentalMonitoringForm/:id"
+      path="/GlobalEnvironmentalMonitoringForm/:unit/:id"
       exact
       component={GlobalEnvironmentalMonitoringForm} 
     />
