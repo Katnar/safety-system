@@ -41,6 +41,9 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
 
   async function init() { 
     let user1 = await isAuthenticated();
+    if (match.params.id != "0") {
+      loadDatas();
+    }
     console.log(user1)
       if (user1.user.role == "1") {
         getGdods();
@@ -335,6 +338,7 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
                   type="select"
                   value={state.gdod}
                   onChange={handleChange}
+                  disabled="disabled"
                 >
                   <option value={""}>גדוד</option>
                   {gdods.map((gdod, index) => (

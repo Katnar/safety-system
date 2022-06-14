@@ -353,7 +353,7 @@ const SortingTable = (props) => {
                     >
                       {" "}
                       <Link
-                        to={`/equipmentAndMaterialsPeriodicInspectionsGdodForm/${row.original._id}`}
+                        to={`/GlobalEnvironmentalMonitoringForm/${row.original._id}`}
                       >
                         <button className="btn btn-edit">ערוך</button>
                       </Link>

@@ -269,7 +269,7 @@ const routesgeneral = (
       component={GlobalCertificationsManagementsForm} 
     />
     <LoggedinRoute 
-      path="/GlobalEnvironmentalMonitoringForm/:unit/:id"
+      path="/GlobalEnvironmentalMonitoringForm/:id"
       exact
       component={GlobalEnvironmentalMonitoringForm} 
     />
