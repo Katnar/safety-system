@@ -42,6 +42,9 @@ const CertificationManagementDataComponent = ({match}) => {
 
   async function init() { 
     let user1 = await isAuthenticated();
+    if (match.params.id != "0") {
+      loadDatas();
+    }
     console.log(user1)
       if (user1.user.role == "1") {
         getGdods();
@@ -56,6 +59,20 @@ const CertificationManagementDataComponent = ({match}) => {
         getGdodsByPikod();
       }
   }
+
+  const loadDatas = () => {
+    axios
+      .get(
+        `http://localhost:8000/api/certificationsManagement/${match.params.id}`
+      )
+      .then((response) => {
+        let tempdatas = response.data;
+        setData(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const getGdods = async () => {
     try {
@@ -325,6 +342,7 @@ const CertificationManagementDataComponent = ({match}) => {
                   type="select"
                   value={data.gdod}
                   onChange={handleChange}
+                  disabled="disabled"
                 >
                   <option value={""}>גדוד</option>
                   {gdods.map((gdod, index) => (

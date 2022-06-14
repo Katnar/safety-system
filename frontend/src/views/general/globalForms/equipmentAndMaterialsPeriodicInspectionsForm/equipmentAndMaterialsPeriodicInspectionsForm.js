@@ -37,9 +37,113 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
   //mahzor
   const [state, setState] = useState({});
   const [gdods, setGdods] = useState([]);
+  const user = isAuthenticated();
 
-  //mahzor
+  async function init() { 
+    let user1 = await isAuthenticated();
+    console.log(user1)
+      if (user1.user.role == "1") {
+        getGdods();
+      }else
+      if (user1.user.role == "2") {
+        getGdodsByHativa();
+      }else 
+      if (user1.user.role == "3") {
+        getGdodsByOgda();
+      }else 
+      if (user1.user.role == "4") {
+        getGdodsByPikod();
+      }
+  }
 
+  const getGdods = async () => {
+    try {
+      await axios
+        .get(`http://localhost:8000/api/certificationsManagement`)
+        .then((response) => {
+          let tempData = [];
+          for (let i = 0; i < response.data.length; i++) {
+            if (response.data[i].gdod == user.user.gdod) {
+              tempData.push(response.data[i]);
+            }
+          }
+          setState(tempData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch { }
+  };
+
+  const getGdodsByHativa = async () => {
+    let tempgdodbyhativa;
+    await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: user.user.hativa })
+      .then((response) => {
+        tempgdodbyhativa = response.data;
+        setGdods(tempgdodbyhativa, () => console.log(gdods))
+        console.log(gdods)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+  const getGdodsByOgda = async () => {
+    let tempgdodsbyogda = [];
+    console.log(user.user.ogda)
+    await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: user.user.ogda })
+      .then(async (response1) => {
+        for (let i = 0; i < response1.data.length; i++) {
+          await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
+            .then((response2) => {
+              for (let j = 0; j < response2.data.length; j++) {
+                tempgdodsbyogda.push(response2.data[j])               
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          }
+          console.log(tempgdodsbyogda)
+          setGdods(tempgdodsbyogda);
+          console.log(gdods)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getGdodsByPikod = async () => {
+    let tempgdodsbypikod = [];
+
+    await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: user.user.pikod })
+      .then(async (response1) => {
+        for (let i = 0; i < response1.data.length; i++) {
+          await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
+            .then(async (response2) => {
+              for (let j = 0; j < response2.data.length; j++) {
+                await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response2.data[j]._id })
+                  .then(async (response3) => {
+                    for (let k = 0; k < response3.data.length; k++) {
+                      tempgdodsbypikod.push(response3.data[k])
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  })
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+        setGdods(tempgdodsbypikod)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   function handleChange(evt) {
     const value = evt.target.value;
     setState({ ...state, [evt.target.name]: value });
@@ -83,11 +187,6 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
   function CheckFormData() {
     let flag = true;
     let error = "";
-
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
-    //   flag = false;
-    // }
     return flag;
   }
 
@@ -120,13 +219,6 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
     }
 
     await UploadFile(tempData._id);
-
-
-    // let result = await axios.post(
-    //   "http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections",
-    //   state
-    // );
-    // tempData = result.data;
   }
 
   const [singleFile, setSingleFile] = useState("");

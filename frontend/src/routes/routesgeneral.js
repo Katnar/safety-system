@@ -264,7 +264,7 @@ const routesgeneral = (
 
 
     <LoggedinRoute 
-      path="/GlobalCertificationsManagementsForm/:unit/:id"
+      path="/GlobalCertificationsManagementsForm/:id"
       exact
       component={GlobalCertificationsManagementsForm} 
     />
