@@ -355,6 +355,7 @@ const EnvironmentalMonitoringForm = ({ match }) => {
                   type="select"
                   value={state.gdod}
                   onChange={handleChange}
+                  // disabled="disabled"
                 >
                   <option value={""}>גדוד</option>
                   {gdods.map((gdod, index) => (

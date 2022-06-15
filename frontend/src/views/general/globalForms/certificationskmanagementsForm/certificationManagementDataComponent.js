@@ -342,7 +342,7 @@ const CertificationManagementDataComponent = ({match}) => {
                   type="select"
                   value={data.gdod}
                   onChange={handleChange}
-                  disabled="disabled"
+                  // disabled="disabled"
                 >
                   <option value={""}>גדוד</option>
                   {gdods.map((gdod, index) => (
