@@ -136,6 +136,8 @@ import GlobalReviewsDocumentationView from "views/general/globalPages/reviewsDoc
 
 import GlobalCertificationsManagementsForm from "views/general/globalForms/certificationskmanagementsForm/certificationManagementDataComponent";
 import GlobalEnvironmentalMonitoringForm from "views/general/globalForms/environmentalMonitoringForm/environmentalMonitoringForm";
+import GlobalEquipmentAndMaterialsForm from "views/general/globalForms/equipmentAndMaterialsPeriodicInspectionsForm/equipmentAndMaterialsPeriodicInspectionsForm";
+import GlobalUnitIdForm from "views/general/globalForms/unitIdForm/unitIdDataComponent";
 
 
 const routesgeneral = (
@@ -272,6 +274,16 @@ const routesgeneral = (
       path="/GlobalEnvironmentalMonitoringForm/:id"
       exact
       component={GlobalEnvironmentalMonitoringForm} 
+    />
+    <LoggedinRoute 
+      path="/GlobalEquipmentAndMaterialsForm/:id"
+      exact
+      component={GlobalEquipmentAndMaterialsForm} 
+    />
+    <LoggedinRoute 
+      path="/GlobalUnitIdForm/:id"
+      exact
+      component={GlobalUnitIdForm} 
     />
 
     {/*///////////////////////////////////////////Admin Views/////////////////////////////////////////////////*/}

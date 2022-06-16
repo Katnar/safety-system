@@ -316,7 +316,7 @@ const SortingTable = (props) => {
                       }}
                     >
                       {" "}
-                      <Link to={`/UnitIdGdodForm/${row.original._id}`}>
+                      <Link to={`/GlobalUnitIdForm/${row.original._id}`}>
                         <button className="btn btn-edit">ערוך</button>
                       </Link>
                     </div>

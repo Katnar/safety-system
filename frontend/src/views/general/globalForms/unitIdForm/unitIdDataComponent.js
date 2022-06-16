@@ -31,45 +31,145 @@ import { toast } from "react-toastify";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 import SettingModal from "../../../../components/general/modal/SettingModal";
+import { isAuthenticated } from "auth";
 
 const UnitIdDataComponent = ({ match }) => {
-  //mahzor
-  const [unit, setUnit] = useState({});
-  const [gdods, setGdods] = useState([]);
 
   //mahzor
+  const [data, setData] = useState({});
+  const [gdods, setGdods] = useState([]);
+
+  const user = isAuthenticated();
+
+  async function init() { 
+    let user1 = await isAuthenticated();
+    if (match.params.id != "0") {
+      loadDatas();
+    }
+    console.log(user1)
+      if (user1.user.role == "1") {
+        getGdods();
+      }else
+      if (user1.user.role == "2") {
+        getGdodsByHativa();
+      }else 
+      if (user1.user.role == "3") {
+        getGdodsByOgda();
+      }else 
+      if (user1.user.role == "4") {
+        getGdodsByPikod();
+      }
+  }
+
+  const loadDatas = () => {
+    axios
+      .get(
+        `http://localhost:8000/api/unitId/${match.params.id}`
+      )
+      .then((response) => {
+        let tempdatas = response.data;
+        setData(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getGdods = async () => {
+    try {
+      await axios
+        .get(`http://localhost:8000/api/unitId`)
+        .then((response) => {
+          let tempData = [];
+          for (let i = 0; i < response.data.length; i++) {
+            if (response.data[i].gdod == user.user.gdod) {
+              tempData.push(response.data[i]);
+            }
+          }
+          setData(tempData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch { }
+  };
+
+  const getGdodsByHativa = async () => {
+    let tempgdodbyhativa;
+    await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: user.user.hativa })
+      .then((response) => {
+        tempgdodbyhativa = response.data;
+        setGdods(tempgdodbyhativa, () => console.log(gdods))
+        console.log(gdods)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+  const getGdodsByOgda = async () => {
+    let tempgdodsbyogda = [];
+    console.log(user.user.ogda)
+    await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: user.user.ogda })
+      .then(async (response1) => {
+        for (let i = 0; i < response1.data.length; i++) {
+          await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
+            .then((response2) => {
+              for (let j = 0; j < response2.data.length; j++) {
+                tempgdodsbyogda.push(response2.data[j])               
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          }
+          console.log(tempgdodsbyogda)
+          setGdods(tempgdodsbyogda);
+          console.log(gdods)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getGdodsByPikod = async () => {
+    let tempgdodsbypikod = [];
+
+    await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: user.user.pikod })
+      .then(async (response1) => {
+        for (let i = 0; i < response1.data.length; i++) {
+          await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
+            .then(async (response2) => {
+              for (let j = 0; j < response2.data.length; j++) {
+                await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response2.data[j]._id })
+                  .then(async (response3) => {
+                    for (let k = 0; k < response3.data.length; k++) {
+                      tempgdodsbypikod.push(response3.data[k])
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  })
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+        setGdods(tempgdodsbypikod)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   function handleChange(evt) {
     const value = evt.target.value;
-    setUnit({ ...unit, [evt.target.name]: value });
+    setData({ ...data, [evt.target.name]: value });
   }
 
-  const loadunits = () => {
-    axios
-      .get(`http://localhost:8000/api/unitId/${match.params.id}`)
-      .then((response) => {
-        let tempunits = response.data;
-        setUnit(tempunits);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-
-
-  const loadGdods = () => {
-    axios
-      .get("http://localhost:8000/api/gdod")
-      .then((response) => {
-        setGdods(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const clickSubmit = (event) => {
+  const clickSubmit = async (event) => {
     if (CheckFormData()) {
       SubmitData();
       toast.success("הטופס עודכן בהצלחה");
@@ -82,11 +182,6 @@ const UnitIdDataComponent = ({ match }) => {
   function CheckFormData() {
     let flag = true;
     let error = "";
-
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
-    //   flag = false;
-    // }
     return flag;
   }
 
@@ -108,24 +203,27 @@ const UnitIdDataComponent = ({ match }) => {
   };
 
   async function SubmitData() {
-    let tempUnitData;
+    let tempData;
     if (match.params.id == "0") {
-      //new mahzor
-      let result = await axios.post("http://localhost:8000/api/unitId", unit);
-      tempUnitData = result.data;
+      let result = await axios.post(
+        "http://localhost:8000/api/unitId",
+        data
+      );
+      tempData = result.data;
     } else {
-      // update mahzor
-      let tempUnitWithDeleteId = unit;
-      delete tempUnitWithDeleteId._id;
+      let tempWithDeleteId = data;
+      delete tempWithDeleteId._id;
       let result = await axios.put(
         `http://localhost:8000/api/unitId/${match.params.id}`,
-        tempUnitWithDeleteId
+        tempWithDeleteId
       );
-      tempUnitData = result.data;
+      tempData = result.data;
     }
-
-    await UploadFile(tempUnitData._id);
-    await UploadFile2(tempUnitData._id);
+    if(singleFile!==""){
+        await UploadFile(tempData._id);
+    await UploadFile2(tempData._id);
+    }
+  
 
 
     // console.log("post")
@@ -133,16 +231,8 @@ const UnitIdDataComponent = ({ match }) => {
     // tempUnitData = result.data;
   }
 
-  function init() {
-    if (match.params.id != "0") {
-      loadunits();
-    }
-    loadGdods();
-  }
-
   useEffect(() => {
     init();
-    console.log(match.params);
   }, []);
 
 
@@ -178,7 +268,7 @@ const UnitIdDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="name"
-                  value={unit.name}
+                  value={data.name}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -191,7 +281,7 @@ const UnitIdDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="location"
-                  value={unit.location}
+                  value={data.location}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -204,7 +294,7 @@ const UnitIdDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="unitStructure"
-                  value={unit.unitStructure}
+                  value={data.unitStructure}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -219,7 +309,7 @@ const UnitIdDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="unitMeans"
-                  value={unit.unitMeans}
+                  value={data.unitMeans}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -232,7 +322,7 @@ const UnitIdDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="mainOccupation"
-                  value={unit.mainOccupation}
+                  value={data.mainOccupation}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -245,7 +335,7 @@ const UnitIdDataComponent = ({ match }) => {
                 <Input
                   type="file"
                   name="unitStructureTree"
-                  value={unit.unitStructureTree}
+                  value={data.unitStructureTree}
                   onChange={(e) => SingleFileChange(e)}
                 ></Input>
               {/* </FormGroup> */}
@@ -260,7 +350,7 @@ const UnitIdDataComponent = ({ match }) => {
                 <Input
                   type="file"
                   name="teneStructureTree"
-                  value={unit.teneStructureTree}
+                  value={data.teneStructureTree}
                   onChange={(e) => SingleFileChange2(e)}
                 ></Input>
               {/* </FormGroup> */}
@@ -274,7 +364,7 @@ const UnitIdDataComponent = ({ match }) => {
                   placeholder="גדוד"
                   name="gdod"
                   type="select"
-                  value={unit.gdod}
+                  value={data.gdod}
                   onChange={handleChange}
                 >
                   <option value={""}>גדוד</option>

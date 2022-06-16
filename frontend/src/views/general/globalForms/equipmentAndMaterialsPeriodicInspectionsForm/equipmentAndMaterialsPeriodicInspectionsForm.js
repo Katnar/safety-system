@@ -33,10 +33,13 @@ import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 import SettingModal from "../../../../components/general/modal/SettingModal";
 
+import { isAuthenticated } from "auth";
+
 const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
   //mahzor
-  const [state, setState] = useState({});
+  const [data, setData] = useState({});
   const [gdods, setGdods] = useState([]);
+
   const user = isAuthenticated();
 
   async function init() { 
@@ -59,10 +62,24 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
       }
   }
 
+  const loadDatas = () => {
+    axios
+      .get(
+        `http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections/${match.params.id}`
+      )
+      .then((response) => {
+        let tempdatas = response.data;
+        setData(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const getGdods = async () => {
     try {
       await axios
-        .get(`http://localhost:8000/api/certificationsManagement`)
+        .get(`http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections`)
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
@@ -70,7 +87,7 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
               tempData.push(response.data[i]);
             }
           }
-          setState(tempData);
+          setData(tempData);
         })
         .catch((error) => {
           console.log(error);
@@ -147,37 +164,13 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
         console.log(error);
       });
   };
+
   function handleChange(evt) {
     const value = evt.target.value;
-    setState({ ...state, [evt.target.name]: value });
+    setData({ ...data, [evt.target.name]: value });
   }
 
-  const loadDatas = () => {
-    axios
-      .get(
-        `http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections/${match.params.id}`
-      )
-      .then((response) => {
-        let tempdatas = response.data;
-        setState(tempdatas);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const loadGdods = () => {
-    axios
-      .get("http://localhost:8000/api/gdod")
-      .then((response) => {
-        setGdods(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const clickSubmit = (event) => {
+  const clickSubmit = async (event) => {
     if (CheckFormData()) {
       SubmitData();
       toast.success("הטופס עודכן בהצלחה");
@@ -204,15 +197,43 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
   async function SubmitData() {
     let tempData;
     if (match.params.id == "0") {
+      let result = await axios.post(
+        "http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections",
+        data
+      );
+      tempData = result.data;
+    } else {
+      let tempWithDeleteId = data;
+      delete tempWithDeleteId._id;
+      let result = await axios.put(
+        `http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections/${match.params.id}`,
+        tempWithDeleteId
+      );
+      tempData = result.data;
+    }
+    if(singleFile!=="")
+    await UploadFile(tempData._id);
+  }
+
+  function CheckFormData() {
+    let flag = true;
+    let error = "";
+    return flag;
+  }
+
+
+  async function SubmitData() {
+    let tempData;
+    if (match.params.id == "0") {
       //new mahzor
       let result = await axios.post(
         "http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections",
-        state
+        data
       );
       tempData = result.data;
     } else {
       // update mahzor
-      let tempWithDeleteId = state;
+      let tempWithDeleteId = data;
       delete tempWithDeleteId._id;
       let result = await axios.put(
         `http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections/${match.params.id}`,
@@ -228,13 +249,6 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
   const SingleFileChange = (e) => {
     setSingleFile(e.target.files[0]);
   };
-
-  function init() {
-    if (match.params.id != "0") {
-      loadDatas();
-    }
-    loadGdods();
-  }
 
   useEffect(() => {
     init();
@@ -262,7 +276,7 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
                 <Input
                   type="text"
                   name="equipmentType"
-                  value={state.equipmentType}
+                  value={data.equipmentType}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -275,7 +289,7 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
                 <Input
                   type="text"
                   name="manufacturer"
-                  value={state.manufacturer}
+                  value={data.manufacturer}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -288,7 +302,7 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
                 <Input
                   type="select"
                   name="testingFrequency"
-                  value={state.testingFrequency}
+                  value={data.testingFrequency}
                   onChange={handleChange}
                 >
                   <option value="">בחר תדירות</option>
@@ -309,7 +323,7 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
                 <Input
                   type="date"
                   name="testDate"
-                  value={state.testDate}
+                  value={data.testDate}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -322,7 +336,7 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
                 <Input
                   type="date"
                   name="nextTestDate"
-                  value={state.nextTestDate}
+                  value={data.nextTestDate}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -336,7 +350,7 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
                   placeholder="גדוד"
                   name="gdod"
                   type="select"
-                  value={state.gdod}
+                  value={data.gdod}
                   onChange={handleChange}
                   // disabled="disabled"
                 >
@@ -355,7 +369,7 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
                 <Input
                   type="file"
                   name="documentUpload"
-                  value={state.documentUpload}
+                  value={data.documentUpload}
                   onChange={(e) => SingleFileChange(e)}
                   ></Input>
               {/* </FormGroup> */}

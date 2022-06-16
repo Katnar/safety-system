@@ -22,6 +22,7 @@ const SortingTable = (props) => {
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([]);
+  const [gdods, setGdods] = useState([]);
 
   async function init() {
     if (props.userData.user != undefined) {
@@ -353,7 +354,7 @@ const SortingTable = (props) => {
                     >
                       {" "}
                       <Link
-                        to={`/GlobalEnvironmentalMonitoringForm/${row.original._id}`}
+                        to={`/GlobalequipmentAndMaterialsForm/${row.original._id}`}
                       >
                         <button className="btn btn-edit">ערוך</button>
                       </Link>
