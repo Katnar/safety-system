@@ -29,7 +29,10 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
   const unitId = req.body;
-  UnitId.findByIdAndUpdate(req.params.unitIdId, unitId)
+  UnitId.findByIdAndUpdate(
+    req.params.id,
+    unitId
+  )
     .then((unitId) => res.json(unitId))
     .catch((err) => res.status(400).json("Error: " + err));
 };
