@@ -15,11 +15,11 @@ import {
 } from "reactstrap";
 import UserProfileCircle from "../general/Navbars/UserProfileCircle/UserProfileCircle";
 import ProfilePicture from "../general/Navbars/UserProfileCircle/ProfilePicture";
-import { format } from "date-fns";
+// import { format } from "date-fns";
 import { isAuthenticated } from "auth";
 import replay from "assets/img/replay.png";
-import { Icon } from '@iconify/react';
-import commentDetail from '@iconify/icons-bx/comment-detail';
+// import { Icon } from '@iconify/react';
+// import commentDetail from "@iconify/icons-bx/comment-detail";
 
 const PostCard = () => {
   const [questions, setQuestions] = useState([]);
@@ -31,35 +31,34 @@ const PostCard = () => {
   // console.log(date)
 
   const getQuestions = async () => {
-      await axios
-        .get(`http://localhost:8000/api/smartQuestions`)
-        .then(async (response) => {
-          let tempdatas = await [...response.data].reverse();
-          let tempAnswers;
-          for(let i = 0; i < tempdatas.length; i++) {
-            let answerCounter = 0;
-            // console.log(tempdatas[i])
-            await axios
+    await axios
+      .get(`http://localhost:8000/api/smartQuestions`)
+      .then(async (response) => {
+        let tempdatas = await [...response.data].reverse();
+        let tempAnswers;
+        for (let i = 0; i < tempdatas.length; i++) {
+          let answerCounter = 0;
+          // console.log(tempdatas[i])
+          await axios
             .get(`http://localhost:8000/api/answer`)
             .then(async (response) => {
-             tempAnswers = await [...response.data];
-             for(let j = 0; j < tempAnswers.length; j++) {
-               if(tempAnswers[j].question == tempdatas[i]._id) {
-                 answerCounter++;
-                 console.log(answerCounter)
-               }
-             }
-             tempdatas[i].counter = answerCounter;
-            }
-            )
-          };
-          setQuestions(tempdatas);
-          console.log(tempdatas[0].text);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      }
+              tempAnswers = await [...response.data];
+              for (let j = 0; j < tempAnswers.length; j++) {
+                if (tempAnswers[j].question == tempdatas[i]._id) {
+                  answerCounter++;
+                  console.log(answerCounter);
+                }
+              }
+              tempdatas[i].counter = answerCounter;
+            });
+        }
+        setQuestions(tempdatas);
+        console.log(tempdatas[0].text);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     getQuestions();
@@ -74,7 +73,7 @@ const PostCard = () => {
               borderRadius: "15px",
               boxShadow: "0 0 1rem 0",
               color: "lightBlue",
-              background: "#dee9ed"
+              background: "#dee9ed",
             }}
           >
             <Row>
@@ -100,16 +99,12 @@ const PostCard = () => {
               <Col xs={12} sm={8} md={4}></Col>
               <Col xs={12} sm={8} md={4}>
                 <h4 style={{ textAlign: "left", padding: "1rem 0 0 3rem" }}>
+                  {question.createdAt.slice(11, 16)}{" "}
                   {question.createdAt
-                    .slice(11, 16)
-                    } {" "}
-                    {question.createdAt
                     .slice(0, 10)
                     .split("-")
                     .reverse()
                     .join(".")}
-                   
-                  
                 </h4>
               </Col>
             </Row>
@@ -121,7 +116,6 @@ const PostCard = () => {
               <Col xs={12} sm={8} md={4}></Col>
               <Col xs={12} sm={8} md={4}>
                 <Button
-                  
                   className="btn btn-info"
                   style={{
                     width: "100%",
@@ -143,9 +137,9 @@ const PostCard = () => {
                       }}
                     ></img> */}
                     <div>
-                    <Icon icon={commentDetail} style={{fontSize: "1rem"}}/> {question.counter} תשובות
+                      {/* <Icon icon={commentDetail} style={{fontSize: "1rem"}}/> {question.counter} תשובות */}
                     </div>
-                   
+
                     {/* <h4 style={{ paddingRight: "1rem", textAlign: "left", color: "#fff" }}>
                       תשובות
                     </h4> */}

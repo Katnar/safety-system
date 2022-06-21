@@ -42,30 +42,27 @@ const EnvironmentalMonitoringForm = ({ match }) => {
 
   const user = isAuthenticated();
 
-  async function init() { 
+  async function init() {
     if (match.params.id != "0") {
       loadDatas();
     }
     let user1 = await isAuthenticated();
-    console.log(user1)
-      if (user1.user.role == "1") {
-        getGdods();
-      }else
-      if (user1.user.role == "2") {
-        getGdodsByHativa();
-      }else 
-      if (user1.user.role == "3") {
-        getGdodsByOgda();
-      }else 
-      if (user1.user.role == "4") {
-        getGdodsByPikod();
-      }
+    console.log(user1);
+    if (user1.user.role == "1") {
+      getGdods();
+    } else if (user1.user.role == "2") {
+      getGdodsByHativa();
+    } else if (user1.user.role == "3") {
+      getGdodsByOgda();
+    } else if (user1.user.role == "4") {
+      getGdodsByPikod();
+    }
   }
 
   const getGdods = async () => {
     try {
       await axios
-        .get(`http://localhost:8000/api/certificationsManagement`)
+        .get(`http://localhost:8000/api/environmentalMonitoring`)
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
@@ -78,42 +75,50 @@ const EnvironmentalMonitoringForm = ({ match }) => {
         .catch((error) => {
           console.log(error);
         });
-    } catch { }
+    } catch {}
   };
 
   const getGdodsByHativa = async () => {
     let tempgdodbyhativa;
-    await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: user.user.hativa })
+    await axios
+      .post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, {
+        hativa: user.user.hativa,
+      })
       .then((response) => {
         tempgdodbyhativa = response.data;
-        setGdods(tempgdodbyhativa, () => console.log(gdods))
-        console.log(gdods)
+        setGdods(tempgdodbyhativa, () => console.log(gdods));
+        console.log(gdods);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-
   const getGdodsByOgda = async () => {
     let tempgdodsbyogda = [];
-    console.log(user.user.ogda)
-    await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: user.user.ogda })
+    console.log(user.user.ogda);
+    await axios
+      .post(`http://localhost:8000/api/hativa/hativasbyogdaid`, {
+        ogda: user.user.ogda,
+      })
       .then(async (response1) => {
         for (let i = 0; i < response1.data.length; i++) {
-          await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
+          await axios
+            .post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, {
+              hativa: response1.data[i]._id,
+            })
             .then((response2) => {
               for (let j = 0; j < response2.data.length; j++) {
-                tempgdodsbyogda.push(response2.data[j])               
+                tempgdodsbyogda.push(response2.data[j]);
               }
             })
             .catch((error) => {
               console.log(error);
             });
-          }
-          console.log(tempgdodsbyogda)
-          setGdods(tempgdodsbyogda);
-          console.log(gdods)
+        }
+        console.log(tempgdodsbyogda);
+        setGdods(tempgdodsbyogda);
+        console.log(gdods);
       })
       .catch((error) => {
         console.log(error);
@@ -123,28 +128,37 @@ const EnvironmentalMonitoringForm = ({ match }) => {
   const getGdodsByPikod = async () => {
     let tempgdodsbypikod = [];
 
-    await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: user.user.pikod })
+    await axios
+      .post(`http://localhost:8000/api/ogda/ogdasbypikodid`, {
+        pikod: user.user.pikod,
+      })
       .then(async (response1) => {
         for (let i = 0; i < response1.data.length; i++) {
-          await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
+          await axios
+            .post(`http://localhost:8000/api/hativa/hativasbyogdaid`, {
+              ogda: response1.data[i]._id,
+            })
             .then(async (response2) => {
               for (let j = 0; j < response2.data.length; j++) {
-                await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response2.data[j]._id })
+                await axios
+                  .post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, {
+                    hativa: response2.data[j]._id,
+                  })
                   .then(async (response3) => {
                     for (let k = 0; k < response3.data.length; k++) {
-                      tempgdodsbypikod.push(response3.data[k])
+                      tempgdodsbypikod.push(response3.data[k]);
                     }
                   })
                   .catch((error) => {
                     console.log(error);
-                  })
+                  });
               }
             })
             .catch((error) => {
               console.log(error);
             });
         }
-        setGdods(tempgdodsbypikod)
+        setGdods(tempgdodsbypikod);
       })
       .catch((error) => {
         console.log(error);
@@ -226,7 +240,6 @@ const EnvironmentalMonitoringForm = ({ match }) => {
     }
 
     await UploadFile(tempData._id);
-
 
     // let result = await axios.post(
     //   "http://localhost:8000/api/environmentalMonitoring",
@@ -359,7 +372,9 @@ const EnvironmentalMonitoringForm = ({ match }) => {
                 >
                   <option value={""}>גדוד</option>
                   {gdods.map((gdod, index) => (
-                    <option value={gdod._id} key={index}>{gdod.name}</option>
+                    <option value={gdod._id} key={index}>
+                      {gdod.name}
+                    </option>
                   ))}
                 </Input>
               </FormGroup>
@@ -369,12 +384,12 @@ const EnvironmentalMonitoringForm = ({ match }) => {
                 צירוף מסמכים
               </div>
               {/* <FormGroup dir="rtl"> */}
-                <Input
-                  type="file"
-                  name="documentUpload"
-                  value={state.documentUpload}
-                  onChange={(e) => SingleFileChange(e)}
-                  ></Input>
+              <Input
+                type="file"
+                name="documentUpload"
+                value={state.documentUpload}
+                onChange={(e) => SingleFileChange(e)}
+              ></Input>
               {/* </FormGroup> */}
             </Col>
           </Row>

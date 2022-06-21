@@ -51,7 +51,7 @@ export default function SignUpForm() {
   //       console.log(error);
   //     });
   // };
-  
+
   const loadGdods = () => {
     axios
       .get("http://localhost:8000/api/gdod")
@@ -247,7 +247,7 @@ export default function SignUpForm() {
           <Col lg="5" md="7">
             <Card className="shadow border-0">
               <CardBody className="px-lg-5 py-lg-5">
-              <div className="text-center text-muted mb-4">
+                <div className="text-center text-muted mb-4">
                   <img src={logo}></img>
                 </div>
                 <div className="text-center text-muted mb-4">
@@ -283,7 +283,7 @@ export default function SignUpForm() {
                       onChange={handleChange}
                     />
                   </FormGroup>
-{/* 
+                  {/* 
                   <FormGroup className="mb-3" dir="rtl">
                     <Input
                       placeholder="גדוד"
@@ -368,83 +368,83 @@ export default function SignUpForm() {
                         גדוד
                       </div>
                       <FormGroup className="mb-3" dir="rtl">
-                    <Input
-                      placeholder="גדוד"
-                      name="gdod"
-                      type="select"
-                      value={data.gdod}
-                      onChange={handleChange}
-                    >
-                    <option value={""}>גדוד</option>
-                            {gdods.map((gdod, index) => (
-                              <option value={gdod._id}>{gdod.name}</option>
-                            ))}
-                    </Input> 
-                  </FormGroup>
+                        <Input
+                          placeholder="גדוד"
+                          name="gdod"
+                          type="select"
+                          value={data.gdod}
+                          onChange={handleChange}
+                        >
+                          <option value={""}>גדוד</option>
+                          {gdods.map((gdod, index) => (
+                            <option value={gdod._id}>{gdod.name}</option>
+                          ))}
+                        </Input>
+                      </FormGroup>
                     </>
                   ) : data.role === "2" ? (
-<>
+                    <>
                       <div style={{ textAlign: "right", paddingTop: "10px" }}>
                         חטיבה
                       </div>
                       <FormGroup className="mb-3" dir="rtl">
-                    <Input
-                      placeholder="חטיבה"
-                      name="hativa"
-                      type="select"
-                      value={data.hativa}
-                      onChange={handleChange}
-                    >
-                    <option value={""}>חטיבה</option>
-                            {hativas.map((hativa, index) => (
-                              <option value={hativa._id}>{hativa.name}</option>
-                            ))}
-                    </Input> 
-                  </FormGroup>
+                        <Input
+                          placeholder="חטיבה"
+                          name="hativa"
+                          type="select"
+                          value={data.hativa}
+                          onChange={handleChange}
+                        >
+                          <option value={""}>חטיבה</option>
+                          {hativas.map((hativa, index) => (
+                            <option value={hativa._id}>{hativa.name}</option>
+                          ))}
+                        </Input>
+                      </FormGroup>
                     </>
                   ) : data.role === "3" ? (
-<>
+                    <>
                       <div style={{ textAlign: "right", paddingTop: "10px" }}>
                         אוגדה
                       </div>
                       <FormGroup className="mb-3" dir="rtl">
-                    <Input
-                      placeholder="אוגדה"
-                      name="ogda"
-                      type="select"
-                      value={data.ogda}
-                      onChange={handleChange}
-                    >
-                    <option value={""}>אוגדה</option>
-                            {ogdas.map((ogda, index) => (
-                              <option value={ogda._id}>{ogda.name}</option>
-                            ))}
-                    </Input> 
-                  </FormGroup>
+                        <Input
+                          placeholder="אוגדה"
+                          name="ogda"
+                          type="select"
+                          value={data.ogda}
+                          onChange={handleChange}
+                        >
+                          <option value={""}>אוגדה</option>
+                          {ogdas.map((ogda, index) => (
+                            <option value={ogda._id}>{ogda.name}</option>
+                          ))}
+                        </Input>
+                      </FormGroup>
                     </>
                   ) : data.role === "4" ? (
-<>
+                    <>
                       <div style={{ textAlign: "right", paddingTop: "10px" }}>
                         פיקוד
                       </div>
                       <FormGroup className="mb-3" dir="rtl">
-                    <Input
-                      placeholder="פיקוד"
-                      name="pikod"
-                      type="select"
-                      value={data.pikod}
-                      onChange={handleChange}
-                    >
-                    <option value={""}>פיקוד</option>
-                            {pikods.map((pikod, index) => (
-                              <option value={pikod._id}>{pikod.name}</option>
-                            ))}
-                    </Input> 
-                  </FormGroup>
+                        <Input
+                          placeholder="פיקוד"
+                          name="pikod"
+                          type="select"
+                          value={data.pikod}
+                          onChange={handleChange}
+                        >
+                          <option value={""}>פיקוד</option>
+                          {pikods.map((pikod, index) => (
+                            <option value={pikod._id}>{pikod.name}</option>
+                          ))}
+                        </Input>
+                      </FormGroup>
                     </>
-                  ) :null}
+                  ) : null}
                   <div className="text-center">
-                    <button onClick={clickSubmit} className="btn btn-primary">
+                    <button onClick={clickSubmit} className="btn btn-edit">
                       הרשם
                     </button>
                   </div>

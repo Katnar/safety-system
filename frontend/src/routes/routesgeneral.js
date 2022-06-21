@@ -44,7 +44,7 @@ import gdodHome from "views/Home/gdodDashboard";
 import ogdaHome from "views/Home/ogdaDashboard";
 import pikodHome from "views/Home/pikodDashboard";
 
-import Forum from "views/general/adminpages/forum"
+import Forum from "views/general/adminpages/forum";
 // import GdodHome from "views/Home/Home";
 
 import safetyOfficersQualificationTable from "components/safetySystem/adminPages/safetyOfficersQualification/SortingTable";
@@ -138,7 +138,12 @@ import GlobalCertificationsManagementsForm from "views/general/globalForms/certi
 import GlobalEnvironmentalMonitoringForm from "views/general/globalForms/environmentalMonitoringForm/environmentalMonitoringForm";
 import GlobalEquipmentAndMaterialsForm from "views/general/globalForms/equipmentAndMaterialsPeriodicInspectionsForm/equipmentAndMaterialsPeriodicInspectionsForm";
 import GlobalUnitIdForm from "views/general/globalForms/unitIdForm/unitIdDataComponent";
-
+import GlobalGorundingTestsForm from "views/general/globalForms/groundingTestsForm/groundingTestsForm";
+import GlobalHazardsMonitoringForm from "views/general/globalForms/hazardsMonitoringForm/hazardsMonitoringForm";
+import GlobalHomsManagementMonitoringForm from "views/general/globalForms/homsManagementMonitoringForm/homsManagementMonitoringForm";
+import GlobalMachinesAndEquipmentPeriodicInspectionsForm from "views/general/globalForms/machinesAndEquipmentPeriodicInspectionsForm/machinesAndEquipmentPeriodicInspectionsForm";
+import GlobalMonthlySafetyCommitteesMonitoringForm from "views/general/globalForms/monthlySafetyCommitteesMonitoringForm/monthlySafetyCommitteesMonitoringForm";
+import GlobalOccupationalSupervisionForm from "views/general/globalForms/occupationalSupervisionForm/occupationalSupervisionDataComponent";
 
 const routesgeneral = (
   <>
@@ -170,10 +175,9 @@ const routesgeneral = (
     <AdminRoute path="/edituser/:userid" exact component={EditUser} />
     <AdminRoute path="/tableView/:collection?" exact component={tableView} />
     <AdminRoute path="/formView/:id?" exact component={FormView} />
-    
 
     <AdminRoute path="/adminDashboard" exact component={Home} />
-    <LoggedinRoute path="/globalDashboard/:unit" exact component={globalHome}/>
+    <LoggedinRoute path="/globalDashboard/:unit" exact component={globalHome} />
     <GdodRoute path="/gdodDashboard/:gdod" exact component={gdodHome} />
     {/* <HativaRoute path="/hativaDashboard/:hativa" exact component={hativaHome} /> */}
     <LoggedinRoute path="/ogdaDashboard/:ogda" exact component={ogdaHome} />
@@ -187,103 +191,137 @@ const routesgeneral = (
       exact
       component={DisplayMahzor}
     /> */}
+    {/*///////////////////////////////////////////Global Routes/////////////////////////////////////////////////*/}
 
-    <LoggedinRoute 
+    {/*///////////////////////////////////////////Global Views/////////////////////////////////////////////////*/}
+
+    <LoggedinRoute
       path="/GlobalUnitIdView"
       exact
-      component={GlobalUnitIdView} 
+      component={GlobalUnitIdView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalSafetyOfficersQualificationView"
       exact
-      component={GlobalSafetyOfficersQualificationView} 
+      component={GlobalSafetyOfficersQualificationView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalCertificationsManagementsView"
       exact
-      component={GlobalCertificationsManagementsView} 
+      component={GlobalCertificationsManagementsView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalOccupationalSupervisionView"
       exact
-      component={GlobalOccupationalSupervisionView} 
+      component={GlobalOccupationalSupervisionView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalTrainingProgramView"
       exact
-      component={GlobalTrainingProgramView} 
+      component={GlobalTrainingProgramView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalEquipmentAndMaterialsPeriodicInspectionsView"
       exact
-      component={GlobalEquipmentAndMaterialsPeriodicInspectionsView} 
+      component={GlobalEquipmentAndMaterialsPeriodicInspectionsView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalEnvironmentalMonitoringView"
       exact
-      component={GlobalEnvironmentalMonitoringView} 
+      component={GlobalEnvironmentalMonitoringView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalMachinesAndEquipmentPeriodicInspectionsView"
       exact
-      component={GlobalMachinesAndEquipmentPeriodicInspectionsView} 
+      component={GlobalMachinesAndEquipmentPeriodicInspectionsView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalRiskManagementMonitoringView"
       exact
-      component={GlobalRiskManagementMonitoringView} 
+      component={GlobalRiskManagementMonitoringView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalMonthlySafetyCommitteesMonitoringView"
       exact
-      component={GlobalMonthlySafetyCommitteesMonitoringView} 
+      component={GlobalMonthlySafetyCommitteesMonitoringView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalHazardsMonitoringView"
       exact
-      component={GlobalHazardsMonitoringView} 
+      component={GlobalHazardsMonitoringView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalHomsManagementMonitoringView"
       exact
-      component={GlobalHomsManagementMonitoringView} 
+      component={GlobalHomsManagementMonitoringView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalPersonalProtectiveEquipmentMonitoringView"
       exact
-      component={GlobalPersonalProtectiveEquipmentMonitoringView} 
+      component={GlobalPersonalProtectiveEquipmentMonitoringView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalGroundingTestsView"
       exact
-      component={GlobalGroundingTestsView} 
+      component={GlobalGroundingTestsView}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalReviewsDocumentationView"
       exact
-      component={GlobalReviewsDocumentationView} 
+      component={GlobalReviewsDocumentationView}
     />
 
+    {/*///////////////////////////////////////////Global Forms/////////////////////////////////////////////////*/}
 
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalCertificationsManagementsForm/:id"
       exact
-      component={GlobalCertificationsManagementsForm} 
+      component={GlobalCertificationsManagementsForm}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalEnvironmentalMonitoringForm/:id"
       exact
-      component={GlobalEnvironmentalMonitoringForm} 
+      component={GlobalEnvironmentalMonitoringForm}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalEquipmentAndMaterialsForm/:id"
       exact
-      component={GlobalEquipmentAndMaterialsForm} 
+      component={GlobalEquipmentAndMaterialsForm}
     />
-    <LoggedinRoute 
+    <LoggedinRoute
       path="/GlobalUnitIdForm/:id"
       exact
-      component={GlobalUnitIdForm} 
+      component={GlobalUnitIdForm}
+    />
+    <LoggedinRoute
+      path="/GlobalGorundingTestsForm/:id"
+      exact
+      component={GlobalGorundingTestsForm}
+    />
+    <LoggedinRoute
+      path="/GlobalHazardsMonitoringForm/:id"
+      exact
+      component={GlobalHazardsMonitoringForm}
+    />
+    <LoggedinRoute
+      path="/GlobalHomsManagementMonitoringForm/:id"
+      exact
+      component={GlobalHomsManagementMonitoringForm}
+    />
+    <LoggedinRoute
+      path="/GlobalMachinesAndEquipmentPeriodicInspectionsForm/:id"
+      exact
+      component={GlobalMachinesAndEquipmentPeriodicInspectionsForm}
+    />
+    <LoggedinRoute
+      path="/GlobalMonthlySafetyCommitteesMonitoringForm/:id"
+      exact
+      component={GlobalMonthlySafetyCommitteesMonitoringForm}
+    />
+    <LoggedinRoute
+      path="/GlobalOccupationalSupervisionForm/:id"
+      exact
+      component={GlobalOccupationalSupervisionForm}
     />
 
     {/*///////////////////////////////////////////Admin Views/////////////////////////////////////////////////*/}
@@ -518,7 +556,11 @@ const routesgeneral = (
 
     {/*///////////////////////////////////////////Gdod Forms/////////////////////////////////////////////////*/}
 
-    <LoggedinRoute path="/UnitIdGdodForm/:id" exact component={UnitIdGdodForm} />
+    <LoggedinRoute
+      path="/UnitIdGdodForm/:id"
+      exact
+      component={UnitIdGdodForm}
+    />
     <LoggedinRoute
       path="/safetyOfficersQualificationGdodForm/:id"
       exact
@@ -622,8 +664,6 @@ const routesgeneral = (
     /> */}
     {/*////////////////////////////////////////Candidate User//////////////////////////////////////////////////*/}
 
-
-    
     <AdminRoute path="/tableView/:collection?" exact component={tableView} />
     <AdminRoute path="/formView/:id?" exact component={FormView} />
   </>

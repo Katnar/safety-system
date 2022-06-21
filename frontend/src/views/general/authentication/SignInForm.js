@@ -148,7 +148,7 @@ function Signin() {
                         <div className="text-center">
                           <button
                             onClick={clickSubmit}
-                            className="btn btn-primary"
+                            className="btn btn-edit"
                           >
                             התחבר
                           </button>
@@ -160,7 +160,7 @@ function Signin() {
                             onClick={() => {
                               history.push(`/signup`);
                             }}
-                            className="btn btn-primary"
+                            className="btn btn-edit"
                           >
                             הרשם
                           </button>
@@ -183,7 +183,7 @@ function Signin() {
         <Row className="justify-content-center">
           <Col>
             {showSuccess()}
-            {showError()}
+            {/* {showError()} */}
             {signInForm()}
             {redirectUser()}
           </Col>

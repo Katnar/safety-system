@@ -33,24 +33,141 @@ import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 import SettingModal from "../../../../components/general/modal/SettingModal";
 
+import { isAuthenticated } from "auth";
+
 const OccupationalSupervisionDataComponent = ({ match }) => {
-  const [data, setData] = useState({});
+  const [state, setState] = useState({});
   const [gdods, setGdods] = useState([]);
+
+  const user = isAuthenticated();
+
+  async function init() {
+    if (match.params.id != "0") {
+      loadDatas();
+    }
+    let user1 = await isAuthenticated();
+    console.log(user1);
+    if (user1.user.role == "1") {
+      getGdods();
+    } else if (user1.user.role == "2") {
+      getGdodsByHativa();
+    } else if (user1.user.role == "3") {
+      getGdodsByOgda();
+    } else if (user1.user.role == "4") {
+      getGdodsByPikod();
+    }
+  }
+
+  const getGdods = async () => {
+    try {
+      await axios
+        .get(`http://localhost:8000/api/occupationalSupervision`)
+        .then((response) => {
+          let tempData = [];
+          for (let i = 0; i < response.data.length; i++) {
+            if (response.data[i].gdod == user.user.gdod) {
+              tempData.push(response.data[i]);
+            }
+          }
+          setState(tempData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch {}
+  };
+
+  const getGdodsByHativa = async () => {
+    let tempgdodbyhativa;
+    await axios
+      .post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, {
+        hativa: user.user.hativa,
+      })
+      .then((response) => {
+        tempgdodbyhativa = response.data;
+        setGdods(tempgdodbyhativa, () => console.log(gdods));
+        console.log(gdods);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getGdodsByOgda = async () => {
+    let tempgdodsbyogda = [];
+    console.log(user.user.ogda);
+    await axios
+      .post(`http://localhost:8000/api/hativa/hativasbyogdaid`, {
+        ogda: user.user.ogda,
+      })
+      .then(async (response1) => {
+        for (let i = 0; i < response1.data.length; i++) {
+          await axios
+            .post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, {
+              hativa: response1.data[i]._id,
+            })
+            .then((response2) => {
+              for (let j = 0; j < response2.data.length; j++) {
+                tempgdodsbyogda.push(response2.data[j]);
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+        console.log(tempgdodsbyogda);
+        setGdods(tempgdodsbyogda);
+        console.log(gdods);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getGdodsByPikod = async () => {
+    let tempgdodsbypikod = [];
+
+    await axios
+      .post(`http://localhost:8000/api/ogda/ogdasbypikodid`, {
+        pikod: user.user.pikod,
+      })
+      .then(async (response1) => {
+        for (let i = 0; i < response1.data.length; i++) {
+          await axios
+            .post(`http://localhost:8000/api/hativa/hativasbyogdaid`, {
+              ogda: response1.data[i]._id,
+            })
+            .then(async (response2) => {
+              for (let j = 0; j < response2.data.length; j++) {
+                await axios
+                  .post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, {
+                    hativa: response2.data[j]._id,
+                  })
+                  .then(async (response3) => {
+                    for (let k = 0; k < response3.data.length; k++) {
+                      tempgdodsbypikod.push(response3.data[k]);
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+        setGdods(tempgdodsbypikod);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   function handleChange(evt) {
     const value = evt.target.value;
-    setData({ ...data, [evt.target.name]: value });
+    setState({ ...state, [evt.target.name]: value });
   }
-
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
-  };
 
   const loadDatas = () => {
     axios
@@ -59,7 +176,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
       )
       .then((response) => {
         let tempdatas = response.data;
-        setData(tempdatas);
+        setState(tempdatas);
       })
       .catch((error) => {
         console.log(error);
@@ -77,14 +194,19 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
       });
   };
 
+  const clickSubmit = (event) => {
+    if (CheckFormData()) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack();
+    } else {
+      toast.error("שגיאה בטופס");
+    }
+  };
+
   function CheckFormData() {
     let flag = true;
     let error = "";
-
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
-    //   flag = false;
-    // }
     return flag;
   }
 
@@ -97,35 +219,32 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
   };
 
   async function SubmitData() {
-    // console.log("post")
-    let tempOccupationalSupervisionData;
+    let tempData;
     if (match.params.id == "0") {
       //new mahzor
       let result = await axios.post(
         "http://localhost:8000/api/occupationalSupervision",
-        data
+        state
       );
-      tempOccupationalSupervisionData = result.data;
+      tempData = result.data;
     } else {
       // update mahzor
-      let tempWithDeleteId = data;
+      let tempWithDeleteId = state;
       delete tempWithDeleteId._id;
       let result = await axios.put(
         `http://localhost:8000/api/occupationalSupervision/${match.params.id}`,
         tempWithDeleteId
       );
-      tempOccupationalSupervisionData = result.data;
+      tempData = result.data;
     }
 
-    await UploadFile(tempOccupationalSupervisionData._id);
+    await UploadFile(tempData._id);
 
-  }
-
-  function init() {
-    if (match.params.id != "0") {
-      loadDatas();
-    }
-    loadGdods();
+    // let result = await axios.post(
+    //   "http://localhost:8000/api/occupationalSupervision",
+    //   state
+    // );
+    // tempData = result.data;
   }
 
   useEffect(() => {
@@ -159,7 +278,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="personalNumber"
-                  value={data.personalNumber}
+                  value={state.personalNumber}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -172,7 +291,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 <Input
                   type="number"
                   name="id"
-                  value={data.id}
+                  value={state.id}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -185,7 +304,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="fullName"
-                  value={data.fullName}
+                  value={state.fullName}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -200,7 +319,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="rank"
-                  value={data.rank}
+                  value={state.rank}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -213,7 +332,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="profession"
-                  value={data.profession}
+                  value={state.profession}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -226,7 +345,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="harmfulCause"
-                  value={data.harmfulCause}
+                  value={state.harmfulCause}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -241,7 +360,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="legislationAndMilitaryOrders"
-                  value={data.legislationAndMilitaryOrders}
+                  value={state.legislationAndMilitaryOrders}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -254,7 +373,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 <Input
                   type="select"
                   name="frequencyOfTests"
-                  value={data.frequencyOfTests}
+                  value={state.frequencyOfTests}
                   onChange={handleChange}
                 >
                   <option value="">בחר תדירות</option>
@@ -273,7 +392,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 <Input
                   type="date"
                   name="lastExecutionDate"
-                  value={data.lastExecutionDate}
+                  value={state.lastExecutionDate}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -288,7 +407,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 <Input
                   type="date"
                   name="nextTestDate"
-                  value={data.nextTestDate}
+                  value={state.nextTestDate}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -301,7 +420,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 <Input
                   type="select"
                   name="fit"
-                  value={data.fit}
+                  value={state.fit}
                   onChange={handleChange}
                 >
                   <option value="">בחר סטטוס</option>
@@ -319,7 +438,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                   placeholder="גדוד"
                   name="gdod"
                   type="select"
-                  value={data.gdod}
+                  value={state.gdod}
                   onChange={handleChange}
                 >
                   <option value={""}>גדוד</option>
@@ -336,12 +455,12 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 צירוף מסמכים סרוקים
               </div>
               {/* <FormGroup dir="rtl"> */}
-                <Input
-                  type="file"
-                  name="documentUpload"
-                  value={data.documentUpload}
-                  onChange={(e) => SingleFileChange(e)}
-                ></Input>
+              <Input
+                type="file"
+                name="documentUpload"
+                value={state.documentUpload}
+                onChange={(e) => SingleFileChange(e)}
+              ></Input>
               {/* </FormGroup> */}
             </Col>
           </Row>

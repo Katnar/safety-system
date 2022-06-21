@@ -11,7 +11,7 @@ import { withRouter, Redirect, Link } from "react-router-dom";
 import { COLUMNS } from "./coulmns";
 import { GlobalFilter } from "./GlobalFilter";
 import axios from "axios";
-import {FaFileDownload} from 'react-icons/fa';
+import { FaFileDownload } from "react-icons/fa";
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
@@ -44,7 +44,9 @@ const SortingTable = (props) => {
   const getUnitDetailsByGdod = async () => {
     try {
       await axios
-        .get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections`)
+        .get(
+          `http://localhost:8000/api/machinesAndEquipmentPeriodicInspections`
+        )
         .then((response) => {
           let tempData = [];
           for (let i = 0; i < response.data.length; i++) {
@@ -57,23 +59,27 @@ const SortingTable = (props) => {
         .catch((error) => {
           console.log(error);
         });
-    } catch { }
+    } catch {}
   };
 
   const getUnitDetailsByHativa = async () => {
     let tempgdodbyhativa;
-    await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: props.userData.user.hativa })
+    await axios
+      .post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, {
+        hativa: props.userData.user.hativa,
+      })
       .then((response) => {
         tempgdodbyhativa = response.data;
-        console.log(tempgdodbyhativa)
+        console.log(tempgdodbyhativa);
       })
       .catch((error) => {
         console.log(error);
       });
 
-    await axios.get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections`)
+    await axios
+      .get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections`)
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         let tempData = [];
         for (let i = 0; i < response.data.length; i++) {
           for (let j = 0; j < tempgdodbyhativa.length; j++) {
@@ -89,16 +95,21 @@ const SortingTable = (props) => {
       });
   };
 
-
   const getUnitDetailsByOgda = async () => {
     let tempgdodsbyogda = [];
-    await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: props.userData.user.ogda })
+    await axios
+      .post(`http://localhost:8000/api/hativa/hativasbyogdaid`, {
+        ogda: props.userData.user.ogda,
+      })
       .then(async (response1) => {
         for (let i = 0; i < response1.data.length; i++) {
-          await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
+          await axios
+            .post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, {
+              hativa: response1.data[i]._id,
+            })
             .then((response2) => {
               for (let j = 0; j < response2.data.length; j++) {
-                tempgdodsbyogda.push(response2.data[j])
+                tempgdodsbyogda.push(response2.data[j]);
               }
             })
             .catch((error) => {
@@ -110,7 +121,8 @@ const SortingTable = (props) => {
         console.log(error);
       });
 
-    await axios.get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections`)
+    await axios
+      .get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections`)
       .then((response) => {
         // console.log(response.data)
         let tempData = [];
@@ -131,21 +143,30 @@ const SortingTable = (props) => {
   const getUnitDetailsByPikod = async () => {
     let tempgdodsbypikod = [];
 
-    await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: props.userData.user.pikod })
+    await axios
+      .post(`http://localhost:8000/api/ogda/ogdasbypikodid`, {
+        pikod: props.userData.user.pikod,
+      })
       .then(async (response1) => {
         for (let i = 0; i < response1.data.length; i++) {
-          await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
+          await axios
+            .post(`http://localhost:8000/api/hativa/hativasbyogdaid`, {
+              ogda: response1.data[i]._id,
+            })
             .then(async (response2) => {
               for (let j = 0; j < response2.data.length; j++) {
-                await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response2.data[j]._id })
+                await axios
+                  .post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, {
+                    hativa: response2.data[j]._id,
+                  })
                   .then(async (response3) => {
                     for (let k = 0; k < response3.data.length; k++) {
-                      tempgdodsbypikod.push(response3.data[k])
+                      tempgdodsbypikod.push(response3.data[k]);
                     }
                   })
                   .catch((error) => {
                     console.log(error);
-                  })
+                  });
               }
             })
             .catch((error) => {
@@ -157,7 +178,8 @@ const SortingTable = (props) => {
         console.log(error);
       });
 
-      await axios.get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections`)
+    await axios
+      .get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections`)
       .then((response) => {
         // console.log(response.data)
         let tempData = [];
@@ -352,7 +374,19 @@ const SortingTable = (props) => {
                       return <td>{cell.value}</td>;
                     }
                     if (cell.column.id == "_id") {
-                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=machinesAndEquipmentPeriodicInspections&id="+cell.value.toString()} target="_blank"><FaFileDownload/></a></td>;
+                      return (
+                        <td>
+                          <a
+                            href={
+                              "http://localhost:8000/api/downloadFile?collec=machinesAndEquipmentPeriodicInspections&id=" +
+                              cell.value.toString()
+                            }
+                            target="_blank"
+                          >
+                            <FaFileDownload />
+                          </a>
+                        </td>
+                      );
                     }
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
@@ -368,7 +402,7 @@ const SortingTable = (props) => {
                     >
                       {" "}
                       <Link
-                        to={`/machinesAndEquipmentPeriodicInspectionsGdodForm/${row.original._id}`}
+                        to={`/GlobalMachinesAndEquipmentPeriodicInspectionsForm/${row.original._id}`}
                       >
                         <button className="btn btn-edit">ערוך</button>
                       </Link>
