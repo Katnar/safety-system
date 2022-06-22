@@ -144,6 +144,11 @@ import GlobalHomsManagementMonitoringForm from "views/general/globalForms/homsMa
 import GlobalMachinesAndEquipmentPeriodicInspectionsForm from "views/general/globalForms/machinesAndEquipmentPeriodicInspectionsForm/machinesAndEquipmentPeriodicInspectionsForm";
 import GlobalMonthlySafetyCommitteesMonitoringForm from "views/general/globalForms/monthlySafetyCommitteesMonitoringForm/monthlySafetyCommitteesMonitoringForm";
 import GlobalOccupationalSupervisionForm from "views/general/globalForms/occupationalSupervisionForm/occupationalSupervisionDataComponent";
+import GlobalPersonalProtectiveEquipmentMonitoringForm from "views/general/globalForms/personalProtectiveEquipmentMonitoringForm/personalProtectiveEquipmentMonitoringForm";
+import GlobalReviewsDocumentationForm from "views/general/globalForms/reviewsDocumentationForm/reviewsDocumentationForm";
+import GlobalRiskManagementMonitoringForm from "views/general/globalForms/riskManagementMonitoringForm/riskManagementMonitoringForm";
+import GlobalSafetyOfficersQualificationForm from "views/general/globalForms/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
+import GlobalTrainingProgramForm from "views/general/globalForms/trainingProgramForm/trainingProgramForm";
 
 const routesgeneral = (
   <>
@@ -322,6 +327,31 @@ const routesgeneral = (
       path="/GlobalOccupationalSupervisionForm/:id"
       exact
       component={GlobalOccupationalSupervisionForm}
+    />
+    <LoggedinRoute
+      path="/GlobalPersonalProtectiveEquipmentMonitoringForm/:id"
+      exact
+      component={GlobalPersonalProtectiveEquipmentMonitoringForm}
+    />
+    <LoggedinRoute
+      path="/GlobalReviewsDocumentationForm/:id"
+      exact
+      component={GlobalReviewsDocumentationForm}
+    />
+    <LoggedinRoute
+      path="/GlobalRiskManagementMonitoringForm/:id"
+      exact
+      component={GlobalRiskManagementMonitoringForm}
+    />
+    <LoggedinRoute
+      path="/GlobalSafetyOfficersQualificationForm/:id"
+      exact
+      component={GlobalSafetyOfficersQualificationForm}
+    />
+    <LoggedinRoute
+      path="/GlobalTrainingProgramForm/:id"
+      exact
+      component={GlobalTrainingProgramForm}
     />
 
     {/*///////////////////////////////////////////Admin Views/////////////////////////////////////////////////*/}
