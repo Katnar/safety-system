@@ -150,6 +150,8 @@ import GlobalRiskManagementMonitoringForm from "views/general/globalForms/riskMa
 import GlobalSafetyOfficersQualificationForm from "views/general/globalForms/safetyOfficersQualificationForm/safetyOfficersQualificationDataComponent";
 import GlobalTrainingProgramForm from "views/general/globalForms/trainingProgramForm/trainingProgramForm";
 
+import DetailsPull from "views/general/globalForms/detailsPull";
+
 const routesgeneral = (
   <>
     {/*///////////////////////////////////////////UnLoggedIn Routes/////////////////////////////////////////////////*/}
@@ -199,6 +201,8 @@ const routesgeneral = (
     {/*///////////////////////////////////////////Global Routes/////////////////////////////////////////////////*/}
 
     {/*///////////////////////////////////////////Global Views/////////////////////////////////////////////////*/}
+
+    <LoggedinRoute path="/DetailsPull" exact component={DetailsPull} />
 
     <LoggedinRoute
       path="/GlobalUnitIdView"

@@ -102,6 +102,7 @@ const CardTableCalc = (props) => {
               borderRadius: "15px",
               backgroundColor: "#B5CFD8",
               boxShadow: "0 0 1rem 0",
+              overflow: "auto",
             }}
           >
             <CardHeader color="info" stats icon>
@@ -128,7 +129,7 @@ const CardTableCalc = (props) => {
                   <a
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
-                    style={{ color: "red" , fontSize: "22px" }}
+                    style={{ color: "red", fontSize: "22px" }}
                   >
                     {props.name[2]}
                   </a>
@@ -152,7 +153,7 @@ const CardTableCalc = (props) => {
                   <a
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
-                    style={{ color: "crimson " , fontSize: "22px" }}
+                    style={{ color: "crimson ", fontSize: "22px" }}
                   >
                     הסמכות מסוימות יפוגו בשבועיים הקרובים
                   </a>

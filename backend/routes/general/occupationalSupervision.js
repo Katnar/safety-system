@@ -7,6 +7,7 @@ const {
   update,
   remove,
   findById,
+  findByPn,
   findByGdod,
   findByHativa,
   findByOgda,
@@ -15,6 +16,8 @@ const {
 
 // find spec
 router.get("/occupationalSupervision/:id", findById);
+
+router.get("/occupationalSupervision", findByPn);
 
 router.get("/occupationalSupervision/bygdod/:gdod", findByGdod);
 
