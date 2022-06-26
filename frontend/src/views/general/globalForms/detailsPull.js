@@ -160,8 +160,10 @@ const DetailsPull = ({ match }) => {
       )
       .then((response) => {
         let tempdatas = response.data[0];
-        console.log(tempdatas)
-        setDetails(tempdatas);
+        if (tempdatas != null)
+        {
+          setDetails(tempdatas);
+        }
       })
       .catch((error) => {
         console.log(error);
