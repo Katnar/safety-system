@@ -43,11 +43,25 @@ const DetailsPull = ({ match }) => {
   const user = isAuthenticated();
 
   async function init() {
-    if (match.params.id != "0") {
-      loadDatas();
-    }
+    getGdods();
+    // if (match.params.id != "0") {
+    //   loadDatas();
+    // }
     let user1 = await isAuthenticated();
     console.log(user1);
+    console.log(state.personalNumber);
+    if (user1.user.role == "1") {
+      getGdods();
+    }else
+    if (user1.user.role == "2") {
+      getGdodsByHativa();
+    }else 
+    if (user1.user.role == "3") {
+      getGdodsByOgda();
+    }else 
+    if (user1.user.role == "4") {
+      getGdodsByPikod();
+    }
   }
 
   function handleChange(evt) {
@@ -55,31 +69,104 @@ const DetailsPull = ({ match }) => {
     setState({ ...state, [evt.target.name]: value });
   }
 
-  const loadDatas = () => {
-    axios
-      .get(
-        `http://localhost:8000/api/occupationalSupervision/${match.params.id}`
-      )
+  const getGdods = async () => {
+      axios
+        .get("http://localhost:8000/api/gdod")
+        .then((response) => {
+          setGdods(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  };
+
+  const getGdodsByHativa = async () => {
+    let tempgdodbyhativa;
+    await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: user.user.hativa })
       .then((response) => {
-        let tempdatas = response.data;
-        setState(tempdatas);
+        tempgdodbyhativa = response.data;
+        setGdods(tempgdodbyhativa, () => console.log(gdods))
+        console.log(gdods)
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+
+  const getGdodsByOgda = async () => {
+    let tempgdodsbyogda = [];
+    console.log(user.user.ogda)
+    await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: user.user.ogda })
+      .then(async (response1) => {
+        for (let i = 0; i < response1.data.length; i++) {
+          await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
+            .then((response2) => {
+              for (let j = 0; j < response2.data.length; j++) {
+                tempgdodsbyogda.push(response2.data[j])               
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          }
+          console.log(tempgdodsbyogda)
+          setGdods(tempgdodsbyogda);
+          console.log(gdods)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getGdodsByPikod = async () => {
+    let tempgdodsbypikod = [];
+
+    await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: user.user.pikod })
+      .then(async (response1) => {
+        for (let i = 0; i < response1.data.length; i++) {
+          await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
+            .then(async (response2) => {
+              for (let j = 0; j < response2.data.length; j++) {
+                await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response2.data[j]._id })
+                  .then(async (response3) => {
+                    for (let k = 0; k < response3.data.length; k++) {
+                      tempgdodsbypikod.push(response3.data[k])
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  })
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+        setGdods(tempgdodsbypikod)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
   const clickPull = (event) => {
+    let tempPn = state.personalNumber
+    console.log(tempPn)
     axios
       .get(
-        `http://localhost:8000/api/occupationalSupervision/${state.personalNumber}`
+        `http://localhost:8000/api/occupationalSupervision/byPn/${tempPn}`
       )
       .then((response) => {
-        let tempdatas = response.data;
+        let tempdatas = response.data[0];
+        console.log(tempdatas)
         setDetails(tempdatas);
       })
       .catch((error) => {
         console.log(error);
+        console.log('error');
+        console.log(state.personalNumber);
       });
   };
 
@@ -220,7 +307,7 @@ const DetailsPull = ({ match }) => {
                   type="select"
                   value={details.gdod}
                   onChange={handleChange}
-                  disabled="disabled"
+                  // disabled="disabled"
                 >
                   <option value={""}>גדוד</option>
                   {gdods.map((gdod, index) => (

@@ -17,7 +17,7 @@ const {
 // find spec
 router.get("/occupationalSupervision/:id", findById);
 
-router.get("/occupationalSupervision", findByPn);
+router.get("/occupationalSupervision/byPn/:pn", findByPn);
 
 router.get("/occupationalSupervision/bygdod/:gdod", findByGdod);
 

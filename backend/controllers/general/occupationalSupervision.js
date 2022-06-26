@@ -12,14 +12,10 @@ exports.findById = async (req, res) => {
 };
 
 exports.findByPn = async (req, res) => {
-  const occupationalSupervision = await OccupationalSupervision.findOne().where(
-    { personalNumber: req.params.Pn }
-  );
-
-  if (!occupationalSupervision) {
-    res.status(500).json({ success: false });
-  }
-  res.send(occupationalSupervision);
+  console.log(req.body.pn)
+  OccupationalSupervision.find({personalNumber: req.params.pn})
+  .then((occupationalSupervision) => res.json(occupationalSupervision))
+  .catch((err) => res.status(400).json("Error: " + err));
 };
 
 exports.findByGdod = async (req, res) => {
