@@ -178,14 +178,19 @@ const CertificationManagementDataComponent = ({match}) => {
     if (pn != '') {
       let response = await axios.get(`http://localhost:8000/api/occupationalSupervision/byPn/${pn}`)
       if (response.data.length > 0) {
-        let tempPersonalNumber = response.data[0]
-        setDetails(response.data[0])
+        // let tempPersonalNumber = response.data[0]
+        // tempPersonalNumber.id = data.id;
+        // tempPersonalNumber.fullName = data.fullName;
+        // tempPersonalNumber.rank = data.rank;
+        // tempPersonalNumber.profession = data.profession;
+        // tempPersonalNumber.gdod = data.gdod;
+        setData(response.data[0])
       }
       else {
-        setDetails({...data, personalNumber: pn})
+        setData({...data, personalNumber: pn})
       }
     } else {
-      setDetails({...data, personalNumber: pn}) }
+      setData({...data, personalNumber: pn}) }
   }
 
   const clickPull = (event) => {
@@ -285,24 +290,12 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="personalNumber"
-                  value={details.personalNumber}
+                  value={data.personalNumber}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col>
-            <Col xs={12} md={4}>
-            <Button
-                type="primary"
-                className="btn btn-edit"
-                style={{ width: "100%", marginTop: "28px" }}
-                onClick={() => clickPull()}
-              >
-                משוך נתונים
-              </Button>
-            </Col>
-            </Row>
-            <Row>
-            <Col xs={12} md={4}>
+ <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 תעודת זהות
               </div>
@@ -310,7 +303,7 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="number"
                   name="id"
-                  value={details.id}
+                  value={data.id}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -323,11 +316,14 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="fullName"
-                  value={details.fullName}
+                  value={data.fullName}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col>          
+            </Row>
+            <Row>
+          
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 דרגה
@@ -336,14 +332,11 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="rank"
-                  value={details.rank}
+                  value={data.rank}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
-            </Col>
-          </Row>
-          <Row>
-  
+            </Col> 
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 מקצוע
@@ -352,7 +345,7 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="profession"
-                  value={details.profession}
+                  value={data.profession}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -365,11 +358,15 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="certification"
-                  value={details.certification}
+                  value={data.certification}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col> 
+          </Row>
+          <Row>
+  
+           
                  <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 תוקף הסמכה
@@ -378,13 +375,11 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="date"
                   name="certificationValidity"
-                  value={details.certificationValidity}
+                  value={data.certificationValidity}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col>
-          </Row>
-          <Row>
       
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
@@ -395,7 +390,7 @@ const CertificationManagementDataComponent = ({match}) => {
                   placeholder="גדוד"
                   name="gdod"
                   type="select"
-                  value={details.gdod}
+                  value={data.gdod}
                   onChange={handleChange}
                   // disabled="disabled"
                 >
