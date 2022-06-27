@@ -36,6 +36,7 @@ import { isAuthenticated } from "auth";
 const CertificationManagementDataComponent = ({match}) => {
   //mahzor
   const [data, setData] = useState({});
+  const [details, setDetails] = useState({});
   const [gdods, setGdods] = useState([]);
 
   const user = isAuthenticated();
@@ -165,8 +166,48 @@ const CertificationManagementDataComponent = ({match}) => {
 
   function handleChange(evt) {
     const value = evt.target.value;
-    setData({ ...data, [evt.target.name]: value });
+    if(evt.target.name != "personalNumber") {
+      setData({ ...data, [evt.target.name]: value });
+    }
+    else {
+      pullDetails(evt.target.value)
+    }
   }
+
+  async function pullDetails(pn) {
+    if (pn != '') {
+      let response = await axios.get(`http://localhost:8000/api/occupationalSupervision/byPn/${pn}`)
+      if (response.data.length > 0) {
+        let tempPersonalNumber = response.data[0]
+        setDetails(response.data[0])
+      }
+      else {
+        setDetails({...data, personalNumber: pn})
+      }
+    } else {
+      setDetails({...data, personalNumber: pn}) }
+  }
+
+  const clickPull = (event) => {
+    let tempPn = data.personalNumber
+    console.log(tempPn)
+    axios
+      .get(
+        `http://localhost:8000/api/occupationalSupervision/byPn/${tempPn}`
+      )
+      .then((response) => {
+        let tempdatas = response.data[0];
+        if (tempdatas != null)
+        {
+          setDetails(tempdatas);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log('error');
+        console.log(data.personalNumber);
+      });
+  };
 
   const clickSubmit = async (event) => {
     if (CheckFormData()) {
@@ -244,11 +285,23 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="personalNumber"
-                  value={data.personalNumber}
+                  value={details.personalNumber}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col>
+            <Col xs={12} md={4}>
+            <Button
+                type="primary"
+                className="btn btn-edit"
+                style={{ width: "100%", marginTop: "28px" }}
+                onClick={() => clickPull()}
+              >
+                משוך נתונים
+              </Button>
+            </Col>
+            </Row>
+            <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 תעודת זהות
@@ -257,7 +310,7 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="number"
                   name="id"
-                  value={data.id}
+                  value={details.id}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -270,13 +323,11 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="fullName"
-                  value={data.fullName}
+                  value={details.fullName}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
-            </Col>
-          </Row>
-          <Row>
+            </Col>          
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 דרגה
@@ -285,11 +336,14 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="rank"
-                  value={data.rank}
+                  value={details.rank}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col>
+          </Row>
+          <Row>
+  
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 מקצוע
@@ -298,7 +352,7 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="profession"
-                  value={data.profession}
+                  value={details.profession}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -311,14 +365,12 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="certification"
-                  value={data.certification}
+                  value={details.certification}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} md={4}>
+            </Col> 
+                 <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 תוקף הסמכה
               </div>
@@ -326,11 +378,14 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="date"
                   name="certificationValidity"
-                  value={data.certificationValidity}
+                  value={details.certificationValidity}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col>
+          </Row>
+          <Row>
+      
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 גדוד
@@ -340,7 +395,7 @@ const CertificationManagementDataComponent = ({match}) => {
                   placeholder="גדוד"
                   name="gdod"
                   type="select"
-                  value={data.gdod}
+                  value={details.gdod}
                   onChange={handleChange}
                   // disabled="disabled"
                 >
@@ -350,7 +405,7 @@ const CertificationManagementDataComponent = ({match}) => {
                   ))}
                 </Input>
               </FormGroup>
-            </Col>
+            </Col> 
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מסמך
@@ -362,10 +417,11 @@ const CertificationManagementDataComponent = ({match}) => {
                 onChange={(e) => SingleFileChange(e)}
               ></Input>
             </Col>
-          </Row>
+            </Row>
           <hr style={{ borderTop: "1px solid darkGray" }} />
           <Row>
-            <Col xs={12} md={4}></Col>
+            <Col xs={12} md={4}>
+            </Col>
             <Col xs={12} md={4}>
               <Button
                 type="primary"
