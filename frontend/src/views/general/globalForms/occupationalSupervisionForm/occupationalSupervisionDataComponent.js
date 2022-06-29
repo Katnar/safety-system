@@ -37,6 +37,7 @@ import { isAuthenticated } from "auth";
 
 const OccupationalSupervisionDataComponent = ({ match }) => {
   const [state, setState] = useState({});
+  const [document, setDocument] = useState({});
   const [gdods, setGdods] = useState([]);
 
   const user = isAuthenticated();
@@ -166,7 +167,25 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
 
   function handleChange(evt) {
     const value = evt.target.value;
-    setState({ ...state, [evt.target.name]: value });
+    if(evt.target.name != "personalNumber") {
+      setState({ ...state, [evt.target.name]: value });
+    }
+    else {
+      pullDetails(evt.target.value)
+    }
+  }
+
+  async function pullDetails(pn) {
+    if (pn != '') {
+      let response = await axios.get(`http://localhost:8000/api/occupationalSupervision/byPn/${pn}`)
+      if (response.data.length > 0) {
+        setState(response.data[0])
+      }
+      else {
+        setState({...state, personalNumber: pn})
+      }
+    } else {
+      setState({...state, personalNumber: pn}) }
   }
 
   const loadDatas = () => {
@@ -458,7 +477,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
               <Input
                 type="file"
                 name="documentUpload"
-                value={state.documentUpload}
+                value={document.documentUpload}
                 onChange={(e) => SingleFileChange(e)}
               ></Input>
               {/* </FormGroup> */}

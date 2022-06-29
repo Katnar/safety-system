@@ -37,6 +37,7 @@ const CertificationManagementDataComponent = ({match}) => {
   //mahzor
   const [data, setData] = useState({});
   const [details, setDetails] = useState({});
+  const [document, setDocument] = useState({});
   const [gdods, setGdods] = useState([]);
 
   const user = isAuthenticated();
@@ -178,12 +179,6 @@ const CertificationManagementDataComponent = ({match}) => {
     if (pn != '') {
       let response = await axios.get(`http://localhost:8000/api/occupationalSupervision/byPn/${pn}`)
       if (response.data.length > 0) {
-        // let tempPersonalNumber = response.data[0]
-        // tempPersonalNumber.id = data.id;
-        // tempPersonalNumber.fullName = data.fullName;
-        // tempPersonalNumber.rank = data.rank;
-        // tempPersonalNumber.profession = data.profession;
-        // tempPersonalNumber.gdod = data.gdod;
         setData(response.data[0])
       }
       else {
@@ -239,13 +234,21 @@ const CertificationManagementDataComponent = ({match}) => {
   };
 
   async function SubmitData() {
+    let tempWithDeleteId = data;
+    delete tempWithDeleteId._id;
     let tempData;
+    // let tempData2;
     if (match.params.id == "0") {
       let result = await axios.post(
         "http://localhost:8000/api/certificationsManagement",
         data
       );
+      // let result2 = await axios.post(
+      //   "http://localhost:8000/api/certificationsManagement",
+      //   document
+      // );
       tempData = result.data;
+      // tempData2 = result2.data;
     } else {
       let tempWithDeleteId = data;
       delete tempWithDeleteId._id;
@@ -408,7 +411,7 @@ const CertificationManagementDataComponent = ({match}) => {
               <Input
                 type="file"
                 name="documentUpload"
-                value={data.documentUpload}
+                // value={document.documentUpload}
                 onChange={(e) => SingleFileChange(e)}
               ></Input>
             </Col>

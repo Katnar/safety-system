@@ -35,11 +35,30 @@ import SettingModal from "../../../../components/general/modal/SettingModal";
 
 const OccupationalSupervisionDataComponent = ({ match }) => {
   const [data, setData] = useState({});
+  const [document, setDocument] = useState({});
   const [gdods, setGdods] = useState([]);
 
   function handleChange(evt) {
     const value = evt.target.value;
-    setData({ ...data, [evt.target.name]: value });
+    if(evt.target.name != "personalNumber") {
+      setData({ ...data, [evt.target.name]: value });
+    }
+    else {
+      pullDetails(evt.target.value)
+    }
+  }
+
+  async function pullDetails(pn) {
+    if (pn != '') {
+      let response = await axios.get(`http://localhost:8000/api/occupationalSupervision/byPn/${pn}`)
+      if (response.data.length > 0) {
+        setData(response.data[0])
+      }
+      else {
+        setData({...data, personalNumber: pn})
+      }
+    } else {
+      setData({...data, personalNumber: pn}) }
   }
 
   const clickSubmit = (event) => {
@@ -339,7 +358,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
                 <Input
                   type="file"
                   name="documentUpload"
-                  value={data.documentUpload}
+                  value={document.documentUpload}
                   onChange={(e) => SingleFileChange(e)}
                 ></Input>
               {/* </FormGroup> */}

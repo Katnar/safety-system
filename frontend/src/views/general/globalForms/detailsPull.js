@@ -332,7 +332,14 @@ const DetailsPull = ({ match }) => {
                 משוך נתונים
               </Button>
             </Col>
-            <Col xs={12} md={4}></Col>
+            <Col xs={12} md={4}><Button
+                type="primary"
+                className="btn btn-primary"
+                style={{ width: "100%" }}
+                onClick={() => clickSubmit()}
+              >
+                העלה נתונים
+              </Button></Col>
           </Row>
         </Container>
       </CardBody>
