@@ -63,6 +63,17 @@ function Signin() {
       });
   };
 
+  const passport = event => {
+    axios.get(`http://localhost:8000/auth/passportauth`)
+      .then(response => {
+        console.log(response.data);
+        setValues({ ...values, personalnumber:response.data.stam._json.cn, password: response.data.stam._json.cn})
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
   const redirectUser = () => {
     if (redirectToReferrer) {
       console.log(user);
@@ -108,8 +119,8 @@ function Signin() {
   );
 
   useEffect(() => {
-    clickSubmit();
-  }, []);
+    passport();
+  }, [])
 
   useEffect(() => {
     setValues({ ...values, password: values.personalnumber });

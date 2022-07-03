@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
-import SimpleReactValidator from "simple-react-validator";
+
 import { singleFileUpload } from "../../../../data/api";
 // reactstrap components
 import {

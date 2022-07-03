@@ -22,7 +22,7 @@ const CardTable = (props) => {
                 <VerifiedUserIcon />
               </CardIcon> */}
               <h1
-                style={{ color: "#000", fontSize: "20px" }}
+                style={{ color: "#000", fontSize: "20px", textAlign: "center" }}
                 // className={classes.cardCategory}
               >
                 <br />

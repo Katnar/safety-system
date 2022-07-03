@@ -48,6 +48,13 @@ import UserCard from "components/general/DashboardCards/UserCard/UserCard";
 import { isAuthenticated } from "auth";
 import CardTableCalcGlobal from "components/Card/CardTableCalcGlobal";
 
+import safetyPic from "assets/img/safetyPic.png"
+
+import {
+  Row,
+  Col,
+} from "reactstrap";
+
 const user = isAuthenticated();
 
 export default function Home() {
@@ -165,14 +172,22 @@ async function init() {
         </GridContainer>
         <hr />
         <br />
-        <Faq
-          style={{
-            direction: "rtl",
-            borderRadius: "15px",
-            backgrooungColor: "#bde0fe",
-          }}
-        />
+        <Row>
+          <Col> 
+            <Faq
+              style={{
+              direction: "rtl",
+              borderRadius: "15px",
+              backgrooungColor: "#bde0fe",
+              }}
+            />
+          </Col>
+          <Col>
+            <img src={safetyPic} style={{height: "55%", display: "block", marginLeft: "auto", marginRight: "auto"}}></img>
+          </Col>
+        </Row>
       </div>
+    
     </Page>
   );
 }

@@ -109,10 +109,18 @@ function Sidebar() {
             <Button
               onClick={clickSubmit}
               className="btn-defailt"
-              style={{ width: "80%"}}
+              style={{ width: "80%", marginTop: "20px"}}
             >
               התנתק
             </Button>
+            <a href="http://216.1.1.11:8008/presentation" target="_blank" rel="noreferrer">
+              <Button
+                className="btn-danger"
+                style={{ width: "80%", marginTop: "20px"}}
+              >
+                חזרה לשולחן הטנ"א שלי
+              </Button>  
+              </a>
           </div>
         </div>
       </div>
