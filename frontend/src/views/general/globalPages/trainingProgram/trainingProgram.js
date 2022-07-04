@@ -32,7 +32,7 @@ function trainigProgram() {
             טבלת תכנית הדרכות
           </h3>
           <TrainingProgramTable userData={user}/>
-          <Link to={`/trainingProgramGdodForm/0`}>
+          <Link to={`/GlobalTrainingProgramForm/0`}>
             <Button>הוסף תכנית הדרכה</Button>
           </Link>
         </CardBody>

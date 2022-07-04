@@ -33,7 +33,7 @@ function HomsManagementMonitoring() {
               טבלת מעקב ניהול חומ"ס
             </h3>
             <HomsManagementMonitoringTable userData={user} />
-            <Link to={`/homsManagementMonitoringGdodForm/0`}>
+            <Link to={`/GlobalHomsManagementMonitoringForm/0`}>
               <Button>הוסף מעקב חומ"ס </Button>
             </Link>
           </CardBody>

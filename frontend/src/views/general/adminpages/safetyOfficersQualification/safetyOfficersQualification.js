@@ -30,7 +30,7 @@ function safetyOfficersQualification() {
             טבלת כשירות ממונים על הבטיחות
           </h3>
           <SafetyOfficersQualificationTable />
-          <Link to={`/safetyOfficersQualificationForm/0`}>
+          <Link to={`/GlobalSafetyOfficersQualificationForm/0`}>
             <Button>הוסף ממונה בטיחות</Button>
           </Link>
         </CardBody>

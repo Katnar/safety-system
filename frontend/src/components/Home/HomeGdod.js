@@ -55,6 +55,13 @@ import moment from "moment";
 import UserCard from "components/general/DashboardCards/UserCard/UserCard";
 import { isAuthenticated } from "auth";
 
+import {
+  Row,
+  Col,
+} from "reactstrap";
+
+import safetyPic from "assets/img/shieldSafety.png"
+
 const useStyles = makeStyles(dashboardStyle);
 
 export default function Home() {
@@ -132,6 +139,9 @@ export default function Home() {
           />
           <CardTable name={["בדיקות הארקות חשמל ומבנים", "groundingTestsGdod"]} />
           <CardTable name={["תיעוד ביקורות", "reviewsDocumentationGdod"]} />
+          <Col>
+            <img src={safetyPic} style={{height: "100px", display: "block", marginLeft: "auto", marginRight: "auto"}}></img>
+          </Col>
         </GridContainer>
         <hr />
         <br />

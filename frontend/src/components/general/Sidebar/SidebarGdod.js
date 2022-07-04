@@ -698,7 +698,7 @@ function SidebarGdod() {
             </Row>
           </NavLink>
 
-        <li>
+        {/* <li>
           <NavLink
             to="/forum"
             style={{ margin: "0px" }}
@@ -729,7 +729,7 @@ function SidebarGdod() {
               </Col>
             </Row>
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink
             to="/manageusers"

@@ -33,7 +33,7 @@ function MachinesAndEquipmentPeriodicInspections() {
               טבלת בדיקות תקופתיות למכונות וציוד
             </h3>
             <MachinesAndEquipmentPeriodicInspectionsTable userData={user} />
-            <Link to={`/machinesAndEquipmentPeriodicInspectionsGdodForm/0`}>
+            <Link to={`/GlobalMachinesAndEquipmentPeriodicInspectionsForm/0`}>
               <Button>הוסף בדיקה</Button>
             </Link>
           </CardBody>

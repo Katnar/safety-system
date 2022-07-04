@@ -33,7 +33,7 @@ function HazardsMonitoring() {
               טבלת מעקב סקר מפגעים
             </h3>
             <HazardsMonitoringTable userData={user} />
-            <Link to={`/hazardsMonitoringGdodForm/0`}>
+            <Link to={`/GlobalHazardsMonitoringForm/0`}>
               <Button>הוסף מעקב מפגע </Button>
             </Link>
           </CardBody>

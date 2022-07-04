@@ -33,7 +33,7 @@ function GroundingTests() {
               טבלת בדיקת הארקות חשמל ומבנים
             </h3>
             <GroundingTestsTable userData={user} />
-            <Link to={`/groundingTestsGdodForm/0`}>
+            <Link to={`/GlobalGroundingTestsForm/0`}>
               <Button>הוסף בדיקה</Button>
             </Link>
           </CardBody>

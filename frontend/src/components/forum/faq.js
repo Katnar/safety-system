@@ -25,16 +25,16 @@ const data = {
         </p>
       ),
     },
-    {
-      title: "איך ניתן ליצור קשר?",
-      content: (
-        <p
-          style={{ direction: "rtl", textAlign: "right", paddingRight: "5rem" }}
-        >
-          ניתן ליצור קשר במייל "חדשנות טנ"א" (+ctrl k).
-        </p>
-      ),
-    },
+    // {
+    //   title: "איך ניתן ליצור קשר?",
+    //   content: (
+    //     <p
+    //       style={{ direction: "rtl", textAlign: "right", paddingRight: "5rem" }}
+    //     >
+          
+    //     </p>
+    //   ),
+    // },
   ],
 };
 

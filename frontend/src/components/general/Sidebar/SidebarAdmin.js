@@ -695,7 +695,7 @@ function SidebarAdmin() {
               </Col>
             </Row>
           </NavLink>
-
+{/* 
         <li>
           <NavLink
             to="/forum"
@@ -727,7 +727,7 @@ function SidebarAdmin() {
               </Col>
             </Row>
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink
             to="/manageusers"

@@ -303,7 +303,7 @@ const routesgeneral = (
       component={GlobalUnitIdForm}
     />
     <LoggedinRoute
-      path="/GlobalGorundingTestsForm/:id"
+      path="/GlobalGroundingTestsForm/:id"
       exact
       component={GlobalGorundingTestsForm}
     />

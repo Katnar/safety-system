@@ -33,7 +33,7 @@ function EnvironmentalMonitoring() {
               טבלת ניטורים סביבתיים
             </h3>
             <EnvironmentalMonitoringTable userData={user} />
-            <Link to={`/environmentalMonitoringForm/0`}>
+            <Link to={`/GlobalEnvironmentalMonitoringForm/0`}>
               <Button>הוסף ניטור סביבתי</Button>
             </Link>
           </CardBody>

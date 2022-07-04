@@ -31,7 +31,7 @@ function RiskManagementMonitoring() {
             טבלת מעקב ניהול סיכונים
           </h3>
           <RiskManagementMonitoringTable />
-          <Link to={`/riskManagementMonitoringForm/0`}>
+          <Link to={`/GlobalRiskManagementMonitoringForm/0`}>
             <Button>הוסף ניהול סיכונים</Button>
           </Link>
         </CardBody>

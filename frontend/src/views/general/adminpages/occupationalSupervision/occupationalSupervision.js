@@ -30,7 +30,7 @@ function occupationalSupervision() {
             טבלת פיקוח תעסוקתי
           </h3>
           <OccupationalSupervisionTable />
-          <Link to={`/occupationalSupervisionForm/0`}>
+          <Link to={`/GlobalOccupationalSupervisionForm/0`}>
             <Button>הוסף פיקוח תעסוקתי</Button>
           </Link>
         </CardBody>

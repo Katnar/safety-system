@@ -31,7 +31,7 @@ function PersonalProtectiveEquipmentMonitoring() {
             טבלת מעקב ציוד מגן אישי
           </h3>
           <PersonalProtectiveEquipmentMonitoringTable />
-          <Link to={`/personalProtectiveEquipmentMonitoringForm/0`}>
+          <Link to={`/GlobalPersonalProtectiveEquipmentMonitoringForm/0`}>
             <Button>הוסף ציוד מגן אישי </Button>
           </Link>
         </CardBody>

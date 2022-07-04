@@ -31,7 +31,7 @@ function ReviewsDocumentation() {
             טבלת תיעוד ביקורות
           </h3>
           <ReviewsDocumentationTable />
-          <Link to={`/reviewsDocumentationForm/0`}>
+          <Link to={`/GlobalReviewsDocumentationForm/0`}>
             <Button>הוסף ביקורת</Button>
           </Link>
         </CardBody>

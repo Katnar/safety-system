@@ -48,7 +48,7 @@ import UserCard from "components/general/DashboardCards/UserCard/UserCard";
 import { isAuthenticated } from "auth";
 import CardTableCalcGlobal from "components/Card/CardTableCalcGlobal";
 
-import safetyPic from "assets/img/safetyPic.png"
+import safetyPic from "assets/img/shieldSafety.png"
 
 import {
   Row,
@@ -169,6 +169,9 @@ async function init() {
           />
           <CardTable name={["בדיקות הארקות חשמל ומבנים", "GlobalGroundingTestsView"]} />
           <CardTable name={["תיעוד ביקורות", "GlobalReviewsDocumentationView"]} />
+          <Col>
+            <img src={safetyPic} style={{height: "100px", display: "block", marginLeft: "auto", marginRight: "auto"}}></img>
+          </Col>
         </GridContainer>
         <hr />
         <br />
@@ -183,7 +186,7 @@ async function init() {
             />
           </Col>
           <Col>
-            <img src={safetyPic} style={{height: "55%", display: "block", marginLeft: "auto", marginRight: "auto"}}></img>
+            {/* <img src={safetyPic} style={{height: "55%", display: "block", marginLeft: "auto", marginRight: "auto"}}></img> */}
           </Col>
         </Row>
       </div>

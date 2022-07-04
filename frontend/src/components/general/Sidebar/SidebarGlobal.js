@@ -712,7 +712,7 @@ function SidebarGlobal() {
               </Col>
             </Row>
           </NavLink>
-
+{/* 
         <li>
           <NavLink
             to="/forum"
@@ -744,7 +744,7 @@ function SidebarGlobal() {
               </Col>
             </Row>
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink
             to="/manageusers"
