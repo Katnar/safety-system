@@ -73,7 +73,7 @@ export default function Home() {
             name={[
               "ניהול הסמכות",
               "certificationManagementGdod",
-              "שים לב! חלק מההסמכות הן פגות תוקף",
+              "שים לב! חלק מההסמכות פגות תוקף",
               "certificationValidity",
               "certificationsManagement",
             ]}
@@ -91,7 +91,7 @@ export default function Home() {
             name={[
               "בדיקות תקופתיות לציוד וחומרים",
               "equipmentAndMaterialsPeriodicInspectionsGdod",
-              "שים לב! חלק מהבדיקות הן פגות תוקף",
+              "שים לב! חלק מהבדיקות פגות תוקף",
               "nextTestDate",
               "equipmentAndMaterialsPeriodicInspections",
             ]}

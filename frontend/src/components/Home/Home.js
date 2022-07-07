@@ -23,7 +23,7 @@ export default function Home() {
             name={[
               "ניהול הסמכות",
               "certificationsManagements",
-              "שים לב! חלק מההסמכות הן פגות תוקף",
+              "שים לב! חלק מההסמכות פגות תוקף",
               "certificationValidity",
               "certificationsManagement",
             ]}
@@ -41,7 +41,7 @@ export default function Home() {
             name={[
               "בדיקות תקופתיות לציוד וחומרים",
               "equipmentAndMaterialsPeriodicInspections",
-              "שים לב! חלק מהבדיקות הן פגות תוקף",
+              "שים לב! חלק מהבדיקות פגות תוקף",
               "nextTestDate",
               "equipmentAndMaterialsPeriodicInspections",
             ]}
@@ -106,7 +106,6 @@ export default function Home() {
             />
           </Col>
           <Col>
-            {/* <img src={safetyPic} style={{height: "55%", display: "block", marginLeft: "auto", marginRight: "auto"}}></img> */}
             <ContactUs/>
           </Col>
         </Row>

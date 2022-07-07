@@ -99,7 +99,7 @@ async function init() {
             name={[
               "ניהול הסמכות",
               "GlobalCertificationsManagementsView",
-              "שים לב! חלק מההסמכות הן פגות תוקף",
+              "שים לב! חלק מההסמכות פגות תוקף",
               "certificationValidity",
               "certificationsManagement",
               byrole,
@@ -119,7 +119,7 @@ async function init() {
             name={[
               "בדיקות תקופתיות לציוד וחומרים",
               "GlobalEquipmentAndMaterialsPeriodicInspectionsView",
-              "שים לב! חלק מהבדיקות הן פגות תוקף",
+              "שים לב! חלק מהבדיקות פגות תוקף",
               "nextTestDate",
               "equipmentAndMaterialsPeriodicInspections",
               byrole,

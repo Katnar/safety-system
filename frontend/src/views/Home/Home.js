@@ -127,7 +127,7 @@ export default function Home() {
                                                 <Warning />
                                             </Danger>
                                             <a href="#pablo" onClick={e => e.preventDefault()}>
-                                                שים לב! חלק מההסמכות הן פגות תוקף</a>
+                                                שים לב! חלק מההסמכות פגות תוקף</a>
                                         </div>
                                     </CardFooter>
                                 ) : (<CardFooter stats>
