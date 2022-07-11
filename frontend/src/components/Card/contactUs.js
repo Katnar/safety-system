@@ -34,13 +34,13 @@ const ContactUs = (props) => {
                                             מנחה בטיחות חילי, רנ"ג גיא דגן
                                         </h2>
                                         <h3 style={{ textAlign: "center", color: "blue"}}>
-                                             050-12312312
+                                             052-945-3904
                                         </h3>
                                         <h2>
                                             קמ"ד בטיחות, רס"ל שובל לוגסי
                                         </h2>
                                         <h3 style={{ textAlign: "center", color: "blue"}}>
-                                             050-32132121
+                                             054-227-1878
                                         </h3>
                                     </Col>
                                 </Row>

@@ -46,8 +46,8 @@ const GroundingTestsForm = ({ match }) => {
     }
     let user1 = await isAuthenticated();
     console.log(user1);
-    if (user1.user.role == "1") {
-      getGdods();
+    if (user1.user.role == "0") {
+      loadGdods();
     } else if (user1.user.role == "2") {
       getGdodsByHativa();
     } else if (user1.user.role == "3") {
@@ -191,20 +191,39 @@ const GroundingTestsForm = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+  const clickSubmit = async (event) => {
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
-    return flag;
+
+    if (((state.buildingName == undefined) || (state.buildingName == ""))) {
+      error += "חסר שדה מבנה נבדק, "
+      flag = false;
+    }
+    if (((state.testDate == undefined) || (state.testDate == ""))) {
+      error += "חסר שדה תאריך בדיקה, "
+      flag = false;
+    }
+    if (((state.nextTestDate == undefined) || (state.nextTestDate == ""))) {
+      error += "חסר שדה תאריך בדיקה הבא, "
+      flag = false;
+    }
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   async function SubmitData() {

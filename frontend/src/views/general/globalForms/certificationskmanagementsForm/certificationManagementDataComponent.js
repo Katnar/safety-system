@@ -48,7 +48,7 @@ const CertificationManagementDataComponent = ({match}) => {
       loadDatas();
     }
     console.log(user1)
-      if (user1.user.role == "1") {
+      if (user1.user.role == "0") {
         getGdods();
       }else
       if (user1.user.role == "2") {
@@ -77,22 +77,14 @@ const CertificationManagementDataComponent = ({match}) => {
   };
 
   const getGdods = async () => {
-    try {
-      await axios
-        .get(`http://localhost:8000/api/certificationsManagement`)
-        .then((response) => {
-          let tempData = [];
-          for (let i = 0; i < response.data.length; i++) {
-            if (response.data[i].gdod == user.user.gdod) {
-              tempData.push(response.data[i]);
-            }
-          }
-          setData(tempData);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch { }
+    axios
+    .get("http://localhost:8000/api/gdod")
+    .then((response) => {
+      setGdods(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   const getGdodsByHativa = async () => {
@@ -210,19 +202,58 @@ const CertificationManagementDataComponent = ({match}) => {
   };
 
   const clickSubmit = async (event) => {
-    if (CheckFormData()) {
+    CheckFormData();
+  };
+
+  const CheckFormData = () => {
+    let flag = true;
+    let error = "";
+
+    if (((data.personalNumber == undefined) || (data.personalNumber == ""))) {
+      error += "חסר שדה מספר אישי, "
+      flag = false;
+    }
+    if (((data.id == undefined) || (data.id == ""))) {
+      error += "חסר שדה תעודת זהות, "
+      flag = false;
+    }
+    if (((data.fullName == undefined) || (data.fullName == ""))) {
+      error += "חסר שדה שם, "
+      flag = false;
+    }
+    if (((data.rank == undefined) || (data.rank == ""))) {
+      error += "חסר שדה דרגה, "
+      flag = false;
+    }
+    if (((data.profession == undefined) || (data.profession == ""))) {
+      error += "חסר שדה מקצוע, "
+      flag = false;
+    }
+    if (((data.certification == undefined) || (data.certification == ""))) {
+      error += "חסר שדה הסמכה, "
+      flag = false;
+    }
+    if (((data.certificationValidity == undefined) || (data.certificationValidity == ""))) {
+      error += "חסר שדה תוקף הסמכה, "
+      flag = false;
+    }
+    if (((data.gdod == undefined) || (data.gdod == ""))) {
+      error += "חסר שדה גדוד , "
+      flag = false;
+    }
+    // if ((document.documentUpload == undefined)) {
+    //   error += "חסר שדה העלאת מסמכים , "
+    //   flag = false;
+    // }
+
+    if (flag == true) {
       SubmitData();
       toast.success("הטופס עודכן בהצלחה");
       history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
     }
-  };
-
-  function CheckFormData() {
-    let flag = true;
-    let error = "";
-    return flag;
+    else {
+      toast.error(error)
+    }
   }
 
   const UploadFile = async (id) => {
@@ -260,6 +291,7 @@ const CertificationManagementDataComponent = ({match}) => {
     }
     if(singleFile!=="")
     await UploadFile(tempData._id);
+
   }
 
   useEffect(() => {

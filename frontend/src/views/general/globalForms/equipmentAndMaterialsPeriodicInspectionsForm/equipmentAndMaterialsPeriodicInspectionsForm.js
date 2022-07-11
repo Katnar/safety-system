@@ -48,8 +48,8 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
       loadDatas();
     }
     console.log(user1)
-      if (user1.user.role == "1") {
-        getGdods();
+      if (user1.user.role == "0") {
+        loadGdods();
       }else
       if (user1.user.role == "2") {
         getGdodsByHativa();
@@ -70,6 +70,17 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
       .then((response) => {
         let tempdatas = response.data;
         setData(tempdatas);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const loadGdods = () => {
+    axios
+      .get("http://localhost:8000/api/gdod")
+      .then((response) => {
+        setGdods(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -171,19 +182,46 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
   }
 
   const clickSubmit = async (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
-    return flag;
+
+    if (((data.equipmentType == undefined) || (data.equipmentType == ""))) {
+      error += "חסר שדה סוג הציוד, "
+      flag = false;
+    }
+    if (((data.manufacturer == undefined) || (data.manufacturer == ""))) {
+      error += "חסר שדה יצרן, "
+      flag = false;
+    }
+    if (((data.testingFrequency == undefined) || (data.testingFrequency == ""))) {
+      error += "חסר תדירות הבדיקות, "
+      flag = false;
+    }
+    if (((data.testDate == undefined) || (data.testDate == ""))) {
+      error += "חסר שדה תאריך בדיקה, "
+      flag = false;
+    }
+    if (((data.nextTestDate == undefined) || (data.nextTestDate == ""))) {
+      error += "חסר שדה תאריך בדיקה הבא, "
+      flag = false;
+    }
+    if (((data.gdod == undefined) || (data.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   const UploadFile = async (id) => {
@@ -213,12 +251,6 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
     }
     if(singleFile!=="")
     await UploadFile(tempData._id);
-  }
-
-  function CheckFormData() {
-    let flag = true;
-    let error = "";
-    return flag;
   }
 
 
