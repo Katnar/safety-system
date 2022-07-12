@@ -47,8 +47,8 @@ const ReviewsDocumentationForm = ({ match }) => {
     }
     let user1 = await isAuthenticated();
     console.log(user1);
-    if (user1.user.role == "1") {
-      getGdods();
+    if (user1.user.role == "0") {
+      loadGdods();
     } else if (user1.user.role == "2") {
       getGdodsByHativa();
     } else if (user1.user.role == "3") {
@@ -192,20 +192,35 @@ const ReviewsDocumentationForm = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+  const clickSubmit = async (event) => {
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
-    return flag;
+
+    if (((state.date == undefined) || (state.date == ""))) {
+      error += "חסר שדה תאריך, "
+      flag = false;
+    }
+    if (((state.location == undefined) || (state.location == ""))) {
+      error += "חסר שדה מיקום ביצוע הביקורת, "
+      flag = false;
+    }
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   const UploadFile = async (id) => {

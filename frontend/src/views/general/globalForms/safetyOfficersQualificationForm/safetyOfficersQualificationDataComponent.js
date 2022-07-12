@@ -45,8 +45,8 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
     }
     let user1 = await isAuthenticated();
     console.log(user1);
-    if (user1.user.role == "1") {
-      getGdods();
+    if (user1.user.role == "0") {
+      loadGdods();
     } else if (user1.user.role == "2") {
       getGdodsByHativa();
     } else if (user1.user.role == "3") {
@@ -210,20 +210,47 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+  const clickSubmit = async (event) => {
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
-    return flag;
+
+    if (((state.personalNumber == undefined) || (state.personalNumber == ""))) {
+      error += "חסר שדה מספר אישי, "
+      flag = false;
+    }
+    if (((state.id == undefined) || (state.id == ""))) {
+      error += "חסר שדה תעודת זהות, "
+      flag = false;
+    }
+    if (((state.fullName == undefined) || (state.fullName == ""))) {
+      error += "חסר שדה שם מלא, "
+      flag = false;
+    }
+    if (((state.certificateIssuingDate == undefined) || (state.certificateIssuingDate == ""))) {
+      error += "חסר שדה תאריך הוצאת תעודה, "
+      flag = false;
+    }
+    if (((state.numberOfSeminarDays == undefined) || (state.numberOfSeminarDays == ""))) {
+      error += "חסר שדה מספר ימי עיון שבוצעו, "
+      flag = false;
+    }
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   async function SubmitData() {

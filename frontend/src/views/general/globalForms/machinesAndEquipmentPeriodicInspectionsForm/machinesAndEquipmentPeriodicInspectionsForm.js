@@ -47,8 +47,8 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
     }
     let user1 = await isAuthenticated();
     console.log(user1);
-    if (user1.user.role == "1") {
-      getGdods();
+    if (user1.user.role == "0") {
+      loadGdods();
     } else if (user1.user.role == "2") {
       getGdodsByHativa();
     } else if (user1.user.role == "3") {
@@ -196,20 +196,67 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+  const clickSubmit = async (event) => {
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
-    return flag;
+
+    if (((state.equipmentType == undefined) || (state.equipmentType == ""))) {
+      error += "חסר שדה סוג הציוד, "
+      flag = false;
+    }
+    if (((state.meanName == undefined) || (state.meanName == ""))) {
+      error += "חסר שדה שם האמצעי, "
+      flag = false;
+    }
+    if (((state.mstb == undefined) || (state.mstb == ""))) {
+      error += "חסר שדה מסט''ב, "
+      flag = false;
+    }
+    if (((state.mkt == undefined) || (state.mkt == ""))) {
+      error += "חסר שדה מק''ט, "
+      flag = false;
+    }
+    if (((state.manufacturer == undefined) || (state.manufacturer == ""))) {
+      error += "חסר שדה יצרן, "
+      flag = false;
+    }
+    if (((state.testDate == undefined) || (state.testDate == ""))) {
+      error += "חסר שדה מועד בדיקה נוכחי, "
+      flag = false;
+    }
+    if (((state.nextTestDate == undefined) || (state.nextTestDate == ""))) {
+      error += "חסר שדה מועד בדיקה הבא, "
+      flag = false;
+    }
+    if (((state.findings == undefined) || (state.findings == ""))) {
+      error += "חסר שדה ממצאים, "
+      flag = false;
+    }
+    if (((state.comments == undefined) || (state.comments == ""))) {
+      error += "חסר שדה הערות, "
+      flag = false;
+    }
+    if (((state.meanQuantity == undefined) || (state.meanQuantity == ""))) {
+      error += "חסר שדה כמות מכל אמצעי, "
+      flag = false;
+    }
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   const UploadFile = async (id) => {

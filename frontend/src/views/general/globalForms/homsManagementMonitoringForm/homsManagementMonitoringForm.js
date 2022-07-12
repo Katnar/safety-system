@@ -45,8 +45,8 @@ const HomsManagementMonitoringForm = ({ match }) => {
     }
     let user1 = await isAuthenticated();
     console.log(user1);
-    if (user1.user.role == "1") {
-      getGdods();
+    if (user1.user.role == "0") {
+      loadGdods();
     } else if (user1.user.role == "2") {
       getGdodsByHativa();
     } else if (user1.user.role == "3") {
@@ -192,20 +192,43 @@ const HomsManagementMonitoringForm = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+  const clickSubmit = async (event) => {
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
-    return flag;
+
+    if (((state.materialName == undefined) || (state.materialName == ""))) {
+      error += "חסר שדה שם החומר, "
+      flag = false;
+    }
+    if (((state.sheetId == undefined) || (state.sheetId == ""))) {
+      error += "חסר שדה מספר גיליון, "
+      flag = false;
+    }
+    if (((state.materialDepartments == undefined) || (state.materialDepartments == ""))) {
+      error += "חסר שדה מחלקות בהן נמצא החומר, "
+      flag = false;
+    }
+    if (((state.comments == undefined) || (state.comments == ""))) {
+      error += "חסר שדה הערות, "
+      flag = false;
+    }
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   async function SubmitData() {
