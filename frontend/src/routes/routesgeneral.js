@@ -19,6 +19,7 @@ import HativaRoute from "auth/HativaRoute";
 import CandidateRoute from "auth/CandidateRoute";
 import UnitRoute from "auth/UnitRoute";
 
+import AdminSignIn from "views/general/authentication/AdminSignInForm";
 import SignIn from "views/general/authentication/SignInForm";
 import SignUp from "views/general/authentication/SignUpForm";
 import ManageUsers from "views/general/authentication/manageusers/ManageUsers";
@@ -155,6 +156,7 @@ import DetailsPull from "views/general/globalForms/detailsPull";
 const routesgeneral = (
   <>
     {/*///////////////////////////////////////////UnLoggedIn Routes/////////////////////////////////////////////////*/}
+    <UnloggedinRoute path="/adminsignin" exact component={AdminSignIn} />
     <UnloggedinRoute path="/signin" exact component={SignIn} />
     <UnloggedinRoute path="/signup" exact component={SignUp} />
     {/*///////////////////////////////////////////UnLoggedIn Routes/////////////////////////////////////////////////*/}

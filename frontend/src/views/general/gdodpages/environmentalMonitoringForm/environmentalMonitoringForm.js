@@ -70,25 +70,51 @@ const EnvironmentalMonitoringForm = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+  const clickSubmit = async (event) => {
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
 
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
-    //   flag = false;
-    // }
-    return flag;
+    if (((state.harmfulCauses == undefined) || (state.harmfulCauses == ""))) {
+      error += "חסר שדה גורמים מזיקים, "
+      flag = false;
+    }
+    if (((state.locationInUnit == undefined) || (state.locationInUnit == ""))) {
+      error += "חסר שדה מיקום ביחידה, "
+      flag = false;
+    }
+    if (((state.lastMonitoringDate == undefined) || (state.lastMonitoringDate == ""))) {
+      error += "חסר שדה מועד ניטור אחרון, "
+      flag = false;
+    }
+    if (((state.nextMonitoringDate == undefined) || (state.nextMonitoringDate == ""))) {
+      error += "חסר שדה מועד ניטור הבא, "
+      flag = false;
+    }
+    if (((state.executionStatus == undefined) || (state.executionStatus == ""))) {
+      error += "חסר שדה סטטוס ביצוע, "
+      flag = false;
+    }
+    if (((state.surveyDate == undefined) || (state.surveyDate == ""))) {
+      error += "חסר שדה תסקיר מתאריך, "
+      flag = false;
+    }
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   const UploadFile = async (id) => {

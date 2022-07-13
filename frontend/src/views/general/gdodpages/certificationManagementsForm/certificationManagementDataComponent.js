@@ -90,25 +90,57 @@ const CertificationManagementDataComponent = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+  const clickSubmit = async (event) => {
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
 
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
+    if (((data.personalNumber == undefined) || (data.personalNumber == ""))) {
+      error += "חסר שדה מספר אישי, "
+      flag = false;
+    }
+    if (((data.id == undefined) || (data.id == ""))) {
+      error += "חסר שדה תעודת זהות, "
+      flag = false;
+    }
+    if (((data.fullName == undefined) || (data.fullName == ""))) {
+      error += "חסר שדה שם, "
+      flag = false;
+    }
+    if (((data.rank == undefined) || (data.rank == ""))) {
+      error += "חסר שדה דרגה, "
+      flag = false;
+    }
+    if (((data.profession == undefined) || (data.profession == ""))) {
+      error += "חסר שדה מקצוע, "
+      flag = false;
+    }
+    if (((data.certification == undefined) || (data.certification == ""))) {
+      error += "חסר שדה הסמכה, "
+      flag = false;
+    }
+    if (((data.certificationValidity == undefined) || (data.certificationValidity == ""))) {
+      error += "חסר שדה תוקף הסמכה, "
+      flag = false;
+    }
+    if (((data.gdod == undefined) || (data.gdod == ""))) {
+      error += "חסר שדה גדוד , "
+      flag = false;
+    }
+    // if (((document.documentUpload == undefined) || (document.documentUpload == ""))) {
+    //   error += "חסר שדה העלאת מסמכים , "
     //   flag = false;
     // }
-    return flag;
+
+    if (flag == true) {
+      SubmitData();
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   const UploadFile = async (id) => {

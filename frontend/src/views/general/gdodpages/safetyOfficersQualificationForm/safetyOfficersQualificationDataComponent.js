@@ -88,26 +88,48 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
         });
     };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
+    const clickSubmit = async (event) => {
+      CheckFormData();
+    };
+  
+    const CheckFormData = () => {
+      let flag = true;
+      let error = "";
+  
+      if (((state.personalNumber == undefined) || (state.personalNumber == ""))) {
+        error += "חסר שדה מספר אישי, "
+        flag = false;
+      }
+      if (((state.id == undefined) || (state.id == ""))) {
+        error += "חסר שדה תעודת זהות, "
+        flag = false;
+      }
+      if (((state.fullName == undefined) || (state.fullName == ""))) {
+        error += "חסר שדה שם מלא, "
+        flag = false;
+      }
+      if (((state.certificateIssuingDate == undefined) || (state.certificateIssuingDate == ""))) {
+        error += "חסר שדה תאריך הוצאת תעודה, "
+        flag = false;
+      }
+      if (((state.numberOfSeminarDays == undefined) || (state.numberOfSeminarDays == ""))) {
+        error += "חסר שדה מספר ימי עיון שבוצעו, "
+        flag = false;
+      }
+      if (((state.gdod == undefined) || (state.gdod == ""))) {
+        error += "חסר שדה גדוד, "
+        flag = false;
+      }
+    
+      if (flag == true) {
+        SubmitData();
+        toast.success("הטופס עודכן בהצלחה");
+        history.goBack()
+      }
+      else {
+        toast.error(error)
+      }
     }
-  };
-
-  function CheckFormData() {
-    let flag = true;
-    let error = "";
-
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
-    //   flag = false;
-    // }
-    return flag;
-  }
 
   async function SubmitData() {
     let tempData;

@@ -47,8 +47,8 @@ const TrainingProgramForm = ({ match }) => {
     }
     let user1 = await isAuthenticated();
     console.log(user1);
-    if (user1.user.role == "1") {
-      getGdods();
+    if (user1.user.role == "0") {
+      loadGdods();
     } else if (user1.user.role == "2") {
       getGdodsByHativa();
     } else if (user1.user.role == "3") {
@@ -192,20 +192,51 @@ const TrainingProgramForm = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+  const clickSubmit = async (event) => {
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
-    return flag;
+
+    if (((state.trainingDate == undefined) || (state.trainingDate == ""))) {
+      error += "חסר שדה תאריך ההדרכה, "
+      flag = false;
+    }
+    if (((state.trainingSubject == undefined) || (state.trainingSubject == ""))) {
+      error += "חסר שדה נושא ההדרכה, "
+      flag = false;
+    }
+    if (((state.requireTest == undefined) || (state.requireTest == ""))) {
+      error += "חסר שדה דורש מבחן, "
+      flag = false;
+    }
+    if (((state.requiredWorkersList == undefined) || (state.requiredWorkersList == ""))) {
+      error += "חסר שדה רשימת עובדים, "
+      flag = false;
+    }
+    if (((state.trainingStatus == undefined) || (state.trainingStatus == ""))) {
+      error += "חסר שדה סטטוס הדרכה, "
+      flag = false;
+    }
+    if (((state.requiredWorkersStatus == undefined) || (state.requiredWorkersStatus == ""))) {
+      error += "חסר שדה סטטוס הגעת עובד, "
+      flag = false;
+    }
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   const UploadFile = async (id) => {

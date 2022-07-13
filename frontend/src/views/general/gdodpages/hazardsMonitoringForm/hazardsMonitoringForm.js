@@ -86,25 +86,87 @@ const HazardsMonitoringForm = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+  const clickSubmit = async (event) => {
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
 
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
-    //   flag = false;
-    // }
-    return flag;
+    if (((state.personalNumber == undefined) || (state.personalNumber == ""))) {
+      error += "חסר שדה מספר אישי, "
+      flag = false;
+    }
+    if (((state.rank == undefined) || (state.rank == ""))) {
+      error += "חסר שדה דרגה, "
+      flag = false;
+    }
+    if (((state.fullName == undefined) || (state.fullName == ""))) {
+      error += "חסר שדה שם מלא, "
+      flag = false;
+    }
+    if (((state.date == undefined) || (state.date == ""))) {
+      error += "חסר שדה תאריך, "
+      flag = false;
+    }
+    if (((state.surveyDetails == undefined) || (state.surveyDetails == ""))) {
+      error += "חסר שדה נתוני הסקר, "
+      flag = false;
+    }
+    if (((state.digitalSignature == undefined) || (state.digitalSignature == ""))) {
+      error += "חסר שדה חתימה דיגיטלית, "
+      flag = false;
+    }
+    if (((state.msd == undefined) || (state.msd == ""))) {
+      error += "חסר שדה מס''ד, "
+      flag = false;
+    }
+    if (((state.location == undefined) || (state.location == ""))) {
+      error += "חסר שדה מיקום, "
+      flag = false;
+    }
+    if (((state.hazardType == undefined) || (state.hazardType == ""))) {
+      error += "חסר שדה סוג המפגע, "
+      flag = false;
+    }
+    if (((state.hazardDescription == undefined) || (state.hazardDescription == ""))) {
+      error += "חסר שדה תיאור הממצא, "
+      flag = false;
+    }
+    if (((state.repairActions == undefined) || (state.repairActions == ""))) {
+      error += "חסר שדה פעולות תיקון ומניעה , "
+      flag = false;
+    }
+    if (((state.repair == undefined) || (state.repair == ""))) {
+      error += "חסר שדה תיקון וסילוק, "
+      flag = false;
+    }
+    if (((state.executionSchedule == undefined) || (state.executionSchedule == ""))) {
+      error += "חסר שדה לו''ז לביצוע, "
+      flag = false;
+    }
+    if (((state.repairControl == undefined) || (state.repairControl == ""))) {
+      error += "חסר שדה בקרת תיקון הממצא, "
+      flag = false;
+    }
+    if (((state.status == undefined) || (state.status == ""))) {
+      error += "חסר שדה סטטוס, "
+      flag = false;
+    }
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
 

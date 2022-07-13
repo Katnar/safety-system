@@ -70,15 +70,6 @@ const UnitIdDataComponent = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
-  };
 
   const UploadFile = async (id) => {
     const formData = new FormData();
@@ -97,15 +88,55 @@ const UnitIdDataComponent = ({ match }) => {
     console.log("Second File:"+singleFile2);
   };
 
-  function CheckFormData() {
+  const clickSubmit = async (event) => {
+    CheckFormData();
+  };
+
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
 
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
-    //   flag = false;
-    // }
-    return flag;
+    if (((unit.name == undefined) || (unit.name == ""))) {
+      error += "חסר שדה שם יחידה, "
+      flag = false;
+    }
+    if (((unit.location == undefined) || (unit.location == ""))) {
+      error += "חסר שדה מיקום יחידה, "
+      flag = false;
+    }
+    if (((unit.unitStructure == undefined) || (unit.unitStructure == ""))) {
+      error += "חסר שדה מבנה היחידה, "
+      flag = false;
+    }
+    if (((unit.unitMeans == undefined) || (unit.unitMeans == ""))) {
+      error += "חסר שדה פירוט האמצעים ביחידה, "
+      flag = false;
+    }
+    if (((unit.mainOccupation == undefined) || (unit.mainOccupation == ""))) {
+      error += "חסר שדה עיסוק מרכזי, "
+      flag = false;
+    }
+    if (((unit.unitStructureTree == undefined) || (unit.unitStructureTree == ""))) {
+      error += "חסר שדה עץ מבנה יחידה, "
+      flag = false;
+    }
+    if (((unit.teneStructureTree == undefined) || (unit.teneStructureTree == ""))) {
+      error += "חסר שדה עץ מבנה מחלקת טנ''א, "
+      flag = false;
+    }
+    if (((unit.gdod == undefined) || (unit.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   async function SubmitData() {

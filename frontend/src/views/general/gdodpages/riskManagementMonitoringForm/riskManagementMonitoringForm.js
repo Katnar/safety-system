@@ -70,25 +70,63 @@ const RiskManagementMonitoringForm = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+  const clickSubmit = async (event) => {
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
 
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
-    //   flag = false;
-    // }
-    return flag;
+    if (((state.processStage == undefined) || (state.processStage == ""))) {
+      error += "חסר שדה שלב התהליך, "
+      flag = false;
+    }
+    if (((state.riskFactor == undefined) || (state.riskFactor == ""))) {
+      error += "חסר שדה גורם הסיכון, "
+      flag = false;
+    }
+    if (((state.factorMfive == undefined) || (state.factorMfive == ""))) {
+      error += "חסר שדה גורם (מתוך M5), "
+      flag = false;
+    }
+    if (((state.initialRiskAssessment == undefined) || (state.initialRiskAssessment == ""))) {
+      error += "חסר שדה הערכת סיכונים ראשונית, "
+      flag = false;
+    }
+    if (((state.preventiveActions == undefined) || (state.preventiveActions == ""))) {
+      error += "חסר שדה פעולות מניעה/אמצעי בקרה, "
+      flag = false;
+    }
+    if (((state.secondRiskAssessment == undefined) || (state.secondRiskAssessment == ""))) {
+      error += "חסר שדה הערכת סיכונים חוזרת, "
+      flag = false;
+    }
+    if (((state.responsibility == undefined) || (state.responsibility == ""))) {
+      error += "חסר שדה אחריות, "
+      flag = false;
+    }
+    if (((state.tgb == undefined) || (state.tgb == ""))) {
+      error += "חסר שדה תג''ב, "
+      flag = false;
+    }
+    if (((state.status == undefined) || (state.status == ""))) {
+      error += "חסר שדה סטטוס, "
+      flag = false;
+    }
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   async function SubmitData() {

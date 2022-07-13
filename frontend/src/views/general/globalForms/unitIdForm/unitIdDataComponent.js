@@ -170,19 +170,54 @@ const UnitIdDataComponent = ({ match }) => {
   }
 
   const clickSubmit = async (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
-    return flag;
+
+    if (((data.name == undefined) || (data.name == ""))) {
+      error += "חסר שדה שם יחידה, "
+      flag = false;
+    }
+    if (((data.location == undefined) || (data.location == ""))) {
+      error += "חסר שדה מיקום יחידה, "
+      flag = false;
+    }
+    if (((data.unitStructure == undefined) || (data.unitStructure == ""))) {
+      error += "חסר שדה מבנה היחידה, "
+      flag = false;
+    }
+    if (((data.unitMeans == undefined) || (data.unitMeans == ""))) {
+      error += "חסר שדה פירוט האמצעים ביחידה, "
+      flag = false;
+    }
+    if (((data.mainOccupation == undefined) || (data.mainOccupation == ""))) {
+      error += "חסר שדה עיסוק מרכזי, "
+      flag = false;
+    }
+    if (((data.unitStructureTree == undefined) || (data.unitStructureTree == ""))) {
+      error += "חסר שדה עץ מבנה יחידה, "
+      flag = false;
+    }
+    if (((data.teneStructureTree == undefined) || (data.teneStructureTree == ""))) {
+      error += "חסר שדה עץ מבנה מחלקת טנ''א, "
+      flag = false;
+    }
+    if (((data.gdod == undefined) || (data.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   const UploadFile = async (id) => {

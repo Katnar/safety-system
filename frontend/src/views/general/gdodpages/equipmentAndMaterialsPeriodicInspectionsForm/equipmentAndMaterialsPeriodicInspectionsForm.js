@@ -70,26 +70,49 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+  const clickSubmit = async (event) => {
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
 
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
-    //   flag = false;
-    // }
-    return flag;
+    if (((state.equipmentType == undefined) || (state.equipmentType == ""))) {
+      error += "חסר שדה סוג הציוד, "
+      flag = false;
+    }
+    if (((state.manufacturer == undefined) || (state.manufacturer == ""))) {
+      error += "חסר שדה יצרן, "
+      flag = false;
+    }
+    if (((state.testingFrequency == undefined) || (state.testingFrequency == ""))) {
+      error += "חסר תדירות הבדיקות, "
+      flag = false;
+    }
+    if (((state.testDate == undefined) || (state.testDate == ""))) {
+      error += "חסר שדה תאריך בדיקה, "
+      flag = false;
+    }
+    if (((state.nextTestDate == undefined) || (state.nextTestDate == ""))) {
+      error += "חסר שדה תאריך בדיקה הבא, "
+      flag = false;
+    }
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
+
 
   const UploadFile = async (id) => {
     const formData = new FormData();

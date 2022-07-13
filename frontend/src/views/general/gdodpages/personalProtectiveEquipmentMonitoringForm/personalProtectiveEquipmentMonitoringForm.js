@@ -69,25 +69,59 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
       });
   };
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
+  const clickSubmit = async (event) => {
+    CheckFormData();
   };
 
-  function CheckFormData() {
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
 
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
-    //   flag = false;
-    // }
-    return flag;
+    if (((state.msd == undefined) || (state.msd == ""))) {
+      error += "חסר שדה מס''ד, "
+      flag = false;
+    }
+    if (((state.equipmentName == undefined) || (state.equipmentName == ""))) {
+      error += "חסר שדה שם הציוד, "
+      flag = false;
+    }
+    if (((state.mkt == undefined) || (state.mkt == ""))) {
+      error += "חסר שדה מק''ט, "
+      flag = false;
+    }
+    if (((state.amount == undefined) || (state.amount == ""))) {
+      error += "חסר שדה כמות, "
+      flag = false;
+    }
+    if (((state.equipmentLocation == undefined) || (state.equipmentLocation == ""))) {
+      error += "חסר שדה מיקום הציוד, "
+      flag = false;
+    }
+    if (((state.testDate == undefined) || (state.testDate == ""))) {
+      error += "חסר שדה תאריך הבדיקה, "
+      flag = false;
+    }
+    if (((state.equipmentGuarantor == undefined) || (state.equipmentGuarantor == ""))) {
+      error += "חסר שדה אחראי הציוד, "
+      flag = false;
+    }
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+    if (((state.comments == undefined) || (state.comments == ""))) {
+      error += "חסר שדה הערות, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   async function SubmitData() {

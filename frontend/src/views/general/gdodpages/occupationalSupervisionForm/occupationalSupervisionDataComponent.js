@@ -63,16 +63,6 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
       setData({...data, personalNumber: pn}) }
   }
 
-  const clickSubmit = (event) => {
-    if (CheckFormData()) {
-      SubmitData();
-      toast.success("הטופס עודכן בהצלחה");
-      history.goBack();
-    } else {
-      toast.error("שגיאה בטופס");
-    }
-  };
-
   const loadDatas = () => {
     axios
       .get(
@@ -98,15 +88,71 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
       });
   };
 
-  function CheckFormData() {
+  const clickSubmit = async (event) => {
+    CheckFormData();
+  };
+
+  const CheckFormData = () => {
     let flag = true;
     let error = "";
 
-    // if (((mahzordata.name == undefined) || (mahzordata.name == "")) || ((mahzordata.startdate == undefined) || (mahzordata.startdate == "")) || ((mahzordata.enddate == undefined) || (mahzordata.enddate == ""))) {
-    //   error += "פרטים כלליים שגויים"
-    //   flag = false;
-    // }
-    return flag;
+    if (((data.personalNumber == undefined) || (data.personalNumber == ""))) {
+      error += "חסר שדה מספר אישי, "
+      flag = false;
+    }
+    if (((data.id == undefined) || (data.id == ""))) {
+      error += "חסר שדה תעודת זהות, "
+      flag = false;
+    }
+    if (((data.fullName == undefined) || (data.fullName == ""))) {
+      error += "חסר שדה שם מלא, "
+      flag = false;
+    }
+    if (((data.rank == undefined) || (data.rank == ""))) {
+      error += "חסר שדה דרגה, "
+      flag = false;
+    }
+    if (((data.profession == undefined) || (data.profession == ""))) {
+      error += "חסר שדה תפקיד/מקצוע, "
+      flag = false;
+    }
+    if (((data.harmfulCause == undefined) || (data.harmfulCause == ""))) {
+      error += "חסר שדה גורם מזיק, "
+      flag = false;
+    }
+    if (((data.legislationAndMilitaryOrders == undefined) || (data.legislationAndMilitaryOrders == ""))) {
+      error += "חסר שדה חקיקה ופקודות הצבא, "
+      flag = false;
+    }
+    if (((data.frequencyOfTests == undefined) || (data.frequencyOfTests == ""))) {
+      error += "חסר שדה תדירות הבדיקות, "
+      flag = false;
+    }
+    if (((data.lastExecutionDate == undefined) || (data.lastExecutionDate == ""))) {
+      error += "חסר שדה תאריך ביצוע אחרון, "
+      flag = false;
+    }
+    if (((data.nextTestDate == undefined) || (data.nextTestDate == ""))) {
+      error += "חסר שדה תאריך בדיקה הבא, "
+      flag = false;
+    }
+    if (((data.fit == undefined) || (data.fit == ""))) {
+      error += "חסר שדה כשיר/לא כשיר, "
+      flag = false;
+    }
+    if (((data.gdod == undefined) || (data.gdod == ""))) {
+      error += "חסר שדה גדוד, "
+      flag = false;
+    }
+  
+    if (flag == true) {
+      SubmitData();
+      toast.success("הטופס עודכן בהצלחה");
+      history.goBack()
+    }
+    else {
+      toast.error(error)
+    }
   }
 
   const UploadFile = async (id) => {
