@@ -40,7 +40,7 @@ const SortingTable = ({ match }) => {
 
   useEffect(() => {
     init();
-    setPageSize(5);
+    setPageSize(15);
   }, []);
 
   const {

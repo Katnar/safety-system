@@ -256,7 +256,7 @@ const SortingTable = (props) => {
 
   useEffect(() => {
     init();
-    setPageSize(5);
+    setPageSize(15);
   }, []);
 
   const {
