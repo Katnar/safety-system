@@ -120,6 +120,7 @@ function Signin() {
 
   useEffect(() => {
     passport();
+    clickSubmit();
   }, [])
 
   useEffect(() => {

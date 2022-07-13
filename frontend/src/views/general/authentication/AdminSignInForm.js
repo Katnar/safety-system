@@ -119,7 +119,8 @@ function Signin() {
   );
 
   useEffect(() => {
-    clickSubmit();
+    // clickSubmit();
+    passport();
   }, [])
 
   useEffect(() => {
