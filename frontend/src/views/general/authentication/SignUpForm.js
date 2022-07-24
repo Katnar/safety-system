@@ -52,6 +52,17 @@ export default function SignUpForm() {
   //     });
   // };
 
+  const passport = event => {
+    axios.get(`http://localhost:8000/auth/passportauth`)
+      .then(response => {
+        console.log(response.data);
+        setData({ ...data, personalnumber:response.data.stam._json.cn, password: response.data.stam._json.cn})
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
   const loadGdods = () => {
     axios
       .get("http://localhost:8000/api/gdod")
@@ -230,6 +241,7 @@ export default function SignUpForm() {
 
   useEffect(() => {
     // loadUnits();
+    passport();
     loadGdods();
     loadHativas();
     loadOgdas();

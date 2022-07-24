@@ -106,14 +106,16 @@ function Sidebar() {
             }}
           >
             <img src={teamLogo} style={{ width: "50%"}}></img>
+            <a href="http://216.1.1.11:98/adminsignin">
             <Button
-              onClick={clickSubmit}
+              // onClick={clickSubmit}
               className="btn-defailt"
               style={{ width: "80%", marginTop: "20px"}}
             >
-              התנתק
+              החלף משתמש
             </Button>
-            <a href="http://216.1.1.11:8008/presentation" target="_blank" rel="noreferrer">
+            </a>
+            <a href="http://216.1.1.11:8008/presentation">
               <Button
                 className="btn-danger"
                 style={{ width: "80%", marginTop: "20px"}}
