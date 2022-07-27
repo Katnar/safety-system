@@ -152,6 +152,7 @@ import GlobalSafetyOfficersQualificationForm from "views/general/globalForms/saf
 import GlobalTrainingProgramForm from "views/general/globalForms/trainingProgramForm/trainingProgramForm";
 
 import DetailsPull from "views/general/globalForms/detailsPull";
+import AboutPage from "views/general/aboutPage/AboutPage";
 
 const routesgeneral = (
   <>
@@ -184,6 +185,8 @@ const routesgeneral = (
     <AdminRoute path="/edituser/:userid" exact component={EditUser} />
     <AdminRoute path="/tableView/:collection?" exact component={tableView} />
     <AdminRoute path="/formView/:id?" exact component={FormView} />
+
+    <LoggedinRoute path="/about" exact component={AboutPage}></LoggedinRoute>
 
     <AdminRoute path="/adminDashboard" exact component={Home} />
     <LoggedinRoute path="/globalDashboard/:unit" exact component={globalHome} />

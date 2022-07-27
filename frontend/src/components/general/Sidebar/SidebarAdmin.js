@@ -33,6 +33,7 @@ import { signout } from "auth/index";
 import history from "../../../history";
 import teamLogo from "assets/img/team100.png"
 import dropdown from "assets/img/dropdown.png"
+import info from "assets/img/info.png"
 
 import {
   Button,
@@ -695,6 +696,9 @@ function SidebarAdmin() {
               </Col>
             </Row>
           </NavLink>
+  
+
+    
 {/* 
         <li>
           <NavLink
@@ -755,6 +759,21 @@ function SidebarAdmin() {
                   }}
                 >
                   עריכת משתמשים
+                </h4>
+              </Col>
+            </Row>
+          </NavLink>
+        </li>
+        <li>
+        <NavLink to="/about" style={{ margin: '0px' }} activeClassName="sidebar_active_link">
+            <Row style={{ direction: "rtl" }}>
+              <Col xs={12} md={3} style={{ paddingLeft: "0px", textAlign: 'center', alignSelf: 'center' }}>
+                <img src={info} style={{ height: "20px" }}></img>
+                 
+              </Col>
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4 style={{ margin: "0px", paddingTop: '6px', paddingBottom: '6px' }}>
+                  אודות המערכת
                 </h4>
               </Col>
             </Row>
