@@ -50,6 +50,8 @@ import CardTableCalcGlobal from "components/Card/CardTableCalcGlobal";
 
 import safetyPic from "assets/img/shieldSafety.png"
 
+import ContactUs from "components/Card/contactUs";
+
 import {
   Row,
   Col,
@@ -186,7 +188,7 @@ async function init() {
             />
           </Col>
           <Col>
-            {/* <img src={safetyPic} style={{height: "55%", display: "block", marginLeft: "auto", marginRight: "auto"}}></img> */}
+            <ContactUs/>
           </Col>
         </Row>
       </div>

@@ -15,7 +15,7 @@ import {
   Col,
   Collapse,
 } from "reactstrap";
-import safetyLogoShort from "assets/img/safetyLogo.png";
+import safetyLogoShort from "assets/img/logobhd20.png";
 
 function TeneComp({ match, theme }) {
 

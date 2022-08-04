@@ -1,4 +1,3 @@
-import RenderToLayer from "material-ui/internal/RenderToLayer";
 import React, { useEffect, useState } from "react";
 import Faq from "react-faq-component";
 

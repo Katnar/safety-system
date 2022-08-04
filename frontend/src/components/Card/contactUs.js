@@ -1,13 +1,7 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
-import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
-import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardIcon from "components/Card/CardIcon.js";
-import { Link } from "react-router-dom";
-import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-import { makeStyles } from "@material-ui/core/styles";
-import Mail from "assets/img/email.png"
+import Mail from "assets/img/outlook.png"
 
 import {
     Row,
@@ -54,7 +48,7 @@ const ContactUs = (props) => {
                                 <Row>
                                     <Col>
 
-                                        <img src={Mail} style={{ height: "210px", float: "left", paddingLeft: "150px" }}></img>
+                                    <a href="mailto: team100@army.idf.il" rel="nofollow"><img src={Mail} style={{ height: "210px", float: "left", paddingLeft: "150px" }}></img></a>
                                     </Col>
                                 </Row>
                             </CardHeader>
