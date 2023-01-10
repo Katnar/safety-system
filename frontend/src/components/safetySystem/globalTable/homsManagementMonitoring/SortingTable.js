@@ -11,6 +11,7 @@ import { withRouter, Redirect, Link } from "react-router-dom";
 import { COLUMNS } from "./coulmns";
 import { GlobalFilter } from "./GlobalFilter";
 import axios from "axios";
+import { FaFileDownload } from 'react-icons/fa';
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
@@ -24,6 +25,9 @@ const SortingTable = (props) => {
 
   async function init() {
     if (props.userData.user != undefined) {
+      if (props.userData.user.role == "0") {
+        getDetails();
+      }
       if (props.userData.user.role == "1") {
         getUnitDetailsByGdod();
       }
@@ -37,7 +41,6 @@ const SortingTable = (props) => {
         getUnitDetailsByPikod();
       }
     }
-    getDetails();
   }
 
   const getUnitDetailsByGdod = async () => {
@@ -56,7 +59,7 @@ const SortingTable = (props) => {
         .catch((error) => {
           console.log(error);
         });
-    } catch {}
+    } catch { }
   };
 
   const getUnitDetailsByHativa = async () => {
@@ -199,41 +202,27 @@ const SortingTable = (props) => {
       await axios
         .get(`http://localhost:8000/api/homsManagementMonitoring`)
         .then((response) => {
-          let tempData = [];
-          for (let i = 0; i < response.data.length; i++) {
-            console.log(props);
-            if (response.data[i].gdod == props.userData.user.gdod) {
-              tempData.push(response.data[i]);
-            }
-          }
-          setData(tempData);
+          setData(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
-    } catch {}
+    } catch { }
   };
 
-  const Delete = (Id) => {
-    axios
-      .delete(`http://localhost:8000/api/homsManagementMonitoring/${Id}`)
-      .then((response) => {
-        loadData();
+  const Delete = (data) => {
+    const tempData = data;
+    tempData.deletedAt = new Date();
+    axios.post("http://localhost:8000/api/homsManagementMonitoringDelete", tempData).then((response) => {
+      axios.delete(`http://localhost:8000/api/homsManagementMonitoring/${data._id}`).then((response) => {
+        init();
       })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const loadData = () => {
-    axios
-      .get("http://localhost:8000/api/homsManagementMonitoring")
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .catch((error) => {
+          console.log(error);
+        });
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   const sendMail = () => {
@@ -310,7 +299,7 @@ const SortingTable = (props) => {
                   </th>
                 ))}
                 <th>ערוך</th>
-                {/* <th>מחק</th> */}
+                {props.userData.user.role == "0" ? <th>מחק</th> : null}
               </tr>
             ))}
           </thead>
@@ -332,8 +321,13 @@ const SortingTable = (props) => {
                     if (cell.column.id == "comments") {
                       return <td>{cell.value}</td>;
                     }
+                    if (cell.column.id == "_id") {
+                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=homsManagementMonitoring&id=" + cell.value.toString()} target="_blank"><FaFileDownload /></a></td>;
+                    }
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  })}
+                  })
+                  }
+                  
                   {/* {console.log(row)} */}
                   <td role="cell">
                     {" "}
@@ -352,7 +346,7 @@ const SortingTable = (props) => {
                       </Link>
                     </div>
                   </td>
-                  {/* <td role="cell">
+                  {props.userData.user.role == "0" ? <td role="cell">
                     {" "}
                     <div
                       style={{
@@ -369,7 +363,7 @@ const SortingTable = (props) => {
                         מחק
                       </button>
                     </div>
-                  </td> */}
+                  </td> : null}
                 </tr>
               );
             })}

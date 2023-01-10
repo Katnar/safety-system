@@ -61,13 +61,13 @@ import { isAuthenticated } from "auth/index";
 
 function SidebarGlobal() {
 
-       const [collapsed1, setCollapsed1] = useState(true);
+  const [collapsed1, setCollapsed1] = useState(true);
   const [collapsed2, setCollapsed2] = useState(true);
   const [collapsed3, setCollapsed3] = useState(true);
   const [collapsed4, setCollapsed4] = useState(true);
   const [collapsed5, setCollapsed5] = useState(true);
 
-     const toggleNavbar1 = () => setCollapsed1(!collapsed1);
+  const toggleNavbar1 = () => setCollapsed1(!collapsed1);
   const toggleNavbar2 = () => setCollapsed2(!collapsed2);
   const toggleNavbar3 = () => setCollapsed3(!collapsed3);
   const toggleNavbar4 = () => setCollapsed4(!collapsed4);
@@ -78,21 +78,21 @@ function SidebarGlobal() {
     signout().then((response) => {
       history.push(`/signin`);
     });
-  }; 
-  
+  };
+
   const user = isAuthenticated();
 
-    let userUnit;
-    if(user.user.role == 1) {
-        userUnit = user.user.gdod;
-    } if(user.user.role == 2) {
-        userUnit = user.user.hativa;
-    } if(user.user.role == 3) {
-        userUnit = user.user.ogda;
-    } if(user.user.role == 4) {
-        userUnit = user.user.pikod;
-    }
-    console.log(userUnit)
+  let userUnit;
+  if (user.user.role == 1) {
+    userUnit = user.user.gdod;
+  } if (user.user.role == 2) {
+    userUnit = user.user.hativa;
+  } if (user.user.role == 3) {
+    userUnit = user.user.ogda;
+  } if (user.user.role == 4) {
+    userUnit = user.user.pikod;
+  }
+  console.log(userUnit)
 
 
 
@@ -102,7 +102,7 @@ function SidebarGlobal() {
       <ThemeContext.Consumer>
         {({ changeTheme, theme }) =>
           theme == "white-content" ? (
-            <Link  to={`/globalDashboard/${userUnit}`}>
+            <Link to={`/globalDashboard/${userUnit}`}>
               <div className="logo">
                 <img
                   src={lightLogo}
@@ -111,7 +111,7 @@ function SidebarGlobal() {
               </div>
             </Link>
           ) : (
-            <Link  to={`/globalDashboard/${userUnit}`}>
+            <Link to={`/globalDashboard/${userUnit}`}>
               <div className="logo">
                 <img
                   src={darkLogo}
@@ -123,7 +123,7 @@ function SidebarGlobal() {
         }
       </ThemeContext.Consumer>
       <Nav style={{ textAlign: "right" }}>
-        
+
         <li>
           <NavLink
             to={`/globalDashboard/${userUnit}`}
@@ -156,348 +156,349 @@ function SidebarGlobal() {
             </Row>
           </NavLink>
         </li>
-        
-    
- 
 
 
-      {/* <li> */}
+
+
+
+        {/* <li> */}
         <Navbar
-            style={{
-              display: "block",
-              cursor: "pointer",
-              textAlign: "right",
-              paddingRight: "22px"
-              // marginRight: "-10px",
-              // paddingRight: "8px",
-            }}
-            onClick={toggleNavbar1}
-          >
-            <Row style={{ direction: "rtl", textAlign: "right", paddingRight: "0px" }}>
-              <Col xs={12} md={3}>
+          style={{
+            display: "block",
+            cursor: "pointer",
+            textAlign: "right",
+            paddingRight: "22px"
+            // marginRight: "-10px",
+            // paddingRight: "8px",
+          }}
+          onClick={toggleNavbar1}
+        >
+          <Row style={{ direction: "rtl", textAlign: "right", paddingRight: "0px" }}>
+            <Col xs={12} md={3}>
               <img src={dropdown} style={{ height: "20px", paddingRight: "0px", margin: "0px" }}></img>
-              </Col>
-              <Col xs={12} md={9} style={{
-                margin: "0px",
-                // paddingTop: "6px",
-                // paddingBottom: "6px",
-                textAlign: 'right',
-                paddingRight: "0px"
-                }}>
-                <h4>
-                  תוכנית בטיחות
-                </h4>
-              </Col>
-            </Row>
-            <Collapse isOpen={!collapsed1} navbar>
+            </Col>
+            <Col xs={12} md={9} style={{
+              margin: "0px",
+              // paddingTop: "6px",
+              // paddingBottom: "6px",
+              textAlign: 'right',
+              paddingRight: "0px"
+            }}>
+              <h4>
+                תוכנית בטיחות
+              </h4>
+            </Col>
+          </Row>
+          <Collapse isOpen={!collapsed1} navbar>
             <NavLink
-            to="/GlobalRiskManagementMonitoringView"
-            style={{ margin: "0px", textAlign: "right"}}
-            activeClassName="sidebar_active_link"
-          >
-                <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
-              >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4 style={{
+              to="/GlobalRiskManagementMonitoringView"
+              style={{ margin: "0px", textAlign: "right" }}
+              activeClassName="sidebar_active_link"
+            >
+              <Row style={{ direction: "rtl" }}>
+                <Col
+                  xs={12}
+                  md={3}
+                  style={{
+                    paddingLeft: "0px",
+                    textAlign: "center",
+                    alignSelf: "center",
+                  }}
+                >
+                  {/* <img src={table} style={{ height: "20px" }}></img> */}
+                </Col>
+                <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                  <h4 style={{
                     margin: "0px",
                     paddingTop: "6px",
                     paddingBottom: "6px",
-                    textAlign: 'right'}}>ניהול סיכונים</h4>
-              </Col>
-            </Row>
-              </NavLink>
+                    textAlign: 'right'
+                  }}>ניהול סיכונים</h4>
+                </Col>
+              </Row>
+            </NavLink>
 
-              <NavLink
-            to="/GlobalTrainingProgramView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
-              >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
+            <NavLink
+              to="/GlobalTrainingProgramView"
+              style={{ margin: "0px" }}
+              activeClassName="sidebar_active_link"
+            >
+              <Row style={{ direction: "rtl" }}>
+                <Col
+                  xs={12}
+                  md={3}
                   style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    textAlign: 'right'
+                    paddingLeft: "0px",
+                    textAlign: "center",
+                    alignSelf: "center",
                   }}
                 >
-                  תכנית הדרכות
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-          <NavLink
-            to="/GlobalHazardsMonitoringView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
-              >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
+                  {/* <img src={table} style={{ height: "20px" }}></img> */}
+                </Col>
+                <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                  <h4
+                    style={{
+                      margin: "0px",
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                      textAlign: 'right'
+                    }}
+                  >
+                    תכנית הדרכות
+                  </h4>
+                </Col>
+              </Row>
+            </NavLink>
+            <NavLink
+              to="/GlobalHazardsMonitoringView"
+              style={{ margin: "0px" }}
+              activeClassName="sidebar_active_link"
+            >
+              <Row style={{ direction: "rtl" }}>
+                <Col
+                  xs={12}
+                  md={3}
                   style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    textAlign: 'right'
-                  }}
-                >סקר מפגעים</h4>
-              </Col>
-            </Row>
-          </NavLink>
-          <NavLink
-            to="/GlobalHomsManagementMonitoringView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
-              >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
-                  style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    textAlign: 'right'
+                    paddingLeft: "0px",
+                    textAlign: "center",
+                    alignSelf: "center",
                   }}
                 >
-                 ניהול חומ"ס
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-          <NavLink
-            to="/GlobalReviewsDocumentationView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
-              >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
+                  {/* <img src={table} style={{ height: "20px" }}></img> */}
+                </Col>
+                <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                  <h4
+                    style={{
+                      margin: "0px",
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                      textAlign: 'right'
+                    }}
+                  >סקר מפגעים</h4>
+                </Col>
+              </Row>
+            </NavLink>
+            <NavLink
+              to="/GlobalHomsManagementMonitoringView"
+              style={{ margin: "0px" }}
+              activeClassName="sidebar_active_link"
+            >
+              <Row style={{ direction: "rtl" }}>
+                <Col
+                  xs={12}
+                  md={3}
                   style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    textAlign: 'right'
+                    paddingLeft: "0px",
+                    textAlign: "center",
+                    alignSelf: "center",
                   }}
                 >
-                  תיעוד ביקורות
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-          <NavLink
-            to="/GlobalMonthlySafetyCommitteesMonitoringView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                  
-                }}
-              >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
+                  {/* <img src={table} style={{ height: "20px" }}></img> */}
+                </Col>
+                <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                  <h4
+                    style={{
+                      margin: "0px",
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                      textAlign: 'right'
+                    }}
+                  >
+                    ניהול חומ"ס
+                  </h4>
+                </Col>
+              </Row>
+            </NavLink>
+            <NavLink
+              to="/GlobalReviewsDocumentationView"
+              style={{ margin: "0px" }}
+              activeClassName="sidebar_active_link"
+            >
+              <Row style={{ direction: "rtl" }}>
+                <Col
+                  xs={12}
+                  md={3}
                   style={{
-                    margin: "0px",
-                    // paddingTop: "6px",
-                    // paddingBottom: "6px",
-                    textAlign: 'right'
+                    paddingLeft: "0px",
+                    textAlign: "center",
+                    alignSelf: "center",
                   }}
                 >
-                 וועדות בטיחות חודשיות
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-            </Collapse>
-          </Navbar>
-          {/* </li> */}
+                  {/* <img src={table} style={{ height: "20px" }}></img> */}
+                </Col>
+                <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                  <h4
+                    style={{
+                      margin: "0px",
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                      textAlign: 'right'
+                    }}
+                  >
+                    תיעוד ביקורות
+                  </h4>
+                </Col>
+              </Row>
+            </NavLink>
+            <NavLink
+              to="/GlobalMonthlySafetyCommitteesMonitoringView"
+              style={{ margin: "0px" }}
+              activeClassName="sidebar_active_link"
+            >
+              <Row style={{ direction: "rtl" }}>
+                <Col
+                  xs={12}
+                  md={3}
+                  style={{
+                    paddingLeft: "0px",
+                    textAlign: "center",
+                    alignSelf: "center",
 
-          <Navbar
-            style={{
-              display: "block",
-              cursor: "pointer",
-              paddingRight: "22px"
-              // marginRight: "-10px",
-              // paddingRight: "8px",
-            }}
-            onClick={toggleNavbar2}
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col xs={12} md={3}>
+                  }}
+                >
+                  {/* <img src={table} style={{ height: "20px" }}></img> */}
+                </Col>
+                <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                  <h4
+                    style={{
+                      margin: "0px",
+                      // paddingTop: "6px",
+                      // paddingBottom: "6px",
+                      textAlign: 'right'
+                    }}
+                  >
+                    וועדות בטיחות חודשיות
+                  </h4>
+                </Col>
+              </Row>
+            </NavLink>
+          </Collapse>
+        </Navbar>
+        {/* </li> */}
+
+        <Navbar
+          style={{
+            display: "block",
+            cursor: "pointer",
+            paddingRight: "22px"
+            // marginRight: "-10px",
+            // paddingRight: "8px",
+          }}
+          onClick={toggleNavbar2}
+        >
+          <Row style={{ direction: "rtl" }}>
+            <Col xs={12} md={3}>
               <img src={dropdown} style={{ height: "20px", textAlign: "right", paddingRight: "0px", margin: "0px" }}></img>
-              </Col>
-              <Col xs={12} md={9} style={{
-                margin: "0px",
-                // paddingTop: "6px",
-                paddingBottom: "6px",
-                textAlign: 'right',
-                paddingRight: "0px"
-                }}>
-                <h4>
-                  הכשרות והסמכות כ"א
-                </h4>
-              </Col>
-            </Row>
-            <Collapse isOpen={!collapsed2} navbar>
+            </Col>
+            <Col xs={12} md={9} style={{
+              margin: "0px",
+              // paddingTop: "6px",
+              paddingBottom: "6px",
+              textAlign: 'right',
+              paddingRight: "0px"
+            }}>
+              <h4>
+                הכשרות והסמכות כ"א
+              </h4>
+            </Col>
+          </Row>
+          <Collapse isOpen={!collapsed2} navbar>
             <NavLink
-            to="/GlobalSafetyOfficersQualificationView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
-              >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
+              to="/GlobalSafetyOfficersQualificationView"
+              style={{ margin: "0px" }}
+              activeClassName="sidebar_active_link"
+            >
+              <Row style={{ direction: "rtl" }}>
+                <Col
+                  xs={12}
+                  md={3}
                   style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    textAlign: 'right'
+                    paddingLeft: "0px",
+                    textAlign: "center",
+                    alignSelf: "center",
                   }}
                 >
-                  כשירות ממונים על הבטחיות
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-          <NavLink
-            to="/GlobalCertificationsManagementsView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
-              >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
+                  {/* <img src={table} style={{ height: "20px" }}></img> */}
+                </Col>
+                <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                  <h4
+                    style={{
+                      margin: "0px",
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                      textAlign: 'right'
+                    }}
+                  >
+                    כשירות ממונים על הבטחיות
+                  </h4>
+                </Col>
+              </Row>
+            </NavLink>
+            <NavLink
+              to="/GlobalCertificationsManagementsView"
+              style={{ margin: "0px" }}
+              activeClassName="sidebar_active_link"
+            >
+              <Row style={{ direction: "rtl" }}>
+                <Col
+                  xs={12}
+                  md={3}
                   style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    textAlign: 'right'
+                    paddingLeft: "0px",
+                    textAlign: "center",
+                    alignSelf: "center",
                   }}
                 >
-                  ניהול הסמכות
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-          <NavLink
-            to="/GlobalOccupationalSupervisionView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
-              >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
+                  {/* <img src={table} style={{ height: "20px" }}></img> */}
+                </Col>
+                <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                  <h4
+                    style={{
+                      margin: "0px",
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                      textAlign: 'right'
+                    }}
+                  >
+                    ניהול הסמכות
+                  </h4>
+                </Col>
+              </Row>
+            </NavLink>
+            <NavLink
+              to="/GlobalOccupationalSupervisionView"
+              style={{ margin: "0px" }}
+              activeClassName="sidebar_active_link"
+            >
+              <Row style={{ direction: "rtl" }}>
+                <Col
+                  xs={12}
+                  md={3}
                   style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    textAlign: 'right'
+                    paddingLeft: "0px",
+                    textAlign: "center",
+                    alignSelf: "center",
                   }}
                 >
-                  פיקוח תעסוקתי
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-            </Collapse>
-          </Navbar>
-          <li>
+                  {/* <img src={table} style={{ height: "20px" }}></img> */}
+                </Col>
+                <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                  <h4
+                    style={{
+                      margin: "0px",
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                      textAlign: 'right'
+                    }}
+                  >
+                    פיקוח תעסוקתי
+                  </h4>
+                </Col>
+              </Row>
+            </NavLink>
+          </Collapse>
+        </Navbar>
+        <li>
           <Navbar
             style={{
               display: "block",
@@ -510,7 +511,7 @@ function SidebarGlobal() {
           >
             <Row style={{ direction: "rtl" }}>
               <Col xs={12} md={3}>
-              <img src={dropdown} style={{ height: "20px", paddingRight: "0px", margin: "0px" }}></img>
+                <img src={dropdown} style={{ height: "20px", paddingRight: "0px", margin: "0px" }}></img>
               </Col>
               <Col xs={12} md={9} style={{
                 margin: "0px",
@@ -518,202 +519,215 @@ function SidebarGlobal() {
                 // paddingTop: "6px",
                 paddingBottom: "6px",
                 textAlign: 'right'
-                }}>
+              }}>
                 <h4>
                   בדיקות וניטורים
                 </h4>
               </Col>
             </Row>
             <Collapse isOpen={!collapsed3} navbar>
-            <NavLink
-            to="/GlobalEnvironmentalMonitoringView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
+              <NavLink
+                to="/GlobalEnvironmentalMonitoringView"
+                style={{ margin: "0px" }}
+                activeClassName="sidebar_active_link"
               >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
-                  style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    textAlign: 'right'
-                  }}
-                >
-                  ניטורים סביבתיים
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-          <NavLink
-            to="/GlobalEquipmentAndMaterialsPeriodicInspectionsView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
+                <Row style={{ direction: "rtl" }}>
+                  <Col
+                    xs={12}
+                    md={3}
+                    style={{
+                      paddingLeft: "0px",
+                      textAlign: "center",
+                      alignSelf: "center",
+                    }}
+                  >
+                    {/* <img src={table} style={{ height: "20px" }}></img> */}
+                  </Col>
+                  <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                    <h4
+                      style={{
+                        margin: "0px",
+                        paddingTop: "6px",
+                        paddingBottom: "6px",
+                        textAlign: 'right'
+                      }}
+                    >
+                      ניטורים סביבתיים
+                    </h4>
+                  </Col>
+                </Row>
+              </NavLink>
+              <NavLink
+                to="/GlobalEquipmentAndMaterialsPeriodicInspectionsView"
+                style={{ margin: "0px" }}
+                activeClassName="sidebar_active_link"
               >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
-                  style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    textAlign: 'right'
-                  }}
-                >
-                  בדיקות תקופתיות לציוד וחומרים
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-          <NavLink
-            to="/GlobalMachinesAndEquipmentPeriodicInspectionsView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
+                <Row style={{ direction: "rtl" }}>
+                  <Col
+                    xs={12}
+                    md={3}
+                    style={{
+                      paddingLeft: "0px",
+                      textAlign: "center",
+                      alignSelf: "center",
+                    }}
+                  >
+                    {/* <img src={table} style={{ height: "20px" }}></img> */}
+                  </Col>
+                  <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                    <h4
+                      style={{
+                        margin: "0px",
+                        paddingTop: "6px",
+                        paddingBottom: "6px",
+                        textAlign: 'right'
+                      }}
+                    >
+                      בדיקות תקופתיות לציוד וחומרים
+                    </h4>
+                  </Col>
+                </Row>
+              </NavLink>
+              <NavLink
+                to="/GlobalMachinesAndEquipmentPeriodicInspectionsView"
+                style={{ margin: "0px" }}
+                activeClassName="sidebar_active_link"
               >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
-                  style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    textAlign: 'right'
-                  }}
-                >
-                  בדיקות תקופתיות למכונות וציוד
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-          <NavLink
-            to="/GlobalGroundingTestsView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
+                <Row style={{ direction: "rtl" }}>
+                  <Col
+                    xs={12}
+                    md={3}
+                    style={{
+                      paddingLeft: "0px",
+                      textAlign: "center",
+                      alignSelf: "center",
+                    }}
+                  >
+                    {/* <img src={table} style={{ height: "20px" }}></img> */}
+                  </Col>
+                  <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                    <h4
+                      style={{
+                        margin: "0px",
+                        paddingTop: "6px",
+                        paddingBottom: "6px",
+                        textAlign: 'right'
+                      }}
+                    >
+                      בדיקות תקופתיות למכונות וציוד
+                    </h4>
+                  </Col>
+                </Row>
+              </NavLink>
+              <NavLink
+                to="/GlobalGroundingTestsView"
+                style={{ margin: "0px" }}
+                activeClassName="sidebar_active_link"
               >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
-                  style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    textAlign: 'right'
-                  }}
-                >
-                  בדיקת הארקות חשמל ומבנים
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-          <NavLink
-            to="/GlobalPersonalProtectiveEquipmentMonitoringView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
+                <Row style={{ direction: "rtl" }}>
+                  <Col
+                    xs={12}
+                    md={3}
+                    style={{
+                      paddingLeft: "0px",
+                      textAlign: "center",
+                      alignSelf: "center",
+                    }}
+                  >
+                    {/* <img src={table} style={{ height: "20px" }}></img> */}
+                  </Col>
+                  <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                    <h4
+                      style={{
+                        margin: "0px",
+                        paddingTop: "6px",
+                        paddingBottom: "6px",
+                        textAlign: 'right'
+                      }}
+                    >
+                      בדיקת הארקות חשמל ומבנים
+                    </h4>
+                  </Col>
+                </Row>
+              </NavLink>
+              <NavLink
+                to="/GlobalPersonalProtectiveEquipmentMonitoringView"
+                style={{ margin: "0px" }}
+                activeClassName="sidebar_active_link"
               >
-                {/* <img src={table} style={{ height: "20px" }}></img> */}
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
-                  style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    textAlign: 'right'
-                  }}
-                >
-                  ציוד מגן אישי
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
+                <Row style={{ direction: "rtl" }}>
+                  <Col
+                    xs={12}
+                    md={3}
+                    style={{
+                      paddingLeft: "0px",
+                      textAlign: "center",
+                      alignSelf: "center",
+                    }}
+                  >
+                    {/* <img src={table} style={{ height: "20px" }}></img> */}
+                  </Col>
+                  <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                    <h4
+                      style={{
+                        margin: "0px",
+                        paddingTop: "6px",
+                        paddingBottom: "6px",
+                        textAlign: 'right'
+                      }}
+                    >
+                      ציוד מגן אישי
+                    </h4>
+                  </Col>
+                </Row>
+              </NavLink>
             </Collapse>
           </Navbar>
-</li>
-          <NavLink
-            to="/GlobalUnitIdView"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
+        </li>
+        <NavLink
+          to="/GlobalUnitIdView"
+          style={{ margin: "0px" }}
+          activeClassName="sidebar_active_link"
+        >
+          <Row style={{ direction: "rtl" }}>
+            <Col
+              xs={12}
+              md={3}
+              style={{
+                paddingLeft: "0px",
+                textAlign: "center",
+                alignSelf: "center",
+              }}
+            >
+              <img src={table} style={{ height: "20px" }}></img>
+            </Col>
+            <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+              <h4
                 style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
+                  margin: "0px",
+                  paddingTop: "6px",
+                  paddingBottom: "6px",
                 }}
               >
+                תעודת זהות יחידה
+              </h4>
+            </Col>
+          </Row>
+        </NavLink>
+        {user.user.role != '1' ?
+          <NavLink to={`/unittreepage`} style={{ margin: '0px' }} activeClassName="sidebar_active_link">
+            <Row style={{ direction: "rtl" }}>
+              <Col xs={12} md={3} style={{ paddingLeft: "0px", textAlign: 'center', alignSelf: 'center' }}>
                 <img src={table} style={{ height: "20px" }}></img>
               </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}> 
-                <h4
-                  style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                  }}
-                >
-                  תעודת זהות יחידה
+              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
+                <h4 style={{ margin: "0px", paddingTop: '6px', paddingBottom: '6px' }}>
+                  עץ יחידות
                 </h4>
               </Col>
             </Row>
-          </NavLink>
-{/* 
+          </NavLink> : null}
+        {/* 
         <li>
           <NavLink
             to="/forum"
@@ -747,43 +761,11 @@ function SidebarGlobal() {
           </NavLink>
         </li> */}
         <li>
-          <NavLink
-            to="/manageusers"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
-              >
-                <img src={editusers} style={{ height: "20px" }}></img>
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
-                  style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                  }}
-                >
-                  עריכת משתמשים
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-        </li>
-        <li>
-        <NavLink to="/about" style={{ margin: '0px' }} activeClassName="sidebar_active_link">
+          <NavLink to="/about" style={{ margin: '0px' }} activeClassName="sidebar_active_link">
             <Row style={{ direction: "rtl" }}>
               <Col xs={12} md={3} style={{ paddingLeft: "0px", textAlign: 'center', alignSelf: 'center' }}>
                 <img src={info} style={{ height: "20px" }}></img>
-                 
+
               </Col>
               <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
                 <h4 style={{ margin: "0px", paddingTop: '6px', paddingBottom: '6px' }}>
@@ -793,58 +775,7 @@ function SidebarGlobal() {
             </Row>
           </NavLink>
         </li>
-
-        </Nav>
-
-          {/* <li>
-          <NavLink
-            to="/riskManagementMonitoring"
-            style={{ margin: "0px" }}
-            activeClassName="sidebar_active_link"
-          >
-            <Row style={{ direction: "rtl" }}>
-              <Col
-                xs={12}
-                md={3}
-                style={{
-                  paddingLeft: "0px",
-                  textAlign: "center",
-                  alignSelf: "center",
-                }}
-              >
-                <img src={table} style={{ height: "20px" }}></img>
-              </Col>
-              <Col xs={12} md={9} style={{ paddingRight: "0px" }}>
-                <h4
-                  style={{
-                    margin: "0px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                  }}
-                >
-                  מעקב ניהול סיכונים
-                </h4>
-              </Col>
-            </Row>
-          </NavLink>
-        </li> */}
-      {/* <div
-        style={{
-          justifyContent: "center",
-          textAlign: "center",
-          bottom: 0,
-          width: "100%",
-        }}
-      >
-        <img src={teamLogo} style={{ width: "50%", marginTop: "5rem" }}></img>
-        <Button
-          onClick={clickSubmit}
-          className="btn-defailt"
-          style={{ width: "80%", bottom: "0"}}
-        >
-          התנתק
-        </Button>
-      </div> */}
+      </Nav>
     </>
   );
 }

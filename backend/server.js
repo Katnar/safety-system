@@ -32,7 +32,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api', fileRoutes.routes);
 
 // Configure Mongo
-const db = "mongodb://localhost/SafetySystem";
+const db = "mongodb://127.0.0.1/SafetySystem";
 
 // Connect to Mongo with Mongoose
 mongoose
@@ -56,39 +56,15 @@ app.use("/api", userRoutes);
 const mail = require("./routes/mail");
 app.use("/api", mail);
 //general routes
-// const affiliationRoutes = require("./routes/general/affiliation");
-// const candidateRoutes = require("./routes/general/candidate");
-// const candidatepreferenceRoutes = require("./routes/general/candidatepreference");
-// const eshkolRoutes = require("./routes/general/eshkol");
-// const finalcandidatepreferenceRoutes = require("./routes/general/finalcandidatepreference");
-// const finaleshkolRoutes = require("./routes/general/finaleshkol");
-// const finalunitpreferenceRoutes = require("./routes/general/finalunitpreference");
-// const jobRoutes = require("./routes/general/job");
-// const jobtypeRoutes = require("./routes/general/jobtype");
-// const mahzorRoutes = require("./routes/general/mahzor");
-const unitRoutes = require("./routes/general/unit");
 const gdodRoutes = require("./routes/general/gdod");
 const hativaRoutes = require("./routes/general/hativa");
 const ogdaRoutes = require("./routes/general/ogda");
 const pikodRoutes = require("./routes/general/pikod");
-// const unitpreferenceRoutes = require("./routes/general/unitpreference");
 
-// app.use("/api", affiliationRoutes);
-// app.use("/api", candidateRoutes);
-// app.use("/api", candidatepreferenceRoutes);
-// app.use("/api", eshkolRoutes);
-// app.use("/api", finalcandidatepreferenceRoutes);
-// app.use("/api", finaleshkolRoutes);
-// app.use("/api", finalunitpreferenceRoutes);
-// app.use("/api", jobRoutes);
-// app.use("/api", jobtypeRoutes);
-// app.use("/api", mahzorRoutes);
-app.use("/api", unitRoutes);
 app.use("/api", gdodRoutes);
 app.use("/api", hativaRoutes);
 app.use("/api", ogdaRoutes);
 app.use("/api", pikodRoutes);
-// app.use("/api", unitpreferenceRoutes);
 
 const safetyOfficersQualificationRoutes = require("./routes/general/safetyOfficersQualification");
 const safetyOfficersQualificationDeleteRoutes = require("./routes/generalDelete/safetyOfficersQualification");

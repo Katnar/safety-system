@@ -11,7 +11,7 @@ import { withRouter, Redirect, Link } from "react-router-dom";
 import { COLUMNS } from "./coulmns";
 import { GlobalFilter } from "./GlobalFilter";
 import axios from "axios";
-import {FaFileDownload} from 'react-icons/fa';
+import { FaFileDownload } from 'react-icons/fa';
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
@@ -26,6 +26,9 @@ const SortingTable = (props) => {
 
   async function init() {
     if (props.userData.user != undefined) {
+      if (props.userData.user.role == "0") {
+        getDetails();
+      }
       if (props.userData.user.role == "1") {
         getUnitDetailsByGdod();
       }
@@ -157,7 +160,7 @@ const SortingTable = (props) => {
         console.log(error);
       });
 
-      await axios.get(`http://localhost:8000/api/unitId`)
+    await axios.get(`http://localhost:8000/api/unitId`)
       .then((response) => {
         // console.log(response.data)
         let tempData = [];
@@ -175,38 +178,44 @@ const SortingTable = (props) => {
       });
   };
 
-  // const UnitDelete = (UnitIdId) => {
-  //   axios
-  //     .delete(`http://localhost:8000/api/unitId/${UnitIdId}`)
-  //     .then((response) => {
-  //       loadUnits();
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const getDetails = async () => {
+    try {
+      await axios
+        .get(`http://localhost:8000/api/unitId`)
+        .then((response) => {
+          setData(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch { }
+  };
 
-  // const loadUnits = () => {
-  //   axios
-  //     .get("http://localhost:8000/api/unitId")
-  //     .then((response) => {
-  //       setData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const Delete = (data) => {
+    const tempData = data;
+    tempData.deletedAt = new Date();
+    axios.post("http://localhost:8000/api/unitIdDelete", tempData).then((response) => {
+      axios.delete(`http://localhost:8000/api/unitId/${data._id}`).then((response) => {
+        init();
+      })
+        .catch((error) => {
+          console.log(error);
+        });
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
 
-  // const sendMail = () => {
-  //   axios
-  //     .put("http://localhost:8000/api/sendMail")
-  //     .then((response) => {
-  //       setData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const sendMail = () => {
+    axios
+      .put("http://localhost:8000/api/sendMail")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     init();
@@ -271,7 +280,7 @@ const SortingTable = (props) => {
                   </th>
                 ))}
                 <th>ערוך</th>
-                {/* <th>מחק</th> */}
+                {props.userData.user.role == "0" ? <th>מחק</th> : null}
               </tr>
             ))}
           </thead>
@@ -297,11 +306,11 @@ const SortingTable = (props) => {
                       return <td>{cell.value}</td>;
                     }
                     if (cell.column.id == "unitStructureTree") {
-                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=unitId&id="+row.original._id} target="_blank"><FaFileDownload/></a></td>;
-                  }
-                  if (cell.column.id == "teneStructureTree") {
-                    return <td><a href={"http://localhost:8000/api/downloadFile?collec=unitId&id="+"2_"+row.original._id} target="_blank"><FaFileDownload/></a></td>;
-                   }
+                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=unitId&id=" + row.original._id} target="_blank"><FaFileDownload /></a></td>;
+                    }
+                    if (cell.column.id == "teneStructureTree") {
+                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=unitId&id=" + "2_" + row.original._id} target="_blank"><FaFileDownload /></a></td>;
+                    }
                     console.log(row.original.userData._id);
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
@@ -321,7 +330,7 @@ const SortingTable = (props) => {
                       </Link>
                     </div>
                   </td>
-                  {/* <td role="cell">
+                  {props.userData.user.role == "0" ? <td role="cell">
                     {" "}
                     <div
                       style={{
@@ -333,12 +342,12 @@ const SortingTable = (props) => {
                       {" "}
                       <button
                         className="btn btn-danger"
-                        onClick={() => UnitDelete(row.original._id)}
+                        onClick={() => Delete(row.original._id)}
                       >
                         מחק
                       </button>
                     </div>
-                  </td> */}
+                  </td> : null}
                 </tr>
               );
             })}

@@ -1,14 +1,35 @@
 const EnvironmentalMonitoring = require("../../models/general/environmentalMonitoring");
+const { readtipul } = require("../../helpers/aggregatehelper");
+const mongoose = require('mongoose');
 
 exports.findById = async (req, res) => {
-  const environmentalMonitoring = await EnvironmentalMonitoring.findOne().where(
-    { _id: req.params.id }
-  );
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
 
-  if (!environmentalMonitoring) {
-    res.status(500).json({ success: false });
+  let andquery = [];
+  let matchquerry;
+
+  andquery.push({ "_id": mongoose.Types.ObjectId(req.params.id) });
+
+  if (andquery.length != 0) {
+    matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
   }
-  res.send(environmentalMonitoring);
+
+  // console.log(matchquerry)
+  // console.log(andquery)
+
+  EnvironmentalMonitoring.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result[0]);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.findByGdod = async (req, res) => {

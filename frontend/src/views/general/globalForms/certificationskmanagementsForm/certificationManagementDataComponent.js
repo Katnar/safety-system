@@ -27,39 +27,78 @@ import history from "history.js";
 import { produce } from "immer";
 import { generate } from "shortid";
 import { toast } from "react-toastify";
-
-// import editpic from "assets/img/edit.png";
-// import deletepic from "assets/img/delete.png";
-// import SettingModal from "../../../../components/general/modal/SettingModal";
 import { isAuthenticated } from "auth";
+import Select from 'components/general/Select/AnimatedSelect'
 
-const CertificationManagementDataComponent = ({match}) => {
-  //mahzor
-  const [data, setData] = useState({});
-  const [details, setDetails] = useState({});
-  const [document, setDocument] = useState({});
-  const [gdods, setGdods] = useState([]);
-
+const CertificationManagementDataComponent = ({ match }) => {
   const user = isAuthenticated();
 
-  async function init() { 
-    let user1 = await isAuthenticated();
+  const [state, setState] = useState({});
+  //units
+  const [gdods, setGdods] = useState([]);
+  const [hativas, setHativas] = useState([]);
+  const [ogdas, setOgdas] = useState([]);
+  const [pikods, setPikods] = useState([]);
+
+  async function init() {
     if (match.params.id != "0") {
       loadDatas();
     }
-    console.log(user1)
-      if (user1.user.role == "0") {
-        getGdods();
-      }else
-      if (user1.user.role == "2") {
-        getGdodsByHativa();
-      }else 
-      if (user1.user.role == "3") {
-        getGdodsByOgda();
-      }else 
-      if (user1.user.role == "4") {
-        getGdodsByPikod();
-      }
+    loadPikods();
+  }
+
+  const loadPikods = async () => {
+    await axios.get("http://localhost:8000/api/pikod",)
+      .then(response => {
+        setPikods(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  const loadOgdas = async (pikodid) => {
+    let temppikodogdas = [];
+    await axios.post("http://localhost:8000/api/ogda/ogdasbypikodid", { pikod: pikodid })
+      .then(response => {
+        for (let j = 0; j < response.data.length; j++)
+          temppikodogdas.push(response.data[j])
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    setOgdas(temppikodogdas);
+  }
+
+  const loadHativas = async (ogdaid) => {
+    let tempogdahativas = [];
+    await axios.post("http://localhost:8000/api/hativa/hativasbyogdaid", { ogda: ogdaid })
+      .then(response => {
+        for (let j = 0; j < response.data.length; j++)
+          tempogdahativas.push(response.data[j])
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    setHativas(tempogdahativas);
+  }
+
+  const loadGdods = async (hativaid) => {
+    let temphativasgdods = [];
+    await axios.post("http://localhost:8000/api/gdod/gdodsbyhativaid", { hativa: hativaid })
+      .then(response => {
+        for (let j = 0; j < response.data.length; j++)
+          temphativasgdods.push(response.data[j])
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    setGdods(temphativasgdods);
+  }
+
+  function handleChange(evt) {
+    const value = evt.target.value;
+    setState({ ...state, [evt.target.name]: value });
   }
 
   const loadDatas = () => {
@@ -69,137 +108,28 @@ const CertificationManagementDataComponent = ({match}) => {
       )
       .then((response) => {
         let tempdatas = response.data;
-        setData(tempdatas);
+        tempdatas.certificationValidity=tempdatas.certificationValidity.slice(0, 10)
+        setState(tempdatas);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const getGdods = async () => {
-    axios
-    .get("http://localhost:8000/api/gdod")
-    .then((response) => {
-      setGdods(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  };
-
-  const getGdodsByHativa = async () => {
-    let tempgdodbyhativa;
-    await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: user.user.hativa })
-      .then((response) => {
-        tempgdodbyhativa = response.data;
-        setGdods(tempgdodbyhativa, () => console.log(gdods))
-        console.log(gdods)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-
-  const getGdodsByOgda = async () => {
-    let tempgdodsbyogda = [];
-    console.log(user.user.ogda)
-    await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: user.user.ogda })
-      .then(async (response1) => {
-        for (let i = 0; i < response1.data.length; i++) {
-          await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
-            .then((response2) => {
-              for (let j = 0; j < response2.data.length; j++) {
-                tempgdodsbyogda.push(response2.data[j])               
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-          }
-          console.log(tempgdodsbyogda)
-          setGdods(tempgdodsbyogda);
-          console.log(gdods)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getGdodsByPikod = async () => {
-    let tempgdodsbypikod = [];
-
-    await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: user.user.pikod })
-      .then(async (response1) => {
-        for (let i = 0; i < response1.data.length; i++) {
-          await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
-            .then(async (response2) => {
-              for (let j = 0; j < response2.data.length; j++) {
-                await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response2.data[j]._id })
-                  .then(async (response3) => {
-                    for (let k = 0; k < response3.data.length; k++) {
-                      tempgdodsbypikod.push(response3.data[k])
-                    }
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  })
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-        setGdods(tempgdodsbypikod)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  function handleChange2(selectedOption, name) {
+    if (!(selectedOption.value == "בחר"))
+      setState({ ...state, [name]: selectedOption.value });
+    else {
+      let tempstate = { ...state };
+      delete tempstate[name];
+      setState(tempstate);
+    }
+  }
 
   function handleChange(evt) {
     const value = evt.target.value;
-    if(evt.target.name != "personalNumber") {
-      setData({ ...data, [evt.target.name]: value });
-    }
-    else {
-      pullDetails(evt.target.value)
-    }
+      setState({ ...state, [evt.target.name]: value });
   }
-
-  async function pullDetails(pn) {
-    if (pn != '') {
-      let response = await axios.get(`http://localhost:8000/api/occupationalSupervision/byPn/${pn}`)
-      if (response.data.length > 0) {
-        setData(response.data[0])
-      }
-      else {
-        setData({...data, personalNumber: pn})
-      }
-    } else {
-      setData({...data, personalNumber: pn}) }
-  }
-
-  const clickPull = (event) => {
-    let tempPn = data.personalNumber
-    console.log(tempPn)
-    axios
-      .get(
-        `http://localhost:8000/api/occupationalSupervision/byPn/${tempPn}`
-      )
-      .then((response) => {
-        let tempdatas = response.data[0];
-        if (tempdatas != null)
-        {
-          setDetails(tempdatas);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log('error');
-        console.log(data.personalNumber);
-      });
-  };
 
   const clickSubmit = async (event) => {
     CheckFormData();
@@ -209,35 +139,35 @@ const CertificationManagementDataComponent = ({match}) => {
     let flag = true;
     let error = "";
 
-    if (((data.personalNumber == undefined) || (data.personalNumber == ""))) {
+    if (((state.personalNumber == undefined) || (state.personalNumber == ""))) {
       error += "חסר שדה מספר אישי, "
       flag = false;
     }
-    if (((data.id == undefined) || (data.id == ""))) {
+    if (((state.id == undefined) || (state.id == ""))) {
       error += "חסר שדה תעודת זהות, "
       flag = false;
     }
-    if (((data.fullName == undefined) || (data.fullName == ""))) {
+    if (((state.fullName == undefined) || (state.fullName == ""))) {
       error += "חסר שדה שם, "
       flag = false;
     }
-    if (((data.rank == undefined) || (data.rank == ""))) {
+    if (((state.rank == undefined) || (state.rank == ""))) {
       error += "חסר שדה דרגה, "
       flag = false;
     }
-    if (((data.profession == undefined) || (data.profession == ""))) {
+    if (((state.profession == undefined) || (state.profession == ""))) {
       error += "חסר שדה מקצוע, "
       flag = false;
     }
-    if (((data.certification == undefined) || (data.certification == ""))) {
+    if (((state.certification == undefined) || (state.certification == ""))) {
       error += "חסר שדה הסמכה, "
       flag = false;
     }
-    if (((data.certificationValidity == undefined) || (data.certificationValidity == ""))) {
+    if (((state.certificationValidity == undefined) || (state.certificationValidity == ""))) {
       error += "חסר שדה תוקף הסמכה, "
       flag = false;
     }
-    if (((data.gdod == undefined) || (data.gdod == ""))) {
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
       error += "חסר שדה גדוד , "
       flag = false;
     }
@@ -265,14 +195,14 @@ const CertificationManagementDataComponent = ({match}) => {
   };
 
   async function SubmitData() {
-    let tempWithDeleteId = data;
+    let tempWithDeleteId = state;
     delete tempWithDeleteId._id;
     let tempData;
     // let tempData2;
     if (match.params.id == "0") {
       let result = await axios.post(
         "http://localhost:8000/api/certificationsManagement",
-        data
+        state
       );
       // let result2 = await axios.post(
       //   "http://localhost:8000/api/certificationsManagement",
@@ -281,7 +211,7 @@ const CertificationManagementDataComponent = ({match}) => {
       tempData = result.data;
       // tempData2 = result2.data;
     } else {
-      let tempWithDeleteId = data;
+      let tempWithDeleteId = state;
       delete tempWithDeleteId._id;
       let result = await axios.put(
         `http://localhost:8000/api/certificationsManagement/${match.params.id}`,
@@ -289,14 +219,28 @@ const CertificationManagementDataComponent = ({match}) => {
       );
       tempData = result.data;
     }
-    if(singleFile!=="")
-    await UploadFile(tempData._id);
+    if (singleFile !== "")
+      await UploadFile(tempData._id);
 
   }
 
   useEffect(() => {
+    setOgdas([]);
+    loadOgdas(state.pikod);
+  }, [state.pikod]);
+
+  useEffect(() => {
+    setHativas([]);
+    loadHativas(state.ogda);
+  }, [state.ogda]);
+
+  useEffect(() => {
+    setGdods([]);
+    loadGdods(state.hativa);
+  }, [state.hativa]);
+
+  useEffect(() => {
     init();
-    
   }, []);
 
   const [singleFile, setSingleFile] = useState("");
@@ -312,7 +256,7 @@ const CertificationManagementDataComponent = ({match}) => {
           style={{ direction: "rtl", textAlign: "center", fontWeight: "bold" }}
         >
           טופס ניהול הסמכות
-        </CardTitle> 
+        </CardTitle>
       </CardHeader>
       <CardBody style={{ direction: "rtl" }}>
         <Container>
@@ -325,12 +269,12 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="personalNumber"
-                  value={data.personalNumber}
+                  value={state.personalNumber}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col>
- <Col xs={12} md={4}>
+            <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 תעודת זהות
               </div>
@@ -338,7 +282,7 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="number"
                   name="id"
-                  value={data.id}
+                  value={state.id}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -351,14 +295,14 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="fullName"
-                  value={data.fullName}
+                  value={state.fullName}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
-            </Col>          
-            </Row>
-            <Row>
-          
+            </Col>
+          </Row>
+          <Row>
+
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 דרגה
@@ -367,11 +311,11 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="rank"
-                  value={data.rank}
+                  value={state.rank}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
-            </Col> 
+            </Col>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 מקצוע
@@ -380,7 +324,7 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="profession"
-                  value={data.profession}
+                  value={state.profession}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -393,16 +337,16 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="text"
                   name="certification"
-                  value={data.certification}
+                  value={state.certification}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
-            </Col> 
+            </Col>
           </Row>
           <Row>
-  
-           
-                 <Col xs={12} md={4}>
+
+
+            <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 תוקף הסמכה
               </div>
@@ -410,32 +354,12 @@ const CertificationManagementDataComponent = ({match}) => {
                 <Input
                   type="date"
                   name="certificationValidity"
-                  value={data.certificationValidity}
+                  value={state.certificationValidity}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
             </Col>
-      
-            <Col xs={12} md={4}>
-              <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                גדוד
-              </div>
-              <FormGroup className="mb-3" dir="rtl">
-                <Input
-                  placeholder="גדוד"
-                  name="gdod"
-                  type="select"
-                  value={data.gdod}
-                  onChange={handleChange}
-                  // disabled="disabled"
-                >
-                  <option value={""}>גדוד</option>
-                  {gdods.map((gdod, index) => (
-                    <option value={gdod._id} key={index}>{gdod.name}</option>
-                  ))}
-                </Input>
-              </FormGroup>
-            </Col> 
+
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מסמך
@@ -447,7 +371,61 @@ const CertificationManagementDataComponent = ({match}) => {
                 onChange={(e) => SingleFileChange(e)}
               ></Input>
             </Col>
-            </Row>
+          </Row>
+
+          <Row style={{ paddingTop: '10px' }}>
+            {((user.user.role == "0")) ?
+              <>
+                {(!(state.ogda)) ?
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>פיקוד</h6>
+                    <Select data={pikods} handleChange2={handleChange2} name={'pikod'} val={state.pikod ? state.pikod : undefined} />
+                  </Col> :
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>פיקוד</h6>
+                    <Select data={pikods} handleChange2={handleChange2} name={'pikod'} val={state.pikod ? state.pikod : undefined} isDisabled={true} />
+                  </Col>}
+              </> : null}
+
+            {((user.user.role == "0") || (user.user.role == "4")) ?
+              <>
+                {((state.pikod) && !(state.hativa)) ?
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>אוגדה</h6>
+                    <Select data={ogdas} handleChange2={handleChange2} name={'ogda'} val={state.ogda ? state.ogda : undefined} />
+                  </Col> :
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>אוגדה</h6>
+                    <Select data={ogdas} handleChange2={handleChange2} name={'ogda'} val={state.ogda ? state.ogda : undefined} isDisabled={true} />
+                  </Col>}
+              </> : null}
+
+            {((user.user.role == "0") || (user.user.role == "4") || (user.user.role == "3")) ?
+              <>
+                {((state.ogda) && !(state.gdod)) ?
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>חטיבה</h6>
+                    <Select data={hativas} handleChange2={handleChange2} name={'hativa'} val={state.hativa ? state.hativa : undefined} />
+                  </Col> :
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>חטיבה</h6>
+                    <Select data={hativas} handleChange2={handleChange2} name={'hativa'} val={state.hativa ? state.hativa : undefined} isDisabled={true} />
+                  </Col>}
+              </> : null}
+
+            {((user.user.role == "0") || (user.user.role == "4") || (user.user.role == "3") || (user.user.role == "2")) ?
+              <>
+                {((state.hativa)) ?
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>גדוד</h6>
+                    <Select data={gdods} handleChange2={handleChange2} name={'gdod'} val={state.gdod ? state.gdod : undefined} />
+                  </Col> :
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>גדוד</h6>
+                    <Select data={gdods} handleChange2={handleChange2} name={'gdod'} val={state.gdod ? state.gdod : undefined} isDisabled={true} />
+                  </Col>}
+              </> : null}
+          </Row>
           <hr style={{ borderTop: "1px solid darkGray" }} />
           <Row>
             <Col xs={12} md={4}>
@@ -470,4 +448,3 @@ const CertificationManagementDataComponent = ({match}) => {
   );
 };
 export default withRouter(CertificationManagementDataComponent);
- 

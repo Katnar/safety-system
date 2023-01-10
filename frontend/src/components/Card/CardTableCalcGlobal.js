@@ -24,38 +24,120 @@ const CardTableCalcGlobal = (props) => {
 
   const DataLoad = async () => {
     let tempUnit
+    if (user.user.role == "0") {
+      tempUnit = "";
+    }
     if (user.user.role == "1") {
-      tempUnit = user.user.gdod;
+      tempUnit = "/" + user.user.gdod;
     }
     if (user.user.role == "2") {
-      tempUnit = user.user.hativa;
+      tempUnit = "/" + user.user.hativa;
     }
     if (user.user.role == "3") {
-      tempUnit = user.user.ogda;
+      tempUnit = "/" + user.user.ogda;
     }
     if (user.user.role == "4") {
-      tempUnit = user.user.pikod;
+      tempUnit = "/" + user.user.pikod;
     }
     const validity = props.name[3];
-    await Axios.get(`http://localhost:8000/api/${props.name[4]}/${props.name[5]}/${tempUnit}`).then((response) => {
-      // console.log(response.data);
-      // console.log(response.data[0].certificationValidity);
+
+    let tempgdods = [];
+
+    if (user.user.role== "1") {
+      await Axios.get(`http://localhost:8000/api/gdod/${user.user.gdod}`)
+        .then((response) => {
+          tempgdods = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+
+    if (user.user.role== "2") {
+      await Axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: user.user.hativa })
+        .then((response) => {
+          tempgdods = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+
+    if (user.user.role== "3") {
+      await Axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: user.user.ogda })
+        .then(async (response1) => {
+          for (let i = 0; i < response1.data.length; i++) {
+            await Axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
+              .then((response2) => {
+                for (let j = 0; j < response2.data.length; j++) {
+                  tempgdods.push(response2.data[j])
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+
+    if (user.user.role== "4") {
+      await Axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: user.user.pikod })
+        .then(async (response1) => {
+          for (let i = 0; i < response1.data.length; i++) {
+            await Axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
+              .then(async (response2) => {
+                for (let j = 0; j < response2.data.length; j++) {
+                  await Axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response2.data[j]._id })
+                    .then(async (response3) => {
+                      for (let k = 0; k < response3.data.length; k++) {
+                        tempgdods.push(response3.data[k])
+                      }
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    })
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+    await Axios.get(`http://localhost:8000/api/${props.name[4]}`).then(async(response) => {
       var valid = 0;
       var expired = 0;
       var isExpired = false;
       var isAlert = false;
       var today = new Date();
-      for (var i = 0; i < response.data.length; i++) {
+
+      let tempData = [];
+        for (let i = 0; i < response.data.length; i++) {
+          for (let j = 0; j < tempgdods.length; j++) {
+            if (response.data[i].gdod == tempgdods[j]._id) {
+              tempData.push(response.data[i]);
+            }
+          }
+        }
+
+      for (var i = 0; i < tempData.length; i++) {
         console.log(validity);
         if (props.name[3] == "certificationValidity") {
-          if (Date.parse(response.data[i].certificationValidity) > today) {
+          if (Date.parse(tempData[i].certificationValidity) > today) {
             valid++;
           } else {
             expired++;
             isExpired = true;
           }
           if (
-            moment(response.data[i].certificationValidity).diff(
+            moment(tempData[i].certificationValidity).diff(
               moment(today),
               "days"
             ) < 14
@@ -64,28 +146,28 @@ const CardTableCalcGlobal = (props) => {
           }
         }
         if (props.name[3] == "nextTestDate") {
-          if (Date.parse(response.data[i].nextTestDate) > today) {
+          if (Date.parse(tempData[i].nextTestDate) > today) {
             valid++;
           } else {
             expired++;
             isExpired = true;
           }
           if (
-            moment(response.data[i].nextTestDate).diff(moment(today), "days") <
+            moment(tempData[i].nextTestDate).diff(moment(today), "days") <
             14
           ) {
             isAlert = true;
           }
         }
         if (props.name[3] == "nextMonitoringDate") {
-          if (Date.parse(response.data[i].nextMonitoringDate) > today) {
+          if (Date.parse(tempData[i].nextMonitoringDate) > today) {
             valid++;
           } else {
             expired++;
             isExpired = true;
           }
           if (
-            moment(response.data[i].nextMonitoringDate).diff(
+            moment(tempData[i].nextMonitoringDate).diff(
               moment(today),
               "days"
             ) < 14
@@ -107,7 +189,7 @@ const CardTableCalcGlobal = (props) => {
   useEffect(() => {
     DataLoad();
     // init();
-  }, []);
+  }, [props]);
 
   return (
     <>
@@ -130,7 +212,7 @@ const CardTableCalcGlobal = (props) => {
               <br />
               <h3
                 style={{ color: "black", fontSize: "26px", fontWeight: "bold" }}
-                // className={classes.cardCategory}
+              // className={classes.cardCategory}
               >
                 {props.name[0]}
               </h3>

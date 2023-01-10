@@ -79,7 +79,7 @@ function Signin() {
       console.log(user);
       if (user && user.validated == true) {
         if (user.role === "0") {
-          history.push(`/adminDashboard`);
+          history.push(`/globalDashboard/0`);
         }
         if (user.role === "1") {
           history.push(`/globalDashboard/${user.gdod}`);
@@ -147,6 +147,7 @@ function Signin() {
                       placeholder="מספר אישי"
                       type="string"
                       value={personalnumber}
+                      disabled
                     />
                   </FormGroup>
                   {/* <FormGroup>

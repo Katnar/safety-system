@@ -29,136 +29,86 @@ import { produce } from "immer";
 import { generate } from "shortid";
 import { toast } from "react-toastify";
 
-import editpic from "assets/img/edit.png";
-import deletepic from "assets/img/delete.png";
-import SettingModal from "../../../../components/general/modal/SettingModal";
-
 import { isAuthenticated } from "auth";
+import Select from 'components/general/Select/AnimatedSelect'
 
 const EnvironmentalMonitoringForm = ({ match }) => {
-  //mahzor
-  const [state, setState] = useState({});
-  const [gdods, setGdods] = useState([]);
-
   const user = isAuthenticated();
+
+  const [state, setState] = useState({});
+  //units
+  const [gdods, setGdods] = useState([]);
+  const [hativas, setHativas] = useState([]);
+  const [ogdas, setOgdas] = useState([]);
+  const [pikods, setPikods] = useState([]);
 
   async function init() {
     if (match.params.id != "0") {
       loadDatas();
     }
-    let user1 = await isAuthenticated();
-    console.log(user1);
-    if (user1.user.role == "0") {
-      loadGdods();
-    } else if (user1.user.role == "2") {
-      getGdodsByHativa();
-    } else if (user1.user.role == "3") {
-      getGdodsByOgda();
-    } else if (user1.user.role == "4") {
-      getGdodsByPikod();
-    }
+    loadPikods();
   }
 
-  const getGdods = async () => {
-    try {
-      await axios
-        .get(`http://localhost:8000/api/environmentalMonitoring`)
-        .then((response) => {
-          let tempData = [];
-          for (let i = 0; i < response.data.length; i++) {
-            if (response.data[i].gdod == user.user.gdod) {
-              tempData.push(response.data[i]);
-            }
-          }
-          setState(tempData);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch {}
-  };
-
-  const getGdodsByHativa = async () => {
-    let tempgdodbyhativa;
-    await axios
-      .post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, {
-        hativa: user.user.hativa,
+  const loadPikods = async () => {
+    await axios.get("http://localhost:8000/api/pikod",)
+      .then(response => {
+        setPikods(response.data);
       })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  const loadOgdas = async (pikodid) => {
+    let temppikodogdas = [];
+    await axios.post("http://localhost:8000/api/ogda/ogdasbypikodid", { pikod: pikodid })
+      .then(response => {
+        for (let j = 0; j < response.data.length; j++)
+          temppikodogdas.push(response.data[j])
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    setOgdas(temppikodogdas);
+  }
+
+  const loadHativas = async (ogdaid) => {
+    let tempogdahativas = [];
+    await axios.post("http://localhost:8000/api/hativa/hativasbyogdaid", { ogda: ogdaid })
+      .then(response => {
+        for (let j = 0; j < response.data.length; j++)
+          tempogdahativas.push(response.data[j])
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    setHativas(tempogdahativas);
+  }
+
+  const loadGdods = async (hativaid) => {
+    let temphativasgdods = [];
+    await axios.post("http://localhost:8000/api/gdod/gdodsbyhativaid", { hativa: hativaid })
+      .then(response => {
+        for (let j = 0; j < response.data.length; j++)
+          temphativasgdods.push(response.data[j])
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    setGdods(temphativasgdods);
+  }
+
+  const loadDatas = () => {
+    axios
+      .get(
+        `http://localhost:8000/api/environmentalMonitoring/${match.params.id}`
+      )
       .then((response) => {
-        tempgdodbyhativa = response.data;
-        setGdods(tempgdodbyhativa, () => console.log(gdods));
-        console.log(gdods);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getGdodsByOgda = async () => {
-    let tempgdodsbyogda = [];
-    console.log(user.user.ogda);
-    await axios
-      .post(`http://localhost:8000/api/hativa/hativasbyogdaid`, {
-        ogda: user.user.ogda,
-      })
-      .then(async (response1) => {
-        for (let i = 0; i < response1.data.length; i++) {
-          await axios
-            .post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, {
-              hativa: response1.data[i]._id,
-            })
-            .then((response2) => {
-              for (let j = 0; j < response2.data.length; j++) {
-                tempgdodsbyogda.push(response2.data[j]);
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-        console.log(tempgdodsbyogda);
-        setGdods(tempgdodsbyogda);
-        console.log(gdods);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getGdodsByPikod = async () => {
-    let tempgdodsbypikod = [];
-
-    await axios
-      .post(`http://localhost:8000/api/ogda/ogdasbypikodid`, {
-        pikod: user.user.pikod,
-      })
-      .then(async (response1) => {
-        for (let i = 0; i < response1.data.length; i++) {
-          await axios
-            .post(`http://localhost:8000/api/hativa/hativasbyogdaid`, {
-              ogda: response1.data[i]._id,
-            })
-            .then(async (response2) => {
-              for (let j = 0; j < response2.data.length; j++) {
-                await axios
-                  .post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, {
-                    hativa: response2.data[j]._id,
-                  })
-                  .then(async (response3) => {
-                    for (let k = 0; k < response3.data.length; k++) {
-                      tempgdodsbypikod.push(response3.data[k]);
-                    }
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  });
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-        setGdods(tempgdodsbypikod);
+        let tempdatas = response.data;
+        tempdatas.lastMonitoringDate=tempdatas.lastMonitoringDate.slice(0, 10)
+        tempdatas.nextMonitoringDate=tempdatas.nextMonitoringDate.slice(0, 10)
+        tempdatas.surveyDate=tempdatas.surveyDate.slice(0, 10)
+        setState(tempdatas);
       })
       .catch((error) => {
         console.log(error);
@@ -170,30 +120,15 @@ const EnvironmentalMonitoringForm = ({ match }) => {
     setState({ ...state, [evt.target.name]: value });
   }
 
-  const loadDatas = () => {
-    axios
-      .get(
-        `http://localhost:8000/api/environmentalMonitoring/${match.params.id}`
-      )
-      .then((response) => {
-        let tempdatas = response.data;
-        setState(tempdatas);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const loadGdods = () => {
-    axios
-      .get("http://localhost:8000/api/gdod")
-      .then((response) => {
-        setGdods(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  function handleChange2(selectedOption, name) {
+    if (!(selectedOption.value == "בחר"))
+      setState({ ...state, [name]: selectedOption.value });
+    else {
+      let tempstate = { ...state };
+      delete tempstate[name];
+      setState(tempstate);
+    }
+  }
 
   const clickSubmit = async (event) => {
     CheckFormData();
@@ -279,6 +214,21 @@ const EnvironmentalMonitoringForm = ({ match }) => {
     // tempData = result.data;
 
   }
+
+  useEffect(() => {
+    setOgdas([]);
+    loadOgdas(state.pikod);
+  }, [state.pikod]);
+
+  useEffect(() => {
+    setHativas([]);
+    loadHativas(state.ogda);
+  }, [state.ogda]);
+
+  useEffect(() => {
+    setGdods([]);
+    loadGdods(state.hativa);
+  }, [state.hativa]);
 
   useEffect(() => {
     init();
@@ -391,28 +341,6 @@ const EnvironmentalMonitoringForm = ({ match }) => {
           <Row>
             <Col xs={12} md={4}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                גדוד
-              </div>
-              <FormGroup className="mb-3" dir="rtl">
-                <Input
-                  placeholder="גדוד"
-                  name="gdod"
-                  type="select"
-                  value={state.gdod}
-                  onChange={handleChange}
-                  // disabled="disabled"
-                >
-                  <option value={""}>גדוד</option>
-                  {gdods.map((gdod, index) => (
-                    <option value={gdod._id} key={index}>
-                      {gdod.name}
-                    </option>
-                  ))}
-                </Input>
-              </FormGroup>
-            </Col>
-            <Col xs={12} md={4}>
-              <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 צירוף מסמכים
               </div>
               {/* <FormGroup dir="rtl"> */}
@@ -424,6 +352,59 @@ const EnvironmentalMonitoringForm = ({ match }) => {
               ></Input>
               {/* </FormGroup> */}
             </Col>
+          </Row>
+          <Row style={{ paddingTop: '10px' }}>
+            {((user.user.role == "0")) ?
+              <>
+                {(!(state.ogda)) ?
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>פיקוד</h6>
+                    <Select data={pikods} handleChange2={handleChange2} name={'pikod'} val={state.pikod ? state.pikod : undefined} />
+                  </Col> :
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>פיקוד</h6>
+                    <Select data={pikods} handleChange2={handleChange2} name={'pikod'} val={state.pikod ? state.pikod : undefined} isDisabled={true} />
+                  </Col>}
+              </> : null}
+
+            {((user.user.role == "0") || (user.user.role == "4")) ?
+              <>
+                {((state.pikod) && !(state.hativa)) ?
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>אוגדה</h6>
+                    <Select data={ogdas} handleChange2={handleChange2} name={'ogda'} val={state.ogda ? state.ogda : undefined} />
+                  </Col> :
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>אוגדה</h6>
+                    <Select data={ogdas} handleChange2={handleChange2} name={'ogda'} val={state.ogda ? state.ogda : undefined} isDisabled={true} />
+                  </Col>}
+              </> : null}
+
+            {((user.user.role == "0") || (user.user.role == "4") || (user.user.role == "3")) ?
+              <>
+                {((state.ogda) && !(state.gdod)) ?
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>חטיבה</h6>
+                    <Select data={hativas} handleChange2={handleChange2} name={'hativa'} val={state.hativa ? state.hativa : undefined} />
+                  </Col> :
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>חטיבה</h6>
+                    <Select data={hativas} handleChange2={handleChange2} name={'hativa'} val={state.hativa ? state.hativa : undefined} isDisabled={true} />
+                  </Col>}
+              </> : null}
+
+            {((user.user.role == "0") || (user.user.role == "4") || (user.user.role == "3") || (user.user.role == "2")) ?
+              <>
+                {((state.hativa)) ?
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>גדוד</h6>
+                    <Select data={gdods} handleChange2={handleChange2} name={'gdod'} val={state.gdod ? state.gdod : undefined} />
+                  </Col> :
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>גדוד</h6>
+                    <Select data={gdods} handleChange2={handleChange2} name={'gdod'} val={state.gdod ? state.gdod : undefined} isDisabled={true} />
+                  </Col>}
+              </> : null}
           </Row>
           <hr style={{ borderTop: "1px solid darkGray" }} />
           <Row>

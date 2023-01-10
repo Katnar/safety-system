@@ -26,6 +26,9 @@ const SortingTable = (props) => {
 
   async function init() {
     if (props.userData.user != undefined) {
+      if (props.userData.user.role == "0") {
+        getDetails();
+      }
       if (props.userData.user.role == "1") {
         getUnitDetailsByGdod();
       }
@@ -39,7 +42,6 @@ const SortingTable = (props) => {
         getUnitDetailsByPikod();
       }
     }
-    getDetails();
   }
 
   const getUnitDetailsByGdod = async () => {
@@ -60,7 +62,7 @@ const SortingTable = (props) => {
         .catch((error) => {
           console.log(error);
         });
-    } catch {}
+    } catch { }
   };
 
   const getUnitDetailsByHativa = async () => {
@@ -205,43 +207,27 @@ const SortingTable = (props) => {
           `http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections`
         )
         .then((response) => {
-          let tempData = [];
-          for (let i = 0; i < response.data.length; i++) {
-            console.log(props);
-            if (response.data[i].gdod == props.userData.user.gdod) {
-              tempData.push(response.data[i]);
-            }
-          }
-          setData(tempData);
+          setData(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
-    } catch {}
+    } catch { }
   };
 
-  const Delete = (Id) => {
-    axios
-      .delete(
-        `http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections/${Id}`
-      )
-      .then((response) => {
-        loadData();
+  const Delete = (data) => {
+    const tempData = data;
+    tempData.deletedAt = new Date();
+    axios.post("http://localhost:8000/api/equipmentAndMaterialsPeriodicInspectionsDelete", tempData).then((response) => {
+      axios.delete(`http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections/${data._id}`).then((response) => {
+        init();
       })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const loadData = () => {
-    axios
-      .get("http://localhost:8000/api/equipmentAndMaterialsPeriodicInspections")
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .catch((error) => {
+          console.log(error);
+        });
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   const sendMail = () => {
@@ -318,7 +304,7 @@ const SortingTable = (props) => {
                   </th>
                 ))}
                 <th>ערוך</th>
-                {/* <th>מחק</th> */}
+                {props.userData.user.role == "0" ? <th>מחק</th> : null}
               </tr>
             ))}
           </thead>
@@ -394,7 +380,7 @@ const SortingTable = (props) => {
                       </Link>
                     </div>
                   </td>
-                  {/* <td role="cell">
+                  {props.userData.user.role == "0" ? <td role="cell">
                     {" "}
                     <div
                       style={{
@@ -411,7 +397,7 @@ const SortingTable = (props) => {
                         מחק
                       </button>
                     </div>
-                  </td> */}
+                  </td> : null}
                 </tr>
               );
             })}

@@ -1,15 +1,36 @@
 const SafetyOfficersQualification = require("../../models/general/safetyOfficersQualification");
+const { readtipul } = require("../../helpers/aggregatehelper");
+const mongoose = require('mongoose');
 
 exports.findById = async (req, res) => {
-  const safetyOfficersQualification =
-    await SafetyOfficersQualification.findOne().where({ _id: req.params.id });
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
 
-  if (!safetyOfficersQualification) {
-    res.status(500).json({ success: false });
+  let andquery = [];
+  let matchquerry;
+
+  andquery.push({ "_id": mongoose.Types.ObjectId(req.params.id) });
+
+  if (andquery.length != 0) {
+    matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
   }
-  res.send(safetyOfficersQualification);
-};
 
+  // console.log(matchquerry)
+  // console.log(andquery)
+
+  SafetyOfficersQualification.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result[0]);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
+};
 exports.find = (req, res) => {
   SafetyOfficersQualification.find()
     .then((safetyOfficersQualification) =>

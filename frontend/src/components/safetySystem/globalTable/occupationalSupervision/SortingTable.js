@@ -25,6 +25,9 @@ const SortingTable = (props) => {
 
   async function init() {
     if (props.userData.user != undefined) {
+      if (props.userData.user.role == "0") {
+        getDetails();
+      }
       if (props.userData.user.role == "1") {
         getUnitDetailsByGdod();
       }
@@ -38,7 +41,6 @@ const SortingTable = (props) => {
         getUnitDetailsByPikod();
       }
     }
-    getOccupationalSupervisionDetails();
   }
 
   const getUnitDetailsByGdod = async () => {
@@ -195,19 +197,12 @@ const SortingTable = (props) => {
       });
   };
 
-  const getOccupationalSupervisionDetails = async () => {
+  const getDetails = async () => {
     try {
       await axios
         .get(`http://localhost:8000/api/occupationalSupervision`)
         .then((response) => {
-          let tempData = [];
-          for (let i = 0; i < response.data.length; i++) {
-            console.log(props);
-            if (response.data[i].gdod == props.userData.user.gdod) {
-              tempData.push(response.data[i]);
-            }
-          }
-          setData(tempData);
+          setData(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -215,24 +210,24 @@ const SortingTable = (props) => {
     } catch {}
   };
 
-  const occupationalSupervisionDetailsDelete = (
-    occupationalSupervisionDetailsId
-  ) => {
-    axios
-      .delete(
-        `http://localhost:8000/api/occupationalSupervision/${occupationalSupervisionDetailsId}`
-      )
-      .then((response) => {
-        loadOccupationalSupervisionDetails();
+  const Delete = (data) => {
+    const tempData = data;
+    tempData.deletedAt = new Date();
+    axios.post("http://localhost:8000/api/occupationalSupervisionDelete", tempData).then((response) => {
+      axios.delete(`http://localhost:8000/api/occupationalSupervision/${data._id}`).then((response) => {
+        init();
       })
       .catch((error) => {
         console.log(error);
       });
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
-  const loadOccupationalSupervisionDetails = () => {
+  const sendMail = () => {
     axios
-      .get("http://localhost:8000/api/occupationalSupervision")
+      .put("http://localhost:8000/api/sendMail")
       .then((response) => {
         setData(response.data);
       })
@@ -304,7 +299,7 @@ const SortingTable = (props) => {
                   </th>
                 ))}
                 <th>ערוך</th>
-                {/* <th>מחק</th> */}
+                {props.userData.user.role=="0"?<th>מחק</th>:null}
               </tr>
             ))}
           </thead>
@@ -398,7 +393,7 @@ const SortingTable = (props) => {
                       </Link>
                     </div>
                   </td>
-                  {/* <td role="cell">
+                  {props.userData.user.role=="0"? <td role="cell">
                     {" "}
                     <div
                       style={{
@@ -410,14 +405,12 @@ const SortingTable = (props) => {
                       {" "}
                       <button
                         className="btn btn-danger"
-                        onClick={() =>
-                          occupationalSupervisionDetailsDelete(row.original._id)
-                        }
+                        onClick={() => Delete(row.original._id)}
                       >
                         מחק
                       </button>
                     </div>
-                  </td> */}
+                  </td>:null}
                 </tr>
               );
             })}

@@ -27,137 +27,81 @@ import history from "history.js";
 import { produce } from "immer";
 import { generate } from "shortid";
 import { toast } from "react-toastify";
-
-import editpic from "assets/img/edit.png";
-import deletepic from "assets/img/delete.png";
-import SettingModal from "../../../../components/general/modal/SettingModal";
 import { isAuthenticated } from "auth";
+import Select from 'components/general/Select/AnimatedSelect'
 
 const UnitIdDataComponent = ({ match }) => {
-
-  //mahzor
-  const [data, setData] = useState({});
-  const [gdods, setGdods] = useState([]);
-
   const user = isAuthenticated();
 
-  async function init() { 
-    let user1 = await isAuthenticated();
+  const [state, setState] = useState({});
+  //units
+  const [gdods, setGdods] = useState([]);
+  const [hativas, setHativas] = useState([]);
+  const [ogdas, setOgdas] = useState([]);
+  const [pikods, setPikods] = useState([]);
+
+  async function init() {
     if (match.params.id != "0") {
       loadDatas();
     }
-    console.log(user1)
-      if (user1.user.role == "1") {
-        getGdods();
-      }else
-      if (user1.user.role == "2") {
-        getGdodsByHativa();
-      }else 
-      if (user1.user.role == "3") {
-        getGdodsByOgda();
-      }else 
-      if (user1.user.role == "4") {
-        getGdodsByPikod();
-      }
+    loadPikods();
+  }
+
+  const loadPikods = async () => {
+    await axios.get("http://localhost:8000/api/pikod",)
+      .then(response => {
+        setPikods(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  const loadOgdas = async (pikodid) => {
+    let temppikodogdas = [];
+    await axios.post("http://localhost:8000/api/ogda/ogdasbypikodid", { pikod: pikodid })
+      .then(response => {
+        for (let j = 0; j < response.data.length; j++)
+          temppikodogdas.push(response.data[j])
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    setOgdas(temppikodogdas);
+  }
+
+  const loadHativas = async (ogdaid) => {
+    let tempogdahativas = [];
+    await axios.post("http://localhost:8000/api/hativa/hativasbyogdaid", { ogda: ogdaid })
+      .then(response => {
+        for (let j = 0; j < response.data.length; j++)
+          tempogdahativas.push(response.data[j])
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    setHativas(tempogdahativas);
+  }
+
+  const loadGdods = async (hativaid) => {
+    let temphativasgdods = [];
+    await axios.post("http://localhost:8000/api/gdod/gdodsbyhativaid", { hativa: hativaid })
+      .then(response => {
+        for (let j = 0; j < response.data.length; j++)
+          temphativasgdods.push(response.data[j])
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    setGdods(temphativasgdods);
   }
 
   const loadDatas = () => {
     axios
-      .get(
-        `http://localhost:8000/api/unitId/${match.params.id}`
-      )
+      .get(`http://localhost:8000/api/unitId/${match.params.id}`)
       .then((response) => {
         let tempdatas = response.data;
-        setData(tempdatas);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getGdods = async () => {
-    try {
-      await axios
-        .get(`http://localhost:8000/api/unitId`)
-        .then((response) => {
-          let tempData = [];
-          for (let i = 0; i < response.data.length; i++) {
-            if (response.data[i].gdod == user.user.gdod) {
-              tempData.push(response.data[i]);
-            }
-          }
-          setData(tempData);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch { }
-  };
-
-  const getGdodsByHativa = async () => {
-    let tempgdodbyhativa;
-    await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: user.user.hativa })
-      .then((response) => {
-        tempgdodbyhativa = response.data;
-        setGdods(tempgdodbyhativa, () => console.log(gdods))
-        console.log(gdods)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-
-  const getGdodsByOgda = async () => {
-    let tempgdodsbyogda = [];
-    console.log(user.user.ogda)
-    await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: user.user.ogda })
-      .then(async (response1) => {
-        for (let i = 0; i < response1.data.length; i++) {
-          await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
-            .then((response2) => {
-              for (let j = 0; j < response2.data.length; j++) {
-                tempgdodsbyogda.push(response2.data[j])               
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-          }
-          console.log(tempgdodsbyogda)
-          setGdods(tempgdodsbyogda);
-          console.log(gdods)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getGdodsByPikod = async () => {
-    let tempgdodsbypikod = [];
-
-    await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: user.user.pikod })
-      .then(async (response1) => {
-        for (let i = 0; i < response1.data.length; i++) {
-          await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
-            .then(async (response2) => {
-              for (let j = 0; j < response2.data.length; j++) {
-                await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response2.data[j]._id })
-                  .then(async (response3) => {
-                    for (let k = 0; k < response3.data.length; k++) {
-                      tempgdodsbypikod.push(response3.data[k])
-                    }
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  })
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-        setGdods(tempgdodsbypikod)
+        setState(tempdatas);
       })
       .catch((error) => {
         console.log(error);
@@ -166,7 +110,17 @@ const UnitIdDataComponent = ({ match }) => {
 
   function handleChange(evt) {
     const value = evt.target.value;
-    setData({ ...data, [evt.target.name]: value });
+    setState({ ...state, [evt.target.name]: value });
+  }
+
+  function handleChange2(selectedOption, name) {
+    if (!(selectedOption.value == "בחר"))
+      setState({ ...state, [name]: selectedOption.value });
+    else {
+      let tempstate = { ...state };
+      delete tempstate[name];
+      setState(tempstate);
+    }
   }
 
   const clickSubmit = async (event) => {
@@ -177,39 +131,39 @@ const UnitIdDataComponent = ({ match }) => {
     let flag = true;
     let error = "";
 
-    if (((data.name == undefined) || (data.name == ""))) {
+    if (((state.name == undefined) || (state.name == ""))) {
       error += "חסר שדה שם יחידה, "
       flag = false;
     }
-    if (((data.location == undefined) || (data.location == ""))) {
+    if (((state.location == undefined) || (state.location == ""))) {
       error += "חסר שדה מיקום יחידה, "
       flag = false;
     }
-    if (((data.unitStructure == undefined) || (data.unitStructure == ""))) {
+    if (((state.unitStructure == undefined) || (state.unitStructure == ""))) {
       error += "חסר שדה מבנה היחידה, "
       flag = false;
     }
-    if (((data.unitMeans == undefined) || (data.unitMeans == ""))) {
+    if (((state.unitMeans == undefined) || (state.unitMeans == ""))) {
       error += "חסר שדה פירוט האמצעים ביחידה, "
       flag = false;
     }
-    if (((data.mainOccupation == undefined) || (data.mainOccupation == ""))) {
+    if (((state.mainOccupation == undefined) || (state.mainOccupation == ""))) {
       error += "חסר שדה עיסוק מרכזי, "
       flag = false;
     }
-    if (((data.unitStructureTree == undefined) || (data.unitStructureTree == ""))) {
+    if (((state.unitStructureTree == undefined) || (state.unitStructureTree == ""))) {
       error += "חסר שדה עץ מבנה יחידה, "
       flag = false;
     }
-    if (((data.teneStructureTree == undefined) || (data.teneStructureTree == ""))) {
+    if (((state.teneStructureTree == undefined) || (state.teneStructureTree == ""))) {
       error += "חסר שדה עץ מבנה מחלקת טנ''א, "
       flag = false;
     }
-    if (((data.gdod == undefined) || (data.gdod == ""))) {
+    if (((state.gdod == undefined) || (state.gdod == ""))) {
       error += "חסר שדה גדוד, "
       flag = false;
     }
-  
+
     if (flag == true) {
       SubmitData();
       toast.success("הטופס עודכן בהצלחה");
@@ -225,16 +179,16 @@ const UnitIdDataComponent = ({ match }) => {
     const collec = "unitId";
     formData.append("file", singleFile);
     await singleFileUpload(formData, collec, id);
-    console.log("First File:"+singleFile);
+    console.log("First File:" + singleFile);
   };
 
-  
+
   const UploadFile2 = async (id) => {
     const formData = new FormData();
     const collec = "unitId";
     formData.append("file", singleFile2);
-    await singleFileUpload(formData, collec, "2_"+id);
-    console.log("Second File:"+singleFile2);
+    await singleFileUpload(formData, collec, "2_" + id);
+    console.log("Second File:" + singleFile2);
   };
 
   async function SubmitData() {
@@ -242,11 +196,11 @@ const UnitIdDataComponent = ({ match }) => {
     if (match.params.id == "0") {
       let result = await axios.post(
         "http://localhost:8000/api/unitId",
-        data
+        state
       );
       tempData = result.data;
     } else {
-      let tempWithDeleteId = data;
+      let tempWithDeleteId = state;
       delete tempWithDeleteId._id;
       let result = await axios.put(
         `http://localhost:8000/api/unitId/${match.params.id}`,
@@ -254,11 +208,11 @@ const UnitIdDataComponent = ({ match }) => {
       );
       tempData = result.data;
     }
-    if(singleFile!==""){
-        await UploadFile(tempData._id);
-    await UploadFile2(tempData._id);
+    if (singleFile !== "") {
+      await UploadFile(tempData._id);
+      await UploadFile2(tempData._id);
     }
-  
+
 
 
     // console.log("post")
@@ -267,15 +221,29 @@ const UnitIdDataComponent = ({ match }) => {
   }
 
   useEffect(() => {
+    setOgdas([]);
+    loadOgdas(state.pikod);
+  }, [state.pikod]);
+
+  useEffect(() => {
+    setHativas([]);
+    loadHativas(state.ogda);
+  }, [state.ogda]);
+
+  useEffect(() => {
+    setGdods([]);
+    loadGdods(state.hativa);
+  }, [state.hativa]);
+
+  useEffect(() => {
     init();
   }, []);
-
 
   const [singleFile, setSingleFile] = useState("");
   const SingleFileChange = (e) => {
     setSingleFile(e.target.files[0]);
   };
-  
+
   const [singleFile2, setSingleFile2] = useState("");
   const SingleFileChange2 = (e) => {
     setSingleFile2(e.target.files[0]);
@@ -303,7 +271,7 @@ const UnitIdDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="name"
-                  value={data.name}
+                  value={state.name}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -316,7 +284,7 @@ const UnitIdDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="location"
-                  value={data.location}
+                  value={state.location}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -329,7 +297,7 @@ const UnitIdDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="unitStructure"
-                  value={data.unitStructure}
+                  value={state.unitStructure}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -344,7 +312,7 @@ const UnitIdDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="unitMeans"
-                  value={data.unitMeans}
+                  value={state.unitMeans}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -357,7 +325,7 @@ const UnitIdDataComponent = ({ match }) => {
                 <Input
                   type="text"
                   name="mainOccupation"
-                  value={data.mainOccupation}
+                  value={state.mainOccupation}
                   onChange={handleChange}
                 ></Input>
               </FormGroup>
@@ -367,12 +335,12 @@ const UnitIdDataComponent = ({ match }) => {
                 עץ מבנה יחידה
               </div>
               {/* <FormGroup dir="rtl"> */}
-                <Input
-                  type="file"
-                  name="unitStructureTree"
-                  value={data.unitStructureTree}
-                  onChange={(e) => SingleFileChange(e)}
-                ></Input>
+              <Input
+                type="file"
+                name="unitStructureTree"
+                value={state.unitStructureTree}
+                onChange={(e) => SingleFileChange(e)}
+              ></Input>
               {/* </FormGroup> */}
             </Col>
           </Row>
@@ -382,33 +350,67 @@ const UnitIdDataComponent = ({ match }) => {
                 עץ מבנה מחלקת טנ"א
               </div>
               {/* <FormGroup dir="rtl"> */}
-                <Input
-                  type="file"
-                  name="teneStructureTree"
-                  value={data.teneStructureTree}
-                  onChange={(e) => SingleFileChange2(e)}
-                ></Input>
+              <Input
+                type="file"
+                name="teneStructureTree"
+                value={state.teneStructureTree}
+                onChange={(e) => SingleFileChange2(e)}
+              ></Input>
               {/* </FormGroup> */}
             </Col>
-            <Col xs={12} md={4}>
-              <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                גדוד
-              </div>
-              <FormGroup className="mb-3" dir="rtl">
-                <Input
-                  placeholder="גדוד"
-                  name="gdod"
-                  type="select"
-                  value={data.gdod}
-                  onChange={handleChange}
-                >
-                  <option value={""}>גדוד</option>
-                  {gdods.map((gdod, index) => (
-                    <option value={gdod._id}>{gdod.name}</option>
-                  ))}
-                </Input>
-              </FormGroup>
-            </Col>
+          </Row>
+          <Row style={{ paddingTop: '10px' }}>
+            {((user.user.role == "0")) ?
+              <>
+                {(!(state.ogda)) ?
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>פיקוד</h6>
+                    <Select data={pikods} handleChange2={handleChange2} name={'pikod'} val={state.pikod ? state.pikod : undefined} />
+                  </Col> :
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>פיקוד</h6>
+                    <Select data={pikods} handleChange2={handleChange2} name={'pikod'} val={state.pikod ? state.pikod : undefined} isDisabled={true} />
+                  </Col>}
+              </> : null}
+
+            {((user.user.role == "0") || (user.user.role == "4")) ?
+              <>
+                {((state.pikod) && !(state.hativa)) ?
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>אוגדה</h6>
+                    <Select data={ogdas} handleChange2={handleChange2} name={'ogda'} val={state.ogda ? state.ogda : undefined} />
+                  </Col> :
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>אוגדה</h6>
+                    <Select data={ogdas} handleChange2={handleChange2} name={'ogda'} val={state.ogda ? state.ogda : undefined} isDisabled={true} />
+                  </Col>}
+              </> : null}
+
+            {((user.user.role == "0") || (user.user.role == "4") || (user.user.role == "3")) ?
+              <>
+                {((state.ogda) && !(state.gdod)) ?
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>חטיבה</h6>
+                    <Select data={hativas} handleChange2={handleChange2} name={'hativa'} val={state.hativa ? state.hativa : undefined} />
+                  </Col> :
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>חטיבה</h6>
+                    <Select data={hativas} handleChange2={handleChange2} name={'hativa'} val={state.hativa ? state.hativa : undefined} isDisabled={true} />
+                  </Col>}
+              </> : null}
+
+            {((user.user.role == "0") || (user.user.role == "4") || (user.user.role == "3") || (user.user.role == "2")) ?
+              <>
+                {((state.hativa)) ?
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>גדוד</h6>
+                    <Select data={gdods} handleChange2={handleChange2} name={'gdod'} val={state.gdod ? state.gdod : undefined} />
+                  </Col> :
+                  <Col style={{ justifyContent: 'right', alignContent: 'right', textAlign: 'right' }}>
+                    <h6>גדוד</h6>
+                    <Select data={gdods} handleChange2={handleChange2} name={'gdod'} val={state.gdod ? state.gdod : undefined} isDisabled={true} />
+                  </Col>}
+              </> : null}
           </Row>
           <hr style={{ borderTop: "1px solid darkGray" }} />
           <Row>

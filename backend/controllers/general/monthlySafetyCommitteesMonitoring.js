@@ -1,15 +1,35 @@
 const MonthlySafetyCommitteesMonitoring = require("../../models/general/monthlySafetyCommitteesMonitoring");
+const { readtipul } = require("../../helpers/aggregatehelper");
+const mongoose = require('mongoose');
 
 exports.findById = async (req, res) => {
-  const monthlySafetyCommitteesMonitoring =
-    await MonthlySafetyCommitteesMonitoring.findOne().where({
-      _id: req.params.id,
-    });
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
 
-  if (!monthlySafetyCommitteesMonitoring) {
-    res.status(500).json({ success: false });
+  let andquery = [];
+  let matchquerry;
+
+  andquery.push({ "_id": mongoose.Types.ObjectId(req.params.id) });
+
+  if (andquery.length != 0) {
+    matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
   }
-  res.send(monthlySafetyCommitteesMonitoring);
+
+  // console.log(matchquerry)
+  // console.log(andquery)
+
+  MonthlySafetyCommitteesMonitoring.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result[0]);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.find = (req, res) => {

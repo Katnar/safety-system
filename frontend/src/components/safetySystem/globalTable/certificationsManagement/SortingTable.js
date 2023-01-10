@@ -10,7 +10,7 @@ import { withRouter, Redirect, Link } from "react-router-dom";
 import { COLUMNS } from "./coulmns";
 import { GlobalFilter } from "./GlobalFilter";
 import axios from "axios";
-import {FaFileDownload} from 'react-icons/fa';
+import { FaFileDownload } from 'react-icons/fa';
 import Button from "reactstrap/lib/Button";
 import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
@@ -23,12 +23,11 @@ const SortingTable = (props) => {
 
   const [data, setData] = useState([]);
 
-  function init() {
-    getCertificationsDetails();
-  }
-
   async function init() {
     if (props.userData.user != undefined) {
+      if (props.userData.user.role == "0") {
+        getCertificationsDetails();
+      }
       if (props.userData.user.role == "1") {
         getUnitDetailsByGdod();
       }
@@ -42,7 +41,6 @@ const SortingTable = (props) => {
         getUnitDetailsByPikod();
       }
     }
-    getCertificationsDetails();
   }
 
   const getUnitDetailsByGdod = async () => {
@@ -161,7 +159,7 @@ const SortingTable = (props) => {
         console.log(error);
       });
 
-      await axios.get(`http://localhost:8000/api/certificationsManagement`)
+    await axios.get(`http://localhost:8000/api/certificationsManagement`)
       .then((response) => {
         // console.log(response.data)
         let tempData = [];
@@ -184,44 +182,28 @@ const SortingTable = (props) => {
       await axios
         .get(`http://localhost:8000/api/certificationsManagement`)
         .then((response) => {
-          let tempData = [];
-          for (let i = 0; i < response.data.length; i++) {
-            // console.log(props);
-            console.log(response.data[i].gdod);
-            console.log(props.userData.user.gdod);
-            if (response.data[i].gdod == props.userData.user.gdod) {
-              tempData.push(response.data[i]);
-        
-            }
-          }
-          setData(tempData);
+          setData(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
-    } catch {}
+    } catch { }
   };
 
-  const Delete = (Id) => {
-    axios
-      .delete(`http://localhost:8000/api/certificationsManagement/${Id}`)
-      .then((response) => {
-        load();
+  const Delete = (data) => {
+    const tempData = data;
+    tempData.deletedAt = new Date();
+    axios.post("http://localhost:8000/api/certificationsManagementDelete", tempData).then((response) => {
+      axios.delete(`http://localhost:8000/api/certificationsManagement/${data._id}`).then((response) => {
+        init();
+        console.log(response.data)
       })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const load = () => {
-    axios
-      .get("http://localhost:8000/api/certificationsManagement")
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .catch((error) => {
+          console.log(error);
+        });
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   useEffect(() => {
@@ -287,7 +269,7 @@ const SortingTable = (props) => {
                   </th>
                 ))}
                 <th>ערוך</th>
-                {/* <th>מחק</th> */}
+                {props.userData.user.role == "0" ? <th>מחק</th> : null}
               </tr>
             ))}
           </thead>
@@ -327,7 +309,7 @@ const SortingTable = (props) => {
                       );
                     }
                     if (cell.column.id == "_id") {
-                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=certificationsManagement&id="+cell.value.toString()} target="_blank"><FaFileDownload/></a></td>;
+                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=certificationsManagement&id=" + cell.value.toString()} target="_blank"><FaFileDownload /></a></td>;
                     }
                     // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
@@ -349,7 +331,7 @@ const SortingTable = (props) => {
                       </Link>
                     </div>
                   </td>
-                  {/* <td role="cell">
+                  {props.userData.user.role == "0" ? <td role="cell">
                     {" "}
                     <div
                       style={{
@@ -366,7 +348,7 @@ const SortingTable = (props) => {
                         מחק
                       </button>
                     </div>
-                  </td> */}
+                  </td> : null}
                 </tr>
               );
             })}

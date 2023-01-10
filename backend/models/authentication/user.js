@@ -20,6 +20,8 @@ const userSchema = new mongoose.Schema({
     hativa: {type: String},
     ogda: {type: String},
     pikod: {type: String},
+    //
+    site_permission: {type:String,default:'צפייה ועריכה'},
 }, {timestamps: true})
 
 // virtual field

@@ -20,4 +20,9 @@ export const COLUMNS = [
     accessor: "comments",
     Filter: ColumnFilter,
   },
+  {
+    Header: "מסמכים",
+    accessor: "_id",
+    Filter: ColumnFilter,
+  },
 ];

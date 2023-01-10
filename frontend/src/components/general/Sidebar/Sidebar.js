@@ -46,22 +46,23 @@ import { signin, authenticate, isAuthenticated } from "auth/index";
 
 import SidebarAdmin from "components/general/Sidebar/SidebarAdmin";
 import SidebarGlobal from "components/general/Sidebar/SidebarGlobal";
-import SidebarGdod from "components/general/Sidebar/SidebarGdod";
-import SidebarHativa from "components/general/Sidebar/SidebarHativa";
-import SidebarOgda from "components/general/Sidebar/SidebarOgda";
-import SidebarPikod from "components/general/Sidebar/SidebarPikod";
-import SidebarCandidate from "../Sidebar/Sidebarcandidate";
 import teamLogo from "assets/img/team100.png"
 
 function Sidebar() {
-  const clickSubmit = (event) => {
-    event.preventDefault();
-    signout().then((response) => {
-      history.push(`/signin`);
-    });
-    }
   const [color, setcolor] = useState("transparent");
   const { user } = isAuthenticated();
+
+  const clickSubmit = (event) => {
+    event.preventDefault();
+    if(user.role === "0"){
+        signout().then((response) => {
+            history.push(`/adminsignin`);
+        });
+    }
+    else{
+      history.push(`/signupotherusers`);
+    }
+  };
 
   return (
     <>
@@ -83,7 +84,7 @@ function Sidebar() {
           borderLeft: "1px solid lightgray",
         }}
       >
-        <div className="sidebar-wrapper" style={{ overflow: "hidden" }}>
+        <div className="sidebar-wrapper" style={{ overflowY:'auto',overflowX:'hidden' }}>
           {user.role === "0" ? (
             <SidebarAdmin />
           ) : user.role === "1" ? (
@@ -91,7 +92,7 @@ function Sidebar() {
           ) : user.role === "2" ? (
             <SidebarGlobal />
           ) : user.role === "3" ? (
-            <SidebarGlobal /> 
+            <SidebarGlobal />
           ) : user.role === "4" ? (
             <SidebarGlobal />
           ) : null}
@@ -99,30 +100,38 @@ function Sidebar() {
             style={{
               justifyContent: "center",
               textAlign: "center",
-              position: "absolute",
+              // position: "absolute",
               bottom: 0,
               width: "100%",
               marginBottom: "15px"
             }}
           >
-            <img src={teamLogo} style={{ width: "50%"}}></img>
-            <a href="http://216.1.1.11:98/adminsignin">
-            <Button
-              // onClick={clickSubmit}
-              className="btn-defailt"
-              style={{ width: "80%", marginTop: "20px"}}
-            >
-              החלף משתמש
-            </Button>
-            </a>
+            <img src={teamLogo} style={{ width: "50%" }}></img>
+            {user.role === "0" ?
+              <button
+                onClick={clickSubmit}
+                className="btn-new-blue"
+                style={{ width: '80%', marginTop: '15px' }}
+              >
+                התנתק
+              </button>
+              :
+              <button
+                onClick={clickSubmit}
+                className="btn-new-blue"
+                style={{ width: '80%', marginTop: '15px' }}
+              >
+                רשום משתמש נוסף
+              </button>
+            }
             <a href="http://216.1.1.11:8008/presentation">
-              <Button
-                className="btn-danger"
-                style={{ width: "80%", marginTop: "20px"}}
+              <button
+                className="btn-new-delete"
+                style={{ width: '80%', marginTop: '15px' }}
               >
                 חזרה לשולחן הטנ"א שלי
-              </Button>  
-              </a>
+              </button>
+            </a>
           </div>
         </div>
       </div>

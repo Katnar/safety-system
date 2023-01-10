@@ -1,13 +1,35 @@
 const CertificationsManagement = require("../../models/general/certificationsManagement");
+const { readtipul } = require("../../helpers/aggregatehelper");
+const mongoose = require('mongoose');
 
 exports.findById = async (req, res) => {
-  const certificationsManagement =
-    await CertificationsManagement.findOne().where({ _id: req.params.id });
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
 
-  if (!certificationsManagement) {
-    res.status(500).json({ success: false });
+  let andquery = [];
+  let matchquerry;
+
+  andquery.push({ "_id": mongoose.Types.ObjectId(req.params.id) });
+
+  if (andquery.length != 0) {
+    matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
   }
-  res.send(certificationsManagement);
+
+  // console.log(matchquerry)
+  // console.log(andquery)
+
+  CertificationsManagement.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result[0]);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.findByGdod = async (req, res) => {
