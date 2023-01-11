@@ -191,8 +191,11 @@ const HazardsMonitoringForm = ({ match }) => {
       error += "חסר שדה סטטוס, "
       flag = false;
     }
-    if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד, "
+    if (user.user.role == "1"){
+      state.gdod = user.user.gdod
+    }
+    else if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד , "
       flag = false;
     }
 

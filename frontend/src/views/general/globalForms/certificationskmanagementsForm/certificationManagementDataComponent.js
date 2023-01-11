@@ -167,14 +167,17 @@ const CertificationManagementDataComponent = ({ match }) => {
       error += "חסר שדה תוקף הסמכה, "
       flag = false;
     }
-    if (((state.gdod == undefined) || (state.gdod == ""))) {
+    if (user.user.role == "1"){
+      state.gdod = user.user.gdod
+    }
+    else if (((state.gdod == undefined) || (state.gdod == ""))) {
       error += "חסר שדה גדוד , "
       flag = false;
     }
-    // if ((document.documentUpload == undefined)) {
-    //   error += "חסר שדה העלאת מסמכים , "
-    //   flag = false;
-    // }
+    if (singleFile==""){
+      error += "נא להוסיף קובץ"
+      flag = false;
+    }
 
     if (flag == true) {
       SubmitData();
