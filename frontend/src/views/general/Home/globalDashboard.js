@@ -12,42 +12,117 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
+import axios from "axios";
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 export default function Home(props) {
-  const [byrole, setByrole] = useState("");
   const useStyles = makeStyles(dashboardStyle);
-
+  const [gdods, setGdods] = useState("");
   const user = isAuthenticated();
 
   async function init() {
-    console.log(user.user.role)
+
     if (user.user.role == "0") {
-      setByrole("");
+      await axios.get(`http://localhost:8000/api/gdod`)
+        .then((response) => {
+          let tempgdods = response.data;
+          setGdods(tempgdods)        
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
+
+
     if (user.user.role == "1") {
-      setByrole("/bygdod");
+      await axios.get(`http://localhost:8000/api/gdod/${user.user.gdod}`)
+        .then((response) => {
+          let tempgdods = [response.data];
+          setGdods(tempgdods)        
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
+
     if (user.user.role == "2") {
-      setByrole("/byhativa");
+      await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: user.user.hativa })
+        .then((response) => {
+          let tempgdods = response.data;
+          setGdods(tempgdods)        
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
+
     if (user.user.role == "3") {
-      setByrole("/byogda");
+      let tempgdods=[];
+      await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: user.user.ogda })
+        .then(async(response1) => {
+          for (let i = 0; i < response1.data.length; i++) {
+            await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
+              .then((response2) => {
+                for (let j = 0; j < response2.data.length; j++) {
+                  tempgdods.push(response2.data[j])
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+          console.log(tempgdods)
+          setGdods(tempgdods)        
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
+
     if (user.user.role == "4") {
-      setByrole("/bypikod");
-    }
+      let tempgdods=[];
+      await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: user.user.pikod })
+        .then(async(response1) => {
+          for (let i = 0; i < response1.data.length; i++) {
+            await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
+              .then(async(response2) => {
+                for (let j = 0; j < response2.data.length; j++) {
+                  await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response2.data[j]._id })
+                    .then((response3) => {
+                      for (let k = 0; k < response3.data.length; k++) {
+                        tempgdods.push(response3.data[k])
+                      }
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    })
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+          setGdods(tempgdods)        
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
   }
 
   useEffect(() => {
-    if(user && user.user.role){
+    if (user.user && user.user.role != undefined && user.user.role != null) {
       init();
     }
-  }, [props.match]);
+  }, [user.user.role]);
 
   return (
-    // <Page loader={"resize-spin"} color={"#A9A9A9"} size={4}>
-    <div>
+    gdods.length == 0 ?
+      <div style={{ width: '50%', marginTop: '30%' }}>
+        <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
+      </div>
+      :
+      <div>
       <GridContainer>
         <CardTableCalcGlobal
           name={[
@@ -56,8 +131,8 @@ export default function Home(props) {
             "שים לב! חלק מההסמכות פגות תוקף",
             "certificationValidity",
             "certificationsManagement",
-            byrole,
           ]}
+          gdods={gdods}
         />
         <CardTableCalcGlobal
           name={[
@@ -66,8 +141,8 @@ export default function Home(props) {
             "שים לב! חלק מהפיקוחים פגי תוקף",
             "nextTestDate",
             "occupationalSupervision",
-            byrole,
           ]}
+          gdods={gdods}
         />
         <CardTableCalcGlobal
           name={[
@@ -76,8 +151,8 @@ export default function Home(props) {
             "שים לב! חלק מהבדיקות פגות תוקף",
             "nextTestDate",
             "equipmentAndMaterialsPeriodicInspections",
-            byrole,
           ]}
+          gdods={gdods}
         />
         <CardTableCalcGlobal
           name={[
@@ -86,8 +161,8 @@ export default function Home(props) {
             "שים לב! חלק מהניטורים פגי תוקף",
             "nextMonitoringDate",
             "environmentalMonitoring",
-            byrole,
           ]}
+          gdods={gdods}
         />
       </GridContainer>
       <GridContainer>

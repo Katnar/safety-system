@@ -16,6 +16,8 @@ import style from "components/Table.css";
 import editpic from "assets/img/edit.png";
 import deletepic from "assets/img/delete.png";
 import { isAuthenticated } from "auth";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 const SortingTable = (props) => {
   const user = isAuthenticated();
@@ -241,160 +243,176 @@ const SortingTable = (props) => {
   );
 
   return (
-    <>
-      <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-      <div className="table-responsive" style={{ overflow: "auto" }}>
-        <table {...getTableProps()}>
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th>
-                    <div
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                    >
-                      {" "}
-                      {column.render("Header")}{" "}
-                    </div>
-                    <div>
-                      {column.canFilter ? column.render("Filter") : null}
-                    </div>
-                    <div>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? "🔽"
-                          : "⬆️"
-                        : ""}
-                    </div>
-                  </th>
-                ))}
-                <th>ערוך</th>
-                {props.userData.user.role == "0" ? <th>מחק</th> : null}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {page.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    if (cell.column.id == "personalNumber") {
-                      return <td>{cell.value}</td>;
-                    }
-                    if (cell.column.id == "id") {
-                      return <td>{cell.value}</td>;
-                    }
-                    if (cell.column.id == "fullName") {
-                      return <td>{cell.value}</td>;
-                    }
-                    if (cell.column.id == "rank") {
-                      return <td>{cell.value}</td>;
-                    }
-                    if (cell.column.id == "profession") {
-                      return <td>{cell.value}</td>;
-                    }
-                    if (cell.column.id == "certification") {
-                      return <td>{cell.value}</td>;
-                    }
-                    if (cell.column.id == "certificationValidity") {
-                      return (
-                        <td>
-                          {cell.value
-                            .slice(0, 10)
-                            .split("-")
-                            .reverse()
-                            .join("-")}
-                        </td>
-                      );
-                    }
-                    if (cell.column.id == "_id") {
-                      return <td><a href={"http://localhost:8000/api/downloadFile?collec=certificationsManagement&id=" + cell.value.toString()} target="_blank"><FaFileDownload /></a></td>;
-                    }
-                    // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  })}
-                  {/* {console.log(row)} */}
-                  <td role="cell">
-                    {" "}
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {" "}
-                      <Link
-                        to={`/GlobalCertificationsManagementsForm/${row.original._id}`}
-                      >
-                        <button className="btn btn-edit">ערוך</button>
-                      </Link>
-                    </div>
-                  </td>
-                  {props.userData.user.role == "0" ? <td role="cell">
-                    {" "}
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {" "}
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => Delete(row.original._id)}
-                      >
-                        מחק
-                      </button>
-                    </div>
-                  </td> : null}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <div className="pagination">
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            {"<"}
-          </button>{" "}
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
-            {">"}
-          </button>{" "}
-          <span>
-            עמוד{" "}
-            <strong>
-              {pageIndex + 1} מתוך {pageOptions.length}
-            </strong>{" "}
-          </span>
-          <span>
-            | חפש עמוד:{" "}
-            <input
-              type="number"
-              defaultValue={pageIndex + 1}
-              onChange={(e) => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                gotoPage(page);
-              }}
-              style={{ width: "100px", borderRadius: "10px" }}
-            />
-          </span>{" "}
-          <select
-            style={{ borderRadius: "10px" }}
-            value={pageSize}
-            onChange={(e) => {
-              setPageSize(Number(e.target.value));
-            }}
-          >
-            {[5, 10, 15, 20, 25].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
-                Show {pageSize}
-              </option>
-            ))}
-          </select>
-        </div>
+    data.length == 0 ?
+      <div style={{ width: '50%', marginTop: '30%' }}>
+        <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
       </div>
-    </>
+      :
+      <>
+        <div style={{ float: 'right', paddingBottom: '5px' }}>
+          <ReactHTMLTableToExcel
+            id="test-table-xls-button"
+            className="btn-green"
+            table="table-to-xls"
+            filename="קובץ - ניהול הסמכות"
+            sheet="קובץ - ניהול הסמכות"
+            buttonText="הורד כקובץ אקסל"
+            style={{ float: 'right' }}
+          />
+        </div>
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+        <div className="table-responsive" style={{ overflow: "auto" }}>
+          <table {...getTableProps()} id="table-to-xls">
+            <thead>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <th>
+                      <div
+                        {...column.getHeaderProps(column.getSortByToggleProps())}
+                      >
+                        {" "}
+                        {column.render("Header")}{" "}
+                      </div>
+                      <div>
+                        {column.canFilter ? column.render("Filter") : null}
+                      </div>
+                      <div>
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ? "🔽"
+                            : "⬆️"
+                          : ""}
+                      </div>
+                    </th>
+                  ))}
+                  <th>ערוך</th>
+                  {props.userData.user.role == "0" ? <th>מחק</th> : null}
+                </tr>
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {page.map((row) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      if (cell.column.id == "personalNumber") {
+                        return <td>{cell.value}</td>;
+                      }
+                      if (cell.column.id == "id") {
+                        return <td>{cell.value}</td>;
+                      }
+                      if (cell.column.id == "fullName") {
+                        return <td>{cell.value}</td>;
+                      }
+                      if (cell.column.id == "rank") {
+                        return <td>{cell.value}</td>;
+                      }
+                      if (cell.column.id == "profession") {
+                        return <td>{cell.value}</td>;
+                      }
+                      if (cell.column.id == "certification") {
+                        return <td>{cell.value}</td>;
+                      }
+                      if (cell.column.id == "certificationValidity") {
+                        return (
+                          <td>
+                            {cell.value
+                              .slice(0, 10)
+                              .split("-")
+                              .reverse()
+                              .join("-")}
+                          </td>
+                        );
+                      }
+                      if (cell.column.id == "_id") {
+                        return <td><a href={"http://localhost:8000/api/downloadFile?collec=certificationsManagement&id=" + cell.value.toString()} target="_blank"><FaFileDownload /></a></td>;
+                      }
+                      // return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                    })}
+                    {/* {console.log(row)} */}
+                    <td role="cell">
+                      {" "}
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {" "}
+                        <Link
+                          to={`/GlobalCertificationsManagementsForm/${row.original._id}`}
+                        >
+                          <button className="btn btn-edit">ערוך</button>
+                        </Link>
+                      </div>
+                    </td>
+                    {props.userData.user.role == "0" ? <td role="cell">
+                      {" "}
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {" "}
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => Delete(row.original._id)}
+                        >
+                          מחק
+                        </button>
+                      </div>
+                    </td> : null}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <div className="pagination">
+            <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+              {"<"}
+            </button>{" "}
+            <button onClick={() => nextPage()} disabled={!canNextPage}>
+              {">"}
+            </button>{" "}
+            <span>
+              עמוד{" "}
+              <strong>
+                {pageIndex + 1} מתוך {pageOptions.length}
+              </strong>{" "}
+            </span>
+            <span>
+              | חפש עמוד:{" "}
+              <input
+                type="number"
+                defaultValue={pageIndex + 1}
+                onChange={(e) => {
+                  const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                  gotoPage(page);
+                }}
+                style={{ width: "100px", borderRadius: "10px" }}
+              />
+            </span>{" "}
+            <select
+              style={{ borderRadius: "10px" }}
+              value={pageSize}
+              onChange={(e) => {
+                setPageSize(Number(e.target.value));
+              }}
+            >
+              {[5, 10, 15, 20, 25].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  Show {pageSize}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </>
   );
 };
 export default withRouter(SortingTable);

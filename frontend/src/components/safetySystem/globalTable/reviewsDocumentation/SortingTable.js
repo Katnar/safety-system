@@ -9,7 +9,8 @@ import {
 import Button from "reactstrap/lib/Button";
 import { withRouter, Redirect, Link } from "react-router-dom";
 import { COLUMNS } from "./coulmns";
-import { GlobalFilter } from "./GlobalFilter";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import PropagateLoader from "react-spinners/PropagateLoader";import { GlobalFilter } from "./GlobalFilter";
 import axios from "axios";
 import { FaFileDownload } from "react-icons/fa";
 import style from "components/Table.css";
@@ -271,10 +272,26 @@ const SortingTable = (props) => {
   );
 
   return (
-    <>
-      <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-      <div className="table-responsive" style={{ overflow: "auto" }}>
-        <table {...getTableProps()}>
+    data.length == 0 ?
+      <div style={{ width: '50%', marginTop: '30%' }}>
+        <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
+      </div>
+      :
+      <>
+        <div style={{ float: 'right', paddingBottom: '5px' }}>
+          <ReactHTMLTableToExcel
+            id="test-table-xls-button"
+            className="btn-green"
+            table="table-to-xls"
+            filename="קובץ - תיעוד ביקורת"
+            sheet="קובץ - תיעוד ביקורת"
+            buttonText="הורד כקובץ אקסל"
+            style={{ float: 'right' }}
+          />
+        </div>
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+        <div className="table-responsive" style={{ overflow: "auto" }}>
+          <table {...getTableProps()} id="table-to-xls">
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>

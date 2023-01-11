@@ -2,6 +2,8 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useTable, useSortBy, useGlobalFilter, useFilters, usePagination } from "react-table";
 import { withRouter, Redirect, Link } from "react-router-dom";
 import { COLUMNS } from "./coulmns";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import PropagateLoader from "react-spinners/PropagateLoader";
 import { GlobalFilter } from './GlobalFilter'
 import axios from 'axios'
 
@@ -9,13 +11,31 @@ const SortingTable = ({ match }) => {
   const columns = useMemo(() => COLUMNS, []);
 
   const [data, setData] = useState([])
+  //units
+  const [gdods, setGdods] = useState([]);
+  const [hativas, setHativas] = useState([]);
+  const [ogdas, setOgdas] = useState([]);
+  const [pikods, setPikods] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      const result = await axios.get("http://localhost:8000/api/usersvalidated");
-      setData(result.data);
-    })();
-  }, []);
+  const loadPikods = async () => {
+    let response = await axios.get("http://localhost:8000/api/pikod",)
+    setPikods(response.data);
+  }
+
+  const loadOgdas = async () => {
+    let response = await axios.get("http://localhost:8000/api/ogda",)
+    setOgdas(response.data);
+  }
+
+  const loadHativas = async () => {
+    let response = await axios.get("http://localhost:8000/api/hativa",)
+    setHativas(response.data);
+  }
+
+  const loadGdods = async () => {
+    let response = await axios.get("http://localhost:8000/api/gdod",)
+    setGdods(response.data);
+  }
 
   const UserDelete = UserId => {
     axios.post(`http://localhost:8000/api/user/remove/${UserId}`)
@@ -28,7 +48,7 @@ const SortingTable = ({ match }) => {
   }
 
   const loadUsers = () => {
-    axios.get("http://localhost:8000/api/usersvalidated")
+    axios.get("http://localhost:8000/api/usersvalidatedaggregate")
       .then(response => {
         setData(response.data);
       })
@@ -61,13 +81,39 @@ const SortingTable = ({ match }) => {
 
     useGlobalFilter, useFilters, useSortBy, usePagination);
 
+    useEffect(() => {
+      (async () => {
+        await loadPikods();
+        await loadOgdas();
+        await loadHativas();
+        await loadGdods();
+        const result = await axios.get("http://localhost:8000/api/usersvalidatedaggregate");
+        setData(result.data);
+      })();
+    }, []);
+  
 
   return (
-    <>
-
-      <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-      <div className="table-responsive" style={{ overflow: 'auto' }}>
-        <table {...getTableProps()}>
+    data.length == 0 ?
+      <div style={{ width: '50%', marginTop: '30%' }}>
+        <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
+      </div>
+      :
+      <>
+        <div style={{ float: 'right', paddingBottom: '5px' }}>
+          <ReactHTMLTableToExcel
+            id="test-table-xls-button"
+            className="btn-green"
+            table="table-to-xls"
+            filename="קובץ - ניהול משתמשים"
+            sheet="קובץ - ניהול משתמשים"
+            buttonText="הורד כקובץ אקסל"
+            style={{ float: 'right' }}
+          />
+        </div>
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+        <div className="table-responsive" style={{ overflow: "auto" }}>
+          <table {...getTableProps()} id="table-to-xls">
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
@@ -94,7 +140,7 @@ const SortingTable = ({ match }) => {
                   <tr {...row.getRowProps()}>
                     {
                       row.cells.map(cell => {
-                        if ((cell.column.id != "createdAt") && (cell.column.id != "updatedAt") && (cell.column.id != "role") && (cell.column.id != "workplan")&& (cell.column.id != "zminot")&& (cell.column.id != "kshirot")&& (cell.column.id != "adam")) {
+                        if ((cell.column.id != "createdAt") && (cell.column.id != "updatedAt") && (cell.column.id != "role") && (cell.column.id != "unit")) {
                           return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                         }
                         else {
@@ -118,43 +164,17 @@ const SortingTable = ({ match }) => {
                             if (cell.value == '5')
                             return <td>מנהל כללי</td>
                           }
-                          if (cell.column.id == "workplan") {
-                            if (cell.value == "0")
-                            return <td>רשאי</td>
-                            if (cell.value == "1")
-                              return <td>צפייה</td>
-                              if (cell.value == "2")
-                              return <td>לא רשאי</td>
-
-
-                          }
-                          if (cell.column.id == "kshirot") {
-                            if (cell.value == "0")
-                            return <td>רשאי</td>
-                            if (cell.value == "1")
-                              return <td>צפייה</td>
-                              if (cell.value == "2")
-                              return <td>לא רשאי</td>
-
-                          }
-                          if (cell.column.id == "zminot") {
-                            if (cell.value == "0")
-                            return <td>רשאי</td>
-                            if (cell.value == "1")
-                              return <td>צפייה</td>
-                              if (cell.value == "2")
-                              return <td>לא רשאי</td>
-
-                          }
-                         
-                          if (cell.column.id == "adam") {
-                            if (cell.value == "0")
-                            return <td>רשאי</td>
-                            if (cell.value == "1")
-                              return <td>צפייה</td>
-                              if (cell.value == "2")
-                              return <td>לא רשאי</td>
-
+                          if (cell.column.id == "unit") {
+                            if (row.original.role == '0')
+                              return <td></td>
+                            if (row.original.role == '1')
+                              return row.original.gdod_data ? <td {...cell.getCellProps()}>{row.original.gdod_data.name}</td> : <td {...cell.getCellProps()}></td>
+                            if (row.original.role == '2')
+                              return row.original.hativa_data ? <td {...cell.getCellProps()}>{row.original.hativa_data.name}</td> : <td {...cell.getCellProps()}></td>
+                            if (row.original.role == '3')
+                              return row.original.ogda_data ? <td {...cell.getCellProps()}>{row.original.ogda_data.name}</td> : <td {...cell.getCellProps()}></td>
+                            if (row.original.role == '4')
+                              return row.original.pikod_data ? <td {...cell.getCellProps()}>{row.original.pikod_data.name}</td>: <td {...cell.getCellProps()}></td>
                           }
                         }
                        

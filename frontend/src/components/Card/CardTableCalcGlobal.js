@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
-import Axios from "axios";
+import axios from "axios";
 import CertificationIcon from "@material-ui/icons/VerifiedUser";
 import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
@@ -13,8 +13,7 @@ import { ContactSupportOutlined } from "@material-ui/icons";
 
 // const useStyles = makeStyles(dashboardStyle);
 // const classes = useStyles();
-const user = isAuthenticated();
-
+// const user = isAuthenticated();
 
 const CardTableCalcGlobal = (props) => {
   const [validData, setValidData] = useState("");
@@ -23,95 +22,9 @@ const CardTableCalcGlobal = (props) => {
   const [isAlertData, setIsAlertData] = useState("");
 
   const DataLoad = async () => {
-    let tempUnit
-    if (user.user.role == "0") {
-      tempUnit = "";
-    }
-    if (user.user.role == "1") {
-      tempUnit = "/" + user.user.gdod;
-    }
-    if (user.user.role == "2") {
-      tempUnit = "/" + user.user.hativa;
-    }
-    if (user.user.role == "3") {
-      tempUnit = "/" + user.user.ogda;
-    }
-    if (user.user.role == "4") {
-      tempUnit = "/" + user.user.pikod;
-    }
     const validity = props.name[3];
 
-    let tempgdods = [];
-
-    if (user.user.role== "1") {
-      await Axios.get(`http://localhost:8000/api/gdod/${user.user.gdod}`)
-        .then((response) => {
-          tempgdods = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      }
-
-    if (user.user.role== "2") {
-      await Axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: user.user.hativa })
-        .then((response) => {
-          tempgdods = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      }
-
-    if (user.user.role== "3") {
-      await Axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: user.user.ogda })
-        .then(async (response1) => {
-          for (let i = 0; i < response1.data.length; i++) {
-            await Axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
-              .then((response2) => {
-                for (let j = 0; j < response2.data.length; j++) {
-                  tempgdods.push(response2.data[j])
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      }
-
-    if (user.user.role== "4") {
-      await Axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: user.user.pikod })
-        .then(async (response1) => {
-          for (let i = 0; i < response1.data.length; i++) {
-            await Axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
-              .then(async (response2) => {
-                for (let j = 0; j < response2.data.length; j++) {
-                  await Axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response2.data[j]._id })
-                    .then(async (response3) => {
-                      for (let k = 0; k < response3.data.length; k++) {
-                        tempgdods.push(response3.data[k])
-                      }
-                    })
-                    .catch((error) => {
-                      console.log(error);
-                    })
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-
-    await Axios.get(`http://localhost:8000/api/${props.name[4]}`).then(async(response) => {
+    await axios.get(`http://localhost:8000/api/${props.name[4]}`).then(async (response) => {
       var valid = 0;
       var expired = 0;
       var isExpired = false;
@@ -119,13 +32,13 @@ const CardTableCalcGlobal = (props) => {
       var today = new Date();
 
       let tempData = [];
-        for (let i = 0; i < response.data.length; i++) {
-          for (let j = 0; j < tempgdods.length; j++) {
-            if (response.data[i].gdod == tempgdods[j]._id) {
-              tempData.push(response.data[i]);
-            }
+      for (let i = 0; i < response.data.length; i++) {
+        for (let j = 0; j < props.gdods.length; j++) {
+          if (response.data[i].gdod == props.gdods[j]._id) {
+            tempData.push(response.data[i]);
           }
         }
+      }
 
       for (var i = 0; i < tempData.length; i++) {
         console.log(validity);
@@ -187,9 +100,9 @@ const CardTableCalcGlobal = (props) => {
   };
 
   useEffect(() => {
-    DataLoad();
-    // init();
-  }, [props]);
+    if (props.gdods && props.gdods.length > 0)
+      DataLoad();
+  }, [props.gdods]);
 
   return (
     <>

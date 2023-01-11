@@ -270,9 +270,9 @@ function UnitTreePage({ match }) {
     }, [])
 
     return (
-        !isdataloaded ?
+        treedata.length == 0 ?
             <div style={{ width: '50%', marginTop: '30%' }}>
-                <PropagateLoader color={'#ff4650'} loading={true} size={25} />
+                <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
             </div>
             :
             <Container style={{ paddingTop: '80px' }}>
