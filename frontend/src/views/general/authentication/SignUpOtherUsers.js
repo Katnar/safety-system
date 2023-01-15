@@ -123,6 +123,10 @@ export default function SignUpOtherUsers() {
     event.preventDefault();
     var flag = true;
     var ErrorReason = "";
+    if (data.error) {
+      flag = false;
+      ErrorReason += "קיים משתמש/בקשת רישום עבור אותו מ.א במערכת \n";
+    }
     if (data.name == "") {
       flag = false;
       ErrorReason += "שם ריק \n";

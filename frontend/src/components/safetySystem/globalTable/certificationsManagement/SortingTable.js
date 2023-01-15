@@ -194,9 +194,9 @@ const SortingTable = (props) => {
 
   const Delete = (data) => {
     const tempData = data;
-    tempData.deletedAt = new Date();
+    // tempData.deletedAt = new Date();
     axios.post("http://localhost:8000/api/certificationsManagementDelete", tempData).then((response) => {
-      axios.delete(`http://localhost:8000/api/certificationsManagement/${data._id}`).then((response) => {
+      axios.delete(`http://localhost:8000/api/certificationsManagement/${tempData}`).then((response) => {
         init();
         console.log(response.data)
       })

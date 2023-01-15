@@ -213,9 +213,9 @@ const SortingTable = (props) => {
 
   const Delete = (data) => {
     const tempData = data;
-    tempData.deletedAt = new Date();
+    // tempData.deletedAt = new Date();
     axios.post("http://localhost:8000/api/monthlySafetyCommitteesMonitoringDelete", tempData).then((response) => {
-      axios.delete(`http://localhost:8000/api/monthlySafetyCommitteesMonitoring/${data._id}`).then((response) => {
+      axios.delete(`http://localhost:8000/api/monthlySafetyCommitteesMonitoring/${tempData}`).then((response) => {
         init();
       })
         .catch((error) => {

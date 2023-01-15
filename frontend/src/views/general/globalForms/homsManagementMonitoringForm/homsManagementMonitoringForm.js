@@ -149,8 +149,15 @@ const HomsManagementMonitoringForm = ({ match }) => {
       error += "חסר שדה הערות, "
       flag = false;
     }
-    if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד, "
+    if (user.user.role == "1"){
+      state.gdod = user.user.gdod
+    }
+    else if (((state.gdod == undefined) || (state.gdod == ""))) {
+      error += "חסר שדה גדוד , "
+      flag = false;
+    }
+    if (singleFile==""){
+      error += "נא להוסיף קובץ"
       flag = false;
     }
 
