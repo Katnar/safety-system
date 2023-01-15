@@ -33,53 +33,136 @@ exports.findById = async (req, res) => {
 };
 
 exports.findByGdod = async (req, res) => {
-  const environmentalMonitoring = await EnvironmentalMonitoring.find().where({
-    gdod: req.params.gdod,
-  });
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
 
-  if (!environmentalMonitoring) {
-    res.status(500).json({ success: false });
+  let andquery = [];
+  let matchquerry;
+
+  andquery.push({ "gdod_data._id": req.params.gdod });
+
+  if (andquery.length != 0) {
+    matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
   }
-  res.send(environmentalMonitoring);
+
+  // console.log(matchquerry)
+  // console.log(andquery)
+
+  EnvironmentalMonitoring.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.findByHativa = async (req, res) => {
-  const environmentalMonitoring = await EnvironmentalMonitoring.find().where({
-    hativa: req.params.hativa,
-  });
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
 
-  if (!environmentalMonitoring) {
-    res.status(500).json({ success: false });
+  let andquery = [];
+  let matchquerry;
+
+  andquery.push({ "hativa_data._id": req.params.hativa });
+
+  if (andquery.length != 0) {
+    matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
   }
-  res.send(environmentalMonitoring);
+
+  // console.log(matchquerry)
+  // console.log(andquery)
+
+  EnvironmentalMonitoring.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.findByOgda = async (req, res) => {
-  const environmentalMonitoring = await EnvironmentalMonitoring.find().where({
-    ogda: req.params.ogda,
-  });
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
 
-  if (!environmentalMonitoring) {
-    res.status(500).json({ success: false });
+  let andquery = [];
+  let matchquerry;
+
+  andquery.push({ "ogda_data._id": req.params.ogda });
+
+  if (andquery.length != 0) {
+    matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
   }
-  res.send(environmentalMonitoring);
+
+  // console.log(matchquerry)
+  // console.log(andquery)
+
+  EnvironmentalMonitoring.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.findByPikod = async (req, res) => {
-  const environmentalMonitoring = await EnvironmentalMonitoring.find().where({
-    pikod: req.params.pikod,
-  });
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
 
-  if (!environmentalMonitoring) {
-    res.status(500).json({ success: false });
+  let andquery = [];
+  let matchquerry;
+
+  andquery.push({ "pikod_data._id": req.params.pikod });
+
+  if (andquery.length != 0) {
+    matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
   }
-  res.send(environmentalMonitoring);
+
+  // console.log(matchquerry)
+  // console.log(andquery)
+
+  EnvironmentalMonitoring.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.find = (req, res) => {
-  EnvironmentalMonitoring.find()
-    .then((environmentalMonitoring) => res.json(environmentalMonitoring))
-    .catch((err) => res.status(400).json("Error: " + err));
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
+
+  EnvironmentalMonitoring.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.create = (req, res) => {

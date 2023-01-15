@@ -21,7 +21,7 @@ import {
 import RiskManagementMonitoringTable from "components/safetySystem/globalTable/riskManagementMonitoring/SortingTable";
 import { isAuthenticated } from "auth";
 
-function RiskManagementMonitoring() {
+function RiskManagementMonitoring({match}) {
   const user = isAuthenticated();
   return (
     <>
@@ -32,7 +32,7 @@ function RiskManagementMonitoring() {
             <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
               טבלת מעקב ניהול סיכונים
             </h3>
-            <RiskManagementMonitoringTable userData={user} />
+            <RiskManagementMonitoringTable unittype={match.params.unittype} unitid={match.params.unitid} />
             <Link to={`/GlobalRiskManagementMonitoringForm/0`}>
               <Button>הוסף ניהול סיכונים</Button>
             </Link>

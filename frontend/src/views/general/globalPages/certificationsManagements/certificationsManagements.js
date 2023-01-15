@@ -21,7 +21,7 @@ import {
 import CertificationsManagementTable from "components/safetySystem/globalTable/certificationsManagement/SortingTable";
 import { isAuthenticated } from "auth";
 
-function certificationsManagements() {
+function certificationsManagements({match}) {
   const user = isAuthenticated();
   return (
     <>
@@ -32,8 +32,8 @@ function certificationsManagements() {
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
             טבלת ניהול הסמכות
           </h3>
-          <CertificationsManagementTable userData={user}/>
-          <Link to={`/GlobalCertificationsManagementsForm/0`} userData={user}>
+          <CertificationsManagementTable unittype={match.params.unittype} unitid={match.params.unitid}/>
+          <Link to={`/GlobalCertificationsManagementsForm/0`}>
             <Button>הוסף הסמכה </Button>
           </Link>
         </CardBody>

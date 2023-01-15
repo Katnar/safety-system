@@ -7,10 +7,22 @@ const {
   update,
   remove,
   findById,
+  findByGdod,
+  findByHativa,
+  findByOgda,
+  findByPikod,
 } = require("../../controllers/general/safetyOfficersQualification");
 
 // find spec
 router.get("/safetyOfficersQualification/:id", findById);
+//findbyrole
+router.get("/safetyOfficersQualification/bygdod/:gdod", findByGdod);
+
+router.get("/safetyOfficersQualification/byhativa/:hativa", findByHativa);
+
+router.get("/safetyOfficersQualification/byogda/:ogda", findByOgda);
+
+router.get("/safetyOfficersQualification/bypikod/:pikod", findByPikod);
 //find all
 router.get("/safetyOfficersQualification", find);
 //add

@@ -85,7 +85,7 @@ function SidebarAdmin() {
       <ThemeContext.Consumer>
         {({ changeTheme, theme }) =>
           theme == "white-content" ? (
-            <Link to="/adminDashboard">
+            <Link to="/globalDashboard/admin/0">
               <div className="logo">
                 <img
                   src={lightLogo}
@@ -94,7 +94,7 @@ function SidebarAdmin() {
               </div>
             </Link>
           ) : (
-            <Link to="/globalDashboard">
+            <Link to="/globalDashboard/admin/0">
               <div className="logo">
                 <img
                   src={darkLogo}
@@ -109,7 +109,7 @@ function SidebarAdmin() {
 
         <li>
           <NavLink
-            to="/globalDashboard/0"
+            to="/globalDashboard/admin/0"
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -174,7 +174,7 @@ function SidebarAdmin() {
           </Row>
           <Collapse isOpen={!collapsed1} navbar>
             <NavLink
-              to="/GlobalRiskManagementMonitoringView"
+              to="/GlobalRiskManagementMonitoringView/admin/0"
               style={{ margin: "0px", textAlign: "right" }}
               activeClassName="sidebar_active_link"
             >
@@ -202,7 +202,7 @@ function SidebarAdmin() {
             </NavLink>
 
             <NavLink
-              to="/GlobalTrainingProgramView"
+              to="/GlobalTrainingProgramView/admin/0"
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -233,7 +233,7 @@ function SidebarAdmin() {
               </Row>
             </NavLink>
             <NavLink
-              to="/GlobalHazardsMonitoringView"
+              to="/GlobalHazardsMonitoringView/admin/0"
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -262,7 +262,7 @@ function SidebarAdmin() {
               </Row>
             </NavLink>
             <NavLink
-              to="/GlobalHomsManagementMonitoringView"
+              to="/GlobalHomsManagementMonitoringView/admin/0"
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -293,7 +293,7 @@ function SidebarAdmin() {
               </Row>
             </NavLink>
             <NavLink
-              to="/GlobalReviewsDocumentationView"
+              to="/GlobalReviewsDocumentationView/admin/0"
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -324,7 +324,7 @@ function SidebarAdmin() {
               </Row>
             </NavLink>
             <NavLink
-              to="/GlobalMonthlySafetyCommitteesMonitoringView"
+              to="/GlobalMonthlySafetyCommitteesMonitoringView/admin/0"
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -387,7 +387,7 @@ function SidebarAdmin() {
           </Row>
           <Collapse isOpen={!collapsed2} navbar>
             <NavLink
-              to="/GlobalSafetyOfficersQualificationView"
+              to="/GlobalSafetyOfficersQualificationView/admin/0"
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -418,7 +418,7 @@ function SidebarAdmin() {
               </Row>
             </NavLink>
             <NavLink
-              to="/GlobalCertificationsManagementsView"
+              to="/GlobalCertificationsManagementsView/admin/0"
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -449,7 +449,7 @@ function SidebarAdmin() {
               </Row>
             </NavLink>
             <NavLink
-              to="/GlobalOccupationalSupervisionView"
+              to="/GlobalOccupationalSupervisionView/admin/0"
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -510,7 +510,7 @@ function SidebarAdmin() {
             </Row>
             <Collapse isOpen={!collapsed3} navbar>
               <NavLink
-                to="/GlobalEnvironmentalMonitoringView"
+                to="/GlobalEnvironmentalMonitoringView/admin/0"
                 style={{ margin: "0px" }}
                 activeClassName="sidebar_active_link"
               >
@@ -541,7 +541,7 @@ function SidebarAdmin() {
                 </Row>
               </NavLink>
               <NavLink
-                to="/GlobalEquipmentAndMaterialsPeriodicInspectionsView"
+                to="/GlobalEquipmentAndMaterialsPeriodicInspectionsView/admin/0"
                 style={{ margin: "0px" }}
                 activeClassName="sidebar_active_link"
               >
@@ -572,7 +572,7 @@ function SidebarAdmin() {
                 </Row>
               </NavLink>
               <NavLink
-                to="/GlobalMachinesAndEquipmentPeriodicInspectionsView"
+                to="/GlobalMachinesAndEquipmentPeriodicInspectionsView/admin/0"
                 style={{ margin: "0px" }}
                 activeClassName="sidebar_active_link"
               >
@@ -603,7 +603,7 @@ function SidebarAdmin() {
                 </Row>
               </NavLink>
               <NavLink
-                to="/GlobalGroundingTestsView"
+                to="/GlobalGroundingTestsView/admin/0"
                 style={{ margin: "0px" }}
                 activeClassName="sidebar_active_link"
               >
@@ -634,7 +634,7 @@ function SidebarAdmin() {
                 </Row>
               </NavLink>
               <NavLink
-                to="/GlobalPersonalProtectiveEquipmentMonitoringView"
+                to="/GlobalPersonalProtectiveEquipmentMonitoringView/admin/0"
                 style={{ margin: "0px" }}
                 activeClassName="sidebar_active_link"
               >
@@ -668,7 +668,7 @@ function SidebarAdmin() {
           </Navbar>
         </li>
         <NavLink
-          to="/GlobalUnitIdView"
+          to="/GlobalUnitIdView/admin/0"
           style={{ margin: "0px" }}
           activeClassName="sidebar_active_link"
         >

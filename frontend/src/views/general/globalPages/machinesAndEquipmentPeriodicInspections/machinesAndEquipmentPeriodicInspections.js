@@ -21,7 +21,7 @@ import {
 import MachinesAndEquipmentPeriodicInspectionsTable from "components/safetySystem/globalTable/machinesAndEquipmentPeriodicInspections/SortingTable";
 import { isAuthenticated } from "auth";
 
-function MachinesAndEquipmentPeriodicInspections() {
+function MachinesAndEquipmentPeriodicInspections({match}) {
   const user = isAuthenticated();
   return (
     <>
@@ -32,7 +32,7 @@ function MachinesAndEquipmentPeriodicInspections() {
             <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
               טבלת בדיקות תקופתיות למכונות וציוד
             </h3>
-            <MachinesAndEquipmentPeriodicInspectionsTable userData={user} />
+            <MachinesAndEquipmentPeriodicInspectionsTable unittype={match.params.unittype} unitid={match.params.unitid} />
             <Link to={`/GlobalMachinesAndEquipmentPeriodicInspectionsForm/0`}>
               <Button>הוסף בדיקה</Button>
             </Link>

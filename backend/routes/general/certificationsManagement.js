@@ -15,7 +15,7 @@ const {
 
 // find spec
 router.get("/certificationsManagement/:id", findById);
-//find all
+//findbyrole
 router.get("/certificationsManagement/bygdod/:gdod", findByGdod);
 
 router.get("/certificationsManagement/byhativa/:hativa", findByHativa);
@@ -23,7 +23,7 @@ router.get("/certificationsManagement/byhativa/:hativa", findByHativa);
 router.get("/certificationsManagement/byogda/:ogda", findByOgda);
 
 router.get("/certificationsManagement/bypikod/:pikod", findByPikod);
-
+//find all
 router.get("/certificationsManagement", find);
 //add
 router.post("/certificationsManagement", create); /**/

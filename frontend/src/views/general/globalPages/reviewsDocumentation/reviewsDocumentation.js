@@ -21,7 +21,7 @@ import {
 import ReviewsDocumentationTable from "components/safetySystem/globalTable/reviewsDocumentation/SortingTable";
 import { isAuthenticated } from "auth";
 
-function ReviewsDocumentation() {
+function ReviewsDocumentation({match}) {
   const user = isAuthenticated();
   return (
     <>
@@ -32,7 +32,7 @@ function ReviewsDocumentation() {
             <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
               טבלת תיעוד ביקורות
             </h3>
-            <ReviewsDocumentationTable userData={user} />
+            <ReviewsDocumentationTable unittype={match.params.unittype} unitid={match.params.unitid} />
             <Link to={`/GlobalReviewsDocumentationForm/0`}>
               <Button>הוסף ביקורת</Button>
             </Link>

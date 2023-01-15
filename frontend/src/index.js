@@ -93,22 +93,22 @@ ReactDOM.render(
 
           {/*///////////////////////////////////////////Global Views/////////////////////////////////////////////////*/}
 
-          <LoggedinRoute path="/globalDashboard/:unit" exact component={globalHome} />
-          <LoggedinRoute path="/GlobalUnitIdView" exact component={GlobalUnitIdView} />
-          <LoggedinRoute path="/GlobalSafetyOfficersQualificationView" exact component={GlobalSafetyOfficersQualificationView} />
-          <LoggedinRoute path="/GlobalCertificationsManagementsView" exact component={GlobalCertificationsManagementsView} />
-          <LoggedinRoute path="/GlobalOccupationalSupervisionView" exact component={GlobalOccupationalSupervisionView} />
-          <LoggedinRoute path="/GlobalTrainingProgramView" exact component={GlobalTrainingProgramView} />
-          <LoggedinRoute path="/GlobalEquipmentAndMaterialsPeriodicInspectionsView" exact component={GlobalEquipmentAndMaterialsPeriodicInspectionsView} />
-          <LoggedinRoute path="/GlobalEnvironmentalMonitoringView" exact component={GlobalEnvironmentalMonitoringView} />
-          <LoggedinRoute path="/GlobalMachinesAndEquipmentPeriodicInspectionsView" exact component={GlobalMachinesAndEquipmentPeriodicInspectionsView} />
-          <LoggedinRoute path="/GlobalRiskManagementMonitoringView" exact component={GlobalRiskManagementMonitoringView} />
-          <LoggedinRoute path="/GlobalMonthlySafetyCommitteesMonitoringView" exact component={GlobalMonthlySafetyCommitteesMonitoringView} />
-          <LoggedinRoute path="/GlobalHazardsMonitoringView" exact component={GlobalHazardsMonitoringView} />
-          <LoggedinRoute path="/GlobalHomsManagementMonitoringView" exact component={GlobalHomsManagementMonitoringView} />
-          <LoggedinRoute path="/GlobalPersonalProtectiveEquipmentMonitoringView" exact component={GlobalPersonalProtectiveEquipmentMonitoringView} />
-          <LoggedinRoute path="/GlobalGroundingTestsView" exact component={GlobalGroundingTestsView} />
-          <LoggedinRoute path="/GlobalReviewsDocumentationView" exact component={GlobalReviewsDocumentationView} />
+          <LoggedinRoute path="/globalDashboard/:unittype/:unitid" exact component={globalHome} />
+          <LoggedinRoute path="/GlobalUnitIdView/:unittype/:unitid" exact component={GlobalUnitIdView} />
+          <LoggedinRoute path="/GlobalSafetyOfficersQualificationView/:unittype/:unitid" exact component={GlobalSafetyOfficersQualificationView} />
+          <LoggedinRoute path="/GlobalCertificationsManagementsView/:unittype/:unitid" exact component={GlobalCertificationsManagementsView} />
+          <LoggedinRoute path="/GlobalOccupationalSupervisionView/:unittype/:unitid" exact component={GlobalOccupationalSupervisionView} />
+          <LoggedinRoute path="/GlobalTrainingProgramView/:unittype/:unitid" exact component={GlobalTrainingProgramView} />
+          <LoggedinRoute path="/GlobalEquipmentAndMaterialsPeriodicInspectionsView/:unittype/:unitid" exact component={GlobalEquipmentAndMaterialsPeriodicInspectionsView} />
+          <LoggedinRoute path="/GlobalEnvironmentalMonitoringView/:unittype/:unitid" exact component={GlobalEnvironmentalMonitoringView} />
+          <LoggedinRoute path="/GlobalMachinesAndEquipmentPeriodicInspectionsView/:unittype/:unitid" exact component={GlobalMachinesAndEquipmentPeriodicInspectionsView} />
+          <LoggedinRoute path="/GlobalRiskManagementMonitoringView/:unittype/:unitid" exact component={GlobalRiskManagementMonitoringView} />
+          <LoggedinRoute path="/GlobalMonthlySafetyCommitteesMonitoringView/:unittype/:unitid" exact component={GlobalMonthlySafetyCommitteesMonitoringView} />
+          <LoggedinRoute path="/GlobalHazardsMonitoringView/:unittype/:unitid" exact component={GlobalHazardsMonitoringView} />
+          <LoggedinRoute path="/GlobalHomsManagementMonitoringView/:unittype/:unitid" exact component={GlobalHomsManagementMonitoringView} />
+          <LoggedinRoute path="/GlobalPersonalProtectiveEquipmentMonitoringView/:unittype/:unitid" exact component={GlobalPersonalProtectiveEquipmentMonitoringView} />
+          <LoggedinRoute path="/GlobalGroundingTestsView/:unittype/:unitid" exact component={GlobalGroundingTestsView} />
+          <LoggedinRoute path="/GlobalReviewsDocumentationView/:unittype/:unitid" exact component={GlobalReviewsDocumentationView} />
 
           {/*///////////////////////////////////////////Global Forms/////////////////////////////////////////////////*/}
 

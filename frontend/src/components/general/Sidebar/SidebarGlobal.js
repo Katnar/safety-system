@@ -92,17 +92,24 @@ function SidebarGlobal() {
   } if (user.user.role == 4) {
     userUnit = user.user.pikod;
   }
-  console.log(userUnit)
 
-
-
+  let userType;
+  if (user.user.role == 1) {
+    userType = 'gdod';
+  } if (user.user.role == 2) {
+    userType = 'hativa';
+  } if (user.user.role == 3) {
+    userType = 'ogda';
+  } if (user.user.role == 4) {
+    userType = 'pikod';
+  }
 
   return (
     <>
       <ThemeContext.Consumer>
         {({ changeTheme, theme }) =>
           theme == "white-content" ? (
-            <Link to={`/globalDashboard/${userUnit}`}>
+            <Link to={`/globalDashboard/${userUnit}/${userUnit}`}>
               <div className="logo">
                 <img
                   src={lightLogo}
@@ -111,7 +118,7 @@ function SidebarGlobal() {
               </div>
             </Link>
           ) : (
-            <Link to={`/globalDashboard/${userUnit}`}>
+            <Link to={`/globalDashboard/${userUnit}/${userUnit}`}>
               <div className="logo">
                 <img
                   src={darkLogo}
@@ -126,7 +133,7 @@ function SidebarGlobal() {
 
         <li>
           <NavLink
-            to={`/globalDashboard/${userUnit}`}
+            to={`/globalDashboard/${userUnit}/${userUnit}`}
             style={{ margin: "0px" }}
             activeClassName="sidebar_active_link"
           >
@@ -191,7 +198,7 @@ function SidebarGlobal() {
           </Row>
           <Collapse isOpen={!collapsed1} navbar>
             <NavLink
-              to="/GlobalRiskManagementMonitoringView"
+              to={`/GlobalRiskManagementMonitoringView/${userUnit}/${userUnit}`}
               style={{ margin: "0px", textAlign: "right" }}
               activeClassName="sidebar_active_link"
             >
@@ -219,7 +226,7 @@ function SidebarGlobal() {
             </NavLink>
 
             <NavLink
-              to="/GlobalTrainingProgramView"
+              to={`/GlobalTrainingProgramView/${userUnit}/${userUnit}`}
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -250,7 +257,7 @@ function SidebarGlobal() {
               </Row>
             </NavLink>
             <NavLink
-              to="/GlobalHazardsMonitoringView"
+              to={`/GlobalHazardsMonitoringView/${userUnit}/${userUnit}`}
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -279,7 +286,7 @@ function SidebarGlobal() {
               </Row>
             </NavLink>
             <NavLink
-              to="/GlobalHomsManagementMonitoringView"
+              to={`/GlobalHomsManagementMonitoringView/${userUnit}/${userUnit}`}
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -310,7 +317,7 @@ function SidebarGlobal() {
               </Row>
             </NavLink>
             <NavLink
-              to="/GlobalReviewsDocumentationView"
+              to={`/GlobalReviewsDocumentationView/${userUnit}/${userUnit}`}
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -341,7 +348,7 @@ function SidebarGlobal() {
               </Row>
             </NavLink>
             <NavLink
-              to="/GlobalMonthlySafetyCommitteesMonitoringView"
+              to={`/GlobalMonthlySafetyCommitteesMonitoringView/${userUnit}/${userUnit}`}
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -404,7 +411,7 @@ function SidebarGlobal() {
           </Row>
           <Collapse isOpen={!collapsed2} navbar>
             <NavLink
-              to="/GlobalSafetyOfficersQualificationView"
+              to={`/GlobalSafetyOfficersQualificationView/${userUnit}/${userUnit}`}
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -435,7 +442,7 @@ function SidebarGlobal() {
               </Row>
             </NavLink>
             <NavLink
-              to="/GlobalCertificationsManagementsView"
+              to={`/GlobalCertificationsManagementsView/${userUnit}/${userUnit}`}
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -466,7 +473,7 @@ function SidebarGlobal() {
               </Row>
             </NavLink>
             <NavLink
-              to="/GlobalOccupationalSupervisionView"
+              to={`/GlobalOccupationalSupervisionView/${userUnit}/${userUnit}`}
               style={{ margin: "0px" }}
               activeClassName="sidebar_active_link"
             >
@@ -527,7 +534,7 @@ function SidebarGlobal() {
             </Row>
             <Collapse isOpen={!collapsed3} navbar>
               <NavLink
-                to="/GlobalEnvironmentalMonitoringView"
+                to={`/GlobalEnvironmentalMonitoringView/${userUnit}/${userUnit}`}
                 style={{ margin: "0px" }}
                 activeClassName="sidebar_active_link"
               >
@@ -558,7 +565,7 @@ function SidebarGlobal() {
                 </Row>
               </NavLink>
               <NavLink
-                to="/GlobalEquipmentAndMaterialsPeriodicInspectionsView"
+                to={`/GlobalEquipmentAndMaterialsPeriodicInspectionsView/${userUnit}/${userUnit}`}
                 style={{ margin: "0px" }}
                 activeClassName="sidebar_active_link"
               >
@@ -589,7 +596,7 @@ function SidebarGlobal() {
                 </Row>
               </NavLink>
               <NavLink
-                to="/GlobalMachinesAndEquipmentPeriodicInspectionsView"
+                to={`/GlobalMachinesAndEquipmentPeriodicInspectionsView/${userUnit}/${userUnit}`}
                 style={{ margin: "0px" }}
                 activeClassName="sidebar_active_link"
               >
@@ -620,7 +627,7 @@ function SidebarGlobal() {
                 </Row>
               </NavLink>
               <NavLink
-                to="/GlobalGroundingTestsView"
+                to={`/GlobalGroundingTestsView/${userUnit}/${userUnit}`}
                 style={{ margin: "0px" }}
                 activeClassName="sidebar_active_link"
               >
@@ -651,7 +658,7 @@ function SidebarGlobal() {
                 </Row>
               </NavLink>
               <NavLink
-                to="/GlobalPersonalProtectiveEquipmentMonitoringView"
+                to={`/GlobalPersonalProtectiveEquipmentMonitoringView/${userUnit}/${userUnit}`}
                 style={{ margin: "0px" }}
                 activeClassName="sidebar_active_link"
               >
@@ -685,7 +692,7 @@ function SidebarGlobal() {
           </Navbar>
         </li>
         <NavLink
-          to="/GlobalUnitIdView"
+          to={`/GlobalUnitIdView/${userUnit}/${userUnit}`}
           style={{ margin: "0px" }}
           activeClassName="sidebar_active_link"
         >
@@ -730,8 +737,8 @@ function SidebarGlobal() {
         {/* 
         <li>
           <NavLink
-            to="/forum"
-            style={{ margin: "0px" }}
+            to={`/forum"
+            style={{ margin:} "0px" }}
             activeClassName="sidebar_active_link"
           >
             <Row style={{ direction: "rtl" }}>

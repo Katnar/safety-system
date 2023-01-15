@@ -15,7 +15,7 @@ const {
 
 // find spec
 router.get("/equipmentAndMaterialsPeriodicInspections/:id", findById);
-
+//findbyrole
 router.get("/equipmentAndMaterialsPeriodicInspections/bygdod/:gdod", findByGdod);
 
 router.get("/equipmentAndMaterialsPeriodicInspections/byhativa/:hativa", findByHativa);

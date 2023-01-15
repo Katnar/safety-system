@@ -21,7 +21,7 @@ import {
 import OccupationalSupervisionTable from "components/safetySystem/globalTable/occupationalSupervision/SortingTable";
 import { isAuthenticated } from "auth";
 
-function occupationalSupervision() {
+function occupationalSupervision({match}) {
   const user = isAuthenticated();
   return (
     <>
@@ -31,7 +31,7 @@ function occupationalSupervision() {
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
             טבלת פיקוח תעסוקתי
           </h3>
-          <OccupationalSupervisionTable userData={user}/>
+          <OccupationalSupervisionTable unittype={match.params.unittype} unitid={match.params.unitid}/>
           <Link to={`/GlobalOccupationalSupervisionForm/0`}>
             <Button>הוסף פיקוח תעסוקתי</Button>
           </Link>

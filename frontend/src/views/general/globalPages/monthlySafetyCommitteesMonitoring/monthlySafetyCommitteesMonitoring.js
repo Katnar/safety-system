@@ -21,7 +21,7 @@ import {
 import MonthlySafetyCommitteesMonitoringTable from "components/safetySystem/globalTable/monthlySafetyCommitteesMonitoring/SortingTable";
 import { isAuthenticated } from "auth";
 
-function MonthlySafetyCommitteesMonitoring() {
+function MonthlySafetyCommitteesMonitoring({match}) {
   const user = isAuthenticated();
   return (
     <>
@@ -32,7 +32,7 @@ function MonthlySafetyCommitteesMonitoring() {
             <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
               טבלת מעקב וועדות בטיחות חודשיות
             </h3>
-            <MonthlySafetyCommitteesMonitoringTable userData={user} />
+            <MonthlySafetyCommitteesMonitoringTable unittype={match.params.unittype} unitid={match.params.unitid} />
             <Link to={`/GlobalMonthlySafetyCommitteesMonitoringForm/0`}>
               <Button>הוסף ועדת בטיחות </Button>
             </Link>

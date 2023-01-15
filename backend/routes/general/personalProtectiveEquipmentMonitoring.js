@@ -7,10 +7,22 @@ const {
   update,
   remove,
   findById,
+  findByGdod,
+  findByHativa,
+  findByOgda,
+  findByPikod,
 } = require("../../controllers/general/personalProtectiveEquipmentMonitoring");
 
 // find spec
 router.get("/personalProtectiveEquipmentMonitoring/:id", findById);
+//findbyrole
+router.get("/personalProtectiveEquipmentMonitoring/bygdod/:gdod", findByGdod);
+
+router.get("/personalProtectiveEquipmentMonitoring/byhativa/:hativa", findByHativa);
+
+router.get("/personalProtectiveEquipmentMonitoring/byogda/:ogda", findByOgda);
+
+router.get("/personalProtectiveEquipmentMonitoring/bypikod/:pikod", findByPikod);
 //find all
 router.get("/personalProtectiveEquipmentMonitoring", find);
 //add

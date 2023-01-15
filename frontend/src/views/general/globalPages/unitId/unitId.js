@@ -21,7 +21,7 @@ import {
 import UnitIdTable from "components/safetySystem/globalTable/UnitId/SortingTable";
 import { isAuthenticated } from "auth";
 
-function unitId() {
+function unitId({match}) {
   const user = isAuthenticated();
   return (
     <>
@@ -31,7 +31,7 @@ function unitId() {
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
             טבלת תעודת זהות יחידה
           </h3>
-          <UnitIdTable userData={user}/>
+          <UnitIdTable unittype={match.params.unittype} unitid={match.params.unitid}/>
           <Link to={`/GlobalUnitIdForm/0`}>
             <Button>הוסף יחידה</Button>
           </Link>
