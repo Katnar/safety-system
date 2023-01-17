@@ -114,7 +114,7 @@ function Home(props) {
 
   return (
     gdods.length == 0 ?
-      <div style={{ width: '50%', marginTop: '30%' }}>
+      <div style={{ width: '50%' }}>
         <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
       </div>
       :
@@ -161,6 +161,7 @@ function Home(props) {
           gdods={gdods}
         />
       </GridContainer>
+      <hr style={{margin:'0px'}} />
       <GridContainer>
         <CardTable name={["תעודת זהות יחידה", `GlobalUnitIdView/${props.match.params.unittype}/${props.match.params.unitid}`]} />
         <CardTable
@@ -198,9 +199,8 @@ function Home(props) {
           <img src={safetyPic} style={{ height: "100px", display: "block", marginLeft: "auto", marginRight: "auto" }}></img>
         </Col>
       </GridContainer>
-      <hr />
-      <br />
-      <Row>
+      <hr style={{marginBottom:'15px',marginTop:'0px'}} />
+      <GridContainer>
         <Col>
           <Faq
             style={{
@@ -213,7 +213,7 @@ function Home(props) {
         <Col>
           <ContactUs />
         </Col>
-      </Row>
+      </GridContainer>
     </div>
     // </Page>
   );

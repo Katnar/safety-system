@@ -295,7 +295,7 @@ const SortingTable = (props) => {
 
   return (
     data.length == 0 ?
-      <div style={{ width: '50%', marginTop: '30%' }}>
+      <div style={{ width: '50%' }}>
         <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
       </div>
       :

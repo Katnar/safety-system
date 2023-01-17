@@ -89,13 +89,10 @@ const CardTableCalcGlobal = (props) => {
           }
         }
       }
-      // console.log(valid);
-      // console.log(isAlert);
       setIsAlertData(isAlert);
       setExpiredData(expired);
       setValidData(valid);
       setIsExpiredData(isExpired);
-      // console.log("test")
     });
   };
 
@@ -114,7 +111,7 @@ const CardTableCalcGlobal = (props) => {
               height: "15rem",
               borderRadius: "15px",
               backgroundColor: "#B5CFD8",
-              boxShadow: "0 0 1rem 0",
+              boxShadow: "0px 0px 5px 0px",
               overflow: "auto",
             }}
           >

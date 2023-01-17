@@ -16,7 +16,7 @@ const CardTable = (props) => {
     <>
       <GridItem xs={8} sm={4} md={2}>
         <Link to={`/${props.name[1]}`}>
-          <Card style={{ borderRadius: "15px", backgroundColor: "#dee9ed", boxShadow: "0 0 1rem 0", height: "5rem" }}>
+          <Card style={{ borderRadius: "15px", backgroundColor: "#dee9ed", boxShadow: "0 0 1rem 0", height: "5rem",marginTop:'15px',marginBottom:'15px',overflow:'auto' }}>
             <CardHeader color="#BCB6FF" stats icon>
               {/* <CardIcon color="#BCB6FF">
                 <VerifiedUserIcon />
