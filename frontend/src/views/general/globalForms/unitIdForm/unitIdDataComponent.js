@@ -129,50 +129,50 @@ const UnitIdDataComponent = ({ match }) => {
 
   const CheckFormData = () => {
     let flag = true;
-    let error = "";
+    var error = [];
 
     if (((state.name == undefined) || (state.name == ""))) {
-      error += "חסר שדה שם יחידה, "
+      error.push("חסר שדה שם יחידה")
       flag = false;
     }
     if (((state.location == undefined) || (state.location == ""))) {
-      error += "חסר שדה מיקום יחידה, "
+      error.push("חסר שדה מיקום יחידה")
       flag = false;
     }
     if (((state.unitStructure == undefined) || (state.unitStructure == ""))) {
-      error += "חסר שדה מבנה היחידה, "
+      error.push("חסר שדה מבנה היחידה")
       flag = false;
     }
     if (((state.unitMeans == undefined) || (state.unitMeans == ""))) {
-      error += "חסר שדה פירוט האמצעים ביחידה, "
+      error.push("חסר שדה פירוט האמצעים ביחידה")
       flag = false;
     }
     if (((state.mainOccupation == undefined) || (state.mainOccupation == ""))) {
-      error += "חסר שדה עיסוק מרכזי, "
+      error.push("חסר שדה עיסוק מרכזי")
       flag = false;
     }
     if (((state.unitStructureTree == undefined) || (state.unitStructureTree == ""))) {
-      error += "חסר שדה עץ מבנה יחידה, "
+      error.push("חסר שדה עץ מבנה יחידה")
       flag = false;
     }
     if (((state.teneStructureTree == undefined) || (state.teneStructureTree == ""))) {
-      error += "חסר שדה עץ מבנה מחלקת טנ''א, "
+      error.push("חסר שדה עץ מבנה מחלקת טנ''א")
       flag = false;
     }
-    if (user.user.role == "1"){
+    if (user.user.role == "1") {
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
 
-    if (singleFile==""){
-      error += "נא להוסיף קובץ"
+    if (singleFile == "") {
+      error.push("נא להוסיף קובץ")
       flag = false;
     }
-    if (singleFile2==""){
-      error += "נא להוסיף קובץ"
+    if (singleFile2 == "") {
+      error.push("נא להוסיף קובץ")
       flag = false;
     }
     if (flag == true) {
@@ -181,7 +181,9 @@ const UnitIdDataComponent = ({ match }) => {
       history.goBack()
     }
     else {
-      toast.error(error)
+      for (const e of error) {
+        toast.error(e)
+      }
     }
   }
 
@@ -198,7 +200,7 @@ const UnitIdDataComponent = ({ match }) => {
     const formData = new FormData();
     const collec = "unitId";
     formData.append("file", singleFile2);
-    await singleFileUpload(formData, collec, "2_" + id);
+    await singleFileUpload(formData, collec, +"2_" + id);
     console.log("Second File:" + singleFile2);
   };
 

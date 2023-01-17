@@ -102,7 +102,7 @@ const TrainingProgramForm = ({ match }) => {
       .get(`http://localhost:8000/api/trainingProgram/${match.params.id}`)
       .then((response) => {
         let tempdatas = response.data;
-        tempdatas.trainingDate=tempdatas.trainingDate.slice(0, 10)
+        tempdatas.trainingDate = tempdatas.trainingDate.slice(0, 10)
         setState(tempdatas);
       })
       .catch((error) => {
@@ -134,49 +134,51 @@ const TrainingProgramForm = ({ match }) => {
     let error = "";
 
     if (((state.trainingDate == undefined) || (state.trainingDate == ""))) {
-      error += "חסר שדה תאריך ההדרכה, "
+      error.push("חסר שדה תאריך ההדרכה")
       flag = false;
     }
     if (((state.trainingSubject == undefined) || (state.trainingSubject == ""))) {
-      error += "חסר שדה נושא ההדרכה, "
+      error.push("חסר שדה נושא ההדרכה")
       flag = false;
     }
     if (((state.requireTest == undefined) || (state.requireTest == ""))) {
-      error += "חסר שדה דורש מבחן, "
+      error.push("חסר שדה דורש מבחן")
       flag = false;
     }
     if (((state.requiredWorkersList == undefined) || (state.requiredWorkersList == ""))) {
-      error += "חסר שדה רשימת עובדים, "
+      error.push("חסר שדה רשימת עובדים")
       flag = false;
     }
     if (((state.trainingStatus == undefined) || (state.trainingStatus == ""))) {
-      error += "חסר שדה סטטוס הדרכה, "
+      error.push("חסר שדה סטטוס הדרכה")
       flag = false;
     }
     if (((state.requiredWorkersStatus == undefined) || (state.requiredWorkersStatus == ""))) {
-      error += "חסר שדה סטטוס הגעת עובד, "
+      error.push("חסר שדה סטטוס הגעת עובד")
       flag = false;
     }
-    if (user.user.role == "1"){
+    if (user.user.role == "1") {
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
 
-    if (singleFile==""){
-      error += "נא להוסיף קובץ"
+    if (singleFile == "") {
+      error.push("נא להוסיף קובץ")
       flag = false;
     }
-    
+
     if (flag == true) {
       SubmitData();
       toast.success("הטופס עודכן בהצלחה");
       history.goBack()
     }
     else {
-      toast.error(error)
+      for (const e of error) {
+        toast.error(e)
+      }
     }
   }
 

@@ -102,7 +102,7 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
       )
       .then((response) => {
         let tempdatas = response.data;
-        tempdatas.testDate=tempdatas.testDate.slice(0, 10)
+        tempdatas.testDate = tempdatas.testDate.slice(0, 10)
         setState(tempdatas);
       })
       .catch((error) => {
@@ -131,45 +131,50 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
 
   const CheckFormData = () => {
     let flag = true;
-    let error = "";
+    var error = [];
 
     if (((state.msd == undefined) || (state.msd == ""))) {
-      error += "חסר שדה מס''ד, "
+      error.push("חסר שדה מס''ד")
+      flag = false;
+    }
+    else 
+    if (isNaN(state.msd)) {
+      error.push('מס"ד לא תקין')
       flag = false;
     }
     if (((state.equipmentName == undefined) || (state.equipmentName == ""))) {
-      error += "חסר שדה שם הציוד, "
+      error.push("חסר שדה שם הציוד")
       flag = false;
     }
     if (((state.mkt == undefined) || (state.mkt == ""))) {
-      error += "חסר שדה מק''ט, "
+      error.push("חסר שדה מק''ט")
       flag = false;
     }
     if (((state.amount == undefined) || (state.amount == ""))) {
-      error += "חסר שדה כמות, "
+      error.push("חסר שדה כמות")
       flag = false;
     }
     if (((state.equipmentLocation == undefined) || (state.equipmentLocation == ""))) {
-      error += "חסר שדה מיקום הציוד, "
+      error.push("חסר שדה מיקום הציוד")
       flag = false;
     }
     if (((state.testDate == undefined) || (state.testDate == ""))) {
-      error += "חסר שדה תאריך הבדיקה, "
+      error.push("חסר שדה תאריך הבדיקה")
       flag = false;
     }
     if (((state.equipmentGuarantor == undefined) || (state.equipmentGuarantor == ""))) {
-      error += "חסר שדה אחראי הציוד, "
+      error.push("חסר שדה אחראי הציוד")
       flag = false;
     }
-    if (user.user.role == "1"){
+    if (user.user.role == "1") {
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
     if (((state.comments == undefined) || (state.comments == ""))) {
-      error += "חסר שדה הערות, "
+      error.push("חסר שדה הערות")
       flag = false;
     }
 
@@ -179,7 +184,9 @@ const PersonalProtectiveEquipmentMonitoringForm = ({ match }) => {
       history.goBack()
     }
     else {
-      toast.error(error)
+      for (const e of error) {
+        toast.error(e)
+      }
     }
   }
 

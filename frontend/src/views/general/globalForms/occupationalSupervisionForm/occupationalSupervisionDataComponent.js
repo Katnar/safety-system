@@ -104,7 +104,7 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
       )
       .then((response) => {
         let tempdatas = response.data;
-        tempdatas.lastExecutionDate=tempdatas.lastExecutionDate.slice(0, 10)
+        tempdatas.lastExecutionDate = tempdatas.lastExecutionDate.slice(0, 10)
         setState(tempdatas);
       })
       .catch((error) => {
@@ -133,61 +133,71 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
 
   const CheckFormData = () => {
     let flag = true;
-    let error = "";
+    var error = [];
 
     if (((state.personalNumber == undefined) || (state.personalNumber == ""))) {
-      error += "חסר שדה מספר אישי, "
+      error.push( "חסר שדה מספר אישי")
       flag = false;
     }
+    else 
+        if (isNaN(state.personalNumber)) {
+          error.push("מס' אישי לא תקין")
+          flag = false;
+        }
     if (((state.id == undefined) || (state.id == ""))) {
-      error += "חסר שדה תעודת זהות, "
+      error.push("חסר שדה תעודת זהות")
+      flag = false;
+    }
+    else 
+    if (isNaN(state.id)) {
+      error.push("ת.ז. לא תקינה")
       flag = false;
     }
     if (((state.fullName == undefined) || (state.fullName == ""))) {
-      error += "חסר שדה שם מלא, "
+      error.push("חסר שדה שם מלא")
       flag = false;
     }
     if (((state.rank == undefined) || (state.rank == ""))) {
-      error += "חסר שדה דרגה, "
+      error.push("חסר שדה דרגה")
       flag = false;
     }
     if (((state.profession == undefined) || (state.profession == ""))) {
-      error += "חסר שדה תפקיד/מקצוע, "
+      error.push("חסר שדה תפקיד/מקצוע")
       flag = false;
     }
     if (((state.harmfulCause == undefined) || (state.harmfulCause == ""))) {
-      error += "חסר שדה גורם מזיק, "
+      error.push("חסר שדה גורם מזיק")
       flag = false;
     }
     if (((state.legislationAndMilitaryOrders == undefined) || (state.legislationAndMilitaryOrders == ""))) {
-      error += "חסר שדה חקיקה ופקודות הצבא, "
+      error.push("חסר שדה חקיקה ופקודות הצבא")
       flag = false;
     }
     if (((state.frequencyOfTests == undefined) || (state.frequencyOfTests == ""))) {
-      error += "חסר שדה תדירות הבדיקות, "
+      error.push("חסר שדה תדירות הבדיקות")
       flag = false;
     }
     if (((state.lastExecutionDate == undefined) || (state.lastExecutionDate == ""))) {
-      error += "חסר שדה תאריך ביצוע אחרון, "
+      error.push("חסר שדה תאריך ביצוע אחרון")
       flag = false;
     }
     if (((state.nextTestDate == undefined) || (state.nextTestDate == ""))) {
-      error += "חסר שדה תאריך בדיקה הבא, "
+      error.push("חסר שדה תאריך בדיקה הבא")
       flag = false;
     }
     if (((state.fit == undefined) || (state.fit == ""))) {
-      error += "חסר שדה כשיר/לא כשיר, "
+      error.push("חסר שדה כשיר/לא כשיר")
       flag = false;
     }
-    if (user.user.role == "1"){
+    if (user.user.role == "1") {
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
-    if (singleFile==""){
-      error += "נא להוסיף קובץ"
+    if (singleFile == "") {
+      error.push("נא להוסיף קובץ")
       flag = false;
     }
 
@@ -197,7 +207,9 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
       history.goBack()
     }
     else {
-      toast.error(error)
+      for (const e of error) {
+        toast.error(e)
+      }
     }
   }
 

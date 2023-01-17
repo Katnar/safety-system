@@ -131,33 +131,33 @@ const HomsManagementMonitoringForm = ({ match }) => {
 
   const CheckFormData = () => {
     let flag = true;
-    let error = "";
+    var error = [];
 
     if (((state.materialName == undefined) || (state.materialName == ""))) {
-      error += "חסר שדה שם החומר, "
+      error.push("חסר שדה שם החומר")
       flag = false;
     }
     if (((state.sheetId == undefined) || (state.sheetId == ""))) {
-      error += "חסר שדה מספר גיליון, "
+      error.push("חסר שדה מספר גיליון")
       flag = false;
     }
     if (((state.materialDepartments == undefined) || (state.materialDepartments == ""))) {
-      error += "חסר שדה מחלקות בהן נמצא החומר, "
+      error.push("חסר שדה מחלקות בהן נמצא החומר")
       flag = false;
     }
     if (((state.comments == undefined) || (state.comments == ""))) {
-      error += "חסר שדה הערות, "
+      error.push("חסר שדה הערות")
       flag = false;
     }
     if (user.user.role == "1"){
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
     if (singleFile==""){
-      error += "נא להוסיף קובץ"
+      error.push("נא להוסיף קובץ")
       flag = false;
     }
 
@@ -167,8 +167,9 @@ const HomsManagementMonitoringForm = ({ match }) => {
       history.goBack()
     }
     else {
-      toast.error(error)
-    }
+      for (const e of error) {
+        toast.error(e)
+      }    }
   }
 
   const UploadFile = async (id) => {

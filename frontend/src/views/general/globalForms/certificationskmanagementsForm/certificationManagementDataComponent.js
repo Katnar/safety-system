@@ -137,45 +137,55 @@ const CertificationManagementDataComponent = ({ match }) => {
 
   const CheckFormData = () => {
     let flag = true;
-    let error = "";
+    var error = [];
 
     if (((state.personalNumber == undefined) || (state.personalNumber == ""))) {
-      error += "חסר שדה מספר אישי, "
+      error.push( "חסר שדה מספר אישי")
       flag = false;
     }
+    else 
+        if (isNaN(state.personalNumber)) {
+          error.push("מס' אישי לא תקין")
+          flag = false;
+        }
     if (((state.id == undefined) || (state.id == ""))) {
-      error += "חסר שדה תעודת זהות, "
+      error.push("חסר שדה תעודת זהות")
+      flag = false;
+    }
+    else 
+    if (isNaN(state.id)) {
+      error.push("ת.ז. לא תקינה")
       flag = false;
     }
     if (((state.fullName == undefined) || (state.fullName == ""))) {
-      error += "חסר שדה שם, "
+      error.push("חסר שדה שם")
       flag = false;
     }
     if (((state.rank == undefined) || (state.rank == ""))) {
-      error += "חסר שדה דרגה, "
+      error.push("חסר שדה דרגה")
       flag = false;
     }
     if (((state.profession == undefined) || (state.profession == ""))) {
-      error += "חסר שדה מקצוע, "
+      error.push("חסר שדה מקצוע")
       flag = false;
     }
     if (((state.certification == undefined) || (state.certification == ""))) {
-      error += "חסר שדה הסמכה, "
+      error.push("חסר שדה הסמכה")
       flag = false;
     }
     if (((state.certificationValidity == undefined) || (state.certificationValidity == ""))) {
-      error += "חסר שדה תוקף הסמכה, "
+      error.push("חסר שדה תוקף הסמכה")
       flag = false;
     }
     if (user.user.role == "1"){
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
     if (singleFile==""){
-      error += "נא להוסיף קובץ"
+      error.push("נא להוסיף קובץ")
       flag = false;
     }
 
@@ -185,7 +195,9 @@ const CertificationManagementDataComponent = ({ match }) => {
       history.goBack();
     }
     else {
-      toast.error(error)
+      for (const e of error){
+        toast.error(e)
+      }
     }
   }
 
