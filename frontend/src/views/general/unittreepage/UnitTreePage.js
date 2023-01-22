@@ -211,49 +211,49 @@ function UnitTreePage({ match }) {
         var idstr = event.key; //idstr = _id
         if (user.user.role == '0') {
             if (event.type == "pikod") {
-                // history.push(`/dashboard/pikod/${idstr}/magadal/0`);
+                history.push(`/globalDashboard/pikod/${idstr}`);
             }
             if (event.type == "ogda") {
                 var ogdaidstr = idstr.split('/')[1];
-                // history.push(`/dashboard/ogda/${ogdaidstr}/magadal/0`);
+                history.push(`/globalDashboard/ogda/${ogdaidstr}`);
             }
             if (event.type == "hativa") {
                 var hativaidstr = idstr.split('/')[2];
-                // history.push(`/dashboard/hativa/${hativaidstr}/magadal/0`);
+                history.push(`/globalDashboard/hativa/${hativaidstr}`);
             }
             if (event.type == "gdod") {
                 var gdodidstr = idstr.split('/')[3];
-                // history.push(`/dashboard/gdod/${gdodidstr}/magadal/0`);
+                history.push(`/globalDashboard/gdod/${gdodidstr}`);
             }
         }
         else if (user.user.role == '4') {
             if (event.type == "ogda") {
                 var ogdaidstr = idstr;
-                // history.push(`/dashboard/ogda/${ogdaidstr}/magadal/0`);
+                history.push(`/globalDashboard/ogda/${ogdaidstr}`);
             }
             if (event.type == "hativa") {
                 var hativaidstr = idstr.split('/')[1];
-                // history.push(`/dashboard/hativa/${hativaidstr}/magadal/0`);
+                history.push(`/globalDashboard/hativa/${hativaidstr}`);
             }
             if (event.type == "gdod") {
                 var gdodidstr = idstr.split('/')[2];
-                // history.push(`/dashboard/gdod/${gdodidstr}/magadal/0`);
+                history.push(`/globalDashboard/gdod/${gdodidstr}`);
             }
         }
         else if (user.user.role == '3') {
             if (event.type == "hativa") {
                 var hativaidstr = idstr;
-                // history.push(`/dashboard/hativa/${hativaidstr}/magadal/0`);
+                history.push(`/globalDashboard/hativa/${hativaidstr}`);
             }
             if (event.type == "gdod") {
                 var gdodidstr = idstr.split('/')[1];
-                // history.push(`/dashboard/gdod/${gdodidstr}/magadal/0`);
+                history.push(`/globalDashboard/gdod/${gdodidstr}`);
             }
         }
         else if (user.user.role == '2') {
             if (event.type == "gdod") {
                 var gdodidstr = idstr;
-                // history.push(`/dashboard/gdod/${gdodidstr}/magadal/0`);
+                history.push(`/globalDashboard/gdod/${gdodidstr}`);
             }
         }
     }
@@ -271,7 +271,7 @@ function UnitTreePage({ match }) {
 
     return (
         treedata.length == 0 ?
-            <div style={{ width: '50%', marginTop: '30%' }}>
+            <div style={{ width: '50%' }}>
                 <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
             </div>
             :

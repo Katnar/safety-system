@@ -7,10 +7,22 @@ const {
   update,
   remove,
   findById,
+  findByGdod,
+  findByHativa,
+  findByOgda,
+  findByPikod,
 } = require("../../controllers/general/trainingProgram");
 
 // find spec
 router.get("/trainingProgram/:id", findById);
+//findbyrole
+router.get("/trainingProgram/bygdod/:gdod", findByGdod);
+
+router.get("/trainingProgram/byhativa/:hativa", findByHativa);
+
+router.get("/trainingProgram/byogda/:ogda", findByOgda);
+
+router.get("/trainingProgram/bypikod/:pikod", findByPikod);
 //find all
 router.get("/trainingProgram", find);
 //add

@@ -79,19 +79,19 @@ function Signin() {
       console.log(user);
       if (user && user.validated == true) {
         if (user.role === "0") {
-          history.push(`/globalDashboard/0`);
+          history.push(`/globalDashboard/admin/0`);
         }
         if (user.role === "1") {
-          history.push(`/globalDashboard/${user.gdod}`);
+          history.push(`/globalDashboard/gdod/${user.gdod}`);
         }
         if (user.role === "2") {
-          history.push(`/globalDashboard/${user.hativa}`);
+          history.push(`/globalDashboard/hativa/${user.hativa}`);
         }
         if (user.role === "3") {
-          history.push(`/globalDashboard/${user.ogda}`);
+          history.push(`/globalDashboard/ogda/${user.ogda}`);
         }
         if (user.role === "4") {
-          history.push(`/globalDashboard/${user.pikod}`);
+          history.push(`/globalDashboard/pikod/${user.pikod}`);
         }
       } else {
         toast.success("משתמש לא מאושר מערכת");

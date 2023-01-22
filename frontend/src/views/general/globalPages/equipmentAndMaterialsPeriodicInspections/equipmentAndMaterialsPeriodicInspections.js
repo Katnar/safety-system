@@ -21,7 +21,7 @@ import {
 import EquipmentAndMaterialsPeriodicInspectionsTable from "components/safetySystem/globalTable/equipmentAndMaterialsPeriodicInspections/SortingTable";
 import { isAuthenticated } from "auth";
 
-function trainigProgram() {
+function trainigProgram({match}) {
   const user = isAuthenticated();
   return (
     <>
@@ -32,7 +32,7 @@ function trainigProgram() {
             <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
               טבלת בדיקות תקופתיות לציוד וחומרים
             </h3>
-            <EquipmentAndMaterialsPeriodicInspectionsTable userData={user} />
+            <EquipmentAndMaterialsPeriodicInspectionsTable unittype={match.params.unittype} unitid={match.params.unitid} />
             <Link to={`/GlobalequipmentAndMaterialsForm/0`}>
               <Button>הוסף בדיקה</Button>
             </Link>

@@ -44,7 +44,28 @@ const UnitIdDataComponent = ({ match }) => {
     if (match.params.id != "0") {
       loadDatas();
     }
+    else{
+      Fixstate()
+    }
     loadPikods();
+  }
+
+  const Fixstate = () => {
+    if (user.user.role == "0") {
+
+    }
+    if (user.user.role == "1") {
+      setState({gdod:user.user.gdod})
+    }
+    if (user.user.role == "2") {
+      setState({hativa:user.user.hativa})
+    }
+    if (user.user.role == "3") {
+      setState({ogda:user.user.ogda})
+    }
+    if (user.user.role == "4") {
+      setState({pikod:user.user.pikod})
+    }
   }
 
   const loadPikods = async () => {
@@ -151,14 +172,14 @@ const UnitIdDataComponent = ({ match }) => {
       error.push("חסר שדה עיסוק מרכזי")
       flag = false;
     }
-    if (((state.unitStructureTree == undefined) || (state.unitStructureTree == ""))) {
-      error.push("חסר שדה עץ מבנה יחידה")
-      flag = false;
-    }
-    if (((state.teneStructureTree == undefined) || (state.teneStructureTree == ""))) {
-      error.push("חסר שדה עץ מבנה מחלקת טנ''א")
-      flag = false;
-    }
+    // if (((state.unitStructureTree == undefined) || (state.unitStructureTree == ""))) {
+    //   error.push("חסר שדה עץ מבנה יחידה")
+    //   flag = false;
+    // }
+    // if (((state.teneStructureTree == undefined) || (state.teneStructureTree == ""))) {
+    //   error.push("חסר שדה עץ מבנה מחלקת טנ''א")
+    //   flag = false;
+    // }
     if (user.user.role == "1") {
       state.gdod = user.user.gdod
     }
@@ -198,9 +219,9 @@ const UnitIdDataComponent = ({ match }) => {
 
   const UploadFile2 = async (id) => {
     const formData = new FormData();
-    const collec = "unitId";
+    const collec = "unitId_2";
     formData.append("file", singleFile2);
-    await singleFileUpload(formData, collec, +"2_" + id);
+    await singleFileUpload(formData, collec, id);
     console.log("Second File:" + singleFile2);
   };
 
@@ -221,16 +242,9 @@ const UnitIdDataComponent = ({ match }) => {
       );
       tempData = result.data;
     }
-    if (singleFile !== "") {
-      await UploadFile(tempData._id);
-      await UploadFile2(tempData._id);
-    }
-
-
-
-    // console.log("post")
-    // let result = await axios.post("http://localhost:8000/api/unitId", unit);
-    // tempUnitData = result.data;
+    let tempid=tempData._id;
+      await UploadFile(tempid);
+      await UploadFile2(tempid);
   }
 
   useEffect(() => {

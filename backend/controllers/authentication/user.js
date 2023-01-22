@@ -21,34 +21,17 @@ exports.find = (req, res) => {
         .then(orders => res.json(orders))
         .catch(err => res.status(400).json('Error: ' + err));
 }
-exports.update = async(req, res) => {
-    
-    const user = await User.findByIdAndUpdate(
-        req.params.id,
-        {
-            name: req.body.name,
-            lastname:  req.body.lastname,
-            personalnumber:  req.body.personalnumber,
-            password:  req.body.password,
-            validated:  req.body.validated,
-            gdod:  req.body.gdod,
-            hativa:  req.body.hativa,
-            ogda:  req.body.ogda,
-            pikod:  req.body.pikod,
-            zminot: req.body.zminot,
-            adam: req.body.adam,
-            workplan: req.body.workplan,
-            kshirot: req.body.kshirot
-        },
-        {new: true}
-        )
-        if(!user) {
-            res.status(404).send({message:'גדוד הביצוע לא יכולה להיווצר'})
-        } 
-        res.status(200).send(user)
-    
+exports.update = async (req, res) => {
+
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    if (!user) {
+        res.status(404).send({ message: 'שגיאה בעדכון' })
+    }
+    res.status(200).send(user)
+
 
 }
+
 // exports.update = (req, res) => {
 //     //console.log(req.body); //prints {...}
 //   //  console.log(req.params); //prints { id: '608e42b1cedc2a3a18492ae5' }

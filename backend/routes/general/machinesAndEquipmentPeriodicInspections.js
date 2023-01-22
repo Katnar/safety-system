@@ -7,10 +7,22 @@ const {
   update,
   remove,
   findById,
+  findByGdod,
+  findByHativa,
+  findByOgda,
+  findByPikod,
 } = require("../../controllers/general/machinesAndEquipmentPeriodicInspections");
 
 // find spec
 router.get("/machinesAndEquipmentPeriodicInspections/:id", findById);
+//findbyrole
+router.get("/machinesAndEquipmentPeriodicInspections/bygdod/:gdod", findByGdod);
+
+router.get("/machinesAndEquipmentPeriodicInspections/byhativa/:hativa", findByHativa);
+
+router.get("/machinesAndEquipmentPeriodicInspections/byogda/:ogda", findByOgda);
+
+router.get("/machinesAndEquipmentPeriodicInspections/bypikod/:pikod", findByPikod);
 //find all
 router.get("/machinesAndEquipmentPeriodicInspections", find);
 //add

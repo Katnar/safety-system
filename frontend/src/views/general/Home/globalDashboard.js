@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import GridContainer from "components/Grid/GridContainer.js";
 import CardTable from "components/Card/CardTable";
@@ -15,50 +16,52 @@ import {
 import axios from "axios";
 import PropagateLoader from "react-spinners/PropagateLoader";
 
-export default function Home(props) {
-  const useStyles = makeStyles(dashboardStyle);
+function Home(props) {
   const [gdods, setGdods] = useState("");
-  const user = isAuthenticated();
+  //spinner
+  const [isdataloaded, setIsdataloaded] = useState(false);
 
   async function init() {
-
-    if (user.user.role == "0") {
+    setIsdataloaded(false)
+    if (props.match.params.unittype == "admin") {
       await axios.get(`http://localhost:8000/api/gdod`)
         .then((response) => {
           let tempgdods = response.data;
-          setGdods(tempgdods)        
+          setGdods(tempgdods)       
+          setIsdataloaded(true) 
         })
         .catch((error) => {
           console.log(error);
         });
     }
 
-
-    if (user.user.role == "1") {
-      await axios.get(`http://localhost:8000/api/gdod/${user.user.gdod}`)
+    if (props.match.params.unittype == "gdod") {
+      await axios.get(`http://localhost:8000/api/gdod/${props.match.params.unitid}`)
         .then((response) => {
           let tempgdods = [response.data];
-          setGdods(tempgdods)        
+          setGdods(tempgdods)     
+          setIsdataloaded(true)   
         })
         .catch((error) => {
           console.log(error);
         });
     }
 
-    if (user.user.role == "2") {
-      await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: user.user.hativa })
+    if (props.match.params.unittype == "hativa") {
+      await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: props.match.params.unitid })
         .then((response) => {
           let tempgdods = response.data;
-          setGdods(tempgdods)        
+          setGdods(tempgdods)  
+          setIsdataloaded(true)      
         })
         .catch((error) => {
           console.log(error);
         });
     }
 
-    if (user.user.role == "3") {
+    if (props.match.params.unittype == "ogda") {
       let tempgdods=[];
-      await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: user.user.ogda })
+      await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: props.match.params.unitid })
         .then(async(response1) => {
           for (let i = 0; i < response1.data.length; i++) {
             await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: response1.data[i]._id })
@@ -72,16 +75,17 @@ export default function Home(props) {
               });
           }
           console.log(tempgdods)
-          setGdods(tempgdods)        
+          setGdods(tempgdods)  
+          setIsdataloaded(true)      
         })
         .catch((error) => {
           console.log(error);
         });
     }
 
-    if (user.user.role == "4") {
+    if (props.match.params.unittype == "pikod") {
       let tempgdods=[];
-      await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: user.user.pikod })
+      await axios.post(`http://localhost:8000/api/ogda/ogdasbypikodid`, { pikod: props.match.params.unitid })
         .then(async(response1) => {
           for (let i = 0; i < response1.data.length; i++) {
             await axios.post(`http://localhost:8000/api/hativa/hativasbyogdaid`, { ogda: response1.data[i]._id })
@@ -102,7 +106,8 @@ export default function Home(props) {
                 console.log(error);
               });
           }
-          setGdods(tempgdods)        
+          setGdods(tempgdods)   
+          setIsdataloaded(true)     
         })
         .catch((error) => {
           console.log(error);
@@ -111,15 +116,15 @@ export default function Home(props) {
   }
 
   useEffect(() => {
-    if (user.user && user.user.role != undefined && user.user.role != null) {
       init();
-    }
-  }, [user.user.role]);
+  }, []);
 
   return (
-    gdods.length == 0 ?
-      <div style={{ width: '50%', marginTop: '30%' }}>
-        <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
+    !isdataloaded ?
+      <div style={{ paddingTop: '20%', paddingBottom: '20%' }}>
+        <div style={{ width: '50%' }}>
+          <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
+        </div>
       </div>
       :
       <div>
@@ -127,7 +132,7 @@ export default function Home(props) {
         <CardTableCalcGlobal
           name={[
             "ניהול הסמכות",
-            "GlobalCertificationsManagementsView",
+            `GlobalCertificationsManagementsView/${props.match.params.unittype}/${props.match.params.unitid}`,
             "שים לב! חלק מההסמכות פגות תוקף",
             "certificationValidity",
             "certificationsManagement",
@@ -137,7 +142,7 @@ export default function Home(props) {
         <CardTableCalcGlobal
           name={[
             "פיקוח תעסוקתי",
-            "GlobalOccupationalSupervisionView",
+            `GlobalOccupationalSupervisionView/${props.match.params.unittype}/${props.match.params.unitid}`,
             "שים לב! חלק מהפיקוחים פגי תוקף",
             "nextTestDate",
             "occupationalSupervision",
@@ -147,7 +152,7 @@ export default function Home(props) {
         <CardTableCalcGlobal
           name={[
             "בדיקות תקופתיות לציוד וחומרים",
-            "GlobalEquipmentAndMaterialsPeriodicInspectionsView",
+            `GlobalEquipmentAndMaterialsPeriodicInspectionsView/${props.match.params.unittype}/${props.match.params.unitid}`,
             "שים לב! חלק מהבדיקות פגות תוקף",
             "nextTestDate",
             "equipmentAndMaterialsPeriodicInspections",
@@ -157,7 +162,7 @@ export default function Home(props) {
         <CardTableCalcGlobal
           name={[
             "ניטורים סביבתיים",
-            "GlobalEnvironmentalMonitoringView",
+            `GlobalEnvironmentalMonitoringView/${props.match.params.unittype}/${props.match.params.unitid}`,
             "שים לב! חלק מהניטורים פגי תוקף",
             "nextMonitoringDate",
             "environmentalMonitoring",
@@ -165,46 +170,46 @@ export default function Home(props) {
           gdods={gdods}
         />
       </GridContainer>
+      <hr style={{margin:'0px'}} />
       <GridContainer>
-        <CardTable name={["תעודת זהות יחידה", "GlobalUnitIdView"]} />
+        <CardTable name={["תעודת זהות יחידה", `GlobalUnitIdView/${props.match.params.unittype}/${props.match.params.unitid}`]} />
         <CardTable
-          name={["כשירות ממונים על הבטיחות", "GlobalSafetyOfficersQualificationView"]}
+          name={["כשירות ממונים על הבטיחות", `GlobalSafetyOfficersQualificationView/${props.match.params.unittype}/${props.match.params.unitid}`]}
         />
-        <CardTable name={["תכנית הדרכות", "GlobalTrainingProgramView"]} />
+        <CardTable name={["תכנית הדרכות", `GlobalTrainingProgramView/${props.match.params.unittype}/${props.match.params.unitid}`]} />
         <CardTable
           name={[
             "בדיקות תקופתיות למכונות וציוד",
-            "GlobalMachinesAndEquipmentPeriodicInspectionsView",
+            `GlobalMachinesAndEquipmentPeriodicInspectionsView/${props.match.params.unittype}/${props.match.params.unitid}`,
           ]}
         />
         <CardTable
-          name={["מעקב ניהול סיכונים", "GlobalRiskManagementMonitoringView"]}
+          name={["מעקב ניהול סיכונים", `GlobalRiskManagementMonitoringView/${props.match.params.unittype}/${props.match.params.unitid}`]}
         />
         <CardTable
           name={[
             "מעקב וועדות בטיחות חודשיות",
-            "GlobalMonthlySafetyCommitteesMonitoringView",
+            `GlobalMonthlySafetyCommitteesMonitoringView/${props.match.params.unittype}/${props.match.params.unitid}`,
           ]}
         />
       </GridContainer>
       <GridContainer>
-        <CardTable name={["מעקב סקר מפגעים", "GlobalHazardsMonitoringView"]} />
-        <CardTable name={['מעקב ניהול חומ"ס', "GlobalHomsManagementMonitoringView"]} />
+        <CardTable name={["מעקב סקר מפגעים", `GlobalHazardsMonitoringView/${props.match.params.unittype}/${props.match.params.unitid}`]} />
+        <CardTable name={['מעקב ניהול חומ"ס', `GlobalHomsManagementMonitoringView/${props.match.params.unittype}/${props.match.params.unitid}`]} />
         <CardTable
           name={[
             "מעקב ציוד מגן אישי",
-            "GlobalPersonalProtectiveEquipmentMonitoringView",
+            `GlobalPersonalProtectiveEquipmentMonitoringView/${props.match.params.unittype}/${props.match.params.unitid}`,
           ]}
         />
-        <CardTable name={["בדיקות הארקות חשמל ומבנים", "GlobalGroundingTestsView"]} />
-        <CardTable name={["תיעוד ביקורות", "GlobalReviewsDocumentationView"]} />
+        <CardTable name={["בדיקות הארקות חשמל ומבנים", `GlobalGroundingTestsView/${props.match.params.unittype}/${props.match.params.unitid}`]} />
+        <CardTable name={["תיעוד ביקורות", `GlobalReviewsDocumentationView/${props.match.params.unittype}/${props.match.params.unitid}`]} />
         <Col>
           <img src={safetyPic} style={{ height: "100px", display: "block", marginLeft: "auto", marginRight: "auto" }}></img>
         </Col>
       </GridContainer>
-      <hr />
-      <br />
-      <Row>
+      <hr style={{marginBottom:'15px',marginTop:'0px'}} />
+      <GridContainer>
         <Col>
           <Faq
             style={{
@@ -217,8 +222,9 @@ export default function Home(props) {
         <Col>
           <ContactUs />
         </Col>
-      </Row>
+      </GridContainer>
     </div>
     // </Page>
   );
 }
+export default withRouter(Home);

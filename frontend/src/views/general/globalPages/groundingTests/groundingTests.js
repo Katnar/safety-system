@@ -21,7 +21,7 @@ import {
 import GroundingTestsTable from "components/safetySystem/globalTable/groundingTests/SortingTable";
 import { isAuthenticated } from "auth";
 
-function GroundingTests() {
+function GroundingTests({match}) {
   const user = isAuthenticated();
   return (
     <>
@@ -32,7 +32,7 @@ function GroundingTests() {
             <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
               טבלת בדיקת הארקות חשמל ומבנים
             </h3>
-            <GroundingTestsTable userData={user} />
+            <GroundingTestsTable unittype={match.params.unittype} unitid={match.params.unitid} />
             <Link to={`/GlobalGroundingTestsForm/0`}>
               <Button>הוסף בדיקה</Button>
             </Link>

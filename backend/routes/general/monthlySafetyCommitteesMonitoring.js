@@ -7,10 +7,22 @@ const {
   update,
   remove,
   findById,
+  findByGdod,
+  findByHativa,
+  findByOgda,
+  findByPikod,
 } = require("../../controllers/general/monthlySafetyCommitteesMonitoring");
 
 // find spec
 router.get("/monthlySafetyCommitteesMonitoring/:id", findById);
+//findbyrole
+router.get("/monthlySafetyCommitteesMonitoring/bygdod/:gdod", findByGdod);
+
+router.get("/monthlySafetyCommitteesMonitoring/byhativa/:hativa", findByHativa);
+
+router.get("/monthlySafetyCommitteesMonitoring/byogda/:ogda", findByOgda);
+
+router.get("/monthlySafetyCommitteesMonitoring/bypikod/:pikod", findByPikod);
 //find all
 router.get("/monthlySafetyCommitteesMonitoring", find);
 //add

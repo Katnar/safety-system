@@ -21,7 +21,7 @@ import {
 import PersonalProtectiveEquipmentMonitoringTable from "components/safetySystem/globalTable/personalProtectiveEquipmentMonitoring/SortingTable";
 import { isAuthenticated } from "auth";
 
-function PersonalProtectiveEquipmentMonitoring() {
+function PersonalProtectiveEquipmentMonitoring({match}) {
   const user = isAuthenticated();
   return (
     <>
@@ -32,7 +32,7 @@ function PersonalProtectiveEquipmentMonitoring() {
             <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
               טבלת מעקב ציוד מגן אישי
             </h3>
-            <PersonalProtectiveEquipmentMonitoringTable userData={user} />
+            <PersonalProtectiveEquipmentMonitoringTable unittype={match.params.unittype} unitid={match.params.unitid} />
             <Link to={`/GlobalPersonalProtectiveEquipmentMonitoringForm/0`}>
               <Button>הוסף ציוד מגן אישי </Button>
             </Link>

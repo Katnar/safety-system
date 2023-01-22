@@ -45,7 +45,28 @@ const OccupationalSupervisionDataComponent = ({ match }) => {
     if (match.params.id != "0") {
       loadDatas();
     }
+    else{
+      Fixstate()
+    }
     loadPikods();
+  }
+
+  const Fixstate = () => {
+    if (user.user.role == "0") {
+
+    }
+    if (user.user.role == "1") {
+      setState({gdod:user.user.gdod})
+    }
+    if (user.user.role == "2") {
+      setState({hativa:user.user.hativa})
+    }
+    if (user.user.role == "3") {
+      setState({ogda:user.user.ogda})
+    }
+    if (user.user.role == "4") {
+      setState({pikod:user.user.pikod})
+    }
   }
 
   const loadPikods = async () => {

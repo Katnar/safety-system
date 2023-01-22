@@ -22,7 +22,7 @@ import {
 import SafetyOfficersQualificationTable from "components/safetySystem/globalTable/safetyOfficersQualification/SortingTable";
 import { isAuthenticated } from "auth";
 
-function safetyOfficersQualification() {
+function safetyOfficersQualification({match}) {
   const user = isAuthenticated();
   return (
     <>
@@ -32,7 +32,7 @@ function safetyOfficersQualification() {
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
             טבלת כשירות ממונים על הבטיחות
           </h3>
-          <SafetyOfficersQualificationTable userData={user}/>
+          <SafetyOfficersQualificationTable unittype={match.params.unittype} unitid={match.params.unitid}/>
           <Link to={`/GlobalSafetyOfficersQualificationForm/0`}>
             <Button>הוסף ממונה בטיחות</Button>
           </Link>

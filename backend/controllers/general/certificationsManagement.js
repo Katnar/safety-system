@@ -33,53 +33,136 @@ exports.findById = async (req, res) => {
 };
 
 exports.findByGdod = async (req, res) => {
-  const certificationsManagement = await CertificationsManagement.find().where({
-    gdod: req.params.gdod,
-  });
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
 
-  if (!certificationsManagement) {
-    res.status(500).json({ success: false });
+  let andquery = [];
+  let matchquerry;
+
+  andquery.push({ "gdod_data._id": req.params.gdod });
+
+  if (andquery.length != 0) {
+    matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
   }
-  res.send(certificationsManagement);
+
+  // console.log(matchquerry)
+  // console.log(andquery)
+
+  CertificationsManagement.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.findByHativa = async (req, res) => {
-  const certificationsManagement = await CertificationsManagement.find().where({
-    hativa: req.params.hativa,
-  });
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
 
-  if (!certificationsManagement) {
-    res.status(500).json({ success: false });
+  let andquery = [];
+  let matchquerry;
+
+  andquery.push({ "hativa_data._id": req.params.hativa });
+
+  if (andquery.length != 0) {
+    matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
   }
-  res.send(certificationsManagement);
+
+  // console.log(matchquerry)
+  // console.log(andquery)
+
+  CertificationsManagement.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.findByOgda = async (req, res) => {
-  const certificationsManagement = await CertificationsManagement.find().where({
-    ogda: req.params.ogda,
-  });
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
 
-  if (!certificationsManagement) {
-    res.status(500).json({ success: false });
+  let andquery = [];
+  let matchquerry;
+
+  andquery.push({ "ogda_data._id": req.params.ogda });
+
+  if (andquery.length != 0) {
+    matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
   }
-  res.send(certificationsManagement);
+
+  // console.log(matchquerry)
+  // console.log(andquery)
+
+  CertificationsManagement.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.findByPikod = async (req, res) => {
-  const certificationsManagement = await CertificationsManagement.find().where({
-    pikod: req.params.pikod,
-  });
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
 
-  if (!certificationsManagement) {
-    res.status(500).json({ success: false });
+  let andquery = [];
+  let matchquerry;
+
+  andquery.push({ "pikod_data._id": req.params.pikod });
+
+  if (andquery.length != 0) {
+    matchquerry = {
+      "$match": {
+        "$and": andquery
+      }
+    };
+    finalquerry.push(matchquerry)
   }
-  res.send(certificationsManagement);
+
+  // console.log(matchquerry)
+  // console.log(andquery)
+
+  CertificationsManagement.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.find = (req, res) => {
-  CertificationsManagement.find()
-    .then((certificationsManagement) => res.json(certificationsManagement))
-    .catch((err) => res.status(400).json("Error: " + err));
+  let tipulfindquerry = readtipul.slice();
+  let finalquerry = tipulfindquerry;
+
+  CertificationsManagement.aggregate(finalquerry)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(400).json('Error: ' + error);
+    });
 };
 
 exports.create = (req, res) => {

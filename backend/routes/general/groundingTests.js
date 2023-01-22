@@ -7,10 +7,22 @@ const {
   update,
   remove,
   findById,
+  findByGdod,
+  findByHativa,
+  findByOgda,
+  findByPikod,
 } = require("../../controllers/general/groundingTests");
 
 // find spec
 router.get("/groundingTests/:id", findById);
+//findbyrole
+router.get("/groundingTests/bygdod/:gdod", findByGdod);
+
+router.get("/groundingTests/byhativa/:hativa", findByHativa);
+
+router.get("/groundingTests/byogda/:ogda", findByOgda);
+
+router.get("/groundingTests/bypikod/:pikod", findByPikod);
 //find all
 router.get("/groundingTests", find);
 //add

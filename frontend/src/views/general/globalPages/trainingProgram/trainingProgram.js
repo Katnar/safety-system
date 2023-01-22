@@ -21,7 +21,7 @@ import {
 import TrainingProgramTable from "components/safetySystem/globalTable/trainingProgram/SortingTable";
 import { isAuthenticated } from "auth";
 
-function trainigProgram() {
+function trainigProgram({match}) {
   const user  = isAuthenticated();
   return (
     <>
@@ -31,7 +31,7 @@ function trainigProgram() {
           <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
             טבלת תכנית הדרכות
           </h3>
-          <TrainingProgramTable userData={user}/>
+          <TrainingProgramTable unittype={match.params.unittype} unitid={match.params.unitid}/>
           <Link to={`/GlobalTrainingProgramForm/0`}>
             <Button>הוסף תכנית הדרכה</Button>
           </Link>

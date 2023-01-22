@@ -21,7 +21,7 @@ import {
 import EnvironmentalMonitoringTable from "components/safetySystem/globalTable/environmentalMonitoring/SortingTable";
 import { isAuthenticated } from "auth";
 
-function EnvironmentalMonitoring() {
+function EnvironmentalMonitoring({match}) {
   const user = isAuthenticated();
   return (
     <>
@@ -32,7 +32,7 @@ function EnvironmentalMonitoring() {
             <h3 style={{ textAlign: "right", fontWeight: "bold" }}>
               טבלת ניטורים סביבתיים
             </h3>
-            <EnvironmentalMonitoringTable userData={user} />
+            <EnvironmentalMonitoringTable unittype={match.params.unittype} unitid={match.params.unitid} />
             <Link to={`/GlobalEnvironmentalMonitoringForm/0`}>
               <Button>הוסף ניטור סביבתי</Button>
             </Link>
