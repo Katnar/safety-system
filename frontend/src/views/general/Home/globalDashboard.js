@@ -17,15 +17,18 @@ import axios from "axios";
 import PropagateLoader from "react-spinners/PropagateLoader";
 
 function Home(props) {
-  const useStyles = makeStyles(dashboardStyle);
   const [gdods, setGdods] = useState("");
+  //spinner
+  const [isdataloaded, setIsdataloaded] = useState(false);
 
   async function init() {
+    setIsdataloaded(false)
     if (props.match.params.unittype == "admin") {
       await axios.get(`http://localhost:8000/api/gdod`)
         .then((response) => {
           let tempgdods = response.data;
-          setGdods(tempgdods)        
+          setGdods(tempgdods)       
+          setIsdataloaded(true) 
         })
         .catch((error) => {
           console.log(error);
@@ -36,7 +39,8 @@ function Home(props) {
       await axios.get(`http://localhost:8000/api/gdod/${props.match.params.unitid}`)
         .then((response) => {
           let tempgdods = [response.data];
-          setGdods(tempgdods)        
+          setGdods(tempgdods)     
+          setIsdataloaded(true)   
         })
         .catch((error) => {
           console.log(error);
@@ -47,7 +51,8 @@ function Home(props) {
       await axios.post(`http://localhost:8000/api/gdod/gdodsbyhativaid`, { hativa: props.match.params.unitid })
         .then((response) => {
           let tempgdods = response.data;
-          setGdods(tempgdods)        
+          setGdods(tempgdods)  
+          setIsdataloaded(true)      
         })
         .catch((error) => {
           console.log(error);
@@ -70,7 +75,8 @@ function Home(props) {
               });
           }
           console.log(tempgdods)
-          setGdods(tempgdods)        
+          setGdods(tempgdods)  
+          setIsdataloaded(true)      
         })
         .catch((error) => {
           console.log(error);
@@ -100,7 +106,8 @@ function Home(props) {
                 console.log(error);
               });
           }
-          setGdods(tempgdods)        
+          setGdods(tempgdods)   
+          setIsdataloaded(true)     
         })
         .catch((error) => {
           console.log(error);
@@ -113,9 +120,11 @@ function Home(props) {
   }, []);
 
   return (
-    gdods.length == 0 ?
-      <div style={{ width: '50%' }}>
-        <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
+    !isdataloaded ?
+      <div style={{ paddingTop: '20%', paddingBottom: '20%' }}>
+        <div style={{ width: '50%' }}>
+          <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
+        </div>
       </div>
       :
       <div>

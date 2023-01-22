@@ -28,6 +28,8 @@ const SortingTable = (props) => {
   const [originaldata, setOriginaldata] = useState([])
   //filter
   const [filter, setFilter] = useState([])
+  //spinner
+  const [isdataloaded, setIsdataloaded] = useState(false);
 
   async function init() {
     fixfilter();
@@ -53,6 +55,7 @@ const SortingTable = (props) => {
       .then((response) => {
         setData(response.data);
         setOriginaldata(response.data);
+          setIsdataloaded(true)
       })
       .catch((error) => {
         console.log(error);
@@ -64,6 +67,7 @@ const SortingTable = (props) => {
       .then((response) => {
         setData(response.data);
         setOriginaldata(response.data);
+          setIsdataloaded(true)
       })
       .catch((error) => {
         console.log(error);
@@ -76,6 +80,7 @@ const SortingTable = (props) => {
       .then((response) => {
         setData(response.data);
         setOriginaldata(response.data);
+          setIsdataloaded(true)
       })
       .catch((error) => {
         console.log(error);
@@ -87,6 +92,7 @@ const SortingTable = (props) => {
       .then((response) => {
         setData(response.data);
         setOriginaldata(response.data);
+          setIsdataloaded(true)
       })
       .catch((error) => {
         console.log(error);
@@ -100,6 +106,7 @@ const SortingTable = (props) => {
         .then((response) => {
           setData(response.data);
           setOriginaldata(response.data);
+          setIsdataloaded(true)
         })
         .catch((error) => {
           console.log(error);
@@ -264,7 +271,7 @@ const SortingTable = (props) => {
   useEffect(() => {
     init();
     setPageSize(15);
-  }, []);
+  }, [props]);
 
   const {
     getTableProps,
@@ -296,9 +303,11 @@ const SortingTable = (props) => {
   );
 
   return (
-    data.length == 0 ?
-      <div style={{ width: '50%' }}>
-        <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
+    !isdataloaded ?
+      <div style={{ paddingTop: '20%', paddingBottom: '20%' }}>
+        <div style={{ width: '50%' }}>
+          <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
+        </div>
       </div>
       :
       <>

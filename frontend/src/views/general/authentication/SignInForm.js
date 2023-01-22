@@ -120,12 +120,11 @@ function Signin() {
 
   useEffect(() => {
     passport();
-    clickSubmit();
   }, [])
 
   useEffect(() => {
-    setValues({ ...values, password: values.personalnumber });
-  }, [values.personalnumber]);
+    clickSubmit();
+  }, [values.personalnumber])
 
   const signInForm = () => (
     <>

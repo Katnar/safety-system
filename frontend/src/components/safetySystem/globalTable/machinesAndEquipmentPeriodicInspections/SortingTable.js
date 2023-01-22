@@ -27,78 +27,86 @@ const SortingTable = (props) => {
   const [originaldata, setOriginaldata] = useState([])
   //filter
   const [filter, setFilter] = useState([])
+  //spinner
+  const [isdataloaded, setIsdataloaded] = useState(false);
 
   async function init() {
+    setIsdataloaded(false);
     fixfilter();
-      if (props.unittype == "admin") {
-        getDetails();
-      }
-      if (props.unittype == "gdod") {
-        getUnitDetailsByGdod();
-      }
-      if (props.unittype == "hativa") {
-        getUnitDetailsByHativa();
-      }
-      if (props.unittype == "ogda") {
-        getUnitDetailsByOgda();
-      }
-      if (props.unittype == "pikod") {
-        getUnitDetailsByPikod();
-      }
+    if (props.unittype == "admin") {
+      getDetails();
+    }
+    if (props.unittype == "gdod") {
+      getUnitDetailsByGdod();
+    }
+    if (props.unittype == "hativa") {
+      getUnitDetailsByHativa();
+    }
+    if (props.unittype == "ogda") {
+      getUnitDetailsByOgda();
+    }
+    if (props.unittype == "pikod") {
+      getUnitDetailsByPikod();
+    }
   }
-  
+
   const getUnitDetailsByGdod = async () => {
-    await axios.get(`http://localhost:8000/api/trainingProgram/bygdod/${props.unitid}`)
+    await axios.get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections/bygdod/${props.unitid}`)
       .then((response) => {
         setData(response.data);
         setOriginaldata(response.data);
+        setIsdataloaded(true)
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  
+
   const getUnitDetailsByHativa = async () => {
-    await axios.get(`http://localhost:8000/api/trainingProgram/byhativa/${props.unitid}`)
+    await axios.get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections/byhativa/${props.unitid}`)
       .then((response) => {
         setData(response.data);
         setOriginaldata(response.data);
+        setIsdataloaded(true)
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  
-  
+
+
   const getUnitDetailsByOgda = async () => {
-    await axios.get(`http://localhost:8000/api/trainingProgram/byogda/${props.unitid}`)
+    await axios.get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections/byogda/${props.unitid}`)
       .then((response) => {
         setData(response.data);
         setOriginaldata(response.data);
+        setIsdataloaded(true)
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  
+
   const getUnitDetailsByPikod = async () => {
-    await axios.get(`http://localhost:8000/api/trainingProgram/bypikod/${props.unitid}`)
+    await axios.get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections/bypikod/${props.unitid}`)
       .then((response) => {
         setData(response.data);
         setOriginaldata(response.data);
+        setIsdataloaded(true)
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  
+
   const getDetails = async () => {
     try {
       await axios
-        .get(`http://localhost:8000/api/trainingProgram`)
+        .get(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections`)
         .then((response) => {
           setData(response.data);
           setOriginaldata(response.data);
+          setIsdataloaded(true)
         })
         .catch((error) => {
           console.log(error);
@@ -109,8 +117,8 @@ const SortingTable = (props) => {
   const Delete = (data) => {
     const tempData = data;
     // tempData.deletedAt = new Date();
-    axios.post("http://localhost:8000/api/trainingProgramDelete", tempData).then((response) => {
-      axios.delete(`http://localhost:8000/api/trainingProgram/${tempData}`).then((response) => {
+    axios.post("http://localhost:8000/api/machinesAndEquipmentPeriodicInspectionsDelete", tempData).then((response) => {
+      axios.delete(`http://localhost:8000/api/machinesAndEquipmentPeriodicInspections/${tempData}`).then((response) => {
         init();
       })
         .catch((error) => {
@@ -152,7 +160,7 @@ const SortingTable = (props) => {
     }
     setFilter(tempfilter);
   }
-  
+
   const setfilterfunction = (evt) => {
     if (evt.currentTarget.name == 'kshirot') {
       if (filter.kshirotfilter) {
@@ -263,7 +271,7 @@ const SortingTable = (props) => {
   useEffect(() => {
     init();
     setPageSize(15);
-  }, []);
+  }, [props]);
 
   const {
     getTableProps,
@@ -295,9 +303,11 @@ const SortingTable = (props) => {
   );
 
   return (
-    data.length == 0 ?
-      <div style={{ width: '50%' }}>
-        <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
+    !isdataloaded ?
+      <div style={{ paddingTop: '20%', paddingBottom: '20%' }}>
+        <div style={{ width: '50%' }}>
+          <PropagateLoader color={'#00dc7f'} loading={true} size={25} />
+        </div>
       </div>
       :
       <>
