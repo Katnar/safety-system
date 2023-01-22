@@ -123,7 +123,7 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
       )
       .then((response) => {
         let tempdatas = response.data;
-        tempdatas.certificateIssuingDate=tempdatas.certificateIssuingDate.slice(0, 10)
+        tempdatas.certificateIssuingDate = tempdatas.certificateIssuingDate.slice(0, 10)
         setState(tempdatas);
       })
       .catch((error) => {
@@ -152,33 +152,38 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
 
   const CheckFormData = () => {
     let flag = true;
-    let error = "";
+    var error = [];
 
     if (((state.personalNumber == undefined) || (state.personalNumber == ""))) {
-      error += "חסר שדה מספר אישי, "
+      error.push("חסר שדה מספר אישי")
       flag = false;
     }
+    else
+      if (isNaN(state.personalNumber)) {
+        error.push("מס' אישי לא תקין")
+        flag = false;
+      }
     if (((state.id == undefined) || (state.id == ""))) {
-      error += "חסר שדה תעודת זהות, "
+      error.push("חסר שדה תעודת זהות")
       flag = false;
     }
     if (((state.fullName == undefined) || (state.fullName == ""))) {
-      error += "חסר שדה שם מלא, "
+      error.push("חסר שדה שם מלא")
       flag = false;
     }
     if (((state.certificateIssuingDate == undefined) || (state.certificateIssuingDate == ""))) {
-      error += "חסר שדה תאריך הוצאת תעודה, "
+      error.push("חסר שדה תאריך הוצאת תעודה")
       flag = false;
     }
     if (((state.numberOfSeminarDays == undefined) || (state.numberOfSeminarDays == ""))) {
-      error += "חסר שדה מספר ימי עיון שבוצעו, "
+      error.push("חסר שדה מספר ימי עיון שבוצעו")
       flag = false;
     }
-    if (user.user.role == "1"){
+    if (user.user.role == "1") {
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
 
@@ -188,7 +193,9 @@ const SafetyOfficersQualificationDataComponent = ({ match }) => {
       history.goBack()
     }
     else {
-      toast.error(error)
+      for (const e of error) {
+        toast.error(e)
+      }
     }
   }
 

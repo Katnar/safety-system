@@ -125,8 +125,8 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
       )
       .then((response) => {
         let tempdatas = response.data;
-        tempdatas.nextTestDate=tempdatas.nextTestDate.slice(0, 10)
-        tempdatas.testDate=tempdatas.testDate.slice(0, 10)
+        tempdatas.nextTestDate = tempdatas.nextTestDate.slice(0, 10)
+        tempdatas.testDate = tempdatas.testDate.slice(0, 10)
         setState(tempdatas);
       })
       .catch((error) => {
@@ -155,48 +155,50 @@ const EquipmentAndMaterialsPeriodicInspectionsForm = ({ match }) => {
 
   const CheckFormData = () => {
     let flag = true;
-    let error = "";
+    var error = [];
 
     if (((state.equipmentType == undefined) || (state.equipmentType == ""))) {
-      error += "חסר שדה סוג הציוד, "
+      error.push("חסר שדה סוג הציוד")
       flag = false;
     }
     if (((state.manufacturer == undefined) || (state.manufacturer == ""))) {
-      error += "חסר שדה יצרן, "
+      error.push("חסר שדה יצרן")
       flag = false;
     }
     if (((state.testingFrequency == undefined) || (state.testingFrequency == ""))) {
-      error += "חסר תדירות הבדיקות, "
+      error.push("חסר תדירות הבדיקות")
       flag = false;
     }
     if (((state.testDate == undefined) || (state.testDate == ""))) {
-      error += "חסר שדה תאריך בדיקה, "
+      error.push("חסר שדה תאריך בדיקה")
       flag = false;
     }
     if (((state.nextTestDate == undefined) || (state.nextTestDate == ""))) {
-      error += "חסר שדה תאריך בדיקה הבא, "
+      error.push("חסר שדה תאריך בדיקה הבא")
       flag = false;
     }
-    if (user.user.role == "1"){
+    if (user.user.role == "1") {
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
 
-    if (singleFile==""){
-      error += "נא להוסיף קובץ"
+    if (singleFile == "") {
+      error.push("נא להוסיף קובץ")
       flag = false;
     }
-    
+
     if (flag == true) {
       SubmitData();
       toast.success("הטופס עודכן בהצלחה");
       history.goBack()
     }
     else {
-      toast.error(error)
+      for (const e of error) {
+        toast.error(e)
+      }
     }
   }
 

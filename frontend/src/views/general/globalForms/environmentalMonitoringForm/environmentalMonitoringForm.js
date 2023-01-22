@@ -157,41 +157,41 @@ const EnvironmentalMonitoringForm = ({ match }) => {
 
   const CheckFormData = () => {
     let flag = true;
-    let error = "";
+    var error =[];
 
     if (((state.harmfulCauses == undefined) || (state.harmfulCauses == ""))) {
-      error += "חסר שדה גורמים מזיקים, "
+      error.push("חסר שדה גורמים מזיקים")
       flag = false;
     }
     if (((state.locationInUnit == undefined) || (state.locationInUnit == ""))) {
-      error += "חסר שדה מיקום ביחידה, "
+      error.push("חסר שדה מיקום ביחידה")
       flag = false;
     }
     if (((state.lastMonitoringDate == undefined) || (state.lastMonitoringDate == ""))) {
-      error += "חסר שדה מועד ניטור אחרון, "
+      error.push("חסר שדה מועד ניטור אחרון")
       flag = false;
     }
     if (((state.nextMonitoringDate == undefined) || (state.nextMonitoringDate == ""))) {
-      error += "חסר שדה מועד ניטור הבא, "
+      error.push("חסר שדה מועד ניטור הבא")
       flag = false;
     }
     if (((state.executionStatus == undefined) || (state.executionStatus == ""))) {
-      error += "חסר שדה סטטוס ביצוע, "
+      error.push("חסר שדה סטטוס ביצוע")
       flag = false;
     }
     if (((state.surveyDate == undefined) || (state.surveyDate == ""))) {
-      error += "חסר שדה תסקיר מתאריך, "
+      error.push("חסר שדה תסקיר מתאריך")
       flag = false;
     }
     if (user.user.role == "1"){
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
     if (singleFile==""){
-      error += "נא להוסיף קובץ"
+      error.push("נא להוסיף קובץ")
       flag = false;
     }
 
@@ -201,7 +201,9 @@ const EnvironmentalMonitoringForm = ({ match }) => {
       history.goBack()
     }
     else {
-      toast.error(error)
+      for (const e of error){
+        toast.error(e)
+      }
     }
   }
 

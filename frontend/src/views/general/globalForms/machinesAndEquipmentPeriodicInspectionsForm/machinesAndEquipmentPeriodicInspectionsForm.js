@@ -125,7 +125,7 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
       )
       .then((response) => {
         let tempdatas = response.data;
-        tempdatas.testDate=tempdatas.testDate.slice(0, 10)
+        tempdatas.testDate = tempdatas.testDate.slice(0, 10)
         setState(tempdatas);
       })
       .catch((error) => {
@@ -154,57 +154,57 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
 
   const CheckFormData = () => {
     let flag = true;
-    let error = "";
+    var error = [];
 
     if (((state.equipmentType == undefined) || (state.equipmentType == ""))) {
-      error += "חסר שדה סוג הציוד, "
+      error.push("חסר שדה סוג הציוד")
       flag = false;
     }
     if (((state.meanName == undefined) || (state.meanName == ""))) {
-      error += "חסר שדה שם האמצעי, "
+      error.push("חסר שדה שם האמצעי")
       flag = false;
     }
     if (((state.mstb == undefined) || (state.mstb == ""))) {
-      error += "חסר שדה מסט''ב, "
+      error.push("חסר שדה מסט''ב")
       flag = false;
     }
     if (((state.mkt == undefined) || (state.mkt == ""))) {
-      error += "חסר שדה מק''ט, "
+      error.push("חסר שדה מק''ט")
       flag = false;
     }
     if (((state.manufacturer == undefined) || (state.manufacturer == ""))) {
-      error += "חסר שדה יצרן, "
+      error.push("חסר שדה יצרן")
       flag = false;
     }
     if (((state.testDate == undefined) || (state.testDate == ""))) {
-      error += "חסר שדה מועד בדיקה נוכחי, "
+      error.push("חסר שדה מועד בדיקה נוכחי")
       flag = false;
     }
     if (((state.nextTestDate == undefined) || (state.nextTestDate == ""))) {
-      error += "חסר שדה מועד בדיקה הבא, "
+      error.push("חסר שדה מועד בדיקה הבא")
       flag = false;
     }
     if (((state.findings == undefined) || (state.findings == ""))) {
-      error += "חסר שדה ממצאים, "
+      error.push("חסר שדה ממצאים")
       flag = false;
     }
     if (((state.comments == undefined) || (state.comments == ""))) {
-      error += "חסר שדה הערות, "
+      error.push("חסר שדה הערות")
       flag = false;
     }
     if (((state.meanQuantity == undefined) || (state.meanQuantity == ""))) {
-      error += "חסר שדה כמות מכל אמצעי, "
+      error.push("חסר שדה כמות מכל אמצעי")
       flag = false;
     }
-    if (user.user.role == "1"){
+    if (user.user.role == "1") {
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
-    if (singleFile==""){
-      error += "נא להוסיף קובץ"
+    if (singleFile == "") {
+      error.push("נא להוסיף קובץ")
       flag = false;
     }
 
@@ -214,7 +214,9 @@ const MachinesAndEquipmentPeriodicInspectionsForm = ({ match }) => {
       history.goBack()
     }
     else {
-      toast.error(error)
+      for (const e of error) {
+        toast.error(e)
+      }
     }
   }
 

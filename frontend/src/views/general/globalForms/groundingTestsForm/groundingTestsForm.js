@@ -153,29 +153,29 @@ const GroundingTestsForm = ({ match }) => {
 
   const CheckFormData = () => {
     let flag = true;
-    let error = "";
+    var error = [];
 
     if (((state.buildingName == undefined) || (state.buildingName == ""))) {
-      error += "חסר שדה מבנה נבדק, "
+      error.push("חסר שדה מבנה נבדק")
       flag = false;
     }
     if (((state.testDate == undefined) || (state.testDate == ""))) {
-      error += "חסר שדה תאריך בדיקה, "
+      error.push("חסר שדה תאריך בדיקה")
       flag = false;
     }
     if (((state.nextTestDate == undefined) || (state.nextTestDate == ""))) {
-      error += "חסר שדה תאריך בדיקה הבא, "
+      error.push("חסר שדה תאריך בדיקה הבא")
       flag = false;
     }
     if (user.user.role == "1"){
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
     if (singleFile==""){
-      error += "נא להוסיף קובץ"
+      error.push("נא להוסיף קובץ")
       flag = false;
     }
 
@@ -185,8 +185,9 @@ const GroundingTestsForm = ({ match }) => {
       history.goBack()
     }
     else {
-      toast.error(error)
-    }
+      for (const e of error) {
+        toast.error(e)
+      }    }
   }
 
   async function SubmitData() {

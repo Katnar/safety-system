@@ -123,7 +123,7 @@ const ReviewsDocumentationForm = ({ match }) => {
       .get(`http://localhost:8000/api/reviewsDocumentation/${match.params.id}`)
       .then((response) => {
         let tempdatas = response.data;
-        tempdatas.date=tempdatas.date.slice(0, 10)
+        tempdatas.date = tempdatas.date.slice(0, 10)
         setState(tempdatas);
       })
       .catch((error) => {
@@ -152,36 +152,38 @@ const ReviewsDocumentationForm = ({ match }) => {
 
   const CheckFormData = () => {
     let flag = true;
-    let error = "";
+    var error = [];
 
     if (((state.date == undefined) || (state.date == ""))) {
-      error += "חסר שדה תאריך, "
+      error.push("חסר שדה תאריך")
       flag = false;
     }
     if (((state.location == undefined) || (state.location == ""))) {
-      error += "חסר שדה מיקום ביצוע הביקורת, "
+      error.push("חסר שדה מיקום ביצוע הביקורת")
       flag = false;
     }
-    if (user.user.role == "1"){
+    if (user.user.role == "1") {
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
 
-    if (singleFile==""){
-      error += "נא להוסיף קובץ"
+    if (singleFile == "") {
+      error.push("נא להוסיף קובץ")
       flag = false;
     }
-    
+
     if (flag == true) {
       SubmitData();
       toast.success("הטופס עודכן בהצלחה");
       history.goBack()
     }
     else {
-      toast.error(error)
+      for (const e of error) {
+        toast.error(e)
+      }
     }
   }
 
