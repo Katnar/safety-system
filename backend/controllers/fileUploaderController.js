@@ -22,7 +22,6 @@ var moveFile = (file, dir2, newName) => {
 const singleFileUpload = async (req, res, next) => {
   const path = require("path");
   const fs = require("fs");
-  const ext = path.extname(req.file.path);
   try {
     fs.readdirSync("./uploads/" + req.body.collection).forEach((file) => {
       if (file.startsWith(req.body.id)) {
@@ -38,10 +37,6 @@ const singleFileUpload = async (req, res, next) => {
         );
       }
     });
-    // if (fs.existsSync('./uploads/' + req.body.collection + '/' + req.body.id + path.extname(filename))) {
-    //     console.log('File exists! moving to archive');
-    //     moveFile('./uploads/' + req.body.collection + '/' + req.body.id + path.extname(filename), './uploads/archive/' + req.body.collection, req.body.id + '#' + Math.random() * (100000000000000 - 0) + 0);
-    // }
   } catch (err) {
     console.error(err);
   }

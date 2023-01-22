@@ -195,7 +195,7 @@ const HomsManagementMonitoringForm = ({ match }) => {
 
   const UploadFile = async (id) => {
     const formData = new FormData();
-    const collec = "certificationsManagement";
+    const collec = "homsManagementMonitoring";
     formData.append("file", singleFile);
     await singleFileUpload(formData, collec, id);
     console.log(singleFile);
