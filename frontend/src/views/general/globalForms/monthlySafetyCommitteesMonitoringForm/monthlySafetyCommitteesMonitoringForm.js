@@ -104,7 +104,7 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
       )
       .then((response) => {
         let tempdatas = response.data;
-        tempdatas.date=tempdatas.date.slice(0, 10)
+        tempdatas.date = tempdatas.date.slice(0, 10)
         setState(tempdatas);
       })
       .catch((error) => {
@@ -133,29 +133,29 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
 
   const CheckFormData = () => {
     let flag = true;
-    let error = "";
+    var error = [];
 
     if (((state.unit == undefined) || (state.unit == ""))) {
-      error += "חסר שדה יחידה, "
+      error.push("חסר שדה יחידה")
       flag = false;
     }
     if (((state.date == undefined) || (state.date == ""))) {
-      error += "חסר שדה תאריך, "
+      error.push("חסר שדה תאריך")
       flag = false;
     }
     if (((state.committeeExecuter == undefined) || (state.committeeExecuter == ""))) {
-      error += "חסר שדה מבצע הוועדה, "
+      error.push("חסר שדה מבצע הוועדה")
       flag = false;
     }
-    if (user.user.role == "1"){
+    if (user.user.role == "1") {
       state.gdod = user.user.gdod
     }
     else if (((state.gdod == undefined) || (state.gdod == ""))) {
-      error += "חסר שדה גדוד , "
+      error.push("חסר שדה גדוד ")
       flag = false;
     }
-    if (singleFile==""){
-      error += "נא להוסיף קובץ"
+    if (singleFile == "") {
+      error.push("נא להוסיף קובץ")
       flag = false;
     }
 
@@ -165,7 +165,9 @@ const MonthlySafetyCommitteesMonitoringForm = ({ match }) => {
       history.goBack()
     }
     else {
-      toast.error(error)
+      for (const e of error) {
+        toast.error(e)
+      }
     }
   }
 
